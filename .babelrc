@@ -1,0 +1,12 @@
+{
+    "plugins": [
+      "transform-decorators-legacy", 
+      "babel-plugin-root-import"
+    ],
+    "presets": ["react-native"],
+    "env": {
+      "production": {
+        "plugins": ["transform-remove-console"]
+      }
+    }
+}
