@@ -3,6 +3,7 @@ package com.novame;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.oney.WebRTCModule.WebRTCModulePackage;
 import com.rnfs.RNFSPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LinearGradientPackage(),
             new ReactNativeOneSignalPackage(),
             new WebRTCModulePackage(),
             new RNFSPackage(),

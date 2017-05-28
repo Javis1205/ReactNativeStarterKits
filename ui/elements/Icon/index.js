@@ -3,7 +3,9 @@ import { TouchableWithoutFeedback, View } from 'react-native'
 import { Icon as IconNB, mapPropsToStyleNames, connectStyle } from 'native-base'
 import Svg from 'react-native-svg'
 import svgs from './svgs'
+import Icomoon, { glyphMap } from '~/ui/elements/Icomoon'
 
+// we can connect to whatever Name space
 @connectStyle('NativeBase.Icon', {}, mapPropsToStyleNames)
 export default class extends Component {
 
@@ -17,8 +19,13 @@ export default class extends Component {
     const {style={}, name, onPress, ...props} = this.props    
     // fallback to material?
     const svg = svgs[name]
-    if (!svg) 
-        return <IconNB {...this.props} />
+    if (!svg) {
+      return (
+        glyphMap[name] 
+        ? <Icomoon {...this.props} />
+        : <IconNB {...this.props} />
+      )
+    }
 
     const {
       fontSize=24,       

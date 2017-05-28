@@ -116,8 +116,8 @@ export default {
 
 
       // Color
-  brandPrimary: '#0054a6',
-  brandInfo: '#3F57D3',
+  brandPrimary: '#0082e7',
+  brandInfo: '#5ec9ff',
   brandSuccess: '#00a651',
   brandDanger: '#ed1c24',
   brandWarning: '#f26522',
@@ -223,7 +223,7 @@ export default {
   listDividerBg: '#f4f4f4',
   listItemHeight: 45,
   listItemActiveColor: '#c7eafb',
-  listBtnUnderlayColor: '#DDD',
+    listBtnUnderlayColor: 'transparent',
 
     // Card
   cardBorderColor: '#ccc',

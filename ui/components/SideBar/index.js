@@ -7,7 +7,6 @@ import { Content,Text, List, ListItem,
 } from 'native-base'
 
 import CacheableImage from '~/ui/components/CacheableImage'
-
 import * as authActions from '~/store/actions/auth'
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
@@ -47,10 +46,11 @@ export default class extends Component {
     // render profile
     const avatar = {uri: (API_BASE + profile.PhotoUrl)}
     return (      
+      
         <Content
           bounces={false}
           style={styles.container}
-        >
+        >                
           <View style={styles.drawerCover}>
             <CacheableImage source={avatar}
               placeholder={<Icon name="image" style={styles.drawerImage}/>} 
@@ -63,19 +63,21 @@ export default class extends Component {
               <Icon onPress={e=>this.navigateTo('user/profile')} name="edit" style={styles.iconEdit} />
             </View>
           </View>
-          {options.listItems.map((item, index) =>
-              <ListItem key={index} button onPress={e => this.navigateTo(item.route)} >
-                <Left>
-                  <Icon name={item.icon} style={styles.icon} />                  
-                  <Text style={styles.iconText}>{item.name}</Text>
-                </Left>                
-              </ListItem>)}
-          
-          <ListItem noBorder style={styles.listItem} button onPress={this._handleLogout} >
-            <Left>                  
-              <Text style={styles.iconTextLast}>Log Out</Text>
-            </Left>                
-          </ListItem>
+          <View style={styles.listItemContainer}>
+            {options.listItems.map((item, index) =>
+                <ListItem noBorder key={index} button onPress={e => this.navigateTo(item.route)} >
+                  <Left>
+                    <Icon name={item.icon} style={styles.icon} />                  
+                    <Text style={styles.iconText}>{item.name}</Text>
+                  </Left>                
+                </ListItem>)}
+            
+            <ListItem noBorder button onPress={this._handleLogout} >
+              <Left>                  
+                <Text style={styles.iconTextLast}>Log Out</Text>
+              </Left>                
+            </ListItem>
+          </View>          
         </Content>
       
     );

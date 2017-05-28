@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView } from 'react-native'
+import { Image } from 'react-native'
 import { 
-  Container,   
+  Container,   View,
   Form, 
   Item, 
   Input, 
@@ -25,7 +25,9 @@ import Content from '~/ui/components/Content'
 import Preload from '~/ui/containers/Preload'
 import { InputField } from '~/ui/elements/Form'
 import { validate } from './utils'
-import { logoSource } from '~/assets'
+import { spashImage } from '~/assets'
+
+import Icon from '~/ui/elements/Icon'
 
 @connect(state=>({  
   loginRequest: commonSelectors.getRequest(state, 'login'),  
@@ -47,27 +49,24 @@ export default class extends Component {
 
     return (
       <Container style={styles.container}>
+        <Image source={spashImage} style={styles.splash}/>    
+                               
+        <View style={styles.bottomContainer}>
+          <Text style={styles.textLogo}>NOVAME</Text>      
 
-        <Content>                                
-          <Thumbnail style={styles.logo} source={logoSource} />        
+          <View style={styles.socialButtons}>
+            <Button full iconLeft style={styles.socialButton}>
+                <Icon name="facebook" style={styles.socialButtonIcon}/>
+                <Text>Login with Facebook</Text>
+            </Button>
+            <Button info iconLeft style={styles.socialButton}>
+                <Icon name="twitter" style={styles.socialButtonIcon}/>
+                <Text>Login with Twitter</Text>
+            </Button>              
+          </View>  
           
-          <Form style={styles.form}>
-              
-              <Field autoCapitalize="none" name="email" label="Email" component={InputField} />
-              <Field name="password" label="Password" secureTextEntry={true} component={InputField} />              
-              <Button onPress={handleSubmit(this._handleLogin)} 
-                style={styles.button}>
-                <Text>Sign in</Text>
-              </Button>
-              <KeyboardAvoidingView>
-                <Text style={styles.label}>Forgot password?</Text>
-              </KeyboardAvoidingView>
-              <Button bordered style={styles.outlineButton} onPress={()=>forwardTo('signup1')}>
-                <Text style={styles.whiteColor}>Sign up</Text>
-              </Button>              
+        </View>
 
-          </Form>
-        </Content>
       </Container>
     )
   }

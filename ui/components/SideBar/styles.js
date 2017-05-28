@@ -3,7 +3,7 @@ import material from '~/theme/variables/material'
 export default {
   container: {
     flex: 1, 
-    backgroundColor: '#363636',    
+    backgroundColor: '#423532',    
   },
 
   drawerCover: {
@@ -11,20 +11,18 @@ export default {
     alignItems: 'center',
     borderBottomWidth: 0.5,
     borderColor:'#8e8e8e',
-    height: 220,    
+    height: 240,    
     position: 'relative',        
   },
   drawerImage: {    
     width: 100,
     height: 100,    
     borderRadius: 50,
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 20,
+    marginBottom: 20,
   },
   listItemContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',    
+    margin: 20, 
   },
   iconContainer: {
     width: 37,
@@ -69,7 +67,9 @@ export default {
     marginLeft: 20,
   },
   iconTextLast: {
-    color: '#ce2d30',
-    paddingLeft: 30,
-  }
+    color: '#eee',
+    marginTop: 10,
+    alignSelf: 'center',
+    marginLeft: 10,
+  },
 };

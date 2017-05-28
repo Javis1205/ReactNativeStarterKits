@@ -31,11 +31,6 @@ export default {
       icon: 'reminder',
     },
     {
-      name: 'Poll',
-      route: 'webrtc',
-      icon: 'poll',
-    },
-    {
       name: 'Help & Support',
       route: 'test',
       icon: 'help',    

@@ -1,51 +1,44 @@
 export default {
-  container: {
-    backgroundColor: '#00b5f1', 
+  container: {    
     flex: 1,
     alignItems: 'center',  
     justifyContent: 'center',   
-    flexDirection: 'column',                   
+    flexDirection: 'column',  
+    backgroundColor: '#000',          
   },  
-  form:{
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  logo: {
-    width: 80, 
-    height: 120,
-    marginTop: 60,    
-    marginBottom: 20,
-    alignSelf:'center',
-  },
-  button: {
-    marginTop: 15,    
-    backgroundColor: '#0072bc',        
-    justifyContent: 'center',
-    width: '100%',   
-    borderRadius: 5,
-  },
-  outlineButton: {
-    marginTop: 60,        
-    borderColor: '#FFF',      
-    justifyContent: 'center',
-    width: '100%',  
-    borderRadius: 5, 
-  },
-  margin: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: '#FFF',
-  },  
-  label: {
-    marginTop: 20,
+  splash:{
     width: '100%',
-    color: '#FFF',
-    textAlign: 'center',
-    fontWeight: '500',
+    height: '100%',
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+    left: 0,                  
   },
-  whiteColor: {
-    color: '#FFF',
-    fontWeight: '500',
-  }
+  textLogo: {
+    color: '#fff',
+    fontWeight: '900',
+    letterSpacing: 2,
+    fontSize: 30,
+    backgroundColor: 'transparent',          
+  },
+  bottomContainer:{
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    marginTop:40,
+    width: '100%',
+    alignItems: 'center',
+  },
+  socialButtons: {        
+    marginTop: 40,
+  },
+  socialButton:{
+    width: 250,
+    margin: 10,
+    justifyContent: 'space-around',
+    paddingLeft: 0,
+  },
+  socialButtonIcon:{    
+    fontSize: 20,    
+  },
 }
