@@ -21,7 +21,11 @@ export default class extends Component {
   render() {
     const {selected, options} = this.props
     return (                 
-        <Content horizontal={true} showsHorizontalScrollIndicator={false}>
+        <Content style={{
+          borderBottomWidth: 1,
+          paddingBottom: 5,
+          borderColor: '#979797',
+        }} horizontal={true} showsHorizontalScrollIndicator={false}>
           {options.map(({key, icon, title, type}, index)=>
           <View key={key}>
             <Button onPress={e=>this.handleOption(index)} noPadder transparent style={

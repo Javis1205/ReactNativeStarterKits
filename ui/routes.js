@@ -42,7 +42,7 @@ export default {
     },
     home: {        
         title: 'Home',
-        Page: Home,        
+        Page: Vault,        
     },  
     notification: {
         title: 'Notification',

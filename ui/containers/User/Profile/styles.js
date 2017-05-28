@@ -3,7 +3,7 @@ import material from '~/theme/variables/material'
 
 export default {
   container:{
-    marginTop: 0,
+    marginTop: 20,
   },
   form:{
     padding: 10,
@@ -16,6 +16,14 @@ export default {
     paddingTop: 20,
     marginBottom:-5,    
   },
+  userLabel:{
+    color: '#fff',        
+    backgroundColor: 'transparent',    
+  },
+  subUserLabel:{
+    color: '#D8D8D8',
+    backgroundColor: 'transparent', 
+  },
   headerContainer:{
     justifyContent: 'space-between', 
     flexDirection: 'row',    
@@ -23,12 +31,12 @@ export default {
     top:0,
     width:'100%',
     height: material.toolbarHeight + 20,
-    backgroundColor:'#04bef2',
+    backgroundColor:'#28282a',
     opacity:0,
     zIndex:10,
   },
   buttonLeft: {        
-    top: 20,      
+    top: 120,      
     position:'absolute',
     zIndex:10,
   },
@@ -41,11 +49,12 @@ export default {
   },
   headerImage:{
     resizeMode: 'cover', 
-    width: '100%', 
+    width: '100%',     
     height:options.header.MAX_HEIGHT - options.avatar.halfSize,     
   },
   avatarContainer:{       
     position: 'absolute',    
+    top:140 - options.avatar.halfSize,
     alignSelf: 'center',
     zIndex:10,    
   },

@@ -5,7 +5,7 @@ export default {
     borderBottomWidth: 0,
   },
   searchContainer: {    
-    backgroundColor: '#0085b6',
+    backgroundColor: '#e1e1e1',
     borderColor:'transparent',
     borderRadius: 5,            
     paddingLeft: 5,
@@ -16,7 +16,7 @@ export default {
     flexDirection:'row',  
   },
   searchIcon:{
-    color:'#a7e7ff',
+    color:'#222',
     paddingRight:0,
   },
   menuIcon:{
@@ -28,6 +28,6 @@ export default {
   },
   searchInput:{
     height: material.platform === 'ios' ? 30 : 50,    
-    color:'#fff'
+    color:'#222'
   }
 }

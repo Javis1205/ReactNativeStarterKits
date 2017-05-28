@@ -11,11 +11,6 @@ export default {
       icon: 'delegation',
     },
     {
-      name: 'Vault',
-      route: 'vault',
-      icon: 'vault',
-    },
-    {
       name: 'Message',
       route: 'message',
       icon: 'message',

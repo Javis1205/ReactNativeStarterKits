@@ -1,10 +1,7 @@
 export default {
   header: {
-    MAX_HEIGHT: 260,
+    MAX_HEIGHT: 340,
     MIN_HEIGHT: 60,
-    get SCROLL_DISTANCE(){
-      return this.MAX_HEIGHT - this.MIN_HEIGHT
-    }
   },
   avatar: {
     size: 120,

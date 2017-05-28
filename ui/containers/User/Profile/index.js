@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Image, Animated } from 'react-native'
+import { TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { 
-  Container, Button, Icon, List,
+  Container, Button, List, Left, Right, Body,
   ListItem, InputGroup, Input, Picker, Text, Thumbnail,
   Form, Item, Switch, View,
 } from 'native-base'
@@ -13,9 +13,11 @@ import styles from './styles'
 import * as dataActions from '~/store/actions/data'
 import * as commonActions from '~/store/actions/common'
 import * as accountSelectors from '~/store/selectors/account'
-import * as dataSelectors from '~/store/selectors/data'
+import * as campaignSelectors from '~/store/selectors/campaign'
 
 import Content from '~/ui/components/Content'
+import Icon from '~/ui/elements/Icon'
+import Event from '~/ui/components/Event'
 import DatePicker from '~/ui/components/DatePicker'
 import PhotoChooser from '~/ui/components/PhotoChooser'
 import Header from '~/ui/components/Header'
@@ -31,12 +33,11 @@ import {
 } from '~/ui/elements/Form'
 
 import { validate } from './utils'
-import { profileCoverSource } from '~/assets'
+import { profileCoverSource, avatarImage } from '~/assets'
 
 @connect(state=>({  
-  initialValues: accountSelectors.getProfile(state),
-  countries: dataSelectors.getCountries(state),
-  cities: dataSelectors.getCities(state),
+  initialValues: accountSelectors.getProfile(state),  
+  activeCampaign: campaignSelectors.getActiveCampaign(state),
 }), {...commonActions, ...dataActions})
 @reduxForm({ form: 'ProfileForm', validate})
 export default class extends Component {  
@@ -44,28 +45,16 @@ export default class extends Component {
   constructor(props) {
     super(props)    
     this.state = {
-      avatar: {uri: (API_BASE + props.initialValues.PhotoUrl)},
-      scrollY: new Animated.Value(0)
+      avatar: avatarImage,      
     }
   }
 
   componentDidMount(){
-    const {countries, getCountries, initialValues:profile} = this.props
-    countries.length 
-      ? this.loadCities(countries, profile.Country) 
-      : getCountries(data=>this.loadCities(data. profile.Country))
+    
   }
 
-  loadCities(countries, value){    
-    const countryCode = countries.find(item=> item.Name === value)['Code']
+  loadCities(countries, value){        
     // this.props.getCities(countryCode)    
-  }
-
-  makeItems(data){
-    const ret = {}
-    // pure key value
-    data && data.forEach(item=>ret[item.Name] = item.Name)
-    return ret
   }
 
   _handleChoosePhoto = ({uri, data})=>{
@@ -73,73 +62,92 @@ export default class extends Component {
     this.setState({avatar:{uri}})
   }
 
-  _onChangeCountries = (value)=>{        
-    this.loadCities(this.props.countries, value)
-  }
-
-  _onScroll = (e)=>{    
-    const offsetY = e.nativeEvent.contentOffset.y     
-    this.state.scrollY.setValue(offsetY)
-  }
-
   _handleSave = (data)=>{
-    console.log(data)
+    
   }
 
   render() {        
-    const {initialValues:profile, route, goBack, countries, cities, handleSubmit} = this.props
+    const {initialValues:profile, route, goBack, activeCampaign, handleSubmit} = this.props
     const {avatar, scrollY} = this.state    
-    // no header or footer
-    const opacity = scrollY.interpolate({
-      inputRange: [0, options.header.SCROLL_DISTANCE / 2],
-      outputRange: [0, 1],
-      extrapolate: 'clamp',
-    })    
-    const top = scrollY.interpolate({
-      inputRange: [0, options.header.SCROLL_DISTANCE],
-      outputRange: [options.header.MAX_HEIGHT - options.avatar.size, 30],
-      extrapolate: 'clamp',
-    })
-    const size = scrollY.interpolate({
-      inputRange: [0, options.header.SCROLL_DISTANCE],
-      outputRange: [options.avatar.size, 60],
-      extrapolate: 'clamp',
-    })    
-    const borderRadius = Animated.divide(size, new Animated.Value(2))
+   
 
   
     return (
-      <Container>                             
-        <Animated.View style={{...styles.headerContainer, opacity}} />
-        <Button transparent style={styles.buttonLeft} onPress={()=>goBack()}>
-          <Text style={styles.iconGray}>Cancel</Text>
-        </Button>
-        <Button onPress={handleSubmit(this._handleSave)} transparent style={styles.buttonRight}>
-          <Text style={styles.iconGray}>Save</Text>
-        </Button>                     
-        <Animated.View style={{...styles.avatarContainer,top}}>      
-          <Animated.Image source={avatar} style={{...styles.avatar,width:size,height:size,borderRadius}}/>
-          <PhotoChooser style={styles.photoIcon} onSuccess={this._handleChoosePhoto}/>
-        </Animated.View>                      
+      <Container>                                   
         
+        <Button light transparent style={styles.buttonLeft} >
+          <Icon small name="heart" />
+          <Text small>8888 LP</Text>
+        </Button>
+        <Button light onPress={handleSubmit(this._handleSave)} transparent style={styles.buttonRight}>
+          <Icon small name="fan" />
+          <Text small>8888 Fans</Text>
+        </Button>                     
+        <View style={styles.avatarContainer}>      
+          <Image source={avatar} style={styles.avatar}/>
+          <PhotoChooser style={styles.photoIcon} onSuccess={this._handleChoosePhoto}/>                    
+        </View>                              
+        
+        <Image style={styles.headerImage} source={profileCoverSource}>   
 
-        <Content scrollEventThrottle={10} style={styles.container} onScroll={this._onScroll}>          
-          <Image style={styles.headerImage} source={profileCoverSource}/>  
-          <Form style={styles.form}>            
-            <Text style={styles.label}>DisplayName</Text>
-            <Field name="DisplayName" component={InputField} />
-            <Toggle titleStyle={styles.label} title="Day of birth"/>            
-            <Field name="Birthdate" displayFormat="DD MMMM YYYY" component={DateField} icon="keyboard-arrow-down" />
-            <Toggle titleStyle={styles.label} title="Location"/>            
-            <Field name="Country" onSelected={this._onChangeCountries} component={DropdownField} 
-              header="Select Country" items={this.makeItems(countries)} />            
-            <Field name="City" component={DropdownField} 
-              header="Select City" items={this.makeItems(cities)}/>
-          </Form>
+          <View style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',            
+            top: 30,
+          }}
+          >
+            <Button small transparent light onPress={()=>goBack()}>
+              <Icon name="arrow-left" style={{
+                fontSize: 20,
+              }} />
+            </Button>
+            
+            <View row>
+              <Button small transparent light rounded bordered style={{
+                borderColor: '#979797',
+                marginRight: 10,
+              }}>
+                <Text small>FOLLOW</Text>
+              </Button>
+              <Button small transparent light rounded bordered style={{
+                borderColor: '#979797',
+                width: 30,
+                paddingLeft:0,
+                paddingRight:0,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+                <Icon small name="more-horiz"/>
+              </Button>
+            </View>
+            
+          </View> 
+          <View style={{                    
+              position: 'absolute',
+              bottom: 10,
+              width: '100%',            
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+          <Text style={styles.userLabel}>{profile.DisplayName}</Text>
+            <Text style={styles.subUserLabel} small>{profile.City}, {profile.Country}</Text>    
+          </View> 
+        </Image>
+
+        <Content style={styles.container}>          
+          <List
+              removeClippedSubviews={false}                    
+              pageSize={5}                  
+              dataArray={activeCampaign.NewFeedsItemsList} renderRow={(feed) =>          
+            <Event feed={feed} key={feed.CampaignId} />          
+          }/>
         </Content>
-
 
       </Container>
     )
   }
 }
+
+

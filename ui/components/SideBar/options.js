@@ -1,7 +1,7 @@
 export default { 
   listItems: [
     {
-      name: 'Network',
+      name: 'Profile',
       route: 'network',
       icon: 'network',
     },    
@@ -11,29 +11,19 @@ export default {
       icon: 'activity',
     },
     {
-      name: 'Account Setting',
+      name: 'Settings',
       route: 'user/setting',
       icon: 'setting',
     },
     {
-      name: 'Manage Interaction',
+      name: 'Rewards',
       route: 'interaction',
       icon: 'interaction',
     },
     {
-      name: 'Calendar',
-      route: 'calendar',
-      icon: 'calendar',
-    },
-    {
-      name: 'Reminder',
+      name: 'Are you a celeb?',
       route: 'calendar',
       icon: 'reminder',
-    },
-    {
-      name: 'Help & Support',
-      route: 'test',
-      icon: 'help',    
     },
 
   ]

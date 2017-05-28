@@ -2,19 +2,14 @@ import material from '~/theme/variables/material'
 
 export default {
   optionTitle: {
-    color: material.textColor,
-    textAlign: 'center',
+    color: material.textColor,    
     fontSize: 14,
-    marginTop: 15,    
+    margin: 15, 
   },
-  optionButton:{
-    width: 60,
-    height: 60,
-    backgroundColor: '#fff',
-    borderRadius: 30,
+  optionButton:{   
     alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',    
+    justifyContent: 'center',        
   },
   optionImage: {
     resizeMode: 'contain', 
@@ -23,8 +18,9 @@ export default {
   },
   optionText: {
     textAlign: 'center',
-    color: '#fff',
-    fontSize: 14,
-    marginTop: 5,
+    color: '#222',
+    fontSize: 12,
+    marginTop: 0,
+    marginBottom: 20,
   },
 }

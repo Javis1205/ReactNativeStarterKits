@@ -68,8 +68,8 @@ export default class extends Component {
           <Icon name="search" style={styles.searchIcon} />
           <Input value={this.props.searchString} 
             autoCorrect={false} onChangeText={this._search} 
-            placeholderTextColor="#a7e7ff" style={styles.searchInput} 
-            placeholder="Regit Search" />                        
+            placeholderTextColor="#222" style={styles.searchInput} 
+            placeholder="Novame Search" />                        
       </Item>
     )
     const right = (

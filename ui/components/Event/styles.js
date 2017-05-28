@@ -2,7 +2,7 @@ import material from '~/theme/variables/material'
 
 export default {
   container: {
-    borderRadius:5,   
+    borderRadius: 0,    
     marginBottom:20, 
     borderWidth:0,
   },
@@ -10,9 +10,7 @@ export default {
     paddingBottom:0
   },
   footerContainer:{ 
-    justifyContent: 'space-around',
-    borderBottomLeftRadius:5,
-    borderBottomRightRadius: 5,     
+    justifyContent: 'space-around',    
   },
   avatarContainer:{
     borderTopWidth: material.platform === 'android' ? 1 : 0,

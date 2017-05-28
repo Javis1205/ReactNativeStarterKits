@@ -149,7 +149,7 @@ export default {
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
   activeTab: '#fff',
   sTabBarActiveTextColor: '#007aff',
-  tabBarActiveTextColor: '#00aeef',
+  tabBarActiveTextColor: '#222',
   tabActiveBgColor: undefined,
 
     // Tab
@@ -165,7 +165,7 @@ export default {
 
     // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#00aeef',
+  toolbarDefaultBg: '#000000',
   toolbarHeight: (platform === 'ios') ? 76 : 56,
   toolbarIconSize: (platform === 'ios') ? 20 : 22,
   toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -304,5 +304,5 @@ export default {
 
   // color theme
   grayColor: '#959595',  
-  backgroundColor: '#e6e7e8',
+  backgroundColor: '#fff',
 };

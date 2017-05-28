@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import { StatusBar } from 'react-native'
 import App from './app'
 import { Provider } from 'react-redux'
 import configureStore from '~/store/config'
 
 import Preload from './containers/Preload'
 import OneSignal from 'react-native-onesignal'
+
+StatusBar.setBarStyle('light-content')
+
+if (!window.navigator.userAgent) {
+  window.navigator.userAgent = "react-native"
+}
 
 export default class Regit extends Component {
 
@@ -65,6 +72,3 @@ export default class Regit extends Component {
   }
 }
 
-if (!window.navigator.userAgent) {
-  window.navigator.userAgent = "react-native"
-}

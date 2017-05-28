@@ -18,7 +18,7 @@ export default (variables = variable) => {
       '.full':{
         justifyContent: 'space-between',
         width: '100%',
-      },
+      },      
       '.regit': {                
         overflow: 'hidden',
         'NativeBase.ListItem': {          

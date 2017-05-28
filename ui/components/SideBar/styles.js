@@ -3,7 +3,7 @@ import material from '~/theme/variables/material'
 export default {
   container: {
     flex: 1, 
-    backgroundColor: '#423532',    
+    backgroundColor: '#2b2b2d',    
   },
 
   drawerCover: {

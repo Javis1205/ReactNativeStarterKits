@@ -163,6 +163,7 @@ export default (variables = variable) => {
         '.transparent': {
           'NativeBase.Text': {
             color: '#f4f4f4',
+            backgroundColor: 'transparent',
           },
           'NativeBase.Icon': {
             color: '#f4f4f4',

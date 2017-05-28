@@ -85,6 +85,15 @@ export default class extends Component {
       {key: 'employment', icon: employmentIcon, title: 'Employment'},
       {key: 'education', icon: educationIcon, title: 'Education'},
       {key: 'others', icon: otherIcon, title: 'Others'},
+      {key: 'groupFinancial', icon: financeIcon, title: 'Financial'},
+      {key: 'groupGovernmentID', icon: governmentIcon, title: 'Government ID'}, 
+      {key: 'document', icon: documentIcon, title: 'Document'},
+      {key: 'membership', icon: membershipIcon, title: 'Membership'},
+      {key: 'family', icon: relationshipIcon, title: 'Relationship'},
+      {key: 'employment', icon: employmentIcon, title: 'Employment'},
+      {key: 'education', icon: educationIcon, title: 'Education'},
+      {key: 'others', icon: otherIcon, title: 'Others'},
+      {key: 'education', icon: educationIcon, title: 'Education'},
     ]
 
     const chunks = _.chunk(this.options.slice(2), 3)    
@@ -94,7 +103,7 @@ export default class extends Component {
         {chunks.map((row, rowIndex)=>
         <Row key={rowIndex}>
         {row.map(({key, icon, title, type}, index)=>
-          <Col key={key}>
+          <Col key={index}>
             <Button onPress={e=>this.handleOption(index)} noPadder transparent style={styles.optionButton}>
               <Image source={icon} style={styles.optionImage} />                          
             </Button>
@@ -268,14 +277,20 @@ export default class extends Component {
 
   render() {
     const {searchString} = this.props
+    const {selected} = this.state
+    const selectedOption = this.options[selected]        
     // console.log('search',searchString)    
     return (                 
         <Container>                    
             <Content padder refreshing={this.state.refreshing} 
-                onRefresh={this._onRefresh}>                            
-              {searchString ? this.renderSearchResult() : this.renderVault()}                                       
+                onRefresh={this._onRefresh}>         
+              <View>        
+                <Header options={this.options.slice(0,6)} selected={selected} onOptionSelect={this._optionSelect}/>
+                <Text style={styles.optionTitle}>Suggestions</Text>               
+              </View>                   
+              {this.popMenu}                                       
             </Content>                 
-            <AddButton onPress={()=>this.showPopover()}/>  
+             
         </Container>      
     )
   }
