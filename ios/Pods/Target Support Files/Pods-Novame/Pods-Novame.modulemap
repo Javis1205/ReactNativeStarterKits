@@ -1,0 +1,6 @@
+framework module Pods_Novame {
+  umbrella header "Pods-Novame-umbrella.h"
+
+  export *
+  module * { export * }
+}

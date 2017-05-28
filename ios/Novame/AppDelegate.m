@@ -11,6 +11,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "OAuthManager.h"
 
 @implementation AppDelegate
 
@@ -36,6 +37,11 @@
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
+  
+  // ADD THIS LINE SOMEWHERE IN THIS FUNCTION
+  [OAuthManager setupOAuthHandler:application];
+  // ...
+  
   [self.window makeKeyAndVisible];
   return YES;
 }
@@ -43,6 +49,13 @@
 // Required for the notification event.
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
   [RCTOneSignal didReceiveRemoteNotification:notification];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  return [OAuthManager handleOpenUrl:application
+                             openURL:url
+                   sourceApplication:sourceApplication
+                          annotation:annotation];
 }
 
 @end
