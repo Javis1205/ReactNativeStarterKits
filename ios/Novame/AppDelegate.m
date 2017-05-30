@@ -21,7 +21,7 @@
 {
   
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                         appId:@"1f83a499-59aa-4b82-adc9-9a2771564aae"];
+                                                         appId:@"ab82f752-be3e-4a12-8ad1-48539dbe73b4"];
   
   NSURL *jsCodeLocation;
 

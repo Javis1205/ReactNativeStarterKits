@@ -98,16 +98,18 @@ export default class extends Component {
             top: 30,
           }}
           >
-            <Button small transparent light onPress={()=>goBack()}>
+            <Button small transparent light style={{
+              paddingLeft: 10,
+            }} onPress={()=>goBack()}>
               <Icon name="arrow-left" style={{
-                fontSize: 20,
+                fontSize: 20,                
               }} />
             </Button>
             
             <View row>
               <Button small transparent light rounded bordered style={{
                 borderColor: '#979797',
-                marginRight: 10,
+                marginRight: 10,                
               }}>
                 <Text small>FOLLOW</Text>
               </Button>
@@ -116,6 +118,7 @@ export default class extends Component {
                 width: 30,
                 paddingLeft:0,
                 paddingRight:0,
+                marginRight: 15,
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>

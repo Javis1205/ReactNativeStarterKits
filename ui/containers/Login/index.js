@@ -48,7 +48,9 @@ export default class extends Component {
   // }
 
   async handleLogin(socialType = 'facebook'){
-    const resp = await manager.authorize(socialType)
+    if(socialType === 'facebook'){ 
+      const resp = await manager.authorize(socialType)
+    }
     this.props.login('brother@regit.today', 'Test@123')
   }
 
