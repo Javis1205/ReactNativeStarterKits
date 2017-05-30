@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native'
 import App from './app'
 import { Provider } from 'react-redux'
 import configureStore from '~/store/config'
-
+import { forwardTo } from '~/store/actions/common'
 import Preload from './containers/Preload'
 import OneSignal from 'react-native-onesignal'
 
@@ -13,16 +13,21 @@ if (!window.navigator.userAgent) {
   window.navigator.userAgent = "react-native"
 }
 
-export default class Regit extends Component {
+export default class extends Component {
 
   constructor(props) {
     super(props)
   
-    this.state = {
-      store: null,
-    }        
+    this.store = null    
 
-    configureStore(store=> this.setState({store}))
+    configureStore(store=> {
+      if(!__DEV__){
+        const firstRoute = store.getState().auth.loggedIn ? 'home' : 'login'
+        store.dispatch(forwardTo(firstRoute, true))
+      }
+      this.store = store
+      this.forceUpdate()
+    })        
   }
 
   componentWillMount() {    
@@ -58,15 +63,18 @@ export default class Regit extends Component {
     console.log('Device info: ', device);
   }
 
-  render() {    
-    const {store} = this.state
+  shouldComponentUpdate(){
+    return false
+  }
+
+  render() {        
     // should have a pre-load page
-    if(!store)
+    if(!this.store)
       return ( <Preload message="Initializing..."/> )
 
     return (
-      <Provider store={store}>
-        <App/>
+      <Provider store={this.store}>
+        <App/>        
       </Provider>
     )
   }
