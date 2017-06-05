@@ -17,9 +17,10 @@ export default class extends Component {
 
   constructor(props) {
     super(props)
-  
-    this.store = null    
+    this.store = null            
+  }
 
+  componentDidMount(){
     configureStore(store=> {
       if(!__DEV__){
         const firstRoute = store.getState().auth.loggedIn ? 'home' : 'login'
@@ -27,7 +28,7 @@ export default class extends Component {
       }
       this.store = store
       this.forceUpdate()
-    })        
+    })    
   }
 
   componentWillMount() {    

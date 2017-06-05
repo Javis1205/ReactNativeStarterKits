@@ -65,7 +65,7 @@ export default class extends Component {
         return true
     }
     
-    async imageDownloadBegin(info) {
+    imageDownloadBegin(info) {
         switch (info.statusCode) {
             case 404:
             case 403:
@@ -76,14 +76,14 @@ export default class extends Component {
         }
     }
 
-    async imageDownloadProgress(info) {
+    imageDownloadProgress(info) {
         if ((info.contentLength / info.bytesWritten) == 1) {
             this.downloading = false
             this.jobId = null
         }
     }
 
-    async checkImageCache(imageUri, cachePath, cacheKey) {
+    checkImageCache(imageUri, cachePath, cacheKey) {
         const dirPath = DocumentDirectoryPath+'/'+cachePath
         const filePath = dirPath+'/'+cacheKey
         
@@ -263,7 +263,7 @@ export default class extends Component {
         }
     }
 
-    async _handleConnectivityChange(isConnected) {
+    _handleConnectivityChange(isConnected) {
         this.networkAvailable = isConnected
     }
   
@@ -274,15 +274,15 @@ export default class extends Component {
 
         if (this.state.cacheable && this.state.cachedImagePath) {
             return this.renderCache()
-        }
-        
-        // maybe Icon or view
-        if(this.props.placeholder){
-            return this.props.placeholder
-        }
+        }        
 
         if (this.props.defaultSource) {
             return this.renderDefaultSource()
+        }
+
+        // maybe Icon or view
+        if(this.props.placeholder){
+            return this.props.placeholder
         }
         
         return (
@@ -312,9 +312,9 @@ export default class extends Component {
     renderDefaultSource() {
         const { children, defaultSource, checkNetwork, networkAvailable, ...props } = this.props        
         return (
-            <CacheableImage {...props} source={defaultSource} checkNetwork={false} networkAvailable={this.networkAvailable} >
+            <ResponsiveImage {...props} source={defaultSource} checkNetwork={false} networkAvailable={this.networkAvailable} >
             {children}
-            </CacheableImage>
+            </ResponsiveImage>
         )
     }
 }
