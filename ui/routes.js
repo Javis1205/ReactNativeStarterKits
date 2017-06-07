@@ -25,7 +25,7 @@ import AddVault from './containers/Vault/AddVault'
 import Message from './containers/Message'
 import Interaction from './containers/Interaction'
 import Calendar from './containers/Calendar'
-// import WebRTC from './containers/WebRTC'
+import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
@@ -178,9 +178,9 @@ export default {
         title: 'Calendar',
         Page: Calendar,
     },
-    // webrtc:{
-    //     title: 'WebRTC',
-    //     Page: WebRTC,
-    // },
+    webrtc:{
+        title: 'WebRTC',
+        Page: WebRTC,
+    },
 
 }

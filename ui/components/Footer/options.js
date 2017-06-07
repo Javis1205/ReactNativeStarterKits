@@ -12,7 +12,7 @@ export default {
     },
     {
       name: 'Message',
-      route: 'message',
+      route: 'webrtc',
       icon: 'message',
     }, 
   ]
