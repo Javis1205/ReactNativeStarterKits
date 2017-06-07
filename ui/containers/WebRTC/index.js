@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Platform } from 'react-native'
 import {
   AppRegistry,
   StyleSheet,
@@ -24,39 +24,46 @@ import {
   getUserMedia,
 } from 'react-native-webrtc';
 
-const socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
+let socket = null;
+let container;
 const configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
 
 const pcPeers = {};
 let localStream;
 
 function getLocalStream(isFront, callback) {
-  MediaStreamTrack.getSources(sourceInfos => {
-    console.log(sourceInfos);
-    let videoSourceId;
-    for (const i = 0; i < sourceInfos.length; i++) {
-      const sourceInfo = sourceInfos[i];
-      if(sourceInfo.kind == "video" && sourceInfo.facing == (isFront ? "front" : "back")) {
-        videoSourceId = sourceInfo.id;
+
+  let videoSourceId;
+
+  // on android, you don't have to specify sourceId manually, just use facingMode
+  // uncomment it if you want to specify
+  if (Platform.OS === 'ios') {
+    MediaStreamTrack.getSources(sourceInfos => {
+      console.log("sourceInfos: ", sourceInfos);
+
+      for (const i = 0; i < sourceInfos.length; i++) {
+        const sourceInfo = sourceInfos[i];
+        if(sourceInfo.kind == "video" && sourceInfo.facing == (isFront ? "front" : "back")) {
+          videoSourceId = sourceInfo.id;
+        }
       }
+    });
+  }
+  getUserMedia({
+    audio: true,
+    video: {
+      mandatory: {
+        minWidth: 640, // Provide your own width, height and frame rate here
+        minHeight: 360,
+        minFrameRate: 30,
+      },
+      facingMode: (isFront ? "user" : "environment"),
+      optional: (videoSourceId ? [{sourceId: videoSourceId}] : []),
     }
-    getUserMedia({
-      audio: true,
-      // video: false,
-      video: {
-        mandatory: {
-          minWidth: 500, // Provide your own width, height and frame rate here
-          minHeight: 300,
-          minFrameRate: 30
-        },
-        facingMode: (isFront ? "user" : "environment"),
-        optional: (videoSourceId ? [{sourceId: videoSourceId}] : [])
-      }
-    }, function (stream) {
-      console.log('dddd', stream);
-      callback(stream);
-    }, logError);
-  });
+  }, function (stream) {
+    console.log('getUserMedia success', stream);
+    callback(stream);
+  }, logError);
 }
 
 function join(roomID) {
@@ -194,8 +201,6 @@ function leave(socketId) {
   container.setState({info: 'One peer leave!'});
 }
 
-
-
 function logError(error) {
   console.log("logError", error);
 }
@@ -220,8 +225,6 @@ function getStats() {
   }
 }
 
-let container;
-
 export default class extends Component {
 
   constructor(props) {
@@ -242,7 +245,7 @@ export default class extends Component {
   
   componentDidMount() {
     container = this;
-
+    socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
     socket.on('exchange', function(data){
       exchange(data);
     });
@@ -278,7 +281,7 @@ export default class extends Component {
         localStream.release();
       }
       localStream = stream;
-      container.setState({selfViewSrc: stream.toURL()});
+      this.setState({selfViewSrc: stream.toURL()});
 
       for (const id in pcPeers) {
         const pc = pcPeers[id];
@@ -358,7 +361,7 @@ export default class extends Component {
             </TouchableHighlight>
           </View>) : null
         }
-        <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>
+        {this.state.selfViewSrc && <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>}
         {
           mapHash(this.state.remoteList, function(remote, index) {
             return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
