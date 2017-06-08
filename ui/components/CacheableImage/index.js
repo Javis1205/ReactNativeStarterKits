@@ -5,8 +5,8 @@ import ResponsiveImage from 'react-native-responsive-image'
 import URL from 'url-parse'
 
 const SHA1 = require("crypto-js/sha1")
-
-export default class extends Component {
+// give it a name so we can search
+export default class CacheableImage extends Component {
 
   static propTypes = {
       activityIndicatorProps: PropTypes.object,
@@ -246,7 +246,7 @@ export default class extends Component {
         if (this.props.checkNetwork) {
             NetInfo.isConnected.addEventListener('change', this._handleConnectivityChange)
             // componentWillUnmount unsets this._handleConnectivityChange in case the component unmounts before this fetch resolves
-            NetInfo.isConnected.fetch().done(this._handleConnectivityChange)
+            NetInfo.isConnected.fetch().then(this._handleConnectivityChange)
         }
 
         this._processSource(this.props.source, true)
@@ -263,7 +263,7 @@ export default class extends Component {
         }
     }
 
-    _handleConnectivityChange(isConnected) {
+    _handleConnectivityChange(isConnected) {        
         this.networkAvailable = isConnected
     }
   
@@ -274,15 +274,15 @@ export default class extends Component {
 
         if (this.state.cacheable && this.state.cachedImagePath) {
             return this.renderCache()
-        }        
-
-        if (this.props.defaultSource) {
-            return this.renderDefaultSource()
         }
-
+        
         // maybe Icon or view
         if(this.props.placeholder){
             return this.props.placeholder
+        }
+
+        if (this.props.defaultSource) {
+            return this.renderDefaultSource()
         }
         
         return (
@@ -312,9 +312,9 @@ export default class extends Component {
     renderDefaultSource() {
         const { children, defaultSource, checkNetwork, networkAvailable, ...props } = this.props        
         return (
-            <ResponsiveImage {...props} source={defaultSource} checkNetwork={false} networkAvailable={this.networkAvailable} >
+            <CacheableImage {...props} source={defaultSource} checkNetwork={false} networkAvailable={this.networkAvailable} >
             {children}
-            </ResponsiveImage>
+            </CacheableImage>
         )
     }
 }

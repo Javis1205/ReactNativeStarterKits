@@ -50,7 +50,7 @@ function getLocalStream(isFront, callback) {
     });
   }
   getUserMedia({
-    audio: true,
+    // audio: true,
     video: {
       mandatory: {
         minWidth: 640, // Provide your own width, height and frame rate here
@@ -313,6 +313,7 @@ export default class extends Component {
     return (
       <View style={styles.listViewContainer}>
         <ListView
+          enableEmptySections={true}
           dataSource={this.ds.cloneWithRows(this.state.textRoomData)}
           renderRow={rowData => <Text>{`${rowData.user}: ${rowData.message}`}</Text>}
           />
