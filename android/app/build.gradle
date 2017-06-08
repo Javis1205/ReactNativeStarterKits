@@ -99,6 +99,8 @@ android {
         }
         manifestPlaceholders = [onesignal_app_id: "ab82f752-be3e-4a12-8ad1-48539dbe73b4",
                                 onesignal_google_project_number: "260952625614"]
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
     }
     signingConfigs {
         release {
@@ -141,6 +143,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':react-native-oauth')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-onesignal')

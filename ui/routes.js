@@ -8,7 +8,6 @@ import SignUpStep3 from './containers/SignUp/Step3'
 import SignUpStep4 from './containers/SignUp/Step4'
 import SignUpStep5 from './containers/SignUp/Step5'
 import SignUpStep6 from './containers/SignUp/Step6'
-import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
 import Delegation from './containers/Delegation/Index'
 import DelegationDetail from './containers/Delegation/Detail'
@@ -27,6 +26,8 @@ import Interaction from './containers/Interaction'
 import Calendar from './containers/Calendar'
 import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
+import UserProfile from './containers/UserProfile'
+import EventDetail from './containers/EventDetail'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -43,7 +44,19 @@ export default {
     home: {        
         title: 'Home',
         Page: Home,
-    },  
+    },
+    userProfile: {
+        title: 'Taylor Swift',
+        Page: UserProfile,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    eventDetail: {
+        title: 'Event',
+        Page: EventDetail,
+        headerType: 'back',
+        footerType: 'none',
+    },
     notification: {
         title: 'Notification',
         Page: Notification,
