@@ -28,7 +28,7 @@ import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
 import EventDetail from './containers/EventDetail'
-
+import Search from './containers/Search'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -41,9 +41,15 @@ export default {
         title: 'Test',
         Page: Test,
     },
+    search: {
+        title: 'Search',
+        Page: Search,
+        headerType: 'searchBack'
+    },
     home: {        
         title: 'Home',
         Page: Home,
+        headerType: 'home'
     },
     userProfile: {
         title: 'Taylor Swift',

@@ -97,7 +97,7 @@ export default class extends Component {
   }
 
   render() {
-    const {  } = this.props
+    // const {  } = this.props
     return (
       <Container>
         <Content padder refreshing={this.state.refreshing}
