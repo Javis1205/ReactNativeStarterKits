@@ -35,7 +35,7 @@ export default class extends Component {
                 <CacheableImage style={styles.avatar} source={starAvatar} />
               </Col>
               <Col>
-                <Row style={{...styles.rowContainer, height: 25}}>
+                <Row style={{...styles.rowContainer, height: 20}}>
                   <Text
                     onLongPress={this.props.onUserPress}
                     style={styles.starNameText}>{feed.starName}</Text>

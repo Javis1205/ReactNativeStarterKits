@@ -83,7 +83,6 @@ export default class extends Component {
   }
   
   _onEventPress() {
-    console.log("OKKK")
     this.props.forwardTo('eventDetail')
   }
   
