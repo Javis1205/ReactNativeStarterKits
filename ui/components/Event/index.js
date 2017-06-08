@@ -16,24 +16,24 @@ import styles from './styles'
 export default class extends Component {
 
   render() {
-    const {feed} = this.props    
-    const avatar = {uri: API_BASE + feed.BusinessImageUrl}
-    const cardImage = {uri: API_BASE + feed.Image}
-
+    const {feed} = this.props
+    const starAvatar = {uri: feed.starAvatar}
+    const eventImg = {uri: feed.eventImg}
+  
     return (      
         <Card style={styles.container}>
           
           <CardItem bordered style={styles.avatarContainer}>
             <Left>
-                <CacheableImage style={styles.avatar} source={avatar} />
+                <CacheableImage style={styles.avatar} source={starAvatar} />
                 <Body>
-                    <Text>{feed.BusinessName}</Text>
-                    <Text note>{moment(feed.SpendEffectDate).format('DD MMM YYYY')}</Text>
+                    <Text>{feed.starName}</Text>
+                    <Text note>{feed.date}</Text>
                 </Body>
             </Left>            
           </CardItem>          
           <CardItem cardBody>
-            <CacheableImage style={styles.image} source={cardImage} />
+            <CacheableImage style={styles.image} source={eventImg} />
           </CardItem>                        
        </Card>       
     )

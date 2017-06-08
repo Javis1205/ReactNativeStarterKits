@@ -7,6 +7,8 @@ import {
     Item,
     View,
     Input,
+    List,
+    ListItem
 } from 'native-base'
 
 import Content from '~/ui/components/Content'
@@ -21,11 +23,28 @@ import Event from '~/ui/components/Event'
 
 import styles from './styles'
 
+const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
+const imgEvent = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
+
+var data = []
+for(let i = 0; i < 5; i++) {
+  data.push({
+    starName: "Taylor Swift",
+    eventName: "Country Super Show",
+    time: "19:00 - 22:00",
+    date: "22/04/2017",
+    location: "LA - USA",
+    numberOfLikes: "2K",
+    numberOfShares: "3K",
+    starAvatar: imgAvatar,
+    eventImg: imgEvent
+  })
+}
+
 @connect(state=>({  
-  token: authSelectors.getToken(state),
-  activeCampaign: campaignSelectors.getActiveCampaign(state),
-  // getActiveCampaignRequest: commonSelectors.getRequest(state, 'getActiveCampaign'),  
+    
 }), {...campaignActions, ...commonActions})
+
 export default class extends Component {
 
   constructor(props) {
@@ -41,12 +60,12 @@ export default class extends Component {
   }
 
   componentWillFocus(){
-    // make it like before
+   /* // make it like before
     const {token, activeCampaign, getActiveCampaign} = this.props
     if(!activeCampaign.NewFeedsItemsList) {
       // so keep refreshing :D
       getActiveCampaign(token)  
-    } 
+    } */
 
     this.setState({
       refreshing: false,
@@ -55,27 +74,29 @@ export default class extends Component {
   }
 
   _onRefresh =() => {
-    this.setState({refreshing: true})                
-    this.props.getActiveCampaign(this.props.token, ()=>this.setState({refreshing: false}))   
-  }    
+    /*this.setState({refreshing: true})
+    this.props.getActiveCampaign(this.props.token, ()=>this.setState({refreshing: false}))  */
+  }
+  
+  renderRow(rowData, sectionID, rowID, highlightRow) {
+    return(
+      <ListItem style={styles.listItemContainer}>
+        <Event feed={rowData}/>
+      </ListItem>
+    )
+  }
 
   render() {
-    const { activeCampaign } = this.props
-    // 10 items
-    return (          
-       
-        <Container>
-                    
-            <Content padder refreshing={this.state.refreshing} 
-                onRefresh={this._onRefresh}                
-            >             
-              {activeCampaign.NewFeedsItemsList && activeCampaign.NewFeedsItemsList.slice(0,10).map(feed=>
-                <Event feed={feed} key={feed.CampaignId} />
-              )}              
-            </Content>            
-            
-        </Container>
-      
+    const {  } = this.props
+    return (
+      <Container>
+        <Content padder refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}>
+          <List
+            renderRow={this.renderRow.bind(this)}
+            dataArray={data}/>
+        </Content>
+      </Container>
     )
   }
 }
