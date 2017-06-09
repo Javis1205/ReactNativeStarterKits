@@ -12,7 +12,7 @@ export default {
     },
     {
       name: 'Settings',
-      route: 'user/setting',
+      route: 'setting',
       icon: 'setting',
     },
     {

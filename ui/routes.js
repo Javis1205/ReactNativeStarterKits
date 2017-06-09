@@ -31,6 +31,8 @@ import EventDetail from './containers/EventDetail'
 import Search from './containers/Search'
 import EventCreation from './containers/EventDetail/Actions/Create'
 import EventUpdate from './containers/EventDetail/Actions/Update'
+import Setting from './containers/Setting'
+import ProfileUpdate from './containers/UserProfile/Actions/Update'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -59,6 +61,12 @@ export default {
         headerType: 'back',
         footerType: 'none',
     },
+    'userProfile/update': {
+        title: 'Update Profile',
+        Page: ProfileUpdate,
+        headerType: 'back',
+        footerType: 'none',
+    },
     eventDetail: {
         title: 'Event',
         Page: EventDetail,
@@ -74,6 +82,12 @@ export default {
     'event/update': {
         title: 'Update Event',
         Page: EventUpdate,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    setting: {
+        title: 'Setting',
+        Page: Setting,
         headerType: 'back',
         footerType: 'none',
     },
