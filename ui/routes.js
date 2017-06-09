@@ -33,6 +33,7 @@ import EventCreation from './containers/EventDetail/Actions/Create'
 import EventUpdate from './containers/EventDetail/Actions/Update'
 import Setting from './containers/Setting'
 import ProfileUpdate from './containers/UserProfile/Actions/Update'
+import ProblemReporter from './containers/UserProfile/Actions/ProblemReporter'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -64,6 +65,12 @@ export default {
     'userProfile/update': {
         title: 'Update Profile',
         Page: ProfileUpdate,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'userProfile/report': {
+        title: 'Report Problem',
+        Page: ProblemReporter,
         headerType: 'back',
         footerType: 'none',
     },

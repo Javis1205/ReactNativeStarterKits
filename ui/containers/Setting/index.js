@@ -33,7 +33,7 @@ export default class Setting extends Component {
       <Container>
         <Content>
           <List>
-            <ListItem >
+            <ListItem onPress={() => this.props.forwardTo('userProfile/report')}>
               <Text>Report Problem</Text>
               <Right>
                 <Icon
