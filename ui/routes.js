@@ -29,6 +29,7 @@ import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
 import EventDetail from './containers/EventDetail'
 import Search from './containers/Search'
+import EventCreation from './containers/EventDetail/Actions/Create'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -60,6 +61,12 @@ export default {
     eventDetail: {
         title: 'Event',
         Page: EventDetail,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'event/create': {
+        title: 'Create Event',
+        Page: EventCreation,
         headerType: 'back',
         footerType: 'none',
     },

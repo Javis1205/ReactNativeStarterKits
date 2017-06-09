@@ -48,6 +48,20 @@ export default {
     marginTop: 20,
     backgroundColor: '#F5A2A2'
   },
+  eventButton: {
+    width: '80%',
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#F5A2A2',
+    alignSelf: 'flex-end'
+  },
+  postButton: {
+    width: '80%',
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#F5A2A2',
+    alignSelf: 'flex-start'
+  },
   listItemContainer: {
     borderBottomWidth: 0,
     paddingLeft: 0,
