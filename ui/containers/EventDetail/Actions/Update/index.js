@@ -10,7 +10,7 @@ import { Dimensions } from 'react-native'
 import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import DateTimePicker from 'react-native-modal-datetime-picker';
+import { BlurView } from 'react-native-blur'
 import moment from 'moment';
 
 import {
@@ -19,6 +19,8 @@ import {
   DateField,
 } from '~/ui/elements/Form'
 import Icon from '~/ui/elements/Icon'
+import ProfileHeader from '~/ui/components/ProfileHeader'
+import EventHeader from '~/ui/components/EventHeader'
 
 import * as commonActions from '~/store/actions/common'
 
@@ -26,8 +28,10 @@ import styles from './styles'
 import EventForm from '../../components/EventForm'
 
 const img = 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
+const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
+const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
 
-const formSelector = formValueSelector('CreateEventForm')
+const formSelector = formValueSelector('UpdateEventForm')
 @connect(state=>({
   formValues: formSelector(state, 'name', 'address'),
   formState: state.form
@@ -37,16 +41,16 @@ const formSelector = formValueSelector('CreateEventForm')
   return ({
     enableReinitialize: true,
     initialValues: {
-      name: '',
-      address: ''
+      name: 'Sing My Song',
+      address: 'LA-USA'
     },
     ...ownProps, ...stateProps, ...dispatchProps,
   })
   
 })
-@reduxForm({ form: 'CreateEventForm', fields: ['name', 'address'], validate: null})
+@reduxForm({ form: 'UpdateEventForm', fields: ['name', 'address'], validate: null})
 
-export default class EventCreation extends Component {
+export default class EventUpdate extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -84,13 +88,15 @@ export default class EventCreation extends Component {
   
   submitEvent() {
     console.log(this.state)
-    this.props.actions.forwardTo('event/update')
   }
   
   render() {
     return(
       <Container>
         <Content>
+          <ProfileHeader>
+            <EventHeader/>
+          </ProfileHeader>
           <EventForm
             getFromTime={this.getFromTime.bind(this)}
             getDate={this.getDate.bind(this)}

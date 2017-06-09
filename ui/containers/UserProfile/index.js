@@ -15,6 +15,7 @@ import CacheableImage from '~/ui/components/CacheableImage'
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 import Event from '~/ui/components/Event'
+import ProfileHeader from '~/ui/components/ProfileHeader'
 
 import * as commonActions from '~/store/actions/common'
 
@@ -159,9 +160,6 @@ export default class UserProfile extends Component {
   }
   
   render() {
-    const starAvatar = {uri: imgAvatar}
-    const coverImg = {uri: imgCover}
-    
     let avatarContainer = null
     if (this.state.isCeleb) {
       avatarContainer = this.renderAvatarContainerCeleb()
@@ -172,24 +170,9 @@ export default class UserProfile extends Component {
     return(
       <Container>
         <Content>
-          <View style={styles.headerContainer}>
-            <CacheableImage
-              onLoadEnd={this.imageLoaded.bind(this)}
-              ref={(img) => { this.backgroundImage = img; }}
-              style={styles.coverImg} source={coverImg}/>
-            <BlurView
-              blurRadius={10}
-              blurAmount={0}
-              viewRef={this.state.viewRef}
-              blurType="dark"
-              style={styles.avatarContainer}/>
-            <View style={styles.avatarContainer}>
-              <CacheableImage style={styles.avatarImg} source={starAvatar} />
-              <View style={styles.socialContainer}>
-                {avatarContainer}
-              </View>
-            </View>
-          </View>
+          <ProfileHeader>
+            {avatarContainer}
+          </ProfileHeader>
           <List
             renderRow={this.renderRow.bind(this)}
             dataArray={data}/>

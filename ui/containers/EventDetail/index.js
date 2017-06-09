@@ -15,6 +15,8 @@ import CacheableImage from '~/ui/components/CacheableImage'
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 import Event from '~/ui/components/Event'
+import ProfileHeader from '~/ui/components/ProfileHeader'
+import EventHeader from '~/ui/components/EventHeader'
 
 const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
 const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
@@ -53,46 +55,9 @@ export default class UserProfile extends Component {
     return(
       <Container>
         <Content>
-          <View style={styles.headerContainer}>
-            <CacheableImage
-              onLoadEnd={this.imageLoaded.bind(this)}
-              ref={(img) => { this.backgroundImage = img; }}
-              style={styles.coverImg} source={coverImg}/>
-            <BlurView
-              blurRadius={10}
-              blurAmount={0}
-              viewRef={this.state.viewRef}
-              blurType="dark"
-              style={styles.avatarContainer}/>
-            <View style={styles.avatarContainer}>
-              <CacheableImage style={styles.avatarImg} source={starAvatar} />
-              <View style={styles.socialContainer}>
-                <Grid>
-                  <Row style={{justifyContent: 'center', marginBottom: 30}}>
-                    <Text style={styles.starNameText}>Taylor Swift</Text>
-                  </Row>
-                  <Row style={{marginBottom: 10}}>
-                    <Col>
-                      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <Icon name='favorite-border' style={styles.icon}/>
-                        <View style={styles.textContainer}>
-                          <Text style={styles.detailText}>8888 LP</Text>
-                        </View>
-                      </View>
-                    </Col>
-                    <Col>
-                      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-                        <Icon name='account-circle' style={styles.icon}/>
-                        <View style={styles.textContainer}>
-                          <Text style={styles.detailText}>8888 Fans</Text>
-                        </View>
-                      </View>
-                    </Col>
-                  </Row>
-                </Grid>
-              </View>
-            </View>
-          </View>
+          <ProfileHeader>
+            <EventHeader/>
+          </ProfileHeader>
           <View style={{alignItems: 'center'}}>
             <Grid>
               <Row style={styles.rowContainer}>
