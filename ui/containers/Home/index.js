@@ -78,16 +78,26 @@ export default class extends Component {
     this.props.getActiveCampaign(this.props.token, ()=>this.setState({refreshing: false}))  */
   }
   
+  _onUserPress() {
+    this.props.forwardTo('userProfile')
+  }
+  
+  _onEventPress() {
+    this.props.forwardTo('eventDetail')
+  }
+  
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
-      <ListItem style={styles.listItemContainer}>
-        <Event feed={rowData}/>
+      <ListItem
+        onPress={this._onEventPress.bind(this)}
+        style={styles.listItemContainer}>
+        <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
       </ListItem>
     )
   }
 
   render() {
-    const {  } = this.props
+    // const {  } = this.props
     return (
       <Container>
         <Content padder refreshing={this.state.refreshing}

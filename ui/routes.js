@@ -8,7 +8,6 @@ import SignUpStep3 from './containers/SignUp/Step3'
 import SignUpStep4 from './containers/SignUp/Step4'
 import SignUpStep5 from './containers/SignUp/Step5'
 import SignUpStep6 from './containers/SignUp/Step6'
-import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
 import Delegation from './containers/Delegation/Index'
 import DelegationDetail from './containers/Delegation/Detail'
@@ -27,7 +26,14 @@ import Interaction from './containers/Interaction'
 import Calendar from './containers/Calendar'
 import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
-
+import UserProfile from './containers/UserProfile'
+import EventDetail from './containers/EventDetail'
+import Search from './containers/Search'
+import EventCreation from './containers/EventDetail/Actions/Create'
+import EventUpdate from './containers/EventDetail/Actions/Update'
+import Setting from './containers/Setting'
+import ProfileUpdate from './containers/UserProfile/Actions/Update'
+import ProblemReporter from './containers/UserProfile/Actions/ProblemReporter'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -40,10 +46,58 @@ export default {
         title: 'Test',
         Page: Test,
     },
+    search: {
+        title: 'Search',
+        Page: Search,
+        headerType: 'searchBack'
+    },
     home: {        
         title: 'Home',
         Page: Home,
-    },  
+        headerType: 'home'
+    },
+    userProfile: {
+        title: 'Taylor Swift',
+        Page: UserProfile,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'userProfile/update': {
+        title: 'Update Profile',
+        Page: ProfileUpdate,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'userProfile/report': {
+        title: 'Report Problem',
+        Page: ProblemReporter,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    eventDetail: {
+        title: 'Event',
+        Page: EventDetail,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'event/create': {
+        title: 'Create Event',
+        Page: EventCreation,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    'event/update': {
+        title: 'Update Event',
+        Page: EventUpdate,
+        headerType: 'back',
+        footerType: 'none',
+    },
+    setting: {
+        title: 'Setting',
+        Page: Setting,
+        headerType: 'back',
+        footerType: 'none',
+    },
     notification: {
         title: 'Notification',
         Page: Notification,

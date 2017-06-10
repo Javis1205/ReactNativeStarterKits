@@ -3,8 +3,10 @@ import material from '~/theme/variables/material'
 export default {
   container: {
     borderRadius: 0,    
-    marginBottom:20, 
+    marginBottom:10,
     borderWidth:0,
+    marginLeft: 0,
+    marginRight: 0
   },
   headerContainer:{
     paddingBottom:0
@@ -14,10 +16,15 @@ export default {
   },
   avatarContainer:{
     borderTopWidth: material.platform === 'android' ? 1 : 0,
+    paddingLeft: 0,
+    paddingRight: 0
   },
   avatar: {
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 80,
+    borderWidth: 0.5,
+    borderRadius: 40,
+    borderColor: 'gray'
   },
   firstCard:{    
     borderTopLeftRadius:5,
@@ -25,11 +32,6 @@ export default {
   },
   text: {    
     color: material.tabBarActiveTextColor,
-  },
-  icon: {
-    color: material.tabBarActiveTextColor,
-    marginLeft:-5,
-    fontSize: 15,
   },
   image:{ 
     resizeMode: 'cover',    
@@ -50,5 +52,19 @@ export default {
   button: {
     borderColor: material.tabBarActiveTextColor,
     width: '100%',
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    fontSize: 20
+  },
+  detailText: {
+    fontSize: 13
+  },
+  rowContainer: {
+    marginBottom: 10
+  },
+  starNameText: {
+    fontSize: 18
   }
 }

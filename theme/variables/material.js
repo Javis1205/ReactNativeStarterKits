@@ -305,4 +305,6 @@ export default {
   // color theme
   grayColor: '#959595',  
   backgroundColor: '#fff',
+  blue400: '#00A9D3',
+  black: '#000'
 };

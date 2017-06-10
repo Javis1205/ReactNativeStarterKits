@@ -16,7 +16,7 @@ export default {
     flexDirection:'row',  
   },
   searchIcon:{
-    color:'#222',
+    color:material.backgroundColor,
     paddingRight:0,
   },
   menuIcon:{
@@ -29,5 +29,24 @@ export default {
   searchInput:{
     height: material.platform === 'ios' ? 30 : 50,    
     color:'#222'
+  },
+  rowIconContainer: {
+    flexDirection: 'row',
+  },
+  badgeContainer: {
+    position: 'absolute',
+    right: 10,
+    top: 10, 
+    width: 16, 
+    height: 16, 
+    borderRadius: 8, 
+    backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 2000
+  },
+  icon: {
+    fontSize: 20
   }
 }

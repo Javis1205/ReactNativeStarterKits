@@ -26,6 +26,9 @@ export default (variables = variable) => {
       },
       '.large': {
         fontSize: variables.btnTextSizeLarge
+      },
+      '.white': {
+        color: 'white'
       }
   };
 
