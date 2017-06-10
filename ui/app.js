@@ -124,11 +124,21 @@ export default class App extends Component {
     return false
   }
 
+  // will assign visible props for page, and only render when it is visible
+  initializePage(ref, route){    
+    if(route.path){
+      this.pageInstances[route.path] = ref
+      ref.visible = true
+      const fn = ref.shouldComponentUpdate
+      ref.shouldComponentUpdate = (nextProps, nextState) => (fn ? fn.call(ref) : true) && ref.visible      
+    }
+  }
+
   // render a component from current page, then pass the params to Page
-  renderComponentFromPage(page){
-    const {Page, ...route} = page    
+  renderComponentFromPage(page) {
+    const { Page, ...route } = page
     return (
-      <Page ref={ref=>route.path && (this.pageInstances[route.path]=ref)} route={route} app={this}/>
+      <Page ref={ref=>this.initializePage(ref, route)} route={route} app={this} />
     )
   }
 
@@ -138,8 +148,7 @@ export default class App extends Component {
     // first time not show please waiting
     // if (!this.navigator || this.page.Preload === false) {
     //   return this.renderComponentFromPage(this.page)
-    // }
-
+    // }    
     const component = (
       <AfterInteractions firstTime={this.firstTime} placeholder={this.page.Preload || <Preload />}>
         {this.renderComponentFromPage(this.page)}
@@ -196,6 +205,7 @@ export default class App extends Component {
     const method = focus ? 'componentWillFocus' : 'componentWillBlur'
     let whatdog = 10    
     let ref = component
+    ref.visible = focus
     // maybe connect, check name of constructor is _class means it is a component :D
     while(ref && whatdog > 0){
       ref[method] && ref[method]()
@@ -231,21 +241,16 @@ export default class App extends Component {
     const {router, drawerState, closeDrawer} = this.props   
     const {title, path, headerType, footerType} = this.page 
     return (            
-      <StyleProvider style={getTheme(material)}>  
+      <StyleProvider style={getTheme(material)}>         
         <Drawer
           ref={ref => this.drawer = ref}
-          open={drawerState === 'opened'}
+          open={false}
           type="displace"             
           negotiatePan={true}
           tweenDuration={100}
-          useInteractionManager={true}
-          content={<SideBar/>}
+          useInteractionManager={true}          
           onClose={closeDrawer}
-        >           
-          {
-            // each Page will overide StatusBar
-            // <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />          
-          }
+        >                     
           <Header type={headerType} title={title} onLeftClick={this._onLeftClick} onItemRef={ref=>this.header=ref} />
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
