@@ -125,8 +125,9 @@ export default class App extends Component {
   }
 
   // will assign visible props for page, and only render when it is visible
-  initializePage(ref, route){    
-    if(route.path){
+  initializePage(ref, route){   
+    // maybe in debug mode, ref can be null 
+    if(ref && route.path){
       this.pageInstances[route.path] = ref
       ref.visible = true
       const fn = ref.shouldComponentUpdate
