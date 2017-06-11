@@ -1,19 +1,9 @@
-export default { 
+export default {
   listItems: [
     {
-      name: 'Profile',
-      route: 'network',
-      icon: 'network',
-    },    
-    {
-      name: 'Activity Log',
-      route: 'activityLog',
-      icon: 'activity',
-    },
-    {
-      name: 'Settings',
-      route: 'setting',
-      icon: 'setting',
+      name: 'FanProfile',
+      route: 'fanProfile',
+      icon: 'interaction',
     },
     {
       name: 'Rewards',
@@ -21,11 +11,20 @@ export default {
       icon: 'interaction',
     },
     {
+      name: 'Settings',
+      route: 'setting',
+      icon: 'setting',
+    },
+    {
+      name: 'History',
+      route: 'fanHistory',
+      icon: 'network',
+    },
+    {
       name: 'Are you a celeb?',
       route: 'calendar',
       icon: 'reminder',
     },
-
   ]
 
 }

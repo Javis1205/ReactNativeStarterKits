@@ -249,7 +249,8 @@ export default class App extends Component {
           type="displace"             
           negotiatePan={true}
           tweenDuration={100}
-          useInteractionManager={true}          
+          useInteractionManager={true}  
+          content={<SideBar />}        
           onClose={closeDrawer}
         >                     
           <Header type={headerType} title={title} onLeftClick={this._onLeftClick} onItemRef={ref=>this.header=ref} />

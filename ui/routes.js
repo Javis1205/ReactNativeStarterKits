@@ -34,6 +34,8 @@ import EventUpdate from './containers/EventDetail/Actions/Update'
 import Setting from './containers/Setting'
 import ProfileUpdate from './containers/UserProfile/Actions/Update'
 import ProblemReporter from './containers/UserProfile/Actions/ProblemReporter'
+import FanHistory from './containers/FanHistory'
+import FanProfile from './containers/FanProfile'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -97,6 +99,16 @@ export default {
         Page: Setting,
         headerType: 'back',
         footerType: 'none',
+    },
+    fanHistory: {
+        title: 'History',
+        Page: FanHistory,
+        headerType: 'back'
+    },
+    fanProfile: {
+        title: 'Profile',
+        Page: FanProfile,
+        headerType: 'back'
     },
     notification: {
         title: 'Notification',
