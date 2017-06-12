@@ -44,7 +44,8 @@ for(let i = 0; i < 5; i++) {
 
 @connect(state=>({  
   token: authSelectors.getToken(state),
-  celebrity_id: accountSelectors.getCelebrityId(state)
+  celebrity_id: accountSelectors.getCelebrityId(state),
+  activeCampaign: campaignSelectors.getActiveCampaign(state)
 }), {...campaignActions, ...commonActions})
 
 export default class extends Component {
@@ -64,9 +65,9 @@ export default class extends Component {
   componentWillFocus(){
     // make it like before
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
-    
-    getActiveCampaign(token, celebrity_id, 1, 10)
-
+    if (!activeCampaign) {
+      getActiveCampaign(token, celebrity_id, 1, 10)
+    }
     this.setState({
       refreshing: false,
     })
@@ -74,8 +75,9 @@ export default class extends Component {
   }
 
   _onRefresh =() => {
-    /*this.setState({refreshing: true})
-    this.props.getActiveCampaign(this.props.token, ()=>this.setState({refreshing: false}))  */
+    const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
+    this.setState({refreshing: true})
+    getActiveCampaign(token, celebrity_id, 1, 10, ()=>this.setState({refreshing: false}))
   }
   
   _onUserPress() {
@@ -97,14 +99,17 @@ export default class extends Component {
   }
 
   render() {
-    // const {  } = this.props
+    const { activeCampaign } = this.props
     return (
       <Container>
         <Content padder refreshing={this.state.refreshing}
             onRefresh={this._onRefresh}>
-          <List
-            renderRow={this.renderRow.bind(this)}
-            dataArray={data}/>
+          {
+            activeCampaign &&
+            <List
+              renderRow={this.renderRow.bind(this)}
+              dataArray={activeCampaign.results}/>
+          }
         </Content>
       </Container>
     )

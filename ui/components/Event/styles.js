@@ -62,7 +62,8 @@ export default {
     fontSize: 13
   },
   rowContainer: {
-    marginBottom: 10
+    marginBottom: 10,
+    flexDirection: 'row'
   },
   starNameText: {
     fontSize: 18

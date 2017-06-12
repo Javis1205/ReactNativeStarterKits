@@ -14,67 +14,82 @@ import styles from './styles'
 
 
 export default class extends Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      avatarUrl: null,
+    }
+  }
 
   render() {
     const {feed} = this.props
-    const starAvatar = {uri: feed.starAvatar}
+    let starAvatar = null
+    fbAvatar = feed.celebrity.avatar
+    starAvatar = {uri: fbAvatar}
+    console.log(starAvatar)
+    
     let eventImgContainer = null
-    if (typeof feed.eventImg != 'undefined') {
-      const eventImg = {uri: feed.eventImg}
+    if (feed.images.length != 0) {
+      let imgEventUri = API_BASE + '/i/0x0/' + feed.images[0].image.url
+      const eventImg = {uri: imgEventUri}
       eventImgContainer = <View cardBody>
-                            <CacheableImage style={styles.image} source={eventImg} />
+                            <CacheableImage
+                              resizeMode="stretch"
+                              style={styles.image}
+                              source={eventImg} />
                           </View>
     }
   
-    return (      
+    return (
         <View style={styles.container}>
           
           <View bordered style={styles.avatarContainer}>
-            <Grid>
-              <Col style={{width: 90}}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{width: 90}}>
                 <CacheableImage style={styles.avatar} source={starAvatar} />
-              </Col>
-              <Col>
-                <Row style={{...styles.rowContainer, height: 25}}>
+              </View>
+              <View>
+                <View style={{...styles.rowContainer, height: 25}}>
                   <Text
                     onLongPress={this.props.onUserPress}
-                    style={styles.starNameText}>{feed.starName}</Text>
-                </Row>
-                <Row style={{...styles.rowContainer, height: 20}}>
-                  <Text style={styles.detailText}>{'Create an event: ' + feed.eventName}</Text>
-                </Row>
-                <Row style={styles.rowContainer}>
-                  <Col style={{justifyContent: 'center', width: 22}}>
+                    style={styles.starNameText}>{feed.celebrity.username}</Text>
+                </View>
+                <View style={{...styles.rowContainer, height: 20}}>
+                  <Text style={styles.detailText}>{'Create an event: ' + feed.title}</Text>
+                </View>
+                <View style={styles.rowContainer}>
+                  <View style={{justifyContent: 'center', width: 22}}>
                     <Icon name='calendar' style={styles.icon}/>
-                  </Col>
-                  <Col style={{justifyContent: 'center'}}>
-                    <Text style={styles.detailText}>{feed.time + ' ' + feed.date}</Text>
-                  </Col>
-                </Row>
-                <Row style={styles.rowContainer}>
-                  <Col style={{justifyContent: 'center', width: 22}}>
+                  </View>
+                  <View style={{justifyContent: 'center'}}>
+                    <Text style={styles.detailText}>{feed.ins_date + ' ' + feed.upd_date}</Text>
+                  </View>
+                </View>
+                <View style={styles.rowContainer}>
+                  <View style={{justifyContent: 'center', width: 22}}>
                     <Icon name='room' style={styles.icon}/>
-                  </Col>
-                  <Col style={{justifyContent: 'center'}}>
+                  </View>
+                  <View style={{justifyContent: 'center'}}>
                     <Text style={styles.detailText}>{feed.location}</Text>
-                  </Col>
-                </Row>
-                <Row style={styles.rowContainer}>
-                  <Col style={{justifyContent: 'center', width: 22}}>
+                  </View>
+                </View>
+                <View style={styles.rowContainer}>
+                  <View style={{justifyContent: 'center', width: 22}}>
                     <Icon name='favorite-border' style={styles.icon}/>
-                  </Col>
-                  <Col style={{width: '20%', justifyContent: 'center'}}>
-                    <Text style={styles.detailText}>{feed.numberOfLikes}</Text>
-                  </Col>
-                  <Col style={{justifyContent: 'center', width: 22}}>
+                  </View>
+                  <View style={{width: '20%', justifyContent: 'center'}}>
+                    <Text style={styles.detailText}>2K</Text>
+                  </View>
+                  <View style={{justifyContent: 'center', width: 22}}>
                     <Icon name='share' style={styles.icon}/>
-                  </Col>
-                  <Col style={{justifyContent: 'center'}}>
-                    <Text style={styles.detailText}>{feed.numberOfShares}</Text>
-                  </Col>
-                </Row>
-              </Col>
-            </Grid>
+                  </View>
+                  <View style={{justifyContent: 'center'}}>
+                    <Text style={styles.detailText}>3K</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
           </View>
           {eventImgContainer}
        </View>
