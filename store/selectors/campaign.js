@@ -1,4 +1,4 @@
 
-export const getActiveCampaign = state => 
+export const getActiveCampaign = state =>
   state.campaign.activeCampaign
 

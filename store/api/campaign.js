@@ -2,8 +2,8 @@ import { apiGet, apiPost } from '~/store/api/common'
 
 export default {
 
-  getActiveCampaign(accessToken, campaignpublicid='') {    
-    return apiPost('/Api/CampaignService/GetActiveCampaignForCurrentUser', {campaignpublicid}, accessToken)
+  getActiveCampaign(access_token, celebrity_id, page, page_size) {
+    return apiGet('/mobile/v1/news', {celebrity_id, page, page_size}, access_token)
   },
 
 }

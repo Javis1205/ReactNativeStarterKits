@@ -19,35 +19,39 @@ export const rejectErrors = (res) => {
 }
 
 // try invoke callback for refresh token here
-export const fetchJson = (url, options = {}, base = API_BASE) => (
-  // in the same server, API_BASE is emtpy
-  /// check convenient way of passing base directly  
-  fetch(/^(?:https?)?:\/\//.test(url) ? url : base + url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      'Content-Type':'application/x-www-form-urlencoded',      
-      // 'Accept': 'application/json',
-      // 'Content-Type': 'application/json',
-    },
-  })
-  .then(rejectErrors)
-  // default return empty json when no content
-  .then((res) => {
-    const contentType = res.headers.get("content-type") || ''
-    return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
-  })
-)
-
-export const fetchJsonWithToken = (token, url, options = {}, ...args) => (
-  fetchJson(url, {
-    ...options,
-    headers: {
-      ...options.header,
-      Authorization: `Bearer ${token.accessToken || token}`,
-    },
-  }, ...args)
-)
+export const fetchJson = (url, options = {}, base = API_BASE) => {
+  return (
+    // in the same server, API_BASE is emtpy
+    /// check convenient way of passing base directly
+    fetch(/^(?:https?)?:\/\//.test(url) ? url : base + url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        //'Content-Type':'application/x-www-form-urlencoded',
+        // 'Accept': 'application/json',
+        //'Content-Type': 'application/json',
+      },
+    })
+      .then(rejectErrors)
+      // default return empty json when no content
+      .then((res) => {
+        const contentType = res.headers.get("content-type") || ''
+        return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
+      })
+  )
+  
+}
+export const fetchJsonWithToken = (token, url, options = {}, ...args) => {
+  return (
+    fetchJson(url, {
+      ...options,
+      headers: {
+        ...options.header,
+        Authorization: `Bearer ${token.access_token || token}`,
+      },
+    }, ...args)
+  )
+}
 
 // default is get method, we can override header with method:PUT for sample
 export const apiCall = (url, options, token = null) => 
@@ -55,10 +59,31 @@ export const apiCall = (url, options, token = null) =>
 
 // must have data to post, put should not return data
 export const apiPost = (url, data, token, method='POST') => 
-  apiCall(url, { method, body: urlEncode(data) }, token)
+  apiCall(url, {
+    method,
+    body: urlEncode(data),
+    header: {
+      'Content-Type': 'application/json'
+    }
+  }, token)
 
-export const apiGet = (url, data, token, method='GET') => 
-  apiCall(url + '?' + urlEncode(data), { method }, token)
+export const apiLogin = (url, data, token, method='POST') =>
+  apiCall(url, {
+    method,
+    body: urlEncode(data),
+    headers: {
+      'Content-Type':'application/x-www-form-urlencoded'
+    }
+  }, token)
+
+export const apiGet = (url, data, token, method='GET') => {
+  return apiCall(url + '?' + urlEncode(data), {
+    method,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }, token)
+}
 
 
 // if we want to fetch blob data with progress support, we should use fetchBlob, such as download from uri to local, then cache it

@@ -1,13 +1,11 @@
-import { apiPost } from '~/store/api/common'
+import { apiPost, apiLogin } from '~/store/api/common'
 
 export default {
  
 
-  login (username, password) {
-    return apiPost(`/token`, {      
-      username,
-      password,
-      grant_type: 'password',
+  login (facebookToken) {
+    return apiLogin(`/mobile/v1/user/register/facebook/`, {
+      access_token: facebookToken
     })
   },
 

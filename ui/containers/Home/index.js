@@ -18,6 +18,7 @@ import * as authSelectors from '~/store/selectors/auth'
 import * as commonSelectors from '~/store/selectors/common'
 import * as campaignSelectors from '~/store/selectors/campaign'
 import * as campaignActions from '~/store/actions/campaign'
+import * as accountSelectors from '~/store/selectors/account'
 
 import Event from '~/ui/components/Event'
 
@@ -42,7 +43,8 @@ for(let i = 0; i < 5; i++) {
 }
 
 @connect(state=>({  
-    
+  token: authSelectors.getToken(state),
+  celebrity_id: accountSelectors.getCelebrityId(state)
 }), {...campaignActions, ...commonActions})
 
 export default class extends Component {
@@ -60,12 +62,10 @@ export default class extends Component {
   }
 
   componentWillFocus(){
-   /* // make it like before
-    const {token, activeCampaign, getActiveCampaign} = this.props
-    if(!activeCampaign.NewFeedsItemsList) {
-      // so keep refreshing :D
-      getActiveCampaign(token)  
-    } */
+    // make it like before
+    const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
+    
+    getActiveCampaign(token, celebrity_id, 1, 10)
 
     this.setState({
       refreshing: false,

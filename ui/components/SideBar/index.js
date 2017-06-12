@@ -18,6 +18,8 @@ import routes from '~/ui/routes'
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
+const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
+
 import {  
   API_BASE
 } from '~/store/constants/api'
@@ -28,8 +30,11 @@ import {
 }), {...authActions, ...commonActions})
 export default class extends Component {  
 
-  _handleLogout = (e) => {    
-    this.props.logout(this.props.token)       
+  _handleLogout = (e) => {
+    const {forwardTo, closeDrawer, setToast} = this.props
+    closeDrawer()
+    forwardTo('login')
+    setToast('Logout successfully!!!')
   }
 
   navigateTo(route) {
@@ -40,11 +45,11 @@ export default class extends Component {
 
   render() {
     const {profile, forwardTo} = this.props    
-    if(!profile)
-      return (<Spinner color="green" />)
+    /*if(!profile)
+      return (<Spinner color="green" />)*/
     // by default it is flex, so do not set flex portion
     // render profile
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+    const avatar = {uri: imgAvatar}
     return (      
       
         <Content
@@ -56,10 +61,10 @@ export default class extends Component {
               placeholder={<Icon name="image" style={styles.drawerImage}/>} 
               style={styles.drawerImage}/>            
 
-            <Text large style={styles.text}>{profile.DisplayName}</Text>
-            <Text small style={styles.text}>{profile.Birthdate}</Text>
+            <Text large style={styles.text}>Taylor Swift</Text>
+            <Text small style={styles.text}>23/01/1994</Text>
             <View style={styles.editContainer}>
-              <Text small style={styles.text}>{profile.City}, {profile.Country}</Text>
+              <Text small style={styles.text}>{'LA'}, {'USA'}</Text>
               <Icon onPress={e=>this.navigateTo('user/profile')} name="edit" style={styles.iconEdit} />
             </View>
           </View>

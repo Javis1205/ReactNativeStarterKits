@@ -22,11 +22,10 @@ export const setAuthState = (newAuthState) => ({
 })
 
 
-export const saveLoggedUser = ({userName,...token}) => ({
+export const saveLoggedUser = (data) => ({
   type: 'app/saveLoggedUser',
   payload: {
-    user: {userName},
-    token,
+    user: data
   }
 })
 
