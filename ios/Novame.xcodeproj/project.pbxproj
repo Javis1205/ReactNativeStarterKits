@@ -42,6 +42,7 @@
 		240B49461ECF021000D4F01D /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240B49451ECF021000D4F01D /* WebRTC.framework */; };
 		240B49471ECF021800D4F01D /* WebRTC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 240B49451ECF021000D4F01D /* WebRTC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		240CB4091EDAE09600B79303 /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 240CB3911EDAD22200B79303 /* libOAuthManager.a */; };
+		2692B4007753492FBCD389FE /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDE614C337A44468FC18BD4 /* libRNGeocoder.a */; };
 		2A20071B9A6C4F17AA725D80 /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3A2FFD3CB040F8A3859526 /* rubicon-icon-font.ttf */; };
 		2BFD2DE45F52466688E7257F /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1828CB53EDC4706B63E7580 /* Rubik-Italic.ttf */; };
 		2EBA1298E05746C48698D8EA /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B8172E8473D447F7B6DD9949 /* Comic Sans MS.ttf */; };
@@ -315,6 +316,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		C2497E3E1EEEA4E8000773D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E6EF8CCDB8214AD6BDF89678 /* RNGeocoder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BF8FCF941BFFB184000FCD37;
+			remoteInfo = RNGeocoder;
+		};
 		C2CE76581EE94B430080AE4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DA8945A95E774A23BC67AD67 /* RNBlur.xcodeproj */;
@@ -411,6 +419,7 @@
 		B8172E8473D447F7B6DD9949 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
 		BB9CF0E526321E07BD575310 /* Pods-Novame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Novame.release.xcconfig"; path = "Pods/Target Support Files/Pods-Novame/Pods-Novame.release.xcconfig"; sourceTree = "<group>"; };
 		BC89F792091340499B93D979 /* Rubik-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Black.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Black.ttf"; sourceTree = "<group>"; };
+		BFDE614C337A44468FC18BD4 /* libRNGeocoder.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGeocoder.a; sourceTree = "<group>"; };
 		C10D7B773452427EB159C39A /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		C1828CB53EDC4706B63E7580 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Italic.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		CDF05E6C3FEF4FF9A75A8CE1 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
@@ -422,6 +431,7 @@
 		E0F7C67B10C74F29A00B6EC6 /* Skia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Skia.ttf; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; };
 		E17357FCC68340F9851F18DC /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		E51D8B9E474E4884BAFF7E6F /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		E6EF8CCDB8214AD6BDF89678 /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
 		E97137DAF2314D8A8AB04998 /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-UI-Text-Regular.otf"; path = "../node_modules/native-base/Fonts/SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		F0B9740FD8E14FCC9F853392 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		F1E632A32B364466BCCB8F9A /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
@@ -476,6 +486,7 @@
 				10222F23A11D4866BC7DFE18 /* libBVLinearGradient.a in Frameworks */,
 				77E7E62C98FC1D713F11DE8C /* Pods_Novame.framework in Frameworks */,
 				83FA48D7B8494FE092419B7C /* libRNBlur.a in Frameworks */,
+				2692B4007753492FBCD389FE /* libRNGeocoder.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +726,7 @@
 				DA1B83D4B8F34398A2CB4BAF /* BVLinearGradient.xcodeproj */,
 				7B60A45CC71146C38BCB0B63 /* OAuthManager.xcodeproj */,
 				DA8945A95E774A23BC67AD67 /* RNBlur.xcodeproj */,
+				E6EF8CCDB8214AD6BDF89678 /* RNGeocoder.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -749,6 +761,14 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Novame.app */,
 				00E356EE1AD99517003FC87E /* NovameTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2497E1C1EEEA4E8000773D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2497E3F1EEEA4E8000773D2 /* libRNGeocoder.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -959,6 +979,10 @@
 				{
 					ProductGroup = 24A09DF01EB202B100E72448 /* Products */;
 					ProjectRef = 2DEF85572158489B86FA4153 /* RNFS.xcodeproj */;
+				},
+				{
+					ProductGroup = C2497E1C1EEEA4E8000773D2 /* Products */;
+					ProjectRef = E6EF8CCDB8214AD6BDF89678 /* RNGeocoder.xcodeproj */;
 				},
 				{
 					ProductGroup = 24F7EFD91E97990A00B34300 /* Products */;
@@ -1202,6 +1226,13 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		C2497E3F1EEEA4E8000773D2 /* libRNGeocoder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGeocoder.a;
+			remoteRef = C2497E3E1EEEA4E8000773D2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C2CE76591EE94B430080AE4A /* libRNBlur.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1433,12 +1464,14 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-geocoder/ios/RNGeocoder",
 				);
 				INFOPLIST_FILE = NovameTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1474,12 +1507,14 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-geocoder/ios/RNGeocoder",
 				);
 				INFOPLIST_FILE = NovameTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1524,6 +1559,7 @@
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-geocoder/ios/RNGeocoder",
 				);
 				INFOPLIST_FILE = Novame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1566,6 +1602,7 @@
 					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS",
 					"$(SRCROOT)/../node_modules/react-native-blur/ios",
+					"$(SRCROOT)/../node_modules/react-native-geocoder/ios/RNGeocoder",
 				);
 				INFOPLIST_FILE = Novame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

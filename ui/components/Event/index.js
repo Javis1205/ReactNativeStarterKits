@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col,
-  Card, CardItem, Text, Thumbnail, Left, Right, Body, 
+  Card, CardItem, Text, Thumbnail, Left, Right, Body
 } from 'native-base'
+import { Image } from 'react-native'
+import Geocoder from 'react-native-geocoder'
 import { API_BASE } from '~/store/constants/api'
 // import * as accountSelectors from '~/store/selectors/account'
 import moment from 'moment'
@@ -18,7 +20,7 @@ export default class extends Component {
     super(props)
     
     this.state = {
-      avatarUrl: null,
+      location: ''
     }
   }
 
@@ -27,8 +29,6 @@ export default class extends Component {
     let starAvatar = null
     fbAvatar = feed.celebrity.avatar
     starAvatar = {uri: fbAvatar}
-    console.log(starAvatar)
-    
     let eventImgContainer = null
     if (feed.images.length != 0) {
       let imgEventUri = API_BASE + '/i/0x0/' + feed.images[0].image.url
@@ -40,14 +40,18 @@ export default class extends Component {
                               source={eventImg} />
                           </View>
     }
-  
+    
+    let fromTime = moment(feed.ins_date).format("HH:mm")
+    let toTime = moment(feed.upd_date).format("HH:mm")
+    let date = moment(feed.upd_date).format("DD/MM/YY")
+    
     return (
         <View style={styles.container}>
           
           <View bordered style={styles.avatarContainer}>
             <View style={{flexDirection: 'row'}}>
               <View style={{width: 90}}>
-                <CacheableImage style={styles.avatar} source={starAvatar} />
+                <Image style={styles.avatar} source={starAvatar} />
               </View>
               <View>
                 <View style={{...styles.rowContainer, height: 25}}>
@@ -56,14 +60,14 @@ export default class extends Component {
                     style={styles.starNameText}>{feed.celebrity.username}</Text>
                 </View>
                 <View style={{...styles.rowContainer, height: 20}}>
-                  <Text style={styles.detailText}>{'Create an event: ' + feed.title}</Text>
+                  <Text style={styles.detailText}>{'Created an event: ' + feed.title}</Text>
                 </View>
                 <View style={styles.rowContainer}>
                   <View style={{justifyContent: 'center', width: 22}}>
                     <Icon name='calendar' style={styles.icon}/>
                   </View>
                   <View style={{justifyContent: 'center'}}>
-                    <Text style={styles.detailText}>{feed.ins_date + ' ' + feed.upd_date}</Text>
+                    <Text style={styles.detailText}>{fromTime + ' - ' + toTime + '   ' + date}</Text>
                   </View>
                 </View>
                 <View style={styles.rowContainer}>
