@@ -105,7 +105,7 @@ export default class EventCreation extends Component {
       console.log(data.images[0])
       this.setState({
         imgId: data.images[0].id,
-        imgUri: API_BASE + '/i/0x0/' + data.images[0].url
+        imgUri: uri
       })
     })
   }
