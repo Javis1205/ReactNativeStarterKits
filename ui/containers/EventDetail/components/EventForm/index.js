@@ -102,7 +102,7 @@ export default class EventForm extends Component {
   
   handleChoosePhoto = (response) => {
     console.log(response)
-    this.props.getImgUri(response.origURL)
+    this.props.getImgUri(response.uri, response.data)
     this.setState({
       imgUri: response.uri
     })

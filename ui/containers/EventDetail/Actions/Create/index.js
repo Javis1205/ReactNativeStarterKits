@@ -97,10 +97,10 @@ export default class EventCreation extends Component {
     })
   }
   
-  getImgUri(uri) {
+  getImgUri(uri, data) {
     let newDate = new Date()
     this.props.actions.uploadImage(this.props.token, [
-      { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: uri }
+      { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: data }
     ], (error, data) => {
       console.log(data.images[0])
       this.setState({
