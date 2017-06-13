@@ -63,7 +63,7 @@ export default class EventCreation extends Component {
     this.state = {
       fromTime: moment(new Date()).format("HH:mm"),
       toTime: moment(new Date()).format("HH:mm"),
-      date: moment(new Date()).format("DD/MM/YY"),
+      date: moment(new Date()).format("DD/MM/YYYY"),
       imgUri: '',
       imgId: ''
     }
@@ -102,7 +102,6 @@ export default class EventCreation extends Component {
     this.props.actions.uploadImage(this.props.token, [
       { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: data }
     ], (error, data) => {
-      console.log(data.images[0])
       this.setState({
         imgId: data.images[0].id,
         imgUri: uri
@@ -111,19 +110,23 @@ export default class EventCreation extends Component {
   }
   
   submitEvent() {
+    console.log(this.state)
+    let fromTime = moment(this.state.date + ' ' + this.state.fromTime, 'DD/MM/YYYY HH:mm').toISOString()
+    let toTime = moment(this.state.date + ' ' + this.state.toTime, 'DD/MM/YYYY HH:mm').toISOString()
     let event = {
       celebrity_id: this.props.celebrity_id,
       status_id: 2,
       news_type_id: 1,
       location: this.props.formValues.address,
       title: this.props.formValues.name,
-      content: "Hello World"
+      content: "Hello World",
+      start_time: fromTime,
+      finish_time: toTime
     }
     if (this.state.imgId != '') {
       event.image_ids = [this.state.imgId]
     }
     this.props.actions.createCampaign(this.props.token, event)
-    //this.props.actions.forwardTo('event/update')
   }
   
   render() {

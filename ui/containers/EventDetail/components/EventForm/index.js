@@ -6,7 +6,7 @@ import {
   Button, List, ListItem, Switch, Spinner, CheckBox, Picker, Text,
   Container, Item, Input, Left, Body, Right, View, Content, Grid, Col, Row
 } from 'native-base'
-import { Dimensions } from 'react-native'
+import { Dimensions, Image } from 'react-native'
 import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -33,7 +33,7 @@ export default class EventForm extends Component {
       toTimeVisible: false,
       fromTime: moment(new Date()).format("HH:mm"),
       toTime: moment(new Date()).format("HH:mm"),
-      date: moment(new Date()).format("DD/MM/YY"),
+      date: moment(new Date()).format("DD/MM/YYYY"),
       dateVisible: false,
       imgUri: img
     }
@@ -93,10 +93,10 @@ export default class EventForm extends Component {
   }
   
   setDate(value) {
-    this.props.getDate(moment(value).format("DD/MM/YY"))
+    this.props.getDate(moment(value).format("DD/MM/YYYY"))
     this.setState({
       dateVisible: false,
-      date: moment(value).format("DD/MM/YY")
+      date: moment(value).format("DD/MM/YYYY")
     })
   }
   
@@ -108,15 +108,13 @@ export default class EventForm extends Component {
   }
   
   render() {
-    console.log(this.props.imgUri)
-    
     let fromTime = this.state.fromTime
     let toTime = this.state.toTime
     let date = this.state.date
     let imgContainer = null
     if (this.props.imgUri != '') {
       imgContainer = <View style={styles.photoEvent}>
-                      <CacheableImage
+                      <Image
                         style={styles.img}
                         source={{uri: this.props.imgUri}} />
                       <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
