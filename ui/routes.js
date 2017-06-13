@@ -79,7 +79,7 @@ export default {
     eventDetail: {
         title: 'Event',
         Page: EventDetail,
-        headerType: 'back',
+        headerType: 'none',
         footerType: 'none',
     },
     'event/create': {

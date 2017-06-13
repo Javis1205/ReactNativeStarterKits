@@ -47,6 +47,8 @@ export default class extends Component {
     
     return (
         <View style={styles.container}>
+
+        
           
           <View bordered style={styles.avatarContainer}>
             <View style={{flexDirection: 'row'}}>

@@ -49,11 +49,21 @@ export default class UserProfile extends Component {
     this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
   }
   
+  renderHeader(){
+    return this.props.app.header.renderHeaderBack('detail')
+  }
+
   render() {
     const starAvatar = {uri: imgAvatar}
     const coverImg = {uri: imgCover}
     return(
       <Container>
+      <Header noShadow>
+        <Left><Button transparent><Icon name="keyboard-arrow-left" /></Button></Left>
+        <Body><Text>Body</Text></Body>
+        <Right><Text>vai</Text></Right>
+      </Header>
+
         <Content>
           <ProfileHeader>
             <EventHeader/>
