@@ -3,6 +3,7 @@ package com.novame;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.reactnative.photoview.PhotoViewPackage;
 import com.cmcewen.blurview.BlurViewPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFetchBlobPackage(),
             new RNGeocoderPackage(),
             new PhotoViewPackage(),
             new BlurViewPackage(),

@@ -20,6 +20,17 @@ const requestGetActiveCampaign = createRequestSaga({
     ],
 })
 
+const requestCreateCampaign = createRequestSaga({
+  request: api.campaign.createCampaign,
+  key: 'createCampaign',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t create event', 'error')
+  ],
+})
+
 
 // saga reducer
 export default [
@@ -29,7 +40,8 @@ export default [
     function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/getActiveCampaign', requestGetActiveCampaign),                        
+            takeLatest('app/getActiveCampaign', requestGetActiveCampaign),
+            takeLatest('app/createCampaign', requestCreateCampaign),
         ]
     },
 ]

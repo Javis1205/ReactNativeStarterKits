@@ -51,7 +51,11 @@ export default class extends Component {
     if(socialType === 'facebook'){ 
       const resp = await manager.authorize(socialType)
     }
-    let token = "EAAS2N4DQMIEBAP6LxAPnBu8U9juPZAo0bZCBIH1H2ZAC1lseUZCjMwElbUJ1m9aDltTLKZAUK6Gkywn5CdV3r72fC3Xt9ZCFmI5W1zwVMhBedC5yDqXt2f17wjVjpQzEkJDMuImfZAa9yd4d6YfnpgEZBsQTSGBSX4MLtnoJcRtIuFJFrfsvyDsAHBoR2YZBVmtUZD"
+
+    // let token = "EAAS2N4DQMIEBAP6LxAPnBu8U9juPZAo0bZCBIH1H2ZAC1lseUZCjMwElbUJ1m9aDltTLKZAUK6Gkywn5CdV3r72fC3Xt9ZCFmI5W1zwVMhBedC5yDqXt2f17wjVjpQzEkJDMuImfZAa9yd4d6YfnpgEZBsQTSGBSX4MLtnoJcRtIuFJFrfsvyDsAHBoR2YZBVmtUZD"
+
+    let token = "EAACEdEose0cBAENTTfZAGZAaKzg231L1KXaSCvXDPVXPTgKu6zHgU6hc89wZBIdwT0yrNoOK01Q5j7ki44CaxQ2DhaZBTA3tl8R6CeZA8nhKi5foOP2GWyZAyAjtZCLl3mY9n6YL5y9mzzmtZCseo6ZCDG3OKDX7DTcD00pdcktVBSZCvtODPYSTAhhTWbOjowJcsZD"
+
     this.props.login(token)
   }
 

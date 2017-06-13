@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import RNFetchBlob from 'react-native-fetch-blob'
 
 import {
   InputField,
@@ -21,6 +22,10 @@ import {
 import Icon from '~/ui/elements/Icon'
 
 import * as commonActions from '~/store/actions/common'
+import * as campaignActions from '~/store/actions/campaign'
+import * as authSelectors from '~/store/selectors/auth'
+import * as accountSelectors from '~/store/selectors/account'
+import * as imageActions from '~/store/actions/image'
 
 import styles from './styles'
 import EventForm from '../../components/EventForm'
@@ -30,9 +35,11 @@ const img = 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-tayl
 const formSelector = formValueSelector('CreateEventForm')
 @connect(state=>({
   formValues: formSelector(state, 'name', 'address'),
-  formState: state.form
+  formState: state.form,
+  token: authSelectors.getToken(state),
+  celebrity_id: accountSelectors.getCelebrityId(state),
 }), dispatch => ({
-  actions: bindActionCreators({ ...commonActions}, dispatch)
+  actions: bindActionCreators({ ...commonActions, ...campaignActions, ...imageActions}, dispatch)
 }), (stateProps, dispatchProps, ownProps)=>{
   return ({
     enableReinitialize: true,
@@ -79,12 +86,29 @@ export default class EventCreation extends Component {
   getImgUri(uri) {
     this.setState({
       imgUri: uri
+    }, () => {
+      this.props.actions.uploadImage(this.props.token, [
+        { name: 'images', filename: 'event.png', type:'image/png', data: this.state.imgUri }
+      ], (error, data) => {
+        console.log(data)
+      })
     })
   }
   
   submitEvent() {
     console.log(this.state)
-    this.props.actions.forwardTo('event/update')
+    console.log(this.props.formValues)
+    let event = {
+      celebrity_id: this.props.celebrity_id,
+      status_id: 2,
+      news_type_id: 1,
+      location: this.props.formValues.address,
+      title: this.props.formValues.name,
+      content: "Hello World",
+      image_ids: []
+    }
+    this.props.actions.createCampaign(this.props.token, event)
+    //this.props.actions.forwardTo('event/update')
   }
   
   render() {

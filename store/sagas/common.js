@@ -24,10 +24,26 @@ import {
   API_TIMEOUT
 } from '~/store/constants/api'
 
+export const rejectErrors = (res) => {
+  const { status } = res
+  console.log(status)
+  if (status >= 200 && status < 300) {
+    return res
+  }
+  // we can get message from Promise but no need, just use statusText instead of
+  // server return errors
+  return Promise.reject({ message: res.statusText, status })
+}
+
+export const respondJson = (res) => {
+  const contentType = res.headers.get("content-type") || ''
+  return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
+}
+
 // create saga here
 // convenient way: [] instead of polymorph, such as item is not array then [item]
 // because later changes to code will be so easy, just add new row
-export const createRequestSaga = ({request, key, start, stop, success, failure, cancelled, timeout=API_TIMEOUT, cancel}) => {
+export const createRequestSaga = ({request, key, start, stop, success, failure, cancelled, timeout=API_TIMEOUT, cancel, uploadProgress, downloadProgress, intervalProgress=250}) => {
   
   // when we dispatch a function, redux-thunk will give it a dispatch
   // while redux-saga will give it an action instead, good for testing
@@ -63,10 +79,37 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
         throw new Error("Api method not found!!!")
       }
 
+      // start invoke
+      const invokeRequest = ()=>{
+        let chainRequest = request.apply(request, args)
+        if(uploadProgress){
+          chainRequest = chainRequest.uploadProgress({ interval : intervalProgress }, function* (uploaded, total){            
+              for(let actionCreator of uploadProgress){          
+                yield put(actionCreator({uploaded, total}, action))
+              }
+          })
+        }
+
+        if(downloadProgress) {        
+          chainRequest = chainRequest.progress({ interval : intervalProgress }, function*(downloaded, total){
+              for(let actionCreator of downloadProgress){          
+                yield put(actionCreator({downloaded, total}, action))
+              }
+          })
+        }
+
+        // chain the request
+        chainRequest = chainRequest.then(rejectErrors)
+          // default return empty json when no content
+          .then(respondJson)
+
+        return chainRequest
+      }
+
       // we do not wait forever for whatever request !!!
       // timeout is 0 mean default timeout, so default is 0 in case user input 0 
       let raceOptions = {
-        data: call(request, ...args),
+        data: call(invokeRequest),
         isTimeout: call(delay, timeout)
       }
 
@@ -99,6 +142,7 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
       }            
       
     } catch (reason) {
+      console.log(reason)
       // unauthorized
       if(reason.status === 401){
         // try refresh token

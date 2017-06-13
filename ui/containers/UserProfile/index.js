@@ -19,9 +19,6 @@ import ProfileHeader from '~/ui/components/ProfileHeader'
 
 import * as commonActions from '~/store/actions/common'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
-
 var data = []
 for(let i = 0; i < 5; i++) {
   data.push({
