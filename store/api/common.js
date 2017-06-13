@@ -8,17 +8,6 @@ const urlEncode = data => data
 ? Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])).join('&')
 : ''
 
-export const rejectErrors = (res) => {
-  const { status } = res
-  console.log(status)
-  if (status >= 200 && status < 300) {
-    return res
-  }
-  // we can get message from Promise but no need, just use statusText instead of
-  // server return errors
-  return Promise.reject({ message: res.statusText, status })
-}
-
 // try invoke callback for refresh token here
 export const fetchJson = (url, options = {}, base = API_BASE) => {
   return (
@@ -32,15 +21,8 @@ export const fetchJson = (url, options = {}, base = API_BASE) => {
         // 'Accept': 'application/json',
         //'Content-Type': 'application/json',
       },
-    })
-      .then(rejectErrors)
-      // default return empty json when no content
-      .then((res) => {
-        const contentType = res.headers.get("content-type") || ''
-        return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
-      })
-  )
-  
+    })     
+  )  
 }
 
 export const fetchJsonUploadWithToken = (token, url, options = {}, base = API_BASE) => {
@@ -49,12 +31,6 @@ export const fetchJsonUploadWithToken = (token, url, options = {}, base = API_BA
       Authorization: `Bearer ${token.access_token || token}`,
       'Content-Type' : 'multipart/form-data',
     }, options.body)
-    .then(res => {
-      return res.json()
-    })
-    .catch(error => {
-      return error
-    })
 }
 
 export const apiCallUpload = (url, options, token = null) =>
