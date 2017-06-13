@@ -1,4 +1,4 @@
-
+import RNFetchBlob from 'react-native-fetch-blob'
 // default api_base for all request
 import {  
   API_BASE
@@ -9,7 +9,8 @@ const urlEncode = data => data
 : ''
 
 export const rejectErrors = (res) => {
-  const { status } = res  
+  const { status } = res
+  console.log(status)
   if (status >= 200 && status < 300) {
     return res
   }
@@ -41,6 +42,33 @@ export const fetchJson = (url, options = {}, base = API_BASE) => {
   )
   
 }
+
+export const fetchJsonUploadWithToken = (token, url, options = {}, base = API_BASE) => {
+  return RNFetchBlob.fetch('POST', /^(?:https?)?:\/\//.test(url) ? url : base + url,
+    {
+      Authorization: `Bearer ${token.access_token || token}`,
+      'Content-Type' : 'multipart/form-data',
+    }, options.body)
+    .then(res => {
+      return res.json()
+    })
+    .catch(error => {
+      return error
+    })
+}
+
+export const apiCallUpload = (url, options, token = null) =>
+  fetchJsonUploadWithToken(token, url, options)
+
+export const apiPostUpload = (url, data, token, method='POST') =>
+  apiCallUpload(url, {
+    method,
+    body: data,
+    header: {
+      'Content-Type': 'application/json'
+    }
+  }, token)
+
 export const fetchJsonWithToken = (token, url, options = {}, ...args) => {
   return (
     fetchJson(url, {
@@ -58,10 +86,10 @@ export const apiCall = (url, options, token = null) =>
   token ? fetchJsonWithToken(token, url, options) : fetchJson(url, options)
 
 // must have data to post, put should not return data
-export const apiPost = (url, data, token, method='POST') => 
+export const apiPost = (url, data, token, method='POST') =>
   apiCall(url, {
     method,
-    body: urlEncode(data),
+    body: JSON.stringify(data),
     header: {
       'Content-Type': 'application/json'
     }

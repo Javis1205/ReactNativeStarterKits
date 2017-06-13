@@ -7,6 +7,7 @@ import campaign from './campaign'
 import network from './network'
 import delegation from './delegation'
 import vault from './vault'
+import image from './image'
 
 // saga must be a function like generator of other functions
 export default function* () {
@@ -19,5 +20,6 @@ export default function* () {
     ...network.map(watcher => fork(watcher)),
     ...delegation.map(watcher => fork(watcher)),
     ...vault.map(watcher => fork(watcher)),
+    ...image.map(watcher => fork(watcher))
   ]
 }

@@ -143,6 +143,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fetch-blob')
     compile project(':react-native-geocoder')
     compile project(':react-native-photo-view')
     compile project(':react-native-blur')
