@@ -31,6 +31,17 @@ const requestCreateCampaign = createRequestSaga({
   ],
 })
 
+const requestGetDetailedEvent = createRequestSaga({
+  request: api.campaign.getDetailedCampaign,
+  key: 'getDetailedCampaign',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t create event', 'error')
+  ],
+})
+
 
 // saga reducer
 export default [
@@ -42,6 +53,7 @@ export default [
         yield [
             takeLatest('app/getActiveCampaign', requestGetActiveCampaign),
             takeLatest('app/createCampaign', requestCreateCampaign),
+            takeLatest('app/getDetailedCampaign', requestGetDetailedEvent),
         ]
     },
 ]

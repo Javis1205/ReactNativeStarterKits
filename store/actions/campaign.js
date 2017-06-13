@@ -16,3 +16,8 @@ export const createCampaign = (...args) => ({
   type: 'app/createCampaign',
   args
 })
+
+export const getDetailedCampaign = (...args) => ({
+  type: 'app/getDetailedCampaign',
+  args
+})

@@ -18,22 +18,16 @@ import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
 import EventHeader from '~/ui/components/EventHeader'
 
+import * as commonActions from '~/store/actions/common'
+import * as authSelectors from '~/store/selectors/auth'
+import * as campaignActions from '~/store/actions/campaign'
+
 const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
 const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
 
-var data = []
-for(let i = 0; i < 5; i++) {
-  data.push({
-    starName: "Taylor Swift",
-    eventName: "Country Super Show",
-    time: "19:00 - 22:00",
-    date: "22/04/2017",
-    location: "LA - USA",
-    numberOfLikes: "2K",
-    numberOfShares: "3K",
-    starAvatar: imgAvatar
-  })
-}
+@connect(state=>({
+  token: authSelectors.getToken(state),
+}), { ...commonActions, ...campaignActions })
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -45,24 +39,47 @@ export default class UserProfile extends Component {
     }
   }
   
-  imageLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
+  componentDidMount() {
+    this.componentWillFocus()
   }
   
-  renderHeader(){
-    return this.props.app.header.renderHeaderBack('detail')
+  componentWillFocus(){
+    console.log(this.props.route.params.id)
+    this.props.getDetailedCampaign(this.props.token, this.props.route.params.id, (error, data) => {
+      console.log(data)
+    })
+  }
+  
+  onPressBack() {
+    this.props.goBack()
+  }
+  
+  onPressEdit() {
+    this.props.forwardTo('event/update/' + this.props.route.params.id)
   }
 
   render() {
-    const starAvatar = {uri: imgAvatar}
-    const coverImg = {uri: imgCover}
     return(
       <Container>
-      <Header noShadow>
-        <Left><Button transparent><Icon name="keyboard-arrow-left" /></Button></Left>
-        <Body><Text>Body</Text></Body>
-        <Right><Text>vai</Text></Right>
-      </Header>
+        <Header noShadow style={{borderBottomWidth: 0}}>
+          <Left>
+            <Button
+              onPress={this.onPressBack.bind(this)}
+              transparent>
+              <Icon name="keyboard-arrow-left" />
+            </Button>
+          </Left>
+          <Body>
+            <Text full style={{color: 'white', alignSelf: 'center'}}>Body</Text>
+          </Body>
+          <Left style={{alignItems: 'flex-end'}}>
+            <Button
+              onPress={this.onPressEdit.bind(this)}
+              transparent>
+              <Icon style={{fontSize: 18}} name="create" />
+            </Button>
+          </Left>
+        </Header>
 
         <Content>
           <ProfileHeader>

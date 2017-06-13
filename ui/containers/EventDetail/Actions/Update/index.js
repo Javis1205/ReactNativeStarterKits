@@ -93,7 +93,7 @@ export default class EventUpdate extends Component {
   render() {
     return(
       <Container>
-        <Content>
+        <Content style={{marginBottom: 50}}>
           <ProfileHeader>
             <EventHeader/>
           </ProfileHeader>

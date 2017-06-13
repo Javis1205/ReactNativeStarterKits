@@ -76,7 +76,7 @@ export default {
         headerType: 'back',
         footerType: 'none',
     },
-    eventDetail: {
+    'eventDetail/:id': {
         title: 'Event',
         Page: EventDetail,
         headerType: 'none',
@@ -88,7 +88,7 @@ export default {
         headerType: 'back',
         footerType: 'none',
     },
-    'event/update': {
+    'event/update/:id': {
         title: 'Update Event',
         Page: EventUpdate,
         headerType: 'back',

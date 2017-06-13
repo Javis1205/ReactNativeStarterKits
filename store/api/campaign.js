@@ -9,5 +9,9 @@ export default {
   createCampaign(access_token, event) {
     return apiPost('/mobile/v1/news/', event, access_token)
   },
+  
+  getDetailedCampaign(access_token, event_id) {
+    return apiGet('/mobile/v1/news/' + event_id, {}, access_token)
+  },
 
 }

@@ -84,14 +84,14 @@ export default class extends Component {
     this.props.forwardTo('userProfile')
   }
   
-  _onEventPress() {
-    this.props.forwardTo('eventDetail')
+  _onEventPress(id) {
+    this.props.forwardTo('eventDetail/' + id)
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem
-        onPress={this._onEventPress.bind(this)}
+        onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
         <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
       </ListItem>
