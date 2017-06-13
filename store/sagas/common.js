@@ -43,7 +43,7 @@ export const respondJson = (res) => {
 // create saga here
 // convenient way: [] instead of polymorph, such as item is not array then [item]
 // because later changes to code will be so easy, just add new row
-export const createRequestSaga = ({request, key, start, stop, success, failure, cancelled, timeout=API_TIMEOUT, cancel, uploadProgress, downloadProgress, intervalProgress=50, blob}) => {
+export const createRequestSaga = ({request, key, start, stop, success, failure, cancelled, timeout=API_TIMEOUT, cancel, /*uploadProgress, downloadProgress, intervalProgress=50, */blob}) => {
   
   // when we dispatch a function, redux-thunk will give it a dispatch
   // while redux-saga will give it an action instead, good for testing
@@ -84,22 +84,22 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
         let chainRequest = request.apply(request, args)        
         // blob support progress
         if(blob){
-          if(uploadProgress){
-            console.log(uploadProgress, intervalProgress)
-            chainRequest = chainRequest.uploadProgress({ interval : intervalProgress }, function* (uploaded, total){            
-                for(let actionCreator of uploadProgress){          
-                  yield put(actionCreator({uploaded, total}, action))
-                }
-            })
-          }
+          // if(uploadProgress){
+          //   console.log(uploadProgress, intervalProgress)
+          //   chainRequest = chainRequest.uploadProgress({ interval : intervalProgress }, function* (uploaded, total){            
+          //       for(let actionCreator of uploadProgress){          
+          //         yield put(actionCreator({uploaded, total}, action))
+          //       }
+          //   })
+          // }
 
-          if(downloadProgress) {        
-            chainRequest = chainRequest.progress({ interval : intervalProgress }, function* (downloaded, total){
-                for(let actionCreator of downloadProgress){          
-                  yield put(actionCreator({downloaded, total}, action))
-                }
-            })
-          }
+          // if(downloadProgress) {        
+          //   chainRequest = chainRequest.progress({ interval : intervalProgress }, function* (downloaded, total){
+          //       for(let actionCreator of downloadProgress){          
+          //         yield put(actionCreator({downloaded, total}, action))
+          //       }
+          //   })
+          // }
           chainRequest = chainRequest.then(res => res.json())
         } else {
           // chain the request
