@@ -11,8 +11,9 @@ import { setToast, noop, forwardTo } from '~/store/actions/common'
 const requestUploadImage = createRequestSaga({
   request: api.image.uploadImage,
   key: 'uploadImage',
+  blob: true,
   uploadProgress: [
-    ({uploaded, total}) => console.log(uploaded, total) || noop()
+    ({uploaded, total}) => setToast('Uploaded ' + uploaded)
   ],
   success: [
     
