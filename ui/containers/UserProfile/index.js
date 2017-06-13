@@ -25,14 +25,34 @@ const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090
 var data = []
 for(let i = 0; i < 5; i++) {
   data.push({
-    starName: "Taylor Swift",
-    eventName: "Country Super Show",
-    time: "19:00 - 22:00",
-    date: "22/04/2017",
-    location: "LA - USA",
-    numberOfLikes: "2K",
-    numberOfShares: "3K",
-    starAvatar: imgAvatar
+    "id": "832e0f0b-67e2-4937-a92d-9c6a4ac6714d",
+    "celebrity": {
+      "id": "d0c31260-d04d-4ba0-b561-62dbe12e7922",
+      "email": "sliver_wolf_94@yahoo.com.vn",
+      "username": "PhạmGiaKhánh",
+      "avatar": "https://graph.facebook.com/608942672529336/picture?type=large",
+      "ins_date": "2017-06-11T10:34:17.000Z",
+      "upd_date": "2017-06-12T03:43:47.000Z"
+    },
+    "code": "mybG7YmQ1o",
+    "location": "39.7050736,-105.9115364",
+    "title": "Hello World",
+    "content": "Hello World",
+    "ins_date": "2017-06-12T04:02:20.000Z",
+    "upd_date": "2017-06-12T04:02:20.000Z",
+    "images": [
+      {
+        "id": "ec1dd6e4-1ea4-491a-80d4-00320012cab3",
+        "sort": 1,
+        "image": {
+          "id": "4eb6a00f-1611-4ee5-be10-dde29a1405b3",
+          "url": "8c32950a-3715-43fe-943f-a14290619ab7.png",
+          "title": "Screen Shot 2017-06-08 at 4.01.35 PM.png",
+          "description": "Screen Shot 2017-06-08 at 4.01.35 PM.png",
+          "ins_date": "2017-06-12T04:01:41.000Z"
+        }
+      }
+    ]
   })
 }
 
