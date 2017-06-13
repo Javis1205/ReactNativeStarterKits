@@ -23,7 +23,7 @@ import PhotoChooser from '~/ui/components/PhotoChooser'
 import CacheableImage from '~/ui/components/CacheableImage'
 
 import styles from './styles'
-const img = 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
+const img = 'https://image.freepik.com/free-icon/camera-symbol_318-1953.jpg'
 
 export default class EventForm extends Component {
   constructor(props) {
@@ -102,16 +102,35 @@ export default class EventForm extends Component {
   
   handleChoosePhoto = (response) => {
     console.log(response)
-    this.props.getImgUri(response.uri)
+    this.props.getImgUri(response.origURL)
     this.setState({
-      imgUri: response.origURL
+      imgUri: response.uri
     })
   }
   
   render() {
+    console.log(this.props.imgUri)
+    
     let fromTime = this.state.fromTime
     let toTime = this.state.toTime
     let date = this.state.date
+    let imgContainer = null
+    if (this.props.imgUri != '') {
+      imgContainer = <View style={styles.photoEvent}>
+                      <CacheableImage
+                        style={styles.img}
+                        source={{uri: this.props.imgUri}} />
+                      <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
+                    </View>
+    } else {
+      imgContainer = <View style={styles.photoEvent}>
+                        <CacheableImage
+                          style={styles.img}
+                          source={{uri: this.state.imgUri}} />
+                        <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
+                      </View>
+    }
+    
     return(
       <View style={{paddingLeft: 15, paddingRight: 15}}>
         <View style={{flexDirection: 'column'}}>
@@ -180,12 +199,7 @@ export default class EventForm extends Component {
               component={InputField}
               placeholderTextColor="#7e7e7e"/>
           </View>
-          <View style={styles.photoEvent}>
-            <CacheableImage
-              style={styles.img}
-              source={{uri: this.state.imgUri}} />
-            <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
-          </View>
+          {imgContainer}
         </View>
         <DateTimePicker
           mode="time"

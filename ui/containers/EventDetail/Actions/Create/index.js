@@ -21,6 +21,10 @@ import {
 } from '~/ui/elements/Form'
 import Icon from '~/ui/elements/Icon'
 
+import {
+  API_BASE
+} from '~/store/constants/api'
+
 import * as commonActions from '~/store/actions/common'
 import * as campaignActions from '~/store/actions/campaign'
 import * as authSelectors from '~/store/selectors/auth'
@@ -60,9 +64,19 @@ export default class EventCreation extends Component {
       fromTime: moment(new Date()).format("HH:mm"),
       toTime: moment(new Date()).format("HH:mm"),
       date: moment(new Date()).format("DD/MM/YY"),
-      imgUri: img
+      imgUri: '',
+      imgId: ''
     }
     
+  }
+  
+  componentWillFocus(){
+    this.setState({
+      imgUri: '',
+      imgId: ''
+    })
+    this.props.change('name', '')
+    this.props.change('address', '')
   }
   
   getFromTime(fromTime) {
@@ -84,28 +98,29 @@ export default class EventCreation extends Component {
   }
   
   getImgUri(uri) {
-    this.setState({
-      imgUri: uri
-    }, () => {
-      this.props.actions.uploadImage(this.props.token, [
-        { name: 'images', filename: 'event.png', type:'image/png', data: this.state.imgUri }
-      ], (error, data) => {
-        console.log(data)
+    let newDate = new Date()
+    this.props.actions.uploadImage(this.props.token, [
+      { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: uri }
+    ], (error, data) => {
+      console.log(data.images[0])
+      this.setState({
+        imgId: data.images[0].id,
+        imgUri: API_BASE + '/i/0x0/' + data.images[0].url
       })
     })
   }
   
   submitEvent() {
-    console.log(this.state)
-    console.log(this.props.formValues)
     let event = {
       celebrity_id: this.props.celebrity_id,
       status_id: 2,
       news_type_id: 1,
       location: this.props.formValues.address,
       title: this.props.formValues.name,
-      content: "Hello World",
-      image_ids: []
+      content: "Hello World"
+    }
+    if (this.state.imgId != '') {
+      event.image_ids = [this.state.imgId]
     }
     this.props.actions.createCampaign(this.props.token, event)
     //this.props.actions.forwardTo('event/update')
@@ -116,6 +131,7 @@ export default class EventCreation extends Component {
       <Container>
         <Content>
           <EventForm
+            imgUri={this.state.imgUri}
             getFromTime={this.getFromTime.bind(this)}
             getDate={this.getDate.bind(this)}
             getImgUri={this.getImgUri.bind(this)}

@@ -3,6 +3,7 @@ export default {
   maxWidth: 500,
   maxHeight: 500,
   storageOptions: {
-    skipBackup: true
+    skipBackup: true,
+    path: 'images'
   }
 }
