@@ -53,6 +53,16 @@ const requestUserEvent = createRequestSaga({
   ],
 })
 
+const requestEditCampaign = createRequestSaga({
+  request: api.campaign.editCampaign,
+  key: 'editCampaign',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t update event', 'error')
+  ],
+})
 
 // saga reducer
 export default [
@@ -65,7 +75,8 @@ export default [
           takeLatest('app/getActiveCampaign', requestGetActiveCampaign),
           takeLatest('app/createCampaign', requestCreateCampaign),
           takeLatest('app/getDetailedCampaign', requestGetDetailedEvent),
-          takeLatest('app/getUserCampaign', requestUserEvent)
+          takeLatest('app/getUserCampaign', requestUserEvent),
+          takeLatest('app/editCampaign', requestEditCampaign)
         ]
     },
 ]

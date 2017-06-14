@@ -18,6 +18,8 @@ import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
 import EventHeader from '~/ui/components/EventHeader'
 
+import { urlEncode } from '~/store/api/common'
+
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as campaignActions from '~/store/actions/campaign'
@@ -66,7 +68,8 @@ export default class UserProfile extends Component {
   }
   
   onPressEdit() {
-    this.props.forwardTo('event/update/' + this.props.route.params.id)
+    this.props.chooseACampaign(this.state.event)
+    this.props.forwardTo('event/update')
   }
 
   render() {

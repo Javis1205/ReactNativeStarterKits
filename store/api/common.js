@@ -4,7 +4,7 @@ import {
   API_BASE
 } from '~/store/constants/api'
 
-const urlEncode = data => data 
+export const urlEncode = data => data
 ? Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])).join('&')
 : ''
 

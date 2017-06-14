@@ -88,7 +88,7 @@ export default {
         headerType: 'back',
         footerType: 'none',
     },
-    'event/update/:id': {
+    'event/update': {
         title: 'Update Event',
         Page: EventUpdate,
         headerType: 'back',

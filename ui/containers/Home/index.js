@@ -47,9 +47,7 @@ export default class extends Component {
   componentWillFocus(){
     // make it like before
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
-    if (!activeCampaign) {
-      getActiveCampaign(token, celebrity_id, 1, 10)
-    }
+    getActiveCampaign(token, celebrity_id, 1, 10)
     this.setState({
       refreshing: false,
     })

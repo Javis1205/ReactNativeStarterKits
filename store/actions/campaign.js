@@ -26,3 +26,13 @@ export const getUserCampaign = (...args) => ({
   type: 'app/getUserCampaign',
   args
 })
+
+export const chooseACampaign = (data) => ({
+  type: 'app/chooseACampaign',
+  payload: data,
+})
+
+export const editCampaign = (...args) => ({
+  type: 'app/editCampaign',
+  args
+})

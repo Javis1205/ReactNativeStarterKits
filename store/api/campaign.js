@@ -17,5 +17,9 @@ export default {
   getUserCampaign(access_token, celebrity_id, page, page_size) {
     return apiGet('/mobile/v1/news', {celebrity_id, page, page_size}, access_token)
   },
-
+  
+  editCampaign(access_token, event_id, event) {
+    return apiPost('/mobile/v1/news/' + event_id, event, access_token, 'PUT')
+  },
+  
 }

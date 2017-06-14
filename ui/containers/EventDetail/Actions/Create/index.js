@@ -110,7 +110,6 @@ export default class EventCreation extends Component {
   }
   
   submitEvent() {
-    console.log(this.state)
     let fromTime = moment(this.state.date + ' ' + this.state.fromTime, 'DD/MM/YYYY HH:mm').toISOString()
     let toTime = moment(this.state.date + ' ' + this.state.toTime, 'DD/MM/YYYY HH:mm').toISOString()
     let event = {
