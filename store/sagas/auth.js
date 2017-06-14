@@ -23,11 +23,7 @@ const requestLogin = createRequestSaga({
     cancel: 'app/logout',
     success: [
         (data) => saveLoggedUser(data),
-        //({access_token}) => getProfile(access_token),
-        () => replaceProfile({
-            user_id: "7a39a6ed-3748-4ddb-9f14-3210a473cb25",
-            celebrity_id: "d0c31260-d04d-4ba0-b561-62dbe12e7922"
-        }),
+        ({access_token}) => getProfile(access_token),
         () => setAuthState(true),                   
         () => forwardTo('home'), 
         () => setToast('Logged successfully!!!'),            

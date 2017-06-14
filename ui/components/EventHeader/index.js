@@ -27,7 +27,7 @@ export default class EventHeader extends Component {
     return(
       <Grid>
         <Row style={{justifyContent: 'center', marginBottom: 30}}>
-          <Text style={styles.starNameText}>Taylor Swift</Text>
+          <Text style={styles.starNameText}>{this.props.user.username}</Text>
         </Row>
         <Row style={{marginBottom: 10}}>
           <Col>

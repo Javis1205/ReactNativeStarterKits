@@ -79,5 +79,12 @@ export default {
   dateContainer: {
     width: '20%',
     justifyContent: 'center'
-  }
+  },
+  spinnerContainer: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 }

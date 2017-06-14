@@ -62,6 +62,10 @@ export default class EventUpdate extends Component {
     
   }
   
+  componentDidMount() {
+    console.log(this.props.route.params)
+  }
+  
   getFromTime(fromTime) {
     this.setState({
       fromTime: fromTime
@@ -91,6 +95,11 @@ export default class EventUpdate extends Component {
   }
   
   render() {
+    return(
+      <View>
+        <Text>HELLo</Text>
+      </View>
+    )
     return(
       <Container>
         <Content style={{marginBottom: 50}}>

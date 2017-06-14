@@ -21,3 +21,8 @@ export const getDetailedCampaign = (...args) => ({
   type: 'app/getDetailedCampaign',
   args
 })
+
+export const getUserCampaign = (...args) => ({
+  type: 'app/getUserCampaign',
+  args
+})

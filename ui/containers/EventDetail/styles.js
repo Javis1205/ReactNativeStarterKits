@@ -1,6 +1,7 @@
 /**
  * Created by vjtc0n on 6/8/17.
  */
+import material from '~/theme/variables/material'
 export default {
   coverImg: {
     width: '100%',
@@ -87,6 +88,19 @@ export default {
     flexDirection: 'row'
   },
   eventText: {
-    fontSize: 26
-  }
+    fontSize: 26,
+    alignSelf: 'center'
+  },
+  spinnerContainer: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image:{
+    resizeMode: 'cover',
+    width:'100%',
+    height:material.deviceWidth * 0.6,
+  },
 }
