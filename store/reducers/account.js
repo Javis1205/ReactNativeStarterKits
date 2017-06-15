@@ -4,7 +4,11 @@
 
 // Takes care of changing the application state
 // state is previous state, 
-export const account = (state = {}, {type, payload}) => {
+export const account = (state = {
+  profile: {
+    id: ''
+  }
+}, {type, payload}) => {
   switch (type) {   
     case 'app/replaceProfile':
       // payload is access token

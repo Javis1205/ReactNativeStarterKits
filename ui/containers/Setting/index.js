@@ -33,7 +33,7 @@ export default class Setting extends Component {
       <Container>
         <Content>
           <List>
-            <ListItem onPress={() => this.props.forwardTo('userProfile/report')}>
+            <ListItem onPress={() => this.props.forwardTo('userProfileReport')}>
               <Text>Report Problem</Text>
               <Right>
                 <Icon
@@ -41,7 +41,7 @@ export default class Setting extends Component {
                   name="keyboard-arrow-right"/>
               </Right>
             </ListItem>
-            <ListItem onPress={() => this.props.forwardTo('userProfile/update')}>
+            <ListItem onPress={() => this.props.forwardTo('userProfileUpdate')}>
               <Text>Edit Profile</Text>
               <Right>
                 <Icon

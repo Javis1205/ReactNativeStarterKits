@@ -45,12 +45,17 @@ export default class extends Component {
   }
 
   componentWillFocus(){
-    // make it like before
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
-    getActiveCampaign(token, celebrity_id, 1, 10)
-    this.setState({
-      refreshing: false,
-    })
+    if (!activeCampaign.results) {
+      this.setState({
+        refreshing: true,
+      })
+      getActiveCampaign(token, celebrity_id, 1, 10, () => {
+        this.setState({
+          refreshing: false,
+        })
+      })
+    }
     
   }
 
@@ -82,11 +87,14 @@ export default class extends Component {
     const { activeCampaign } = this.props
     return (
       <Container>
-        <Content padder refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh}>
+        <Content
+          padder
+          refreshing={this.state.refreshing}
+          onRefresh={this._onRefresh}>
           {
-            activeCampaign &&
+            activeCampaign.results &&
             <List
+              removeClippedSubviews={false}
               renderRow={this.renderRow.bind(this)}
               dataArray={activeCampaign.results}/>
           }
