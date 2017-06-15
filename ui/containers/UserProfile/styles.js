@@ -42,11 +42,23 @@ export default {
     height: 30,
     justifyContent: 'center'
   },
-  followButton: {
+  unfollowButton: {
     width: '50%',
     justifyContent: 'center',
     marginTop: 20,
     backgroundColor: '#F5A2A2'
+  },
+  followButton: {
+    width: '50%',
+    justifyContent: 'center',
+    marginTop: 20,
+    borderColor: '#F5A2A2',
+    borderWidth: 3,
+    backgroundColor: 'white'
+  },
+  followTextButton: {
+    color: '#F5A2A2',
+    fontWeight: 'bold'
   },
   eventButton: {
     width: '80%',

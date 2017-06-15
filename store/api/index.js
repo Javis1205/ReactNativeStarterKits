@@ -7,6 +7,7 @@ import network from './network'
 import delegation from './delegation'
 import vault from './vault'
 import image from './image'
+import job from './job'
 
 // we compose all api for each category here as single entry point
 // api will be an single entry point for all frame methods
@@ -20,5 +21,6 @@ export default {
   network,
   delegation,
   vault,
-  image
+  image,
+  job
 }

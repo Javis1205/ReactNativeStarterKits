@@ -23,12 +23,12 @@ import { urlEncode } from '~/store/api/common'
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as campaignActions from '~/store/actions/campaign'
+import * as accountSelectors from '~/store/selectors/account'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
 
 @connect(state=>({
   token: authSelectors.getToken(state),
+  profile: accountSelectors.getProfile(state)
 }), { ...commonActions, ...campaignActions })
 
 export default class UserProfile extends Component {
@@ -39,7 +39,8 @@ export default class UserProfile extends Component {
       refreshing: true,
       viewRef: null,
       event: {},
-      celebrity: {}
+      celebrity: {},
+      isOwner: false
     }
   }
   
@@ -49,9 +50,15 @@ export default class UserProfile extends Component {
   
   componentWillFocus(){
     this.setState({
-      refreshing: true
+      refreshing: true,
+      isOwner: false
     })
     this.props.getDetailedCampaign(this.props.token, this.props.route.params.id, (error, data) => {
+      if (this.props.profile.id == data.celebrity.id) {
+        this.setState({
+          isOwner: true
+        })
+      }
       this.setState({
         event: data,
         celebrity: data.celebrity
@@ -79,6 +86,16 @@ export default class UserProfile extends Component {
           <Spinner color={"black"}/>
         </View>
       )
+    }
+    let editButton = null
+    if (this.state.isOwner) {
+      editButton = <Button
+                    onPress={this.onPressEdit.bind(this)}
+                    transparent>
+                    <Icon style={{fontSize: 18}} name="create" />
+                  </Button>
+    } else {
+      editButton = <View/>
     }
     let eventImgContainer = null
     if (this.state.event.images.length != 0) {
@@ -108,11 +125,7 @@ export default class UserProfile extends Component {
             <Text full style={{color: 'white', alignSelf: 'center'}}>Event</Text>
           </Body>
           <Left style={{alignItems: 'flex-end'}}>
-            <Button
-              onPress={this.onPressEdit.bind(this)}
-              transparent>
-              <Icon style={{fontSize: 18}} name="create" />
-            </Button>
+            {editButton}
           </Left>
         </Header>
 
