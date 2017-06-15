@@ -2,8 +2,8 @@ import material from '~/theme/variables/material'
 
 export default {
   container: {
-    padding: 10,
-    // paddingBottom: 40
+    paddingTop: 10,
+    paddingBottom: 10
   },
   content: {
     height: 200
@@ -23,9 +23,7 @@ export default {
     borderRadius: 25,
   },
   categoryContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'column',
   },
   item: {
     flexDirection: 'column',
@@ -55,5 +53,20 @@ export default {
   suggestSubBlock: {
     flexDirection: 'column',
     // flexWrap: 'wrap'
-  }
+  },
+  spinnerContainer: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  listItemContainer: {
+    borderBottomWidth: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    justifyContent: 'center'
+  },
 }

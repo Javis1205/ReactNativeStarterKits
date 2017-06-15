@@ -58,6 +58,7 @@ export default class UserProfile extends Component {
           isOwner: true
         })
       } else {
+        // Should be Fixed soon
         let isFollowed = false
         if (isFollowed) {
           this.setState({
