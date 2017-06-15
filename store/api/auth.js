@@ -3,10 +3,17 @@ import { apiPost, apiLogin } from '~/store/api/common'
 export default {
  
 
-  login (facebookToken) {
-    return apiLogin(`/mobile/v1/user/register/facebook/`, {
-      access_token: facebookToken
-    })
+  login (token, socialType) {
+    switch (socialType) {
+      case 'facebook':
+        return apiLogin(`/mobile/v1/user/register/facebook/`, {
+          access_token: token
+        })
+      case 'twitter':
+        return apiLogin(`/mobile/v1/user/register/facebook/`, {
+          access_token: token
+        })
+    }
   },
 
   refreshAccessToken (refreshToken) {
