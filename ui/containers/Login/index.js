@@ -27,7 +27,7 @@ import Content from '~/ui/components/Content'
 import Preload from '~/ui/containers/Preload'
 import { InputField } from '~/ui/elements/Form'
 import { validate } from './utils'
-import { spashImage } from '~/assets'
+import { spashImage, backgroundImage } from '~/assets'
 
 import Icon from '~/ui/elements/Icon'
 
@@ -50,9 +50,9 @@ export default class extends Component {
   async handleLogin(socialType = 'facebook'){
 
     
-    const ret = await manager.authorize(socialType)    
-    console.log(ret)
-    const accessToken = ret.response.credentials
+    const ret = await manager.authorize(socialType)
+    console.log(ret.response)
+    const accessToken = ret.response.credentials.accessToken
     this.props.login(accessToken, socialType)
   }
 
@@ -66,7 +66,7 @@ export default class extends Component {
 
     return (
       <Container style={styles.container}>
-        <Image source={spashImage} style={styles.splash}/>    
+        <Image source={backgroundImage} style={styles.splash}/>
                                
         <View style={styles.bottomContainer}>
           <Text style={styles.textLogo}>NOVAME</Text>      

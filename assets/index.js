@@ -15,3 +15,4 @@ export const documentIcon = require('./images/document.png')
 
 export const avatarImage = require('./images/avatar.png')
 export const spashImage = require('./images/splash.jpg')
+export const backgroundImage = require('./images/NovaBackground.jpg')

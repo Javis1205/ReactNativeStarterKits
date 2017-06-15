@@ -4,6 +4,7 @@ export default {
  
 
   login (token, socialType) {
+    console.log(token)
     switch (socialType) {
       case 'facebook':
         return apiLogin(`/mobile/v1/user/register/facebook/`, {
