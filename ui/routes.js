@@ -64,13 +64,13 @@ export default {
         headerType: 'none',
         footerType: 'none',
     },
-    'userProfile/update': {
+    'userProfileUpdate': {
         title: 'Update Profile',
         Page: ProfileUpdate,
         headerType: 'back',
         footerType: 'none',
     },
-    'userProfile/report': {
+    'userProfileReport': {
         title: 'Report Problem',
         Page: ProblemReporter,
         headerType: 'back',
