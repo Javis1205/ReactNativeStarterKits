@@ -20,10 +20,13 @@ import ProfileHeader from '~/ui/components/ProfileHeader'
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as campaignActions from '~/store/actions/campaign'
+import * as accountSelectors from '~/store/selectors/account'
+import * as accountActions from '~/store/actions/account'
 
 @connect(state=>({
-  token: authSelectors.getToken(state)
-}), {...commonActions, ...campaignActions})
+  token: authSelectors.getToken(state),
+  profile: accountSelectors.getProfile(state)
+}), {...commonActions, ...campaignActions, ...accountActions})
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -33,7 +36,9 @@ export default class UserProfile extends Component {
       refreshing: true,
       viewRef: null,
       isCeleb: true,
-      events: []
+      events: [],
+      isOwner: false,
+      isFollowed: false
     }
   }
   
@@ -43,9 +48,23 @@ export default class UserProfile extends Component {
   
   componentWillFocus(){
     this.setState({
-      refreshing: true
+      refreshing: true,
+      isOwner: false,
+      isFollowed: false
     })
     this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+      if (this.props.profile.id == this.props.route.params.userId) {
+        this.setState({
+          isOwner: true
+        })
+      } else {
+        let isFollowed = false
+        if (isFollowed) {
+          this.setState({
+            isFollowed: true
+          })
+        }
+      }
       this.setState({
         events: data.results
       }, () => {
@@ -68,6 +87,16 @@ export default class UserProfile extends Component {
     this.props.goBack()
   }
   
+  onPressFollow() {
+    console.log(this.props.profile.id)
+    console.log(this.props.route.params.userId)
+  }
+  
+  onPressUnFollow() {
+    console.log(this.props.profile.id)
+    console.log(this.props.route.params.userId)
+  }
+  
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem style={styles.listItemContainer}>
@@ -85,6 +114,20 @@ export default class UserProfile extends Component {
   }
   
   renderAvatarContainerFan() {
+    let followButton = null
+    if (this.state.isFollowed) {
+      followButton = <Button
+                      onPress={this.onPressUnFollow.bind(this)}
+                      style={styles.unfollowButton}>
+                      <Text>Following</Text>
+                    </Button>
+    } else {
+      followButton = <Button
+                      onPress={this.onPressFollow.bind(this)}
+                      style={styles.followButton}>
+                      <Text style={styles.followTextButton}>Follow</Text>
+                    </Button>
+    }
     return (
       <Grid>
         <Row>
@@ -106,9 +149,7 @@ export default class UserProfile extends Component {
           </Col>
         </Row>
         <Row style={{justifyContent: 'center'}}>
-          <Button style={styles.followButton}>
-            <Text>Follow</Text>
-          </Button>
+          {followButton}
         </Row>
       </Grid>
     )
@@ -173,7 +214,7 @@ export default class UserProfile extends Component {
       )
     }
     let avatarContainer = null
-    if (this.state.isCeleb) {
+    if (this.state.isOwner) {
       avatarContainer = this.renderAvatarContainerCeleb()
     } else {
       avatarContainer = this.renderAvatarContainerFan()

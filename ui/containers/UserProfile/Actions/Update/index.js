@@ -46,8 +46,8 @@ const formSelector = formValueSelector('UpdateProfileForm')
   return ({
     enableReinitialize: true,
     initialValues: {
-      name: '',
-      address: '',
+      name: stateProps.profile.username,
+      address: stateProps.profile.location,
       favorite: ''
     },
     ...ownProps, ...stateProps, ...dispatchProps,
@@ -60,11 +60,19 @@ export default class ProfileUpdate extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isCeleb: true,
+      isCeleb: false,
       avatarImg: props.profile.avatar,
       coverImg: props.profile.cover_picture,
     }
     
+  }
+  
+  componentDidMount() {
+    if (this.props.profile.user_type.id == 3) {
+      this.setState({
+        isCeleb: true
+      })
+    }
   }
   
   getImgAvatarUri(uri, data) {

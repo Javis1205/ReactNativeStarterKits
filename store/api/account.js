@@ -20,8 +20,15 @@ export default {
   },
   
   updateProfile (access_token, userInfo) {
-    // return fetchJsonWithToken(token, `/logout`)
     return apiPost('/mobile/v1/me/', {userInfo}, access_token, 'PUT')
+  },
+  
+  followCeleb (access_token, celebId) {
+    return apiPost('/mobile/v1/follow/' + celebId, {}, access_token)
+  },
+  
+  unfollowCeleb (access_token, celebId) {
+    return apiPost('/mobile/v1/unfollow/' + celebId, {}, access_token)
   },
 
 }

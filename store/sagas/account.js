@@ -25,10 +25,32 @@ const requestUpdateProfile = createRequestSaga({
   request: api.account.updateProfile,
   key: 'updateProfile',
   success: [
-    ({args:[token]}) => getProfile(token)
+    (data, {args:[token]}) => getProfile(token)
   ],
   failure: [
     () => setToast('Couldn\'t update profile', 'error')
+  ],
+})
+
+const requestFollowCeleb = createRequestSaga({
+  request: api.account.followCeleb,
+  key: 'followCeleb',
+  success: [
+
+  ],
+  failure: [
+    () => setToast('Couldn\'t follow profile', 'error')
+  ],
+})
+
+const requestUnfollowCeleb = createRequestSaga({
+  request: api.account.unfollowCeleb,
+  key: 'unfollowCeleb',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t unfollow profile', 'error')
   ],
 })
 
@@ -42,7 +64,9 @@ export default [
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
           takeLatest('app/getProfile', requestGetProfile),
-          takeLatest('app/updateProfile', requestUpdateProfile)
+          takeLatest('app/updateProfile', requestUpdateProfile),
+          takeLatest('app/followCeleb', requestFollowCeleb),
+          takeLatest('app/unfollowCeleb', requestUnfollowCeleb)
         ]
     },
 ]

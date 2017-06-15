@@ -37,7 +37,7 @@ export default class Avatar extends Component {
       <View style={styles.photoContainer}>
         <Image
           style={styles.img}
-          source={{uri: this.state.imgUri}} />
+          source={{uri: this.props.avatarUri}} />
         <PhotoChooser
           style={styles.photoIcon}
           onSuccess={this.handleChoosePhoto}/>

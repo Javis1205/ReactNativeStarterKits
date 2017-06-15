@@ -34,8 +34,6 @@ import * as imageActions from '~/store/actions/image'
 import styles from './styles'
 import EventForm from '../../components/EventForm'
 
-const img = 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
-
 const formSelector = formValueSelector('CreateEventForm')
 @connect(state=>({
   formValues: formSelector(state, 'name', 'address'),

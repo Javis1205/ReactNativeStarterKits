@@ -37,7 +37,7 @@ export default class Cover extends Component {
       <View style={styles.photoContainer}>
         <Image
           style={styles.img}
-          source={{uri: this.state.imgUri}} />
+          source={{uri: this.props.coverUri}} />
         <PhotoChooser
           style={styles.photoIcon}
           onSuccess={this.handleChoosePhoto}/>
