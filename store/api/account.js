@@ -17,6 +17,11 @@ export default {
 
   getBusinessProfile(accessToken) {
     return apiGet('/Api/BusinessAccount/BusinessAccountProfile', {}, accessToken)
-  }
+  },
+  
+  updateProfile (access_token, userInfo) {
+    // return fetchJsonWithToken(token, `/logout`)
+    return apiPost('/mobile/v1/me/', {userInfo}, access_token, 'PUT')
+  },
 
 }

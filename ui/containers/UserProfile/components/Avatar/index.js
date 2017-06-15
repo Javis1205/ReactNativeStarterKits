@@ -6,7 +6,7 @@ import {
   Button, List, ListItem, Switch, Spinner, CheckBox, Picker, Text,
   Container, Item, Input, Left, Body, Right, View, Content, Grid, Col, Row
 } from 'native-base'
-import { Dimensions } from 'react-native'
+import { Dimensions, Image } from 'react-native'
 
 import {
   InputField,
@@ -29,16 +29,13 @@ export default class Avatar extends Component {
   }
   
   handleChoosePhoto = (response) => {
-    console.log(response)
-    this.setState({
-      imgUri: response.uri
-    })
+    this.props.getImgUri(response.uri, response.data)
   }
   
   render() {
     return (
       <View style={styles.photoContainer}>
-        <CacheableImage
+        <Image
           style={styles.img}
           source={{uri: this.state.imgUri}} />
         <PhotoChooser

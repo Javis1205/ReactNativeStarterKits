@@ -19,23 +19,30 @@ import {
 } from '~/ui/elements/Form'
 import Icon from '~/ui/elements/Icon'
 
+import {
+  API_BASE
+} from '~/store/constants/api'
+
+
 import * as commonActions from '~/store/actions/common'
+import * as authSelectors from '~/store/selectors/auth'
+import * as accountActions from '~/store/actions/account'
+import * as accountSelectors from '~/store/selectors/account'
+import * as imageActions from '~/store/actions/image'
 
 import styles from './styles'
 import UpdateForm from '../../components/UpdateForm'
 import Avatar from '../../components/Avatar'
 import Cover from '../../components/Cover'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
-
 const formSelector = formValueSelector('UpdateProfileForm')
 @connect(state=>({
   formValues: formSelector(state, 'name', 'address', 'favorite'),
-  formState: state.form
-}), dispatch => ({
-  actions: bindActionCreators({ ...commonActions}, dispatch)
-}), (stateProps, dispatchProps, ownProps)=>{
+  formState: state.form,
+  token: authSelectors.getToken(state),
+  profile: accountSelectors.getProfile(state)
+}), { ...commonActions, ...accountActions, ...imageActions},
+  (stateProps, dispatchProps, ownProps)=>{
   return ({
     enableReinitialize: true,
     initialValues: {
@@ -54,17 +61,52 @@ export default class ProfileUpdate extends Component {
     super(props)
     this.state = {
       isCeleb: true,
-      avatarImg: imgAvatar,
-      coverImg: imgCover
+      avatarImg: props.profile.avatar,
+      coverImg: props.profile.cover_picture,
     }
     
+  }
+  
+  getImgAvatarUri(uri, data) {
+    let newDate = new Date()
+    this.props.uploadImage(this.props.token, [
+      { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: data }
+    ], (error, data) => {
+      this.setState({
+        avatarImg: API_BASE + '/i/0x0/' + data.images[0].url
+      })
+    })
+  }
+  
+  getImgCoverUri(uri, data) {
+    let newDate = new Date()
+    this.props.uploadImage(this.props.token, [
+      { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: data }
+    ], (error, data) => {
+      this.setState({
+        coverImg: API_BASE + '/i/0x0/' + data.images[0].url
+      })
+    })
+  }
+  
+  submitUser() {
+    let userInfo = {
+      avatar: this.state.avatarImg,
+      location: this.props.formValues.address,
+      cover_picture: this.state.coverImg,
+      favorite: this.props.formValues.favorite
+    }
+    
+    this.props.updateProfile(this.props.token, userInfo)
   }
   
   renderCommonUser() {
     return (
       <View>
         <View style={styles.avatarCommonUserContainer}>
-          <Avatar avatarUri={this.state.avatarImg}/>
+          <Avatar
+            getImgUri={this.getImgAvatarUri.bind(this)}
+            avatarUri={this.state.avatarImg}/>
         </View>
         <UpdateForm/>
       </View>
@@ -75,18 +117,18 @@ export default class ProfileUpdate extends Component {
     return (
       <View>
         <View style={styles.headerCelebUserContainer}>
-          <Cover coverUri={this.state.coverImg}/>
+          <Cover
+            getImgUri={this.getImgCoverUri.bind(this)}
+            coverUri={this.state.coverImg}/>
           <View style={styles.avatarCelebUserContainer}>
-            <Avatar avatarUri={this.state.avatarImg}/>
+            <Avatar
+              getImgUri={this.getImgAvatarUri.bind(this)}
+              avatarUri={this.state.avatarImg}/>
           </View>
         </View>
         <UpdateForm/>
       </View>
     )
-  }
-  
-  submitUser() {
-    console.log(this.state)
   }
   
   render() {

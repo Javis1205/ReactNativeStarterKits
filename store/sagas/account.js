@@ -5,7 +5,8 @@ import { createRequestSaga } from '~/store/sagas/common'
 import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
-    replaceProfile,
+  replaceProfile,
+  getProfile
 } from '~/store/actions/account'
 
 
@@ -20,6 +21,17 @@ const requestGetProfile = createRequestSaga({
     ],
 })
 
+const requestUpdateProfile = createRequestSaga({
+  request: api.account.updateProfile,
+  key: 'updateProfile',
+  success: [
+    ({args:[token]}) => getProfile(token)
+  ],
+  failure: [
+    () => setToast('Couldn\'t update profile', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -29,7 +41,8 @@ export default [
     function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/getProfile', requestGetProfile),            
+          takeLatest('app/getProfile', requestGetProfile),
+          takeLatest('app/updateProfile', requestUpdateProfile)
         ]
     },
 ]

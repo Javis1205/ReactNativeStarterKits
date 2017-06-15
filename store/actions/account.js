@@ -11,3 +11,8 @@ export const replaceProfile = (data) => ({
   type: 'app/replaceProfile',
   payload: data,
 })
+
+export const updateProfile = (...args) => ({
+  type: 'app/updateProfile',
+  args
+})
