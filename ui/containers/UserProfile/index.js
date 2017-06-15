@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import {findNodeHandle} from 'react-native'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
-  Card, CardItem, Text, Thumbnail, Left, Right, Body
+  Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
 } from 'native-base'
 import { API_BASE } from '~/store/constants/api'
 import moment from 'moment'
@@ -18,58 +18,42 @@ import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
 
 import * as commonActions from '~/store/actions/common'
-
-var data = []
-for(let i = 0; i < 5; i++) {
-  data.push({
-    "id": "832e0f0b-67e2-4937-a92d-9c6a4ac6714d",
-    "celebrity": {
-      "id": "d0c31260-d04d-4ba0-b561-62dbe12e7922",
-      "email": "sliver_wolf_94@yahoo.com.vn",
-      "username": "PhạmGiaKhánh",
-      "avatar": "https://graph.facebook.com/608942672529336/picture?type=large",
-      "ins_date": "2017-06-11T10:34:17.000Z",
-      "upd_date": "2017-06-12T03:43:47.000Z"
-    },
-    "code": "mybG7YmQ1o",
-    "location": "39.7050736,-105.9115364",
-    "title": "Hello World",
-    "content": "Hello World",
-    "ins_date": "2017-06-12T04:02:20.000Z",
-    "upd_date": "2017-06-12T04:02:20.000Z",
-    "images": [
-      {
-        "id": "ec1dd6e4-1ea4-491a-80d4-00320012cab3",
-        "sort": 1,
-        "image": {
-          "id": "4eb6a00f-1611-4ee5-be10-dde29a1405b3",
-          "url": "8c32950a-3715-43fe-943f-a14290619ab7.png",
-          "title": "Screen Shot 2017-06-08 at 4.01.35 PM.png",
-          "description": "Screen Shot 2017-06-08 at 4.01.35 PM.png",
-          "ins_date": "2017-06-12T04:01:41.000Z"
-        }
-      }
-    ]
-  })
-}
+import * as authSelectors from '~/store/selectors/auth'
+import * as campaignActions from '~/store/actions/campaign'
 
 @connect(state=>({
-  
-}), {...commonActions})
+  token: authSelectors.getToken(state)
+}), {...commonActions, ...campaignActions})
 
 export default class UserProfile extends Component {
   constructor(props) {
     super(props)
     
     this.state = {
-      refreshing: false,
+      refreshing: true,
       viewRef: null,
-      isCeleb: true
+      isCeleb: true,
+      events: []
     }
   }
   
-  imageLoaded() {
-    this.setState({ viewRef: findNodeHandle(this.backgroundImage) });
+  componentDidMount() {
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus(){
+    this.setState({
+      refreshing: true
+    })
+    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+      this.setState({
+        events: data.results
+      }, () => {
+        this.setState({
+          refreshing: false
+        })
+      })
+    })
   }
   
   _onUserPress() {
@@ -78,6 +62,10 @@ export default class UserProfile extends Component {
   
   _onCreateEventPress() {
     this.props.forwardTo('event/create')
+  }
+  
+  onPressBack() {
+    this.props.goBack()
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -177,6 +165,13 @@ export default class UserProfile extends Component {
   }
   
   render() {
+    if (this.state.refreshing) {
+      return (
+        <View style={styles.spinnerContainer}>
+          <Spinner color={"black"}/>
+        </View>
+      )
+    }
     let avatarContainer = null
     if (this.state.isCeleb) {
       avatarContainer = this.renderAvatarContainerCeleb()
@@ -186,13 +181,26 @@ export default class UserProfile extends Component {
     
     return(
       <Container>
+        <Header noShadow style={{borderBottomWidth: 0}}>
+          <Left>
+            <Button
+              onPress={this.onPressBack.bind(this)}
+              transparent>
+              <Icon name="keyboard-arrow-left" />
+            </Button>
+          </Left>
+          <Body>
+            <Text full style={{color: 'white', alignSelf: 'center'}}>{this.state.events[0].celebrity.username}</Text>
+          </Body>
+          <Left/>
+        </Header>
         <Content>
-          <ProfileHeader>
+          <ProfileHeader user={this.state.events[0].celebrity}>
             {avatarContainer}
           </ProfileHeader>
           <List
             renderRow={this.renderRow.bind(this)}
-            dataArray={data}/>
+            dataArray={this.state.events}/>
         </Content>
       </Container>
     )

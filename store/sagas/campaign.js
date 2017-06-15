@@ -31,6 +31,38 @@ const requestCreateCampaign = createRequestSaga({
   ],
 })
 
+const requestGetDetailedEvent = createRequestSaga({
+  request: api.campaign.getDetailedCampaign,
+  key: 'getDetailedCampaign',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t create event', 'error')
+  ],
+})
+
+const requestUserEvent = createRequestSaga({
+  request: api.campaign.getUserCampaign,
+  key: 'getUserCampaign',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t create event', 'error')
+  ],
+})
+
+const requestEditCampaign = createRequestSaga({
+  request: api.campaign.editCampaign,
+  key: 'editCampaign',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t update event', 'error')
+  ],
+})
 
 // saga reducer
 export default [
@@ -40,8 +72,11 @@ export default [
     function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/getActiveCampaign', requestGetActiveCampaign),
-            takeLatest('app/createCampaign', requestCreateCampaign),
+          takeLatest('app/getActiveCampaign', requestGetActiveCampaign),
+          takeLatest('app/createCampaign', requestCreateCampaign),
+          takeLatest('app/getDetailedCampaign', requestGetDetailedEvent),
+          takeLatest('app/getUserCampaign', requestUserEvent),
+          takeLatest('app/editCampaign', requestEditCampaign)
         ]
     },
 ]

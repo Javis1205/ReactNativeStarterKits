@@ -10,9 +10,9 @@ export default {
   /**
   * Logs the current user out
   */
-  getProfile (accessToken) {
+  getProfile (access_token) {
     // return fetchJsonWithToken(token, `/logout`)
-    return apiGet('/Api/AccountSettings/Profile', {}, accessToken)
+    return apiGet('/mobile/v1/me/', {}, access_token)
   },
 
   getBusinessProfile(accessToken) {

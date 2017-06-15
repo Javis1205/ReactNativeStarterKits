@@ -58,10 +58,10 @@ export default {
         Page: Home,
         headerType: 'home'
     },
-    userProfile: {
-        title: 'Taylor Swift',
+    'userProfile/:userId': {
+        title: 'User Detail',
         Page: UserProfile,
-        headerType: 'back',
+        headerType: 'none',
         footerType: 'none',
     },
     'userProfile/update': {
@@ -76,7 +76,7 @@ export default {
         headerType: 'back',
         footerType: 'none',
     },
-    eventDetail: {
+    'eventDetail/:id': {
         title: 'Event',
         Page: EventDetail,
         headerType: 'none',

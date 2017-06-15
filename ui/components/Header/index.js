@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   Header, Left, Right, Body,
-  Text, Title, Button, Item, Input,
+  Text, Title, Button, Item, Input, Container
 } from 'native-base'
 import { View } from 'react-native'
 import * as commonSelectors from '~/store/selectors/common'
@@ -91,14 +91,13 @@ export default class extends Component {
     return this.renderHeader(left, center, right)
   }
   renderHeaderHome() {
-    console.log('Case header home')
     const left = (
       <Button transparent onPress={this._leftClick}>
         <Icon style={styles.menuIcon} name='menu' />
       </Button>
     )
     const center = (
-      <Text white>Home</Text>
+      <Text white style={{alignSelf: 'center'}}>Home</Text>
     )
     const right = (
       <View style={styles.rowIconContainer}>
@@ -117,11 +116,18 @@ export default class extends Component {
     return this.renderHeader(left, center, right)
   }
   renderHeader(left, center, right, props) {
+    let rightStyle = null
+    if (right) {
+      rightStyle = {flex: 0.5}
+    } else {
+      rightStyle = {}
+    }
+    
     return (
       <Header noShadow {...props} style={styles.container}>
-        <Left>{left}</Left>
-        <Body>{center}</Body>
-        <Right>{right}</Right>
+        <Left style={{flex: 0.5}}>{left}</Left>
+        <Body style={{flex: 1,}}>{center}</Body>
+        <Right style={rightStyle}>{right}</Right>
       </Header>
     )
   }

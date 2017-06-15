@@ -24,24 +24,6 @@ import Event from '~/ui/components/Event'
 
 import styles from './styles'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-const imgEvent = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
-
-var data = []
-for(let i = 0; i < 5; i++) {
-  data.push({
-    starName: "Taylor Swift",
-    eventName: "Country Super Show",
-    time: "19:00 - 22:00",
-    date: "22/04/2017",
-    location: "LA - USA",
-    numberOfLikes: "2K",
-    numberOfShares: "3K",
-    starAvatar: imgAvatar,
-    eventImg: imgEvent
-  })
-}
-
 @connect(state=>({  
   token: authSelectors.getToken(state),
   celebrity_id: accountSelectors.getCelebrityId(state),
@@ -65,9 +47,7 @@ export default class extends Component {
   componentWillFocus(){
     // make it like before
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
-    if (!activeCampaign) {
-      getActiveCampaign(token, celebrity_id, 1, 10)
-    }
+    getActiveCampaign(token, celebrity_id, 1, 10)
     this.setState({
       refreshing: false,
     })
@@ -80,20 +60,20 @@ export default class extends Component {
     getActiveCampaign(token, celebrity_id, 1, 10, ()=>this.setState({refreshing: false}))
   }
   
-  _onUserPress() {
-    this.props.forwardTo('userProfile')
+  _onUserPress(userId) {
+    this.props.forwardTo('userProfile/' + userId)
   }
   
-  _onEventPress() {
-    this.props.forwardTo('eventDetail')
+  _onEventPress(id) {
+    this.props.forwardTo('eventDetail/' + id)
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem
-        onPress={this._onEventPress.bind(this)}
+        onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
-        <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
+        <Event feed={rowData} onUserPress={this._onUserPress.bind(this, rowData.celebrity.id)}/>
       </ListItem>
     )
   }

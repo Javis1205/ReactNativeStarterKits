@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {findNodeHandle} from 'react-native'
+import {findNodeHandle, Image} from 'react-native'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body
@@ -33,7 +33,7 @@ export default class ProfileHeader extends Component {
   }
   
   render() {
-    const starAvatar = {uri: imgAvatar}
+    const starAvatar = {uri: this.props.user.avatar}
     const coverImg = {uri: imgCover}
     return(
       <View style={styles.headerContainer}>
@@ -48,7 +48,7 @@ export default class ProfileHeader extends Component {
           blurType="dark"
           style={styles.avatarContainer}/>
         <View style={styles.avatarContainer}>
-          <CacheableImage style={styles.avatarImg} source={starAvatar} />
+          <Image style={styles.avatarImg} source={starAvatar} />
           <View style={styles.socialContainer}>
             {this.props.children}
           </View>
