@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { Platform } from 'react-native'
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  TextInput,
+  StyleSheet,    
   ListView,
 } from 'react-native'
+
+import {
+  Text, View, Input, Button, Container,
+} from 'native-base'
 
 import io from 'socket.io-client'
 
@@ -22,11 +22,17 @@ import {
   getUserMedia,
 } from 'react-native-webrtc';
 
-const styles = StyleSheet.create(require('./styles').default)
+import Content from '~/ui/components/Content'
+import Icon from '~/ui/elements/Icon'
+
+import styles from './styles'
 
 let socket = null;
 let container;
-const configuration = {"iceServers": [{"url": "stun:stun.l.google.com:19302"}]};
+const configuration = {"iceServers": [{
+  "url": "stun:stun.l.google.com:19302",
+  // 'url': 'stun:global.stun.twilio.com:3478?transport=udp',
+}]};
 
 const pcPeers = {};
 let localStream;
@@ -61,7 +67,7 @@ function getLocalStream(isFront, callback) {
       optional: (videoSourceId ? [{sourceId: videoSourceId}] : []),
     }
   }, function (stream) {
-    console.log('getUserMedia success', stream);
+    // console.log('getUserMedia success', stream);
     callback(stream);
   }, logError);
 }
@@ -121,7 +127,7 @@ function createPC(socketId, isOffer) {
 
   pc.onaddstream = function (event) {
     console.log('onaddstream', event.stream);
-    container.setState({info: 'One peer join!'});
+    container.setState({info: 'Connected to tupt!'});
 
     const remoteList = container.state.remoteList;
     remoteList[socketId] = event.stream.toURL();
@@ -144,7 +150,9 @@ function createPC(socketId, isOffer) {
 
     dataChannel.onmessage = function (event) {
       console.log("dataChannel.onmessage:", event.data);
-      container.receiveTextData({user: socketId, message: event.data});
+      // container.receiveTextData({user: socketId, message: event.data});
+      // that is tupt :D
+      container.receiveTextData({user: 'tupt', message: event.data});
     };
 
     dataChannel.onopen = function () {
@@ -198,7 +206,7 @@ function leave(socketId) {
   const remoteList = container.state.remoteList;
   delete remoteList[socketId]
   container.setState({ remoteList: remoteList });
-  container.setState({info: 'One peer leave!'});
+  container.setState({info: 'Disconnected!'});
 }
 
 function logError(error) {
@@ -233,7 +241,7 @@ export default class extends Component {
     this.state = {            
         info: 'Initializing',
         status: 'init',
-        roomID: '',
+        roomID: 'tupt',
         isFront: true,
         selfViewSrc: null,
         remoteList: {},
@@ -258,13 +266,12 @@ export default class extends Component {
       getLocalStream(true, function(stream) {
         localStream = stream;
         container.setState({selfViewSrc: stream.toURL()});
-        container.setState({status: 'ready', info: 'Please enter or create room ID'});
+        container.setState({status: 'ready', info: 'Connect tupt'});
       });
     });
   }
 
-  _press = (event) =>{
-    this.refs.roomID.blur();
+  _press = (event) =>{    
     this.setState({status: 'connect', info: 'Connecting'});
     join(this.state.roomID);
   }
@@ -313,62 +320,53 @@ export default class extends Component {
     return (
       <View style={styles.listViewContainer}>
         <ListView
+          style={{flex:2}}
           enableEmptySections={true}
           dataSource={this.ds.cloneWithRows(this.state.textRoomData)}
           renderRow={rowData => <Text>{`${rowData.user}: ${rowData.message}`}</Text>}
           />
-        <TextInput
-          style={{width: 200, height: 30, borderColor: 'gray', borderWidth: 1}}
+        <Input
+          style={{flex:1, paddingTop:0,paddingBottom:0, height: 30, borderColor: 'gray', borderWidth: 1}}
           onChangeText={value => this.setState({textRoomValue: value})}
           value={this.state.textRoomValue}
         />
-        <TouchableHighlight
+        <Button style={{height:30}}
           onPress={this._textRoomPress}>
           <Text>Send</Text>
-        </TouchableHighlight>
+        </Button>
       </View>
     );
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {this.state.info}
-        </Text>
-        {this.state.textRoomConnected && this._renderTextRoom()}
-        <View style={{flexDirection: 'row'}}>
-          <Text>
-            {this.state.isFront ? "Use front camera" : "Use back camera"}
-          </Text>
-          <TouchableHighlight
-            style={{borderWidth: 1, borderColor: 'black'}}
-            onPress={this._switchVideoType}>
-            <Text>Switch camera</Text>
-          </TouchableHighlight>
-        </View>
-        { this.state.status == 'ready' ?
-          (<View>
-            <TextInput
-              ref='roomID'
-              autoCorrect={false}
-              style={{width: 200, height: 40, borderColor: 'gray', borderWidth: 1}}
-              onChangeText={(text) => this.setState({roomID: text})}
-              value={this.state.roomID}
-            />
-            <TouchableHighlight
-              onPress={this._press}>
-              <Text>Enter room</Text>
-            </TouchableHighlight>
-          </View>) : null
-        }
+      <Container>                    
         {this.state.selfViewSrc && <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>}
-        {
-          mapHash(this.state.remoteList, function(remote, index) {
-            return <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
-          })
-        }
-      </View>
+        <View style={{flexDirection: 'row',justifyContent:'space-between', paddingHorizontal: 10}}>               
+          <View style={{flexDirection: 'column', justifyContent:'flex-start'}}>                        
+            <Button transparent noPadder
+              onPress={this._switchVideoType}>
+              <Icon large name="switch-camera" />
+            </Button>
+            { this.state.status === 'ready' &&          
+              <Button transparent noPadder
+                onPress={this._press}>
+                <Icon large name="call" />
+              </Button>          
+            }
+            <Text style={styles.welcome}>
+              {this.state.info}            
+            </Text>     
+          </View>
+        {mapHash(this.state.remoteList, (remote, index) => 
+          <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
+        )}
+        </View>        
+        <Content>          
+          {this.state.textRoomConnected && this._renderTextRoom()} 
+        </Content>
+
+      </Container>
     );
   }
 }

@@ -247,6 +247,7 @@ export default {
     webrtc:{
         title: 'WebRTC',
         Page: WebRTC,
+        headerType: 'back',  
     },
 
 }
