@@ -12,7 +12,9 @@ export const SOCIAL_CONFIG = {
     consumer_secret: 'o2s9ArLF2lgeO0LsyWQyu68jfTirgk1kWLBrrhx2BuaMBtTVqK'
   },
   facebook: {
-    client_id: '805871992895410',
-    client_secret: '88213a66ff8fc3cb4d488f55bce87cd6'  
+    //client_id: '253580248403665',
+    client_id: '253580248403665',
+    //client_secret: '88213a66ff8fc3cb4d488f55bce87cd6',
+    client_secret: '33b973b5a3e8c0a4ad3a91e6611b3380'
   }
 }
