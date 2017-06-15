@@ -10,8 +10,6 @@ import {
   ListView,
 } from 'react-native'
 
-const styles = StyleSheet.create(require('./styles').default)
-
 import io from 'socket.io-client'
 
 import {
@@ -23,6 +21,8 @@ import {
   MediaStreamTrack,
   getUserMedia,
 } from 'react-native-webrtc';
+
+const styles = StyleSheet.create(require('./styles').default)
 
 let socket = null;
 let container;

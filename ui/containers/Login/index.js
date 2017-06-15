@@ -48,16 +48,18 @@ export default class extends Component {
   // }
 
   async handleLogin(socialType = 'facebook'){
-    if(socialType === 'facebook'){ 
-      const resp = await manager.authorize(socialType)
-      console.log(resp)
-    }
+
+    
+    const ret = await manager.authorize(socialType)    
+    console.log(ret)
+    // const accessToken = ret.response.credentials
 
     // let token = "EAAS2N4DQMIEBAP6LxAPnBu8U9juPZAo0bZCBIH1H2ZAC1lseUZCjMwElbUJ1m9aDltTLKZAUK6Gkywn5CdV3r72fC3Xt9ZCFmI5W1zwVMhBedC5yDqXt2f17wjVjpQzEkJDMuImfZAa9yd4d6YfnpgEZBsQTSGBSX4MLtnoJcRtIuFJFrfsvyDsAHBoR2YZBVmtUZD"
 
-    let token = "EAACEdEose0cBAAGuzVtLZA9ZCl36imceSuYPVEUlE08o8EMkvcAV40tzT0Ro2ZA8dVZB8QUihc7aS27GVtbbgUAWjKdbzVjeOIFHuSzSVMMkFQFLa65CzJg27WCWZBTThbmMYdQPZA0fagM55lsdtTKmZAeDtoIibarZAsYyy6QI4ZCGD1JGbITwkF1bCNyuHqL8ZD"
+    // let token = "EAACEdEose0cBAKKtx0GjvDKy12ZBYNaKeExZA4jAiaBNDA7n2hHWt39HUK5LQtmBtunvO4d4EMMSMHIV2w5rzcXvKJt4aiGN96o4AdP6wgYm04IopiO6U73J2b16xUIsOkSIjpjwklpfDLYsOkZBpLM0FrDF9GzjV15SNAmta4IUlP9x7MpDDfjHj95Yp8ZD"
 
-    this.props.login(token)
+
+    // this.props.login(token)
   }
 
   render() {    
