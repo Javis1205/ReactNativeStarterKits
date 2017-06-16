@@ -254,19 +254,19 @@ export default class extends Component {
   componentDidMount() {
     container = this;
     socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
-    socket.on('exchange', function(data){
+    socket.on('exchange', (data)=>{
       exchange(data);
     });
-    socket.on('leave', function(socketId){
+    socket.on('leave', (socketId)=>{
       leave(socketId);
     });
 
-    socket.on('connect', function(data) {
+    socket.on('connect', (data) => {
       console.log('connect');
-      getLocalStream(true, function(stream) {
+      getLocalStream(true, (stream) => {
         localStream = stream;
-        container.setState({selfViewSrc: stream.toURL()});
-        container.setState({status: 'ready', info: 'Connect tupt'});
+        this.setState({selfViewSrc: stream.toURL()});
+        this.setState({status: 'ready', info: 'Connect tupt'});
       });
     });
   }
@@ -279,7 +279,7 @@ export default class extends Component {
   _switchVideoType=()=>{
     const isFront = !this.state.isFront;
     this.setState({isFront});
-    getLocalStream(isFront, function(stream) {
+    getLocalStream(isFront, (stream) => {
       if (localStream) {
         for (const id in pcPeers) {
           const pc = pcPeers[id];
