@@ -31,3 +31,8 @@ export const checkFollowCeleb = (...args) => ({
   type: 'app/checkFollowCeleb',
   args
 })
+
+export const searchProfile = (...args) => ({
+  type: 'app/searchProfile',
+  args
+})

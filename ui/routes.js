@@ -51,7 +51,8 @@ export default {
     search: {
         title: 'Search',
         Page: Search,
-        headerType: 'searchBack'
+        headerType: 'none',
+        footerType: 'none'
     },
     home: {        
         title: 'Home',

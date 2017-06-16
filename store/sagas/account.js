@@ -54,6 +54,17 @@ const requestUnfollowCeleb = createRequestSaga({
   ],
 })
 
+const requestSearchProfile = createRequestSaga({
+  request: api.account.searchProfile,
+  key: 'searchProfile',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t search profile', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -66,7 +77,8 @@ export default [
           takeLatest('app/getProfile', requestGetProfile),
           takeLatest('app/updateProfile', requestUpdateProfile),
           takeLatest('app/followCeleb', requestFollowCeleb),
-          takeLatest('app/unfollowCeleb', requestUnfollowCeleb)
+          takeLatest('app/unfollowCeleb', requestUnfollowCeleb),
+          takeLatest('app/searchProfile', requestSearchProfile)
         ]
     },
 ]

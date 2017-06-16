@@ -2,8 +2,7 @@ import material from '~/theme/variables/material'
 
 export default {
   container: {
-    paddingTop: 10,
-    paddingBottom: 10
+
   },
   content: {
     height: 200
@@ -23,13 +22,18 @@ export default {
     borderRadius: 25,
   },
   categoryContainer: {
-    flexDirection: 'column',
+
   },
   item: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10
+  },
+  celebItem: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   
   suggestBlock: {
@@ -68,5 +72,31 @@ export default {
     marginLeft: 0,
     marginRight: 0,
     justifyContent: 'center'
+  },
+  searchContainer: {
+    backgroundColor: '#e1e1e1',
+    borderColor:'transparent',
+    borderRadius: 5,
+    paddingLeft: 5,
+    paddingRight: 5,
+    marginLeft:-20,
+    width: material.deviceWidth/2 + 60,
+    height:30,
+    flexDirection:'row',
+  },
+  searchIcon:{
+    color:material.backgroundColor,
+    paddingRight:0,
+  },
+  menuIcon:{
+    marginLeft:0,
+  },
+  uploadIcon: {
+    fontSize: 17,
+    marginRight:-3
+  },
+  searchInput:{
+    height: material.platform === 'ios' ? 30 : 50,
+    color:'#222'
   },
 }

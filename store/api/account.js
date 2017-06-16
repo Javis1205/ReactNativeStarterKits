@@ -30,5 +30,18 @@ export default {
   unfollowCeleb (access_token, celebId) {
     return apiPost('/mobile/v1/unfollow/' + celebId, {}, access_token)
   },
+  
+  searchProfile (access_token, celebrityName, jobId) {
+    if (celebrityName != null) {
+      return apiGet('/mobile/v1/search/', {
+        celebrity_name: celebrityName
+      }, access_token)
+    } else if (celebrityName == null && jobId != null) {
+      return apiGet('/mobile/v1/search/', {
+        job_id: jobId
+      }, access_token)
+    }
+    return apiGet('/mobile/v1/search/', {}, access_token)
+  },
 
 }

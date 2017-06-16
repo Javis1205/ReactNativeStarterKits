@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {
   Button, Container, ListItem, List, Spinner,
-  Text, Item, View, Input, Left, Body, Thumbnail, Content
+  Text, Item, View, Input, Left, Body, Thumbnail, Content, Header, Right
 } from 'native-base'
-import { TouchableOpacity, ScrollView , Dimensions} from 'react-native'
+import { TouchableOpacity, ScrollView , Dimensions, ListView} from 'react-native'
 
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
@@ -13,6 +13,8 @@ import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as jobSelectors from '~/store/selectors/job'
 import * as jobActions from '~/store/actions/job'
+import * as accountActions from '~/store/actions/account'
+
 import styles from './styles'
 import material from '~/theme/variables/material'
 
@@ -23,7 +25,7 @@ const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorsw
 @connect(state=>({
   token: authSelectors.getToken(state),
   jobList: jobSelectors.getJob(state)
-}), {...commonActions, ...jobActions})
+}), {...commonActions, ...jobActions, ...accountActions})
 
 export default class Search extends Component {
 
@@ -31,7 +33,12 @@ export default class Search extends Component {
     super(props)
     this.state = {
       refreshing: false,
-      refreshingCeleb: false
+      refreshingCeleb: false,
+      searchText: '',
+      celebList: [
+        {},
+        {}, {}, {}, {}, {}
+      ]
     }
   }
   
@@ -50,18 +57,49 @@ export default class Search extends Component {
     })
   }
   
+  _leftClick = (e) => {
+    const { goBack } = this.props
+    goBack()
+  }
+  
+  _search = (value, force = false) => {
+    this.setState({
+      searchText: value
+    })
+    //this.props.searchProfile(this.props.token, value)
+  }
+  
+  _onPressSearch = () => {
+    console.log(this.state.searchText)
+    this.props.searchProfile(this.props.token, this.state.searchText, null, (error, data) => {
+      console.log(data)
+      this.setState({
+        celebList: data.results
+      })
+    })
+  }
+  
   renderJobItem(rowData, sectionID, rowID, highlightRow) {
-    console.log(rowData)
     return(
       <ListItem style={{...styles.listItemContainer, width: width/4}}>
-        <TouchableOpacity>
-          <View style={styles.item}>
-            <View style={styles.iconContainer}>
-              <Icon name='actor' style={styles.icon} />
-            </View>
-            <Text small>{rowData.name}</Text>
+        <View style={styles.item}>
+          <View style={styles.iconContainer}>
+            <Icon name='actor' style={styles.icon} />
           </View>
-        </TouchableOpacity>
+          <Text small>{rowData.name}</Text>
+        </View>
+      </ListItem>
+    )
+  }
+  
+  renderCelebItem(rowData, sectionID, rowID, highlightRow) {
+    return(
+      <ListItem style={{...styles.listItemContainer, width: width/4}}>
+        <View style={styles.celebItem}>
+          <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
+          <Text>Taylor Swift</Text>
+          <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
+        </View>
       </ListItem>
     )
   }
@@ -76,65 +114,50 @@ export default class Search extends Component {
     }
     return (
       <Container style={styles.container}>
-
-        <View style={styles.categoryContainer}>
-          <List
-            contentContainerStyle={{justifyContent: 'space-between'}}
-            horizontal={true}
-            renderRow={this.renderJobItem.bind(this)}
-            dataArray={this.props.jobList}/>
-        </View>
-
-        <View style={styles.suggestBlock}>
-          <Text bold>Suggestion</Text>
-          <ScrollView>
-            <View style={styles.suggestSubBlock}>
-
-              <View style={styles.rowResult}>
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-                    <Text>Taylor Swift</Text>
-                    <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-                    <Text>Taylor Swift</Text>
-                    <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-                    <Text>Taylor Swift</Text>
-                    <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
-                  </View>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.rowResult}>
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-                    <Text>Taylor Swift</Text>
-                    <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <View style={styles.item}>
-                    <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-                    <Text>Taylor Swift</Text>
-                    <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
-                  </View>
-                </TouchableOpacity>
-              </View>
+        <Header noShadow style={styles.container}>
+          <Left style={{flex: 0.5}}>
+            <Button transparent onPress={this._leftClick}>
+              <Icon style={styles.menuIcon} name={'keyboard-arrow-left'} />
+            </Button>
+          </Left>
+          <Body style={{flex: 1,}}>
+            <Item style={styles.searchContainer}>
+              {/*<Icon name="search" style={styles.searchIcon} />*/}
+              <Input value={this.state.searchText}
+                     autoCorrect={false} onChangeText={this._search}
+                     placeholderTextColor="#222" style={styles.searchInput}
+                     placeholder="Novame Search" />
+            </Item>
+          </Body>
+          <Right style={{}}>
+            <Button
+              onPress={this._onPressSearch.bind(this)}
+              transparent>
+              <Icon style={styles.searchIcon} name="search" />
+            </Button>
+          </Right>
+        </Header>
+        <Content>
+          <View style={styles.categoryContainer}>
+            <List
+              contentContainerStyle={{justifyContent: 'space-between'}}
+              horizontal={true}
+              renderRow={this.renderJobItem.bind(this)}
+              dataArray={this.props.jobList}/>
+          </View>
+  
+          <View style={styles.suggestBlock}>
+            <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>
+            <View style={{flex: 1}}>
+              <List
+                style={{}}
+                contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}
+                pageSize={4}
+                renderRow={this.renderCelebItem.bind(this)}
+                dataArray={this.state.celebList}/>
             </View>
-
-
-          </ScrollView>
-        </View>
+          </View>
+        </Content>
 
       </Container>
     )
