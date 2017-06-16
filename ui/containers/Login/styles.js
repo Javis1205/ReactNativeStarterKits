@@ -6,13 +6,18 @@ export default {
     flexDirection: 'column',  
     backgroundColor: '#000',          
   },  
-  splash:{
+  absolute:{
     width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    height: '100%',    
     position: 'absolute',
     top: 0,
-    left: 0,                  
+    left: 0,    
+  },
+  get splash(){
+    return {
+      ...this.absolute,
+      resizeMode: 'cover',
+    }    
   },
   textLogo: {
     color: '#fff',
