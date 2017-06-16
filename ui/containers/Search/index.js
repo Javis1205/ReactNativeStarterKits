@@ -45,10 +45,6 @@ export default class Search extends Component {
   }
   
   componentDidMount() {
-    this.componentWillFocus()
-  }
-  
-  componentWillFocus(){
     this.setState({
       refreshing: true
     })
@@ -57,6 +53,11 @@ export default class Search extends Component {
         refreshing: false
       })
     })
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus(){
+    
   }
   
   _leftClick = (e) => {
