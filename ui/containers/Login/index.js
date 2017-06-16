@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Image, findNodeHandle } from 'react-native'
 import { 
   Container,   View,
   Form, 
@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
 import OAuthManager from 'react-native-oauth'
+import { BlurView } from 'react-native-blur'
 
 import routes from '~/ui/routes'
 
@@ -43,6 +44,11 @@ manager.configure(SOCIAL_CONFIG)
 @reduxForm({ form: 'LoginForm', validate})
 export default class extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = { viewRef: null }
+  }
+
   // _handleLogin = ({email, password}) => {    
   //   this.props.login(email, password)
   // }
@@ -57,6 +63,10 @@ export default class extends Component {
     this.props.login(token, socialType)
   }
 
+  imageLoaded() {
+    this.setState({ viewRef: findNodeHandle(this.backgroundImage) })
+  }
+
   render() {    
     const { handleSubmit, submitting, forwardTo, loginRequest } = this.props          
     if(loginRequest.status === 'pending'){
@@ -67,17 +77,26 @@ export default class extends Component {
 
     return (
       <Container style={styles.container}>
-        <Image source={backgroundImage} style={styles.splash}/>
+        <Image source={backgroundImage} 
+          ref={img => this.backgroundImage = img}
+          onLoadEnd={this.imageLoaded.bind(this)}
+          style={styles.splash}/>
+        <BlurView
+          style={{...styles.absolute, opacity: 0.8}}
+          viewRef={this.state.viewRef}
+          blurType="dark"
+          blurAmount={1}
+        />
                                
         <View style={styles.bottomContainer}>
           <Text style={styles.textLogo}>NOVAME</Text>      
 
           <View style={styles.socialButtons}>
-            <Button full iconLeft style={styles.socialButton} onPress={()=>this.handleLogin('facebook')}>
+            <Button bordered light transparent iconLeft style={styles.socialButton} onPress={()=>this.handleLogin('facebook')}>
                 <Icon name="facebook" style={styles.socialButtonIcon}/>
                 <Text>Login with Facebook</Text>
             </Button>
-            <Button info iconLeft style={styles.socialButton} onPress={()=>this.handleLogin('twitter')}>
+            <Button bordered light transparent iconLeft style={styles.socialButton} onPress={()=>this.handleLogin('twitter')}>
                 <Icon name="twitter" style={styles.socialButtonIcon}/>
                 <Text>Login with Twitter</Text>
             </Button>              
