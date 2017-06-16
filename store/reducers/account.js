@@ -7,12 +7,14 @@
 export const account = (state = {
   profile: {
     id: ''
-  }
+  },
+  searchedProfile: []
 }, {type, payload}) => {
   switch (type) {   
     case 'app/replaceProfile':
-      // payload is access token
-      return {...state, profile: payload }  
+      return {...state, profile: payload }
+    case 'app/replaceSearchedProfile':
+      return {...state, searchedProfile: payload.results }
     default:
       return state
   }

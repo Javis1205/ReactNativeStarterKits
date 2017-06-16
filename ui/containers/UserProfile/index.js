@@ -36,7 +36,11 @@ export default class UserProfile extends Component {
       refreshing: true,
       viewRef: null,
       isCeleb: true,
-      events: [],
+      events: [
+        {
+          celebrity: {}
+        }
+      ],
       isOwner: false,
       isFollowed: false
     }
@@ -221,6 +225,18 @@ export default class UserProfile extends Component {
       avatarContainer = this.renderAvatarContainerFan()
     }
     
+    let username = null
+    let avatar = null
+    if (this.state.events[0]) {
+      username = this.state.events[0].celebrity.username
+      avatar = this.state.events[0].celebrity
+    } else {
+      username = 'User'
+      avatar = {
+        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
+      }
+    }
+    
     return(
       <Container>
         <Header noShadow style={{borderBottomWidth: 0}}>
@@ -232,12 +248,12 @@ export default class UserProfile extends Component {
             </Button>
           </Left>
           <Body>
-            <Text full style={{color: 'white', alignSelf: 'center'}}>{this.state.events[0].celebrity.username}</Text>
+            <Text full style={{color: 'white', alignSelf: 'center'}}>{username}</Text>
           </Body>
           <Left/>
         </Header>
         <Content>
-          <ProfileHeader user={this.state.events[0].celebrity}>
+          <ProfileHeader user={avatar}>
             {avatarContainer}
           </ProfileHeader>
           <List

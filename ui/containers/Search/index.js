@@ -14,6 +14,7 @@ import * as authSelectors from '~/store/selectors/auth'
 import * as jobSelectors from '~/store/selectors/job'
 import * as jobActions from '~/store/actions/job'
 import * as accountActions from '~/store/actions/account'
+import * as accountSelectors from '~/store/selectors/account'
 
 import styles from './styles'
 import material from '~/theme/variables/material'
@@ -24,7 +25,8 @@ const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorsw
 
 @connect(state=>({
   token: authSelectors.getToken(state),
-  jobList: jobSelectors.getJob(state)
+  jobList: jobSelectors.getJob(state),
+  searchedProfile: accountSelectors.getSearchedProfile(state)
 }), {...commonActions, ...jobActions, ...accountActions})
 
 export default class Search extends Component {
@@ -79,6 +81,10 @@ export default class Search extends Component {
     })
   }
   
+  onUserPress(userId) {
+    this.props.forwardTo('userProfile/' + userId)
+  }
+  
   renderJobItem(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem style={{...styles.listItemContainer, width: width/4}}>
@@ -94,7 +100,9 @@ export default class Search extends Component {
   
   renderCelebItem(rowData, sectionID, rowID, highlightRow) {
     return(
-      <ListItem style={{...styles.listItemContainer, width: width/4}}>
+      <ListItem
+        onPress={this.onUserPress.bind(this, rowData.id)}
+        style={{...styles.listItemContainer, width: width/4}}>
         <View style={styles.celebItem}>
           <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
           <Text>Taylor Swift</Text>
@@ -154,7 +162,7 @@ export default class Search extends Component {
                 contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}
                 pageSize={4}
                 renderRow={this.renderCelebItem.bind(this)}
-                dataArray={this.state.celebList}/>
+                dataArray={this.props.searchedProfile}/>
             </View>
           </View>
         </Content>
