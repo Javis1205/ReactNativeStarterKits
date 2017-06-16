@@ -6,7 +6,8 @@ import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
   replaceProfile,
-  getProfile
+  getProfile,
+  replaceSearchedProfile
 } from '~/store/actions/account'
 
 
@@ -58,7 +59,7 @@ const requestSearchProfile = createRequestSaga({
   request: api.account.searchProfile,
   key: 'searchProfile',
   success: [
-  
+    (data) => replaceSearchedProfile(data)
   ],
   failure: [
     () => setToast('Couldn\'t search profile', 'error')

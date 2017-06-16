@@ -36,3 +36,8 @@ export const searchProfile = (...args) => ({
   type: 'app/searchProfile',
   args
 })
+
+export const replaceSearchedProfile = (data) => ({
+  type: 'app/replaceSearchedProfile',
+  payload: data,
+})
