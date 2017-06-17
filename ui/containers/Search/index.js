@@ -22,8 +22,6 @@ import material from '~/theme/variables/material'
 
 const {height, width} = Dimensions.get('window')
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-
 @connect(state=>({
   token: authSelectors.getToken(state),
   jobList: jobSelectors.getJob(state),
@@ -46,10 +44,6 @@ export default class Search extends Component {
   }
   
   componentDidMount() {
-    this.componentWillFocus()
-  }
-  
-  componentWillFocus(){
     this.setState({
       refreshing: true
     })
@@ -58,6 +52,11 @@ export default class Search extends Component {
         refreshing: false
       })
     })
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus(){
+    
   }
   
   _leftClick = (e) => {
@@ -103,10 +102,10 @@ export default class Search extends Component {
     return(
       <ListItem
         onPress={this.onUserPress.bind(this, rowData.id)}
-        style={{...styles.listItemContainer, width: width/4}}>
+        style={{...styles.listItemContainer, width: width/4, paddingLeft: 5, paddingRight: 5}}>
         <View style={styles.celebItem}>
-          <Thumbnail source={{ uri: imgAvatar }} style={styles.resultThumbnail} />
-          <Text>Taylor Swift</Text>
+          <Thumbnail source={{ uri: rowData.avatar }} style={styles.resultThumbnail} />
+          <Text style={{alignSelf: 'center', fontSize: 12}}>{rowData.username}</Text>
           <View style={styles.row}><Icon name='star' /><Text small>888</Text></View>
         </View>
       </ListItem>

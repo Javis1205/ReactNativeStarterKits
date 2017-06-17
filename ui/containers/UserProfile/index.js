@@ -8,7 +8,7 @@ import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
 } from 'native-base'
-import { API_BASE } from '~/store/constants/api'
+import { API_BASE, COVER_IMAGE } from '~/store/constants/api'
 import moment from 'moment'
 import { BlurView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
@@ -63,7 +63,7 @@ export default class UserProfile extends Component {
         })
       } else {
         // Should be Fixed soon
-        let isFollowed = false
+        let isFollowed = data.celebrity.is_followed
         if (isFollowed) {
           this.setState({
             isFollowed: true
@@ -93,13 +93,48 @@ export default class UserProfile extends Component {
   }
   
   onPressFollow() {
-    console.log(this.props.profile.id)
-    console.log(this.props.route.params.userId)
+    this.props.followCeleb(this.props.token, this.props.route.params.userId, () => {
+      this.setState({
+        isFollowed: true
+      })
+    })
   }
   
   onPressUnFollow() {
-    console.log(this.props.profile.id)
-    console.log(this.props.route.params.userId)
+    this.props.unfollowCeleb(this.props.token, this.props.route.params.userId, () => {
+      this.setState({
+        isFollowed: false
+      })
+    })
+  }
+  
+  convertToMonth(month) {
+    switch (Number(month)) {
+      case 1:
+        return 'Jan'
+      case 2:
+        return 'Feb'
+      case 3:
+        return 'Mar'
+      case 4:
+        return 'Apr'
+      case 5:
+        return 'May'
+      case 6:
+        return 'Jun'
+      case 7:
+        return 'Jul'
+      case 8:
+        return 'Aug'
+      case 9:
+        return 'Sep'
+      case 10:
+        return 'Oct'
+      case 11:
+        return 'Nov'
+      case 12:
+        return 'Dec'
+    }
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -107,8 +142,8 @@ export default class UserProfile extends Component {
       <ListItem style={styles.listItemContainer}>
         <Grid>
           <Col style={styles.dateContainer}>
-            <Text style={styles.dateText}>22</Text>
-            <Text style={styles.dateText}>Apr</Text>
+            <Text style={styles.dateText}>{moment(rowData.finish_time).format("DD")}</Text>
+            <Text style={styles.dateText}>{this.convertToMonth(moment(rowData.finish_time).format("MM"))}</Text>
           </Col>
           <Col>
             <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
@@ -227,13 +262,15 @@ export default class UserProfile extends Component {
     
     let username = null
     let avatar = null
+    let cover = null
     if (this.state.events[0]) {
       username = this.state.events[0].celebrity.username
       avatar = this.state.events[0].celebrity
     } else {
       username = 'User'
       avatar = {
-        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
+        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg',
+        cover: COVER_IMAGE
       }
     }
     

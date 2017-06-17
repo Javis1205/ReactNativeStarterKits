@@ -44,7 +44,6 @@ export default class extends Component {
     let fromTime = moment(feed.start_time).format("HH:mm")
     let toTime = moment(feed.finish_time).format("HH:mm")
     let date = moment(feed.finish_time).format("DD/MM/YY")
-    
     return (
         <View style={styles.container}>
 

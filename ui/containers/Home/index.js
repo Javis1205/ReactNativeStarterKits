@@ -50,7 +50,7 @@ export default class extends Component {
       this.setState({
         refreshing: true,
       })
-      getActiveCampaign(token, celebrity_id, 1, 10, () => {
+      getActiveCampaign(token, 1, 10, () => {
         this.setState({
           refreshing: false,
         })
@@ -62,7 +62,7 @@ export default class extends Component {
   _onRefresh =() => {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
     this.setState({refreshing: true})
-    getActiveCampaign(token, celebrity_id, 1, 10, ()=>this.setState({refreshing: false}))
+    getActiveCampaign(token, 1, 10, ()=>this.setState({refreshing: false}))
   }
   
   _onUserPress(userId) {
