@@ -269,6 +269,8 @@ export default class extends Component {
         this.setState({status: 'ready', info: 'Connect tupt'});
       });
     });
+
+    this.props.app.header.show('back', 'tupt')
   }
 
   _press = (event) =>{    
@@ -342,29 +344,32 @@ export default class extends Component {
     return (
       <Container>                    
         {this.state.selfViewSrc && <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>}
-        <View style={{flexDirection: 'row',justifyContent:'space-between', paddingHorizontal: 10}}>               
-          <View style={{flexDirection: 'column', justifyContent:'flex-start'}}>                        
-            <Button transparent noPadder
+
+        <View style={styles.content}>               
+          <View style={{flexDirection: 'row', width: '100%', paddingHorizontal: 100, alignSelf: 'center', justifyContent:'space-around'}}>                        
+            <Button transparent rounded bordered info noPadder
               onPress={this._switchVideoType}>
               <Icon large name="switch-camera" />
             </Button>
-            { this.state.status === 'ready' &&          
-              <Button transparent noPadder
+                 
+              <Button transparent rounded bordered info noPadder
                 onPress={this._press}>
-                <Icon large name="call" />
+                <Icon large name={this.state.status === 'ready' ? 'videocam' : 'videocam-off'} />
               </Button>          
-            }
-            <Text style={styles.welcome}>
-              {this.state.info}            
-            </Text>     
+                         
           </View>
+          <Text style={styles.welcome}>
+              {this.state.info}            
+            </Text>    
         {mapHash(this.state.remoteList, (remote, index) => 
           <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
         )}
-        </View>        
-        <Content>          
-          {this.state.textRoomConnected && this._renderTextRoom()} 
-        </Content>
+        </View>     
+        {   
+        // <Content>          
+        //   {this.state.textRoomConnected && this._renderTextRoom()} 
+        // </Content>
+      }
 
       </Container>
     );
