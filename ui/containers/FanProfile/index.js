@@ -80,7 +80,7 @@ export default class FanHistory extends Component {
       }
       // Last Row
       if (i == items.length - 1) {
-        rowArr.push(<View style={styles.lastRow}>{itemRows}</View>)
+        rowArr.push(<View style={styles.lastRow} key={i}>{itemRows}</View>)
       }
     }
     return (

@@ -78,6 +78,7 @@ export default class extends Component {
       <Item style={styles.searchContainer}>
         {/*<Icon name="search" style={styles.searchIcon} />*/}
         <Input value={this.props.searchString}
+          autoCapitalize="none"
           autoCorrect={false} onChangeText={this._search}
           placeholderTextColor="#222" style={styles.searchInput}
           placeholder="Novame Search" />

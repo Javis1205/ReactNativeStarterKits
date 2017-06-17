@@ -22,7 +22,8 @@ export default (variables = variable) => {
         fontSize: variables.noteFontSize
       },
       '.small': {
-        fontSize: variables.btnTextSizeSmall
+        fontSize: variables.btnTextSizeSmall,
+        lineHeight: variables.btnTextSizeSmall + 2,
       },
       '.large': {
         fontSize: variables.btnTextSizeLarge

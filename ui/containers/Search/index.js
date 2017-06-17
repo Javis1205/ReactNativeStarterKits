@@ -16,6 +16,7 @@ import * as jobActions from '~/store/actions/job'
 import * as accountActions from '~/store/actions/account'
 import * as accountSelectors from '~/store/selectors/account'
 
+import options from './options'
 import styles from './styles'
 import material from '~/theme/variables/material'
 
@@ -113,6 +114,7 @@ export default class Search extends Component {
   }
 
   render() {
+
     if (this.state.refreshing) {
       return (
         <View style={styles.spinnerContainer}>
@@ -158,11 +160,14 @@ export default class Search extends Component {
             <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>
             <View style={{flex: 1}}>
               <List
-                style={{}}
-                contentContainerStyle={{flexDirection: 'row', flexWrap: 'wrap'}}
+                style={{width:'100%'}}
+                contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
                 pageSize={4}
                 renderRow={this.renderCelebItem.bind(this)}
-                dataArray={this.props.searchedProfile}/>
+                dataArray={
+                  options.searchedProfile
+                  // this.props.searchedProfile
+                }/>
             </View>
           </View>
         </Content>
