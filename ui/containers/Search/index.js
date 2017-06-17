@@ -163,10 +163,7 @@ export default class Search extends Component {
                 contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
                 pageSize={4}
                 renderRow={this.renderCelebItem.bind(this)}
-                dataArray={
-                  options.searchedProfile
-                  // this.props.searchedProfile
-                }/>
+                dataArray={this.props.searchedProfile}/>
             </View>
           </View>
         </Content>
