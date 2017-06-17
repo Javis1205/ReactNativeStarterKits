@@ -57,10 +57,8 @@ export default class extends Component {
 
     
     const ret = await manager.authorize(socialType)
-    console.log(ret.response)
     const accessToken = ret.response.credentials.accessToken
-    let token = "EAACEdEose0cBADhB6tlxXLLuPiUnZColvQZAZCChgNwcZAkYGsU9ReBr42Ld08vZCWdwU9P8ey5fmWhMdr5eno3ZC1YEJlBZA6pjqrugjqSsVYfF37Twm2EN96YAMgjlrtOaDGFY43AoHpZArigJtZAtZCBxNpOSrvZBrlIlWJ1NV9ADtZC5IE4cJRdz2ZB5quPTL4iwZD"
-    this.props.login(token, socialType)
+    this.props.login(accessToken, socialType)
   }
 
   imageLoaded() {

@@ -57,13 +57,14 @@ export default class UserProfile extends Component {
       isFollowed: false
     })
     this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+      console.log(data.celebrity)
       if (this.props.profile.id == this.props.route.params.userId) {
         this.setState({
           isOwner: true
         })
       } else {
         // Should be Fixed soon
-        let isFollowed = false
+        let isFollowed = data.celebrity.is_followed
         if (isFollowed) {
           this.setState({
             isFollowed: true
