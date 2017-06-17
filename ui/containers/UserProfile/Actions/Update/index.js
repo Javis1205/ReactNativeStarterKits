@@ -49,7 +49,7 @@ const formSelector = formValueSelector('UpdateProfileForm')
     initialValues: {
       name: stateProps.profile.username,
       address: stateProps.profile.location,
-      favorite: ''
+      favorite: stateProps.profile.favorite || ''
     },
     ...ownProps, ...stateProps, ...dispatchProps,
   })
