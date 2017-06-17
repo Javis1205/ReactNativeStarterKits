@@ -57,7 +57,6 @@ export default class UserProfile extends Component {
       isFollowed: false
     })
     this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
-      console.log(data.celebrity)
       if (this.props.profile.id == this.props.route.params.userId) {
         this.setState({
           isOwner: true
@@ -109,13 +108,42 @@ export default class UserProfile extends Component {
     })
   }
   
+  convertToMonth(month) {
+    switch (Number(month)) {
+      case 1:
+        return 'Jan'
+      case 2:
+        return 'Feb'
+      case 3:
+        return 'Mar'
+      case 4:
+        return 'Apr'
+      case 5:
+        return 'May'
+      case 6:
+        return 'Jun'
+      case 7:
+        return 'Jul'
+      case 8:
+        return 'Aug'
+      case 9:
+        return 'Sep'
+      case 10:
+        return 'Oct'
+      case 11:
+        return 'Nov'
+      case 12:
+        return 'Dec'
+    }
+  }
+  
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem style={styles.listItemContainer}>
         <Grid>
           <Col style={styles.dateContainer}>
-            <Text style={styles.dateText}>22</Text>
-            <Text style={styles.dateText}>Apr</Text>
+            <Text style={styles.dateText}>{moment(rowData.finish_time).format("DD")}</Text>
+            <Text style={styles.dateText}>{this.convertToMonth(moment(rowData.finish_time).format("MM"))}</Text>
           </Col>
           <Col>
             <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>

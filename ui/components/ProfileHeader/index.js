@@ -34,13 +34,7 @@ export default class ProfileHeader extends Component {
   
   render() {
     const starAvatar = {uri: this.props.user.avatar}
-    let cover = null
-    if (this.props.user.cover_picture) {
-      cover = this.props.cover_picture
-    } else {
-      cover = COVER_IMAGE
-    }
-    const coverImg = {uri: cover}
+    let coverImg = {uri: (this.props.user.cover_picture) ? this.props.user.cover_picture : COVER_IMAGE}
     return(
       <View style={styles.headerContainer}>
         <CacheableImage
