@@ -6,6 +6,8 @@ const LOCAL_IP = Platform.OS === 'ios' ? '127.0.0.1' : '10.0.3.2'
 export const API_BASE = 'http://novame.net:3000'
 export const API_TIMEOUT = 10000
 
+export const COVER_IMAGE = API_BASE + '/i/0x0/06bc904a-f6e7-48f8-99d7-c627e18e9da2.jpg'
+
 export const SOCIAL_CONFIG = {
   twitter: {
     consumer_key: 'SHdlhmSexV0yBgvVQI0qdxK8n',

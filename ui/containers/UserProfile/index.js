@@ -8,7 +8,7 @@ import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
 } from 'native-base'
-import { API_BASE } from '~/store/constants/api'
+import { API_BASE, COVER_IMAGE } from '~/store/constants/api'
 import moment from 'moment'
 import { BlurView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
@@ -93,13 +93,19 @@ export default class UserProfile extends Component {
   }
   
   onPressFollow() {
-    console.log(this.props.profile.id)
-    console.log(this.props.route.params.userId)
+    this.props.followCeleb(this.props.token, this.props.route.params.userId, () => {
+      this.setState({
+        isFollowed: true
+      })
+    })
   }
   
   onPressUnFollow() {
-    console.log(this.props.profile.id)
-    console.log(this.props.route.params.userId)
+    this.props.unfollowCeleb(this.props.token, this.props.route.params.userId, () => {
+      this.setState({
+        isFollowed: false
+      })
+    })
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -227,13 +233,15 @@ export default class UserProfile extends Component {
     
     let username = null
     let avatar = null
+    let cover = null
     if (this.state.events[0]) {
       username = this.state.events[0].celebrity.username
       avatar = this.state.events[0].celebrity
     } else {
       username = 'User'
       avatar = {
-        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg'
+        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg',
+        cover: COVER_IMAGE
       }
     }
     

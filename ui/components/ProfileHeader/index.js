@@ -8,7 +8,7 @@ import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body
 } from 'native-base'
-import { API_BASE } from '~/store/constants/api'
+import { API_BASE, COVER_IMAGE } from '~/store/constants/api'
 import moment from 'moment'
 import { BlurView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
@@ -34,7 +34,13 @@ export default class ProfileHeader extends Component {
   
   render() {
     const starAvatar = {uri: this.props.user.avatar}
-    const coverImg = {uri: imgCover}
+    let cover = null
+    if (this.props.user.cover_picture) {
+      cover = this.props.cover_picture
+    } else {
+      cover = COVER_IMAGE
+    }
+    const coverImg = {uri: cover}
     return(
       <View style={styles.headerContainer}>
         <CacheableImage

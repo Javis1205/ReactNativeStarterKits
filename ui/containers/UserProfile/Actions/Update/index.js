@@ -20,7 +20,8 @@ import {
 import Icon from '~/ui/elements/Icon'
 
 import {
-  API_BASE
+  API_BASE,
+  COVER_IMAGE
 } from '~/store/constants/api'
 
 
@@ -62,7 +63,7 @@ export default class ProfileUpdate extends Component {
     this.state = {
       isCeleb: false,
       avatarImg: props.profile.avatar,
-      coverImg: props.profile.cover_picture,
+      coverImg: props.profile.cover_picture || COVER_IMAGE,
     }
     
   }

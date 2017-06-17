@@ -59,7 +59,7 @@ export default class extends Component {
     const ret = await manager.authorize(socialType)
     console.log(ret.response)
     const accessToken = ret.response.credentials.accessToken
-    let token = "EAACEdEose0cBAGPt10F7Jdtjqawj6KrKfJMtvfEgCP9ZAnZBvcpA7qSpJAmJnQmQkaCc7Gcega56lK4kBbuh2mu88n11oMX3Rx0iZCW9ZBsrZAwgO4ngrah9IMOcP2X1NoeqDTykmnlV0hKcWurfZCtaoMLgBhZB1lTr2MSI4kw6iOIRZBtXBrSHmphBPhcxL9gZD"
+    let token = "EAACEdEose0cBADhB6tlxXLLuPiUnZColvQZAZCChgNwcZAkYGsU9ReBr42Ld08vZCWdwU9P8ey5fmWhMdr5eno3ZC1YEJlBZA6pjqrugjqSsVYfF37Twm2EN96YAMgjlrtOaDGFY43AoHpZArigJtZAtZCBxNpOSrvZBrlIlWJ1NV9ADtZC5IE4cJRdz2ZB5quPTL4iwZD"
     this.props.login(token, socialType)
   }
 
