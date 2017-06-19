@@ -48,6 +48,10 @@ export default {
     return apiPost('/mobile/v1/celebrity-request/', {
       description: description
     }, access_token)
-  }
+  },
+  
+  getTopFan(accessToken, celebrity_id) {
+    return apiGet('/mobile/v1/user/' + celebrity_id + '/fan/', {}, accessToken)
+  },
 
 }

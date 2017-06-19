@@ -19,6 +19,7 @@ import FanHistory from './containers/FanHistory'
 import FanProfile from './containers/FanProfile'
 import AreUCeleb from './containers/AreYouCeleb'
 import QRScan from './containers/QRScan'
+import ListTopFan from './containers/ListTopFan'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -136,6 +137,12 @@ export default {
     qrCode: {
         title: 'Scan Merchandise',
         Page: QRScan,
+        headerType: 'back',
+        footerType: 'none'
+    },
+    'listTopFan/:userId': {
+        title: 'Top Fan',
+        Page: ListTopFan,
         headerType: 'back',
         footerType: 'none'
     }

@@ -41,3 +41,8 @@ export const requestCeleb = (...args) => ({
   type: 'app/requestCeleb',
   args
 })
+
+export const getTopFan = (...args) => ({
+  type: 'app/getTopFan',
+  args
+})

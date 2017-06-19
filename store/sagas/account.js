@@ -77,6 +77,17 @@ const requestRequestCeleb = createRequestSaga({
   ],
 })
 
+const requestGetListFan = createRequestSaga({
+  request: api.account.getTopFan,
+  key: 'getTopFan',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t get top fan', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -91,7 +102,8 @@ export default [
           takeLatest('app/followCeleb', requestFollowCeleb),
           takeLatest('app/unfollowCeleb', requestUnfollowCeleb),
           takeLatest('app/searchProfile', requestSearchProfile),
-          takeLatest('app/requestCeleb', requestRequestCeleb)
+          takeLatest('app/requestCeleb', requestRequestCeleb),
+          takeLatest('app/getTopFan', requestGetListFan)
         ]
     },
 ]
