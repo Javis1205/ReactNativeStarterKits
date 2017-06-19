@@ -3,22 +3,22 @@ export default {
     {
       name: 'Rewards',
       route: 'interaction',
-      icon: 'interaction',
+      icon: 'gift',
     },
     {
       name: 'Settings',
       route: 'setting',
-      icon: 'setting',
+      icon: 'cog',
     },
     {
       name: 'History',
       route: 'fanHistory',
-      icon: 'network',
+      icon: 'history',
     },
     {
       name: 'Are you a celeb?',
       route: 'areUCeleb',
-      icon: 'reminder',
+      icon: 'info',
     },
   ]
 

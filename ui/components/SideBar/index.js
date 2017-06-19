@@ -5,6 +5,7 @@ import { Content,Text, List, ListItem,
   Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables,
   Spinner, Thumbnail,
 } from 'native-base'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CacheableImage from '~/ui/components/CacheableImage'
 import * as authActions from '~/store/actions/auth'
@@ -15,7 +16,7 @@ import * as authSelectors from '~/store/selectors/auth'
 
 import options from './options'
 import routes from '~/ui/routes'
-import Icon from '~/ui/elements/Icon'
+//import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
 const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
@@ -79,7 +80,7 @@ export default class extends Component {
             {options.listItems.map((item, index) =>
                 <ListItem noBorder key={index} button onPress={e => this.navigateTo(item.route)} >
                   <Left>
-                    <Icon name={item.icon} style={styles.icon} />                  
+                    <Icon name={item.icon} style={styles.icon} />
                     <Text style={styles.iconText}>{item.name}</Text>
                   </Left>                
                 </ListItem>)}

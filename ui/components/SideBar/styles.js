@@ -49,9 +49,8 @@ export default {
     color: '#FFF',    
   },
   icon: {    
-    width: 20,
-    height: 20,
-    color: '#FFF',
+    fontSize: 20,
+    color: 'white',
   },
   editContainer:{
     flexDirection:'row',
