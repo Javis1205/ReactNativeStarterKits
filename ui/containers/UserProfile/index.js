@@ -110,6 +110,10 @@ export default class UserProfile extends Component {
     })
   }
   
+  onPressTopFan() {
+    this.props.forwardTo('listTopFan/' + this.props.route.params.userId)
+  }
+  
   convertToMonth(month) {
     switch (Number(month)) {
       case 1:
@@ -182,12 +186,14 @@ export default class UserProfile extends Component {
             </View>
           </Col>
           <Col>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <ListItem
+              onPress={this.onPressTopFan.bind(this)}
+              style={{flexDirection: 'row', justifyContent: 'center', ...styles.listItemContainer, paddingTop: 0, paddingBottom: 0}}>
               <Icon name='account-circle' style={styles.icon}/>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>{this.state.celebrity.fant_count}</Text>
               </View>
-            </View>
+            </ListItem>
           </Col>
         </Row>
         <Row style={{justifyContent: 'center'}}>

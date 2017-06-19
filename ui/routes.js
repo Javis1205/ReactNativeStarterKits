@@ -3,8 +3,6 @@ import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserSetting from './containers/User/Setting'
-import Delegation from './containers/Delegation/Index'
-import DelegationDetail from './containers/Delegation/Detail'
 import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
@@ -19,6 +17,7 @@ import FanHistory from './containers/FanHistory'
 import FanProfile from './containers/FanProfile'
 import AreUCeleb from './containers/AreYouCeleb'
 import QRScan from './containers/QRScan'
+import ListTopFan from './containers/ListTopFan'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
     notFound: {
@@ -103,16 +102,6 @@ export default {
         Page: AreUCeleb,
         headerType: 'back'
     },
-    delegation: {
-        title: 'Delegation',
-        Page: Delegation,
-    },
-    'delegation/detail/:id': {
-        title: 'Delegation Detail',
-        Page: DelegationDetail,
-        headerType: 'back',
-        footer: false,
-    },
     'user/profile': {
         title: 'User Profile',
         Page: UserProfile,
@@ -136,6 +125,12 @@ export default {
     qrCode: {
         title: 'Scan Merchandise',
         Page: QRScan,
+        headerType: 'back',
+        footerType: 'none'
+    },
+    'listTopFan/:userId': {
+        title: 'Top Fan',
+        Page: ListTopFan,
         headerType: 'back',
         footerType: 'none'
     }
