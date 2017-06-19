@@ -17,9 +17,14 @@ export default {
   },
   button: {
     // move to bottom and stretch to height
-    alignSelf: 'flex-end',
-    height: '100%',
-    backgroundColor: '#fff',
+    alignSelf: 'center',
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: -65,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center'
   },
   badgeIcon: {
     marginTop: -18,
@@ -27,5 +32,12 @@ export default {
   badgeText: {
     left:18,
     top:-2,
+  },
+  photoIcon:{
+    fontSize:20,
+    color:'white',
+    alignSelf: 'center',
+    position: 'absolute',
+    top: 10
   },
 }

@@ -66,6 +66,17 @@ const requestSearchProfile = createRequestSaga({
   ],
 })
 
+const requestRequestCeleb = createRequestSaga({
+  request: api.account.requestCeleb,
+  key: 'requestCeleb',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t request', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -79,7 +90,8 @@ export default [
           takeLatest('app/updateProfile', requestUpdateProfile),
           takeLatest('app/followCeleb', requestFollowCeleb),
           takeLatest('app/unfollowCeleb', requestUnfollowCeleb),
-          takeLatest('app/searchProfile', requestSearchProfile)
+          takeLatest('app/searchProfile', requestSearchProfile),
+          takeLatest('app/requestCeleb', requestRequestCeleb)
         ]
     },
 ]

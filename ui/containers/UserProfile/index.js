@@ -42,7 +42,8 @@ export default class UserProfile extends Component {
         }
       ],
       isOwner: false,
-      isFollowed: false
+      isFollowed: false,
+      celebrity: {}
     }
   }
   
@@ -71,7 +72,8 @@ export default class UserProfile extends Component {
         }
       }
       this.setState({
-        events: data.results
+        events: data.results,
+        celebrity: data.celebrity
       }, () => {
         this.setState({
           refreshing: false
@@ -183,7 +185,7 @@ export default class UserProfile extends Component {
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
               <Icon name='account-circle' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888 Fans</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.fant_count}</Text>
               </View>
             </View>
           </Col>
@@ -264,8 +266,8 @@ export default class UserProfile extends Component {
     let avatar = null
     let cover = null
     if (this.state.events[0]) {
-      username = this.state.events[0].celebrity.username
-      avatar = this.state.events[0].celebrity
+      username = this.state.celebrity.username
+      avatar = this.state.celebrity
     } else {
       username = 'User'
       avatar = {

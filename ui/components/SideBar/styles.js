@@ -12,7 +12,12 @@ export default {
     borderBottomWidth: 0.5,
     borderColor:'#8e8e8e',
     height: 240,    
-    position: 'relative',        
+    position: 'relative',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 0,
+    paddingBottom: 0,
+    flexDirection: 'column'
   },
   drawerImage: {    
     width: 100,

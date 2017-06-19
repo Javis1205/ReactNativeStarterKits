@@ -1,11 +1,6 @@
 export default {
   listItems: [
     {
-      name: 'FanProfile',
-      route: 'fanProfile',
-      icon: 'interaction',
-    },
-    {
       name: 'Rewards',
       route: 'interaction',
       icon: 'interaction',
@@ -22,7 +17,7 @@ export default {
     },
     {
       name: 'Are you a celeb?',
-      route: 'calendar',
+      route: 'areUCeleb',
       icon: 'reminder',
     },
   ]

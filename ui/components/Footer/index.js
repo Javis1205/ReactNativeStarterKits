@@ -27,29 +27,15 @@ export default class extends Component {
 
   show(type, route){
     this.setState({type, route})
-  } 
+  }
 
   renderFooterTabs(route){
-    return (                                     
-        <Footer>
-            <FooterTab style={styles.container}>
-              {options.footerItems.map((item, index)=>
-                <Button style={styles.button} onPress={e=>this.tabClick(item.route)} textSmall key={index}>                        
-                    <Icon name={item.icon} style={
-                      item.route === route  ? styles.footerIconActive : styles.footerIcon
-                    } />
-                    <Text style={item.route === route ? styles.active : {}}>{item.name}</Text>
-                </Button>
-              )}                
-              <Button style={styles.button} onPress={e=>this.tabClick('notification')} badge textSmall>                  
-                  <Badge style={styles.badgeText}><Text>5</Text></Badge>      
-                  <Icon name="notification" style={
-                    {...(route === 'notification' ? styles.footerIconActive : styles.footerIcon), ...styles.badgeIcon}
-                  }/>
-                  <Text style={route === 'notification' ? styles.active : {}}>Notification</Text>
-              </Button>
-            </FooterTab>
-        </Footer>            
+    return (
+        <Button
+          style={styles.button}
+          onPress={this.tabClick.bind(this, 'qrCode')}>
+          <Icon name="photo-camera" style={styles.photoIcon}/>
+        </Button>
       )
   }
 

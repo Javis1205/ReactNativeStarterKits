@@ -43,5 +43,11 @@ export default {
     }
     return apiGet('/mobile/v1/search/', {}, access_token)
   },
+  
+  requestCeleb(access_token, description) {
+    return apiPost('/mobile/v1/celebrity-request/', {
+      description: description
+    }, access_token)
+  }
 
 }

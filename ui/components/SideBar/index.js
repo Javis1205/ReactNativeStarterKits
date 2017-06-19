@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform } from 'react-native'
+import { Platform, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Content,Text, List, ListItem, 
   Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables,
@@ -42,6 +42,12 @@ export default class extends Component {
     closeDrawer()
     forwardTo(route)
   }
+  
+  onFanProfilePress() {
+    const {forwardTo, closeDrawer} = this.props
+    closeDrawer()
+    forwardTo('fanProfile')
+  }
 
   render() {
     const {profile, forwardTo} = this.props    
@@ -49,25 +55,26 @@ export default class extends Component {
       return (<Spinner color="green" />)*/
     // by default it is flex, so do not set flex portion
     // render profile
-    const avatar = {uri: imgAvatar}
-    return (      
+    return (
       
         <Content
           bounces={false}
           style={styles.container}
         >                
-          <View style={styles.drawerCover}>
-            <CacheableImage source={avatar}
+          <ListItem
+            onPress={this.onFanProfilePress.bind(this)}
+            style={styles.drawerCover}>
+            <Image source={{uri: this.props.profile.avatar}}
               placeholder={<Icon name="image" style={styles.drawerImage}/>} 
               style={styles.drawerImage}/>            
 
-            <Text large style={styles.text}>Taylor Swift</Text>
-            <Text small style={styles.text}>23/01/1994</Text>
-            <View style={styles.editContainer}>
+            <Text large style={styles.text}>{this.props.profile.username}</Text>
+            <Text small style={styles.text}>{this.props.profile.location}</Text>
+            {/*<View style={styles.editContainer}>
               <Text small style={styles.text}>{'LA'}, {'USA'}</Text>
-              <Icon onPress={e=>this.navigateTo('user/profile')} name="edit" style={styles.iconEdit} />
-            </View>
-          </View>
+              /!*<Icon onPress={e=>{/!*this.navigateTo('user/profile')*!/}} name="edit" style={styles.iconEdit} />*!/
+            </View>*/}
+          </ListItem>
           <View style={styles.listItemContainer}>
             {options.listItems.map((item, index) =>
                 <ListItem noBorder key={index} button onPress={e => this.navigateTo(item.route)} >
