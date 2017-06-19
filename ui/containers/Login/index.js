@@ -55,7 +55,7 @@ export default class extends Component {
 
   async handleLogin(socialType = 'facebook'){
 
-    const ret = await manager.authorize(socialType, {scopes: 'email profile'})
+    const ret = await manager.authorize(socialType)
     console.log(ret.response)
     const token = ret.response.credentials.accessToken
     this.props.login(token, socialType)

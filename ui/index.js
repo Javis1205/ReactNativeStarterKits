@@ -23,7 +23,7 @@ export default class extends Component {
   componentDidMount(){
     configureStore(store=> {
       if(!__DEV__){
-        const firstRoute = store.getState().auth.loggedIn ? 'home' : 'webrtc'
+        const firstRoute = store.getState().auth.loggedIn ? 'home' : 'login'
         store.dispatch(forwardTo(firstRoute, true))
       }
       this.store = store

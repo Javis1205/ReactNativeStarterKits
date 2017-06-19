@@ -3,8 +3,6 @@ import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserSetting from './containers/User/Setting'
-import Delegation from './containers/Delegation/Index'
-import DelegationDetail from './containers/Delegation/Detail'
 import WebRTC from './containers/WebRTC'
 import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
@@ -103,16 +101,6 @@ export default {
         title: 'Celeb Request',
         Page: AreUCeleb,
         headerType: 'back'
-    },
-    delegation: {
-        title: 'Delegation',
-        Page: Delegation,
-    },
-    'delegation/detail/:id': {
-        title: 'Delegation Detail',
-        Page: DelegationDetail,
-        headerType: 'back',
-        footer: false,
     },
     'user/profile': {
         title: 'User Profile',

@@ -57,7 +57,6 @@ export default class ListTopFan extends Component {
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
-    console.log(rowData.avatar)
     let rightContainer = null
     if (this.props.profile.id == this.props.route.params.userId) {
       rightContainer= <Icon style={{alignSelf: 'flex-end'}} name="photo-camera"/>
