@@ -55,7 +55,7 @@ export default class extends Component {
 
   async handleLogin(socialType = 'facebook'){
 
-    const ret = await manager.authorize(socialType, {scopes: 'email profile'})
+    const ret = await manager.authorize(socialType, {scopes: 'email'})
     console.log(ret.response)
     const token = ret.response.credentials.accessToken
     this.props.login(token, socialType)
@@ -80,12 +80,13 @@ export default class extends Component {
           ref={img => this.backgroundImage = img}
           onLoadEnd={this.imageLoaded.bind(this)}
           style={styles.splash}/>
-        <BlurView
-          style={{...styles.absolute, opacity: 0.8}}
-          viewRef={this.state.viewRef}
-          blurType="dark"
-          blurAmount={1}
-        />
+        {this.state.viewRef && <BlurView
+            style={{...styles.absolute, opacity: 0.8}}
+            viewRef={this.state.viewRef}
+            blurType="dark"
+            blurAmount={1}
+          />
+        }
                                
         <View style={styles.bottomContainer}>
           <Text style={styles.textLogo}>NOVAME</Text>      
