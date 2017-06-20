@@ -37,7 +37,7 @@ export default {
   },
   bigText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000',
     backgroundColor: 'transparent',
   },
   image:{ 

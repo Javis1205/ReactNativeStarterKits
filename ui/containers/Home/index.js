@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {                 
-    Button,
+    Button,         
+    Icon,     
     Container,
     Text,    
     Item,
@@ -9,8 +10,6 @@ import {
     List,
     ListItem
 } from 'native-base'
-
-import {Dimensions} from 'react-native'
 
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
@@ -22,11 +21,8 @@ import * as campaignActions from '~/store/actions/campaign'
 import * as accountSelectors from '~/store/selectors/account'
 
 import Event from '~/ui/components/Event'
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles'
-
-const {height, width} = Dimensions.get('window')
 
 @connect(state=>({  
   token: authSelectors.getToken(state),
@@ -41,7 +37,6 @@ export default class extends Component {
 
     this.state = {
       refreshing: false,
-      emptyHome: false
     }    
   }
 
@@ -58,17 +53,7 @@ export default class extends Component {
       getActiveCampaign(token, 1, 10, () => {
         this.setState({
           refreshing: false,
-        }, () => {
-          (activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
         })
-      })
-    } else if (activeCampaign.results.length == 0) {
-      this.setState({
-        emptyHome: true
-      })
-    } else {
-      this.setState({
-        emptyHome: false
       })
     }
     
@@ -77,11 +62,7 @@ export default class extends Component {
   _onRefresh =() => {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
     this.setState({refreshing: true})
-    getActiveCampaign(token, 1, 10, ()=>{
-      (activeCampaign.results.length == 0) ?
-        this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
-        this.setState({emptyHome: false}, ()=>this.setState({refreshing: false}))
-    })
+    getActiveCampaign(token, 1, 10, ()=>this.setState({refreshing: false}))
   }
   
   _onUserPress(userId) {
@@ -90,10 +71,6 @@ export default class extends Component {
   
   _onEventPress(id) {
     this.props.forwardTo('eventDetail/' + id)
-  }
-  
-  _onSearchPress() {
-    this.props.forwardTo('search')
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -105,38 +82,9 @@ export default class extends Component {
       </ListItem>
     )
   }
-  
-  renderList() {
-    const { activeCampaign } = this.props
-    return (
-      <List
-        removeClippedSubviews={false}
-        renderRow={this.renderRow.bind(this)}
-        dataArray={activeCampaign.results}/>
-    )
-  }
-  
-  renderButtonSearch() {
-    return(
-      <View style={styles.buttonContainer}>
-        <View style={styles.refreshContainer}>
-          <Icon style={styles.searchIcon} name="arrow-down" />
-          <Text style={styles.refreshText}>Already follwed celebrities?</Text>
-          <Text style={styles.refreshText}>Pull to refresh</Text>
-        </View>
-        <Button
-          onPress={this._onSearchPress.bind(this)}
-          style={styles.button}>
-          <Icon style={styles.searchIcon} name="search" />
-          <Text style={styles.textSearchButton}>You can find celebrities here</Text>
-        </Button>
-      </View>
-    )
-  }
 
   render() {
     const { activeCampaign } = this.props
-    let content = (this.state.emptyHome) ? this.renderButtonSearch() : this.renderList()
     return (
       <Container style={{
         backgroundColor: '#000',
@@ -148,8 +96,11 @@ export default class extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this._onRefresh}>
           {
-            activeCampaign.results && content
-            
+            activeCampaign.results &&
+            <List
+              removeClippedSubviews={false}
+              renderRow={this.renderRow.bind(this)}
+              dataArray={activeCampaign.results}/>
           }
         </Content>
       </Container>

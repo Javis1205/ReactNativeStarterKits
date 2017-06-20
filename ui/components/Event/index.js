@@ -58,23 +58,23 @@ export default class extends Component {
     return (
         <View style={styles.container}>
 
-          <Background feed={feed}>            
-            <View style={{              
-              paddingHorizontal: 8,
-              paddingBottom: 8,
-              backgroundColor: '#E33D51',
-              // borderTopLeftRadius: 8,
-              // borderTopRightRadius: 8,
+          
+
+          <View style={{              
+              padding: 8,
+              backgroundColor: '#ccc',
+              justifyContent:'space-between',  
             }}>
               
                                              
               <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>
               
-              <Text white style={styles.detailText}>{feed.location}</Text>
+              <Text style={styles.detailText}>{feed.location}</Text>
             </View>
-          </Background>
+
+          <Background feed={feed}></Background>
           
-          <View bordered style={styles.avatarContainer}>
+          <View style={styles.avatarContainer}>
             
 
             <View style={{
