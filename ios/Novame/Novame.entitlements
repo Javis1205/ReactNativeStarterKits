@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)io.fullstack.oauth.AUTH_MANAGER</string>
+		<string>$(AppIdentifierPrefix)com.agiletech.vn.novame</string>
 	</array>
 </dict>
 </plist>
