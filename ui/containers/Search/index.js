@@ -39,17 +39,21 @@ export default class Search extends Component {
       celebList: [
         {},
         {}, {}, {}, {}, {}
-      ]
+      ],
+      refreshingJob: true
     }
   }
   
   componentDidMount() {
     this.setState({
-      refreshing: true
+      refreshing: true,
+      refreshingJob: true,
     })
     this.props.getJob(this.props.token, 1, 4, (error, data) => {
       this.setState({
-        refreshing: false
+        refreshing: false,
+        refreshingJob: false,
+        refreshingCeleb: false
       })
     })
     this.componentWillFocus()
@@ -72,11 +76,14 @@ export default class Search extends Component {
   }
   
   _onPressSearch = () => {
-    console.log(this.state.searchText)
+    this.setState({
+      refreshingCeleb: true
+    })
     this.props.searchProfile(this.props.token, this.state.searchText, null, (error, data) => {
       console.log(data)
       this.setState({
-        celebList: data.results
+        celebList: data.results,
+        refreshingCeleb: false
       })
     })
   }
@@ -121,6 +128,23 @@ export default class Search extends Component {
         </View>
       )
     }
+    
+    let listCeleb = null
+    console.log(this.state.refreshingCeleb)
+    if (!this.state.refreshingCeleb) {
+      listCeleb = <List
+                    removeClippedSubviews={false}
+                    style={{width:'100%'}}
+                    contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
+                    pageSize={4}
+                    renderRow={this.renderCelebItem.bind(this)}
+                    dataArray={this.props.searchedProfile}/>
+    } else {
+      listCeleb = <View style={{...styles.spinnerContainer, marginTop: 30}}>
+                    <Spinner color={"black"}/>
+                  </View>
+    }
+    
     return (
       <Container style={styles.container}>
         <Header noShadow style={styles.container}>
@@ -159,13 +183,7 @@ export default class Search extends Component {
           <View style={styles.suggestBlock}>
             <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>
             <View style={{flex: 1}}>
-              <List
-                removeClippedSubviews={false}
-                style={{width:'100%'}}
-                contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
-                pageSize={4}
-                renderRow={this.renderCelebItem.bind(this)}
-                dataArray={this.props.searchedProfile}/>
+              {listCeleb}
             </View>
           </View>
         </Content>
