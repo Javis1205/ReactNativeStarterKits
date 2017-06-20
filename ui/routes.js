@@ -86,21 +86,26 @@ export default {
     fanHistory: {
         title: 'History',
         Page: FanHistory,
-        headerType: 'back'
+        headerType: 'back',
+        footerType: 'none'
     },
     fanProfile: {
         title: 'Profile',
         Page: FanProfile,
-        headerType: 'back'
+        headerType: 'back',
+        footerType: 'none'
     },
     notification: {
         title: 'Notification',
         Page: Notification,
+        footerType: 'none',
+        headerType: 'back'
     },
     areUCeleb: {
-        title: 'Celeb Request',
+        title: 'Celebrity Request',
         Page: AreUCeleb,
-        headerType: 'back'
+        headerType: 'back',
+        footerType: 'none'
     },
     'user/profile': {
         title: 'User Profile',

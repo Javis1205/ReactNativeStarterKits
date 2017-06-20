@@ -149,6 +149,7 @@ export default class Search extends Component {
         <Content>
           <View style={styles.categoryContainer}>
             <List
+              removeClippedSubviews={false}
               contentContainerStyle={{justifyContent: 'space-between'}}
               horizontal={true}
               renderRow={this.renderJobItem.bind(this)}
@@ -159,6 +160,7 @@ export default class Search extends Component {
             <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>
             <View style={{flex: 1}}>
               <List
+                removeClippedSubviews={false}
                 style={{width:'100%'}}
                 contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
                 pageSize={4}

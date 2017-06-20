@@ -1,56 +1,53 @@
 import React, { Component } from 'react'
 import {
   Button, Container, ListItem, List, Spinner,
-  Text, Item, View, Input, Left, Body, Thumbnail, Content
+  Text, Item, View, Input, Left, Body, Thumbnail, Content, Grid, Col, Row
 } from 'native-base'
-import { TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native'
+import { TouchableOpacity, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
 
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
 import { connect } from 'react-redux'
-import * as commonActions from '~/store/actions/common'
 import PopupPhotoView from '~/ui/components/PopupPhotoView'
 import styles from './styles'
 import material from '~/theme/variables/material'
+
 const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-@connect(null, commonActions)
-export default class FanHistory extends Component {
+
+import * as commonActions from '~/store/actions/common'
+import * as authSelectors from '~/store/selectors/auth'
+import * as accountActions from '~/store/actions/account'
+import * as accountSelectors from '~/store/selectors/account'
+
+@connect(state=>({
+  token: authSelectors.getToken(state),
+  profile: accountSelectors.getProfile(state),
+  listCeleb: accountSelectors.getlistFollowedCeleb(state)
+}), { ...commonActions, ...accountActions})
+
+export default class FanProfile extends Component {
 
   constructor(props) {
     super(props)
-    this.items = [
-      {
-        imgAvatar: imgAvatar,
-        name: 'Taylor Swift 1',
-        number: 888
-      },
-      {
-        imgAvatar: imgAvatar,
-        name: 'Taylor Swift 2',
-        number: 777
-      },
-      {
-        imgAvatar: imgAvatar,
-        name: 'Taylor Swift 3',
-        number: 666
-      },
-      {
-        imgAvatar: imgAvatar,
-        name: 'Taylor Swift 4',
-        number: 666
-      },
-      {
-        imgAvatar: imgAvatar,
-        name: 'Taylor Swift 5',
-        number: 777
-      },
-      // {
-      //   imgAvatar: imgAvatar,
-      //   name: 'Taylor Swift 7',
-      //   number: 777
-      // },
-    ]
+    this.state = {
+      refreshing: true,
+      following: 0
+    }
   }
+  
+  componentDidMount() {
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus() {
+    this.props.getListFollowedCelebrity(this.props.token, 1, 10, (error, data) => {
+      this.setState({
+        refreshing: false,
+        following: data.count
+      })
+    })
+  }
+  
   _renderGrid = (items, numColumn) => {
     let numRow = Math.ceil(items.length / numColumn)
     let itemRows = []
@@ -63,11 +60,19 @@ export default class FanHistory extends Component {
       }
       if (i < items.length) {
         itemRows.push(<View style={{...styles.gridItem, width: itemWidth}} key={i}>
-          <Thumbnail style={styles.thumbnail} source={{ uri: items[i].imgAvatar }} />
-          <Text>{items[i].name}</Text>
-          <View style={styles.row2}>
-            <Icon name='star' style={styles.icon} />
-            <Text bold>{items[i].number}</Text>
+          <View>
+            <Image style={styles.thumbnail} source={{ uri: items[i].avatar }} />
+          </View>
+          <Text style={{fontSize: 14}}>{items[i].username}</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Grid>
+              <Col style={{alignItems: 'flex-end'}}>
+                <Icon name='star' style={styles.icon} />
+              </Col>
+              <Col>
+                <Text bold style={{marginLeft: 2}}>{items[i].fan_count}</Text>
+              </Col>
+            </Grid>
           </View>
         </View>)
       }else{
@@ -90,22 +95,30 @@ export default class FanHistory extends Component {
     )
   }
   render() {
+    if (this.state.refreshing) {
+      return (
+        <View style={styles.spinnerContainer}>
+          <Spinner color={"black"}/>
+        </View>
+      )
+    }
+    
     return (
       <Container style={styles.container}>
         <PopupPhotoView ref='popupPhotoView' />
         <View style={styles.rowPadding}>
           <View style={styles.row}>
             <TouchableWithoutFeedback onPress={() => {
-              this.refs.popupPhotoView.setImage(imgAvatar)
+              this.refs.popupPhotoView.setImage(this.props.profile.avatar)
             }}>
-              <Thumbnail style={styles.thumbnail} source={{ uri: imgAvatar }} />
+              <Thumbnail style={styles.thumbnail} source={{ uri: this.props.profile.avatar }} />
             </TouchableWithoutFeedback>
-            <View>
-              <Text small style={styles.mb5}>Anna Anna</Text>
-              <Text small style={styles.mb5}>Music,Sport</Text>
-              <View style={{ ...styles.row, ...styles.mb5 }}>
+            <View style={{marginLeft: 10}}>
+              <Text small style={{...styles.mb5, fontWeight: 'bold'}}>{this.props.profile.username}</Text>
+              <Text small style={styles.mb5}>{this.props.profile.favorite || 'Favorite'}</Text>
+              <View style={{ ...styles.row, ...styles.mb5, justifyContent: 'flex-start' }}>
                 <Icon name='room' style={styles.icon} />
-                <Text small>Bostom, US </Text>
+                <Text small>{this.props.profile.location || 'Location'}</Text>
               </View>
             </View>
           </View>
@@ -114,7 +127,7 @@ export default class FanHistory extends Component {
         <View style={styles.rowPadding}>
           <View style={styles.row2}>
             <View>
-              <Text style={styles.infoNumber}>8</Text>
+              <Text style={styles.infoNumber}>{this.state.following}</Text>
               <Text small bold>Following</Text>
             </View>
             <Icon name='userDefault' style={styles.iconInfo} />
@@ -135,7 +148,7 @@ export default class FanHistory extends Component {
           </View>
         </View>
         <Content padder>
-          {this._renderGrid(this.items, 3)}
+          {this._renderGrid(this.props.listCeleb, 3)}
         </Content>
       </Container>
     )

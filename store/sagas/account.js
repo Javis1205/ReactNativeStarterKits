@@ -7,7 +7,8 @@ import { setToast, noop, forwardTo } from '~/store/actions/common'
 import {
   replaceProfile,
   getProfile,
-  replaceSearchedProfile
+  replaceSearchedProfile,
+  replaceListFollowedCelebrity
 } from '~/store/actions/account'
 
 
@@ -70,10 +71,16 @@ const requestRequestCeleb = createRequestSaga({
   request: api.account.requestCeleb,
   key: 'requestCeleb',
   success: [
-    
+    () => setToast('Request successfully')
   ],
   failure: [
-    () => setToast('Couldn\'t request', 'error')
+    (error) => {
+      if (error.status == 400) {
+        return setToast('You\'ve already requested', 'error')
+      } else {
+        return setToast('Couldn\'t request', 'error')
+      }
+    }
   ],
 })
 
@@ -85,6 +92,17 @@ const requestGetListFan = createRequestSaga({
   ],
   failure: [
     () => setToast('Couldn\'t get top fan', 'error')
+  ],
+})
+
+const requestGetListFollowedCeleb = createRequestSaga({
+  request: api.account.getListFollowedCelebrity,
+  key: 'getListFollowedCelebrity',
+  success: [
+    (data) => replaceListFollowedCelebrity(data)
+  ],
+  failure: [
+    () => setToast('Couldn\'t get list', 'error')
   ],
 })
 
@@ -103,7 +121,8 @@ export default [
           takeLatest('app/unfollowCeleb', requestUnfollowCeleb),
           takeLatest('app/searchProfile', requestSearchProfile),
           takeLatest('app/requestCeleb', requestRequestCeleb),
-          takeLatest('app/getTopFan', requestGetListFan)
+          takeLatest('app/getTopFan', requestGetListFan),
+          takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb)
         ]
     },
 ]

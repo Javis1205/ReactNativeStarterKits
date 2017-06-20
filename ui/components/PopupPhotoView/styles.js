@@ -3,7 +3,7 @@ export default {
         flexDirection: 'row',
         alignItems: 'flex-start',
         position: 'absolute',
-        top: 0,
+        top: 20,
         zIndex: 2000,
         backgroundColor: 'rgba(0,0,0,0.7)',
         width: '100%'

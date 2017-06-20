@@ -16,7 +16,7 @@ export default {
       icon: 'history',
     },
     {
-      name: 'Are you a celeb?',
+      name: 'Are you a celebrity?',
       route: 'areUCeleb',
       icon: 'info',
     },
