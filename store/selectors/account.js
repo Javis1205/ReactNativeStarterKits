@@ -7,3 +7,6 @@ export const getCelebrityId = state =>
 
 export const getSearchedProfile = state =>
   state.account.searchedProfile
+
+export const getlistFollowedCeleb = state =>
+  state.account.listFollowedCeleb

@@ -48,6 +48,10 @@ export default class ListTopFan extends Component {
   }
   
   componentDidMount() {
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus() {
     this.props.getTopFan(this.props.token, this.props.route.params.userId, (error, data) => {
       this.setState({
         listFan: data.results,

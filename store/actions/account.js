@@ -46,3 +46,14 @@ export const getTopFan = (...args) => ({
   type: 'app/getTopFan',
   args
 })
+
+export const getListFollowedCelebrity = (...args) => ({
+  type: 'app/getListFollowedCelebrity',
+  args
+})
+
+export const replaceListFollowedCelebrity = (data) => ({
+  type: 'app/replaceListFollowedCelebrity',
+  payload: data,
+})
+

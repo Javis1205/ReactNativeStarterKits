@@ -53,5 +53,9 @@ export default {
   getTopFan(accessToken, celebrity_id) {
     return apiGet('/mobile/v1/user/' + celebrity_id + '/fan/', {}, accessToken)
   },
+  
+  getListFollowedCelebrity(accessToken, page, page_size) {
+    return apiGet('/mobile/v1/me/list-followed/', {page, page_size}, accessToken)
+  }
 
 }
