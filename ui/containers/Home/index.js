@@ -140,7 +140,11 @@ export default class extends Component {
     const { activeCampaign } = this.props
     let content = (this.state.emptyHome) ? this.renderButtonSearch() : this.renderList()
     return (
-      <Container>
+      <Container style={{
+        backgroundColor: '#000',
+        borderColor: '#555',
+        borderTopWidth: 0.5,
+      }}>
         <Content
           padder
           refreshing={this.state.refreshing}

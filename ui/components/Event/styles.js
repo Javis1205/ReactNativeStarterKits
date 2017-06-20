@@ -2,11 +2,13 @@ import material from '~/theme/variables/material'
 
 export default {
   container: {
-    borderRadius: 0,    
-    marginBottom:10,
+    borderRadius: 4,    
+    marginBottom:0,
     borderWidth:0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
+    backgroundColor: '#fff',
+    overflow: 'hidden',
   },
   headerContainer:{
     paddingBottom:0
@@ -17,13 +19,13 @@ export default {
   avatarContainer:{
     borderTopWidth: material.platform === 'android' ? 1 : 0,
     paddingLeft: 0,
-    paddingRight: 0
+    paddingRight: 0,    
   },
   avatar: {
-    width: 80,
-    height: 80,
+    width: 40,
+    height: 40,
     borderWidth: 0.5,
-    borderRadius: 40,
+    borderRadius: 20,
     borderColor: 'gray'
   },
   firstCard:{    
@@ -32,6 +34,11 @@ export default {
   },
   text: {    
     color: material.tabBarActiveTextColor,
+  },
+  bigText: {
+    fontSize: 16,
+    color: '#fff',
+    backgroundColor: 'transparent',
   },
   image:{ 
     resizeMode: 'cover',    
@@ -56,16 +63,19 @@ export default {
   icon: {
     width: 20,
     height: 20,
-    fontSize: 20
+    fontSize: 20,    
+    marginLeft:-3,
   },
   detailText: {
-    fontSize: 13
+    fontSize: 10,
+    lineHeight: 12,
   },
   rowContainer: {
     marginBottom: 10,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   starNameText: {
-    fontSize: 18
+    fontSize: 12,    
+    lineHeight: 14,
   }
 }
