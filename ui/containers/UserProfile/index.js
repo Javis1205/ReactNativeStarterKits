@@ -191,7 +191,7 @@ export default class UserProfile extends Component {
               style={{flexDirection: 'row', justifyContent: 'center', ...styles.listItemContainer, paddingTop: 0, paddingBottom: 0}}>
               <Icon name='account-circle' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>{this.state.celebrity.fant_count}</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.fan_count}</Text>
               </View>
             </ListItem>
           </Col>
