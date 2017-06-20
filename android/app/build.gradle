@@ -97,7 +97,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "ab82f752-be3e-4a12-8ad1-48539dbe73b4",
+        manifestPlaceholders = [onesignal_app_id: "254b7d64-9f13-4d06-8b74-1e6f6a3d209e",
                                 onesignal_google_project_number: "260952625614"]
         renderscriptTargetApi 23
         renderscriptSupportModeEnabled true
