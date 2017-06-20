@@ -27,10 +27,8 @@ export default {
     left: 0,
     width: '100%'
   },
-  icon: {
-    width: 30,
-    height: 30,
-    fontSize: 30,
+  icon: {    
+    fontSize: 20,
     color: 'white'
   },
   iconContent: {
@@ -41,7 +39,7 @@ export default {
     marginRight: 10
   },
   detailText: {
-    fontSize: 15,
+    fontSize: 14,
     color: 'white',
     marginLeft: 5
   },
@@ -51,8 +49,9 @@ export default {
     marginLeft: 5
   },
   textContainer: {
-    height: 30,
-    justifyContent: 'center'
+    // height: 30,    
+    justifyContent: 'center',
+    // alignSelf:'center',
   },
   followButton: {
     width: '50%',

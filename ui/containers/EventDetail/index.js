@@ -133,46 +133,56 @@ export default class UserProfile extends Component {
           <ProfileHeader user={this.state.celebrity}>
             <EventHeader user={this.state.celebrity}/>
           </ProfileHeader>
-          <View style={{alignItems: 'center'}}>
-            <Grid>
-              <Row style={{...styles.rowContainer, justifyContent: 'center'}}>
-                <Text style={styles.eventText}>{'Event ' + this.state.event.title}</Text>
-              </Row>
-              <Row style={{alignItems: 'center', flexDirection: 'column'}}>
-                <View>
-                  <View style={styles.rowContainer}>
-                    <Icon name='calendar' style={styles.iconContent}/>
-                    <View style={{justifyContent: 'center'}}>
-                      <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime + ' ' + date}</Text>
-                    </View>
-                  </View>
-                  <View style={styles.rowContainer}>
-                    <Icon name='room' style={styles.iconContent}/>
-                    <View style={{justifyContent: 'center'}}>
-                      <Text style={styles.detailEventText}>{this.state.event.location}</Text>
-                    </View>
-                  </View>
-                  <Row style={styles.rowContainer}>
-                    <Col style={{justifyContent: 'center', width: 30}}>
-                      <Icon name='favorite-border' style={styles.iconContent}/>
-                    </Col>
-                    <Col style={{width: '20%', justifyContent: 'center'}}>
-                      <Text style={styles.detailEventText}>{'2K'}</Text>
-                    </Col>
-                    <Col style={{justifyContent: 'center', width: 30}}>
-                      <Icon name='share' style={styles.iconContent}/>
-                    </Col>
-                    <Col style={{justifyContent: 'center'}}>
-                      <Text style={styles.detailEventText}>{'3K'}</Text>
-                    </Col>
-                  </Row>
-                </View>
-              </Row>
-              <Row>
-                {eventImgContainer}
-              </Row>
-            </Grid>
+
+
+          
+            
+                
+              
+              
+          <View row style={{            
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: '#ccc',
+            borderColor: '#777',
+            borderBottomWidth: 0.5,
+            padding: 8,
+          }}>
+            <View row>
+              <Icon name='calendar' style={styles.iconContent}/>              
+              <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime + ' ' + date}</Text>              
+            </View>
+            
+            <View row>
+              <View row>
+                <Icon name='favorite-border' style={styles.iconContent}/>
+                <Text style={styles.detailEventText}>{'2K'}</Text>
+              </View>
+              <View row style={{
+                marginLeft: 8,
+              }}>
+                <Icon name='share' style={styles.iconContent}/>
+                <Text style={styles.detailEventText}>{'3K'}</Text>
+              </View>
+            </View>
           </View>
+
+          <View style={{
+            borderColor: '#777',
+            borderBottomWidth: 0.5,
+            paddingBottom: 8,
+            margin: 8,            
+          }}>
+            <Text style={styles.eventText}>{'Event ' + this.state.event.title}</Text>
+            <View row>
+                <Icon name='location' style={styles.iconContent}/>                    
+                <Text style={styles.detailEventText}>{this.state.event.location}</Text>                    
+            </View>
+          </View>
+
+          {eventImgContainer}
+          
+
         </Content>
       </Container>
     )
