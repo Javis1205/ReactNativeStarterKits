@@ -29,18 +29,18 @@ export default class EventHeader extends Component {
         <Row style={{justifyContent: 'center', marginBottom: 30}}>
           <Text style={styles.starNameText}>{this.props.user.username}</Text>
         </Row>
-        <Row style={{marginBottom: 10}}>
+        <Row style={{position: 'absolute', bottom: 140, paddingHorizontal:20}}>
           <Col>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='favorite-border' style={styles.icon}/>
+            <View style={{alignSelf:'flex-start', flexDirection: 'row', justifyContent: 'center'}}>
+              <Icon name='heart' style={styles.icon}/>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>8888 LP</Text>
               </View>
             </View>
           </Col>
           <Col>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='account-circle' style={styles.icon}/>
+            <View style={{alignSelf:'flex-end', flexDirection: 'row', justifyContent: 'center'}}>
+              <Icon name='fan' style={styles.icon}/>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>8888 Fans</Text>
               </View>

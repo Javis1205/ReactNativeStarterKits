@@ -15,7 +15,7 @@ import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
 const Background = ({feed, children}) => {
-  if (feed.images.length != 0) {
+  if (feed.images && feed.images.length) {
     let imgEventUri = API_BASE + '/i/0x0/' + feed.images[0].image.url
     const eventImg = {uri: imgEventUri}
     return ( 
@@ -58,23 +58,31 @@ export default class extends Component {
     return (
         <View style={styles.container}>
 
-          <Background feed={feed}>            
-            <View style={{              
-              paddingHorizontal: 8,
-              paddingBottom: 8,
-              backgroundColor: '#E33D51',
-              // borderTopLeftRadius: 8,
-              // borderTopRightRadius: 8,
+          
+
+          <View style={{              
+              padding: 8,
+              backgroundColor: '#fefefe',
+              borderColor: '#ccc',
+              borderBottomWidth: 0.5,
+              justifyContent:'space-between',  
             }}>
               
                                              
-              <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>
-              
-              <Text white style={styles.detailText}>{feed.location}</Text>
+              <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>              
+              <View row style={{
+                marginTop: 4,
+              }}>
+                <Icon name='location' small style={{
+                  marginRight: 4,                  
+                }}/>  
+                <Text note style={styles.detailText}>{feed.location}</Text>
+              </View>
             </View>
-          </Background>
+
+          <Background feed={feed}></Background>
           
-          <View bordered style={styles.avatarContainer}>
+          <View style={styles.avatarContainer}>
             
 
             <View style={{
@@ -88,7 +96,9 @@ export default class extends Component {
                 <Image style={styles.avatar} source={starAvatar} />
 
                 <View style={{        
-                  marginLeft: 8,          
+                  marginLeft: 8,     
+                  height: 30,     
+                  alignSelf: 'center',
                   justifyContent: 'space-around'
                 }}>
                   

@@ -33,7 +33,7 @@ export default class UserProfile extends Component {
     super(props)
     
     this.state = {
-      refreshing: true,
+      refreshing: false,
       viewRef: null,
       isCeleb: true,
       events: [
@@ -53,7 +53,7 @@ export default class UserProfile extends Component {
   
   componentWillFocus(){
     this.setState({
-      refreshing: true,
+      refreshing: false,
       isOwner: false,
       isFollowed: false
     })
@@ -144,62 +144,77 @@ export default class UserProfile extends Component {
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
-    return(
-      <ListItem style={styles.listItemContainer}>
-        <Grid>
-          <Col style={styles.dateContainer}>
-            <Text style={styles.dateText}>{moment(rowData.finish_time).format("DD")}</Text>
-            <Text style={styles.dateText}>{this.convertToMonth(moment(rowData.finish_time).format("MM"))}</Text>
-          </Col>
-          <Col>
-            <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
-          </Col>
-        </Grid>
-      </ListItem>
+    return (
+      <View style={{marginBottom:8}}>
+        <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
+      </View>
     )
+
+    // return(
+    //   <ListItem style={styles.listItemContainer}>
+    //     <Grid>
+    //       <Col style={styles.dateContainer}>
+    //         <Text style={styles.dateText}>{moment(rowData.finish_time).format("DD")}</Text>
+    //         <Text style={styles.dateText}>{this.convertToMonth(moment(rowData.finish_time).format("MM"))}</Text>
+    //       </Col>
+    //       <Col>
+    //         <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
+    //       </Col>
+    //     </Grid>
+    //   </ListItem>
+    // )
   }
   
   renderAvatarContainerFan() {
     let followButton = null
     if (this.state.isFollowed) {
       followButton = <Button
+                      small transparent light rounded bordered
                       onPress={this.onPressUnFollow.bind(this)}
                       style={styles.unfollowButton}>
-                      <Text>Following</Text>
+                      <Text small>Following</Text>
                     </Button>
     } else {
       followButton = <Button
+                      small transparent light rounded bordered
                       onPress={this.onPressFollow.bind(this)}
                       style={styles.followButton}>
-                      <Text style={styles.followTextButton}>Follow</Text>
+                      <Text small style={styles.followTextButton}>Follow</Text>
                     </Button>
     }
+
     return (
-      <Grid>
-        <Row>
-          <Col>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='favorite-border' style={styles.icon}/>
+      <View style={{
+        marginTop: -170,
+      }}>
+        <View row style={{justifyContent: 'space-between'}}>
+            <Button transparent style={{
+              flexDirection: 'row', 
+              justifyContent: 'center'
+            }}>
+              <Icon name='heart' style={styles.icon}/>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>8888 LP</Text>
               </View>
-            </View>
-          </Col>
-          <Col>
-            <ListItem
+            </Button>
+
+            <Button
+              transparent
               onPress={this.onPressTopFan.bind(this)}
-              style={{flexDirection: 'row', justifyContent: 'center', ...styles.listItemContainer, paddingTop: 0, paddingBottom: 0}}>
-              <Icon name='account-circle' style={styles.icon}/>
+              style={{
+                flexDirection: 'row', 
+                justifyContent: 'center'
+              }}>
+              <Icon name='fan' style={styles.icon}/>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>{this.state.celebrity.fan_count}</Text>
               </View>
-            </ListItem>
-          </Col>
-        </Row>
-        <Row style={{justifyContent: 'center'}}>
+            </Button>
+        </View>
+        <View row style={{justifyContent: 'center', marginTop: 20}}>
           {followButton}
-        </Row>
-      </Grid>
+        </View>
+      </View>
     )
   }
   
@@ -283,7 +298,11 @@ export default class UserProfile extends Component {
     }
     
     return(
-      <Container>
+      <Container style={{
+        backgroundColor: '#ccc',
+        borderColor: '#555',
+        borderTopWidth: 0.5,
+      }}>
         <Header noShadow style={{borderBottomWidth: 0}}>
           <Left>
             <Button
@@ -297,13 +316,16 @@ export default class UserProfile extends Component {
           </Body>
           <Left/>
         </Header>
+
         <Content>
-          <ProfileHeader user={avatar}>
+        <ProfileHeader user={avatar}>
             {avatarContainer}
           </ProfileHeader>
+         <View padder>
           <List
             renderRow={this.renderRow.bind(this)}
             dataArray={this.state.events}/>
+          </View>
         </Content>
       </Container>
     )

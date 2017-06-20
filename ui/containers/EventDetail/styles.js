@@ -34,12 +34,9 @@ export default {
     fontSize: 30,
     color: 'white'
   },
-  iconContent: {
-    width: 30,
-    height: 30,
-    fontSize: 30,
-    color: 'black',
-    marginRight: 10
+  iconContent: {    
+    fontSize: 20,    
+    // marginRight: 10
   },
   detailText: {
     fontSize: 15,
@@ -47,8 +44,7 @@ export default {
     marginLeft: 5
   },
   detailEventText: {
-    fontSize: 15,
-    color: 'black',
+    fontSize: 12,    
     marginLeft: 5
   },
   textContainer: {
@@ -69,7 +65,7 @@ export default {
     marginRight: 0
   },
   dateText: {
-    fontSize: 18
+    fontSize: 16
   },
   headerContainer: {
     width: '100%',
@@ -80,7 +76,7 @@ export default {
     justifyContent: 'center'
   },
   starNameText: {
-    fontSize: 20,
+    fontSize: 16,
     color: 'white'
   },
   rowContainer: {
@@ -88,8 +84,8 @@ export default {
     flexDirection: 'row'
   },
   eventText: {
-    fontSize: 26,
-    alignSelf: 'center'
+    fontSize: 18,    
+    // alignSelf: 'center'
   },
   spinnerContainer: {
     backgroundColor: 'white',
