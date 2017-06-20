@@ -44,7 +44,7 @@ export default {
     marginLeft: 5
   },
   detailEventText: {
-    fontSize: 14,    
+    fontSize: 12,    
     marginLeft: 5
   },
   textContainer: {

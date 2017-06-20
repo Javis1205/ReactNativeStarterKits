@@ -62,15 +62,22 @@ export default class extends Component {
 
           <View style={{              
               padding: 8,
+              backgroundColor: '#fefefe',
               borderColor: '#ccc',
               borderBottomWidth: 0.5,
               justifyContent:'space-between',  
             }}>
               
                                              
-              <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>
-              
-              <Text note style={styles.detailText}>{feed.location}</Text>
+              <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>              
+              <View row style={{
+                marginTop: 4,
+              }}>
+                <Icon name='location' small style={{
+                  marginRight: 4,                  
+                }}/>  
+                <Text note style={styles.detailText}>{feed.location}</Text>
+              </View>
             </View>
 
           <Background feed={feed}></Background>
