@@ -22,9 +22,20 @@ export default {
     borderColor: 'black'
   },
   searchIcon: {
-    color: 'black'
+    color: 'black',
+    fontSize: 18,
+    marginRight: 10
   },
   textSearchButton: {
     color: 'black'
+  },
+  refreshText: {
+    
+  },
+  refreshContainer: {
+    position: 'absolute',
+    top: 10,
+    alignSelf: 'center',
+    alignItems: 'center'
   }
 }

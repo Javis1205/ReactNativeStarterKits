@@ -22,7 +22,7 @@ import * as campaignActions from '~/store/actions/campaign'
 import * as accountSelectors from '~/store/selectors/account'
 
 import Event from '~/ui/components/Event'
-import Icon from '~/ui/elements/Icon'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles'
 
@@ -78,8 +78,9 @@ export default class extends Component {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
     this.setState({refreshing: true})
     getActiveCampaign(token, 1, 10, ()=>{
-      (activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
-      this.setState({refreshing: false})
+      (activeCampaign.results.length == 0) ?
+        this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
+        this.setState({emptyHome: false}, ()=>this.setState({refreshing: false}))
     })
   }
   
@@ -118,6 +119,11 @@ export default class extends Component {
   renderButtonSearch() {
     return(
       <View style={styles.buttonContainer}>
+        <View style={styles.refreshContainer}>
+          <Icon style={styles.searchIcon} name="arrow-down" />
+          <Text style={styles.refreshText}>Already follwed celebrities?</Text>
+          <Text style={styles.refreshText}>Pull to refresh</Text>
+        </View>
         <Button
           onPress={this._onSearchPress.bind(this)}
           style={styles.button}>
