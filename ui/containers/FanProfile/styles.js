@@ -38,15 +38,16 @@ export default {
     row2: {
         flexDirection: 'row',
         alignItems: 'center',
+      flex: 1/3,
+      justifyContent: 'center'
     },
     mb5: {
         marginBottom: 5
     },
     rowPadding: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 10
+        padding: 10,
     },
     marginRight: {
         marginRight: 3
@@ -62,8 +63,12 @@ export default {
     },
     infoNumber: {
         fontSize: 20,
-      alignSelf: 'center'
+      alignSelf: 'center',
     },
+      infoText: {
+        fontSize: 16,
+        alignSelf: 'center',
+      },
     gridItem: {
         padding: 10,
         alignItems: 'center',
@@ -82,5 +87,14 @@ export default {
     justifyContent: 'center',
     alignItems: 'center'
   },
+  listItemContainer: {
+    borderBottomWidth: 0.6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginLeft: 0,
+    marginRight: 0,
+    flexDirection: 'row',
+    borderBottomColor: '#ccc'
+  }
 
 }

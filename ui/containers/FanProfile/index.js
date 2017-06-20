@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Button, Container, ListItem, List, Spinner,
+  Button, Container, ListItem, List, Spinner, Right,
   Text, Item, View, Input, Left, Body, Thumbnail, Content, Grid, Col, Row
 } from 'native-base'
 import { TouchableOpacity, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
@@ -11,8 +11,8 @@ import { connect } from 'react-redux'
 import PopupPhotoView from '~/ui/components/PopupPhotoView'
 import styles from './styles'
 import material from '~/theme/variables/material'
+import ProfileHeader from '~/ui/components/ProfileHeader'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
 
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
@@ -94,6 +94,25 @@ export default class FanProfile extends Component {
       </View>
     )
   }
+  renderRow(rowData, sectionID, rowID, highlightRow) {
+    console.log(rowData)
+    return(
+      <ListItem style={styles.listItemContainer}>
+        <Image style={styles.thumbnail} source={{uri: rowData.avatar}} />
+        <View style={{marginLeft:5}}>
+          <Text>{rowData.username}</Text>
+          <Text>{rowData.location || 'Location'}</Text>
+        </View>
+        <Right>
+          <View row>
+          <Icon name='star' style={styles.icon} />
+          <Text>{rowData.fan_count}</Text>
+          </View>
+        </Right>
+      </ListItem>
+    )
+  }
+  
   render() {
     if (this.state.refreshing) {
       return (
@@ -106,49 +125,40 @@ export default class FanProfile extends Component {
     return (
       <Container style={styles.container}>
         <PopupPhotoView ref='popupPhotoView' />
-        <View style={styles.rowPadding}>
-          <View style={styles.row}>
-            <TouchableWithoutFeedback onPress={() => {
-              this.refs.popupPhotoView.setImage(this.props.profile.avatar)
-            }}>
-              <Thumbnail style={styles.thumbnail} source={{ uri: this.props.profile.avatar }} />
-            </TouchableWithoutFeedback>
-            <View style={{marginLeft: 10}}>
-              <Text small style={{...styles.mb5, fontWeight: 'bold'}}>{this.props.profile.username}</Text>
-              <Text small style={styles.mb5}>{this.props.profile.favorite || 'Favorite'}</Text>
-              <View style={{ ...styles.row, ...styles.mb5, justifyContent: 'flex-start' }}>
-                <Icon name='room' style={styles.icon} />
-                <Text small>{this.props.profile.location || 'Location'}</Text>
+        <Content>
+          <ProfileHeader user={this.props.profile}>
+            <View style={{alignItems: 'center', paddingBottom: 30}}>
+              <Text style={{color: 'white'}}>{this.props.profile.username || 'Username'}</Text>
+              <Text small style={{color: 'white', marginTop: 10}}>{this.props.profile.favorite || 'Favorite'}</Text>
+              <Text small style={{color: 'white', marginTop: 10}}>{this.props.profile.location || 'Location'}</Text>
+            </View>
+          </ProfileHeader>
+          <Content padder>
+            <View style={styles.rowPadding}>
+              <View style={{...styles.row2, borderRightWidth: 1, borderColor: '#ccc'}}>
+                <View>
+                  <Text style={styles.infoNumber}>{this.state.following}</Text>
+                  <Text style={styles.infoText}>Following</Text>
+                </View>
+              </View>
+              <View style={{...styles.row2, borderRightWidth: 1, borderColor: '#ccc'}}>
+                <View>
+                  <Text style={styles.infoNumber}>8888</Text>
+                  <Text style={styles.infoText}>LP</Text>
+                </View>
+              </View>
+              <View style={styles.row2}>
+                <View>
+                  <Text style={styles.infoNumber}>8888</Text>
+                  <Text style={styles.infoText}>Reward</Text>
+                </View>
               </View>
             </View>
-          </View>
-        </View>
-
-        <View style={styles.rowPadding}>
-          <View style={styles.row2}>
-            <View>
-              <Text style={styles.infoNumber}>{this.state.following}</Text>
-              <Text small bold>Following</Text>
-            </View>
-            <Icon name='userDefault' style={styles.iconInfo} />
-          </View>
-          <View style={styles.row2}>
-            <View>
-              <Text style={styles.infoNumber}>8888</Text>
-              <Text small bold>LP</Text>
-            </View>
-            <Icon name='favorite-border' style={styles.iconInfo} />
-          </View>
-          <View style={styles.row2}>
-            <View>
-              <Text style={styles.infoNumber}>8888</Text>
-              <Text small bold>Reward</Text>
-            </View>
-            <Icon name='trophy' style={styles.iconInfo} />
-          </View>
-        </View>
-        <Content padder>
-          {this._renderGrid(this.props.listCeleb, 3)}
+            <View style={{height: 1, width: '100%', backgroundColor: '#ccc'}}/>
+          </Content>
+          <List
+            renderRow={this.renderRow.bind(this)}
+            dataArray={this.props.listCeleb}/>
         </Content>
       </Container>
     )

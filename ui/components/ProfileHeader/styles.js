@@ -67,5 +67,16 @@ export default {
   starNameText: {
     fontSize: 20,
     color: 'white'
+  },
+  avatarButton: {
+    width: 80,
+    height: 80,
+    borderWidth: 0.5,
+    borderRadius: 40,
+    borderColor: 'gray',
+    alignSelf: 'center',
+    paddingLeft: 0,
+    paddingRight: 0,
+    backgroundColor: 'transparent'
   }
 }

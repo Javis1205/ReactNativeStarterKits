@@ -13,10 +13,9 @@ import moment from 'moment'
 import { BlurView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
 import Icon from '~/ui/elements/Icon'
+import PopupPhotoView from '~/ui/components/PopupPhotoView'
 import styles from './styles'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-const imgCover = "http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg"
 
 export default class ProfileHeader extends Component {
   constructor(props) {
@@ -37,6 +36,7 @@ export default class ProfileHeader extends Component {
     let coverImg = {uri: (this.props.user.cover_picture) ? this.props.user.cover_picture : COVER_IMAGE}
     return(
       <View style={styles.headerContainer}>
+        <PopupPhotoView ref='popupPhotoView' />
         <CacheableImage
           onLoadEnd={this.imageLoaded.bind(this)}
           ref={(img) => { this.backgroundImage = img; }}
@@ -48,7 +48,11 @@ export default class ProfileHeader extends Component {
           blurType="dark"
           style={styles.avatarContainer}/>
         <View style={styles.avatarContainer}>
-          <Image style={styles.avatarImg} source={starAvatar} />
+          <Button
+            onPress={() => this.refs.popupPhotoView.setImage(this.props.user.avatar)}
+            style={styles.avatarButton}>
+            <Image style={styles.avatarImg} source={starAvatar} />
+          </Button>
           <View style={styles.socialContainer}>
             {this.props.children}
           </View>
