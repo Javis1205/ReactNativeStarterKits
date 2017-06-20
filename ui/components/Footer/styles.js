@@ -20,10 +20,10 @@ export default {
     alignSelf: 'center',
     backgroundColor: 'black',
     position: 'absolute',
-    bottom: -65,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    bottom: -15,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
     justifyContent: 'center'
   },
   badgeIcon: {

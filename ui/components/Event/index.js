@@ -15,7 +15,7 @@ import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
 const Background = ({feed, children}) => {
-  if (feed.images.length != 0) {
+  if (feed.images && feed.images.length) {
     let imgEventUri = API_BASE + '/i/0x0/' + feed.images[0].image.url
     const eventImg = {uri: imgEventUri}
     return ( 
@@ -62,14 +62,15 @@ export default class extends Component {
 
           <View style={{              
               padding: 8,
-              backgroundColor: '#ccc',
+              borderColor: '#ccc',
+              borderBottomWidth: 0.5,
               justifyContent:'space-between',  
             }}>
               
                                              
               <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>
               
-              <Text style={styles.detailText}>{feed.location}</Text>
+              <Text note style={styles.detailText}>{feed.location}</Text>
             </View>
 
           <Background feed={feed}></Background>
@@ -88,7 +89,9 @@ export default class extends Component {
                 <Image style={styles.avatar} source={starAvatar} />
 
                 <View style={{        
-                  marginLeft: 8,          
+                  marginLeft: 8,     
+                  height: 30,     
+                  alignSelf: 'center',
                   justifyContent: 'space-around'
                 }}>
                   

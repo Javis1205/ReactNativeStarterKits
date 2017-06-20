@@ -62,7 +62,14 @@ export default class extends Component {
   _onRefresh =() => {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
     this.setState({refreshing: true})
-    getActiveCampaign(token, 1, 10, ()=>this.setState({refreshing: false}))
+
+    getActiveCampaign(token, 1, 10, (error, data)=>{
+      setTimeout(() => {
+        (data.results.length == 0) ?
+          this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
+          this.setState({emptyHome: false}, ()=>this.setState({refreshing: false}))
+      }, 1000)
+    })
   }
   
   _onUserPress(userId) {
@@ -87,7 +94,7 @@ export default class extends Component {
     const { activeCampaign } = this.props
     return (
       <Container style={{
-        backgroundColor: '#000',
+        backgroundColor: '#ccc',
         borderColor: '#555',
         borderTopWidth: 0.5,
       }}>

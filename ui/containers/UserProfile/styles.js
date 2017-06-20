@@ -27,14 +27,12 @@ export default {
     left: 0,
     width: '100%'
   },
-  icon: {
-    width: 30,
-    height: 30,
-    fontSize: 30,
+  icon: {    
+    fontSize: 20,
     color: 'white'
   },
   detailText: {
-    fontSize: 15,
+    fontSize: 14,
     color: 'white',
     marginLeft: 5
   },
@@ -43,21 +41,22 @@ export default {
     justifyContent: 'center'
   },
   unfollowButton: {
-    width: '50%',
+    // width: '50%',
     justifyContent: 'center',
     marginTop: 20,
-    backgroundColor: '#F5A2A2'
+    // backgroundColor: '#F5A2A2'
+    borderColor: '#979797',
+    backgroundColor: '#000',    
   },
   followButton: {
-    width: '50%',
+    // width: '50%',
     justifyContent: 'center',
     marginTop: 20,
-    borderColor: '#F5A2A2',
-    borderWidth: 3,
-    backgroundColor: 'white'
+    borderColor: '#979797',
+    borderWidth: 1,        
   },
   followTextButton: {
-    color: '#F5A2A2',
+    color: '#979797',
     fontWeight: 'bold'
   },
   eventButton: {

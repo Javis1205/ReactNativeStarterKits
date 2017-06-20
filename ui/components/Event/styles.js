@@ -36,8 +36,9 @@ export default {
     color: material.tabBarActiveTextColor,
   },
   bigText: {
-    fontSize: 16,
-    color: '#000',
+    fontSize: 15,
+    // color: '#000',
+    // lineHeight: 20,    
     backgroundColor: 'transparent',
   },
   image:{ 
