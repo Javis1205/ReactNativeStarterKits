@@ -253,10 +253,10 @@ export default class UserProfile extends Component {
       username = this.state.celebrity.username
       avatar = this.state.celebrity
     } else {
-      username = 'User'
+      username = this.state.celebrity.username
       avatar = {
-        avatar: 'http://images.huffingtonpost.com/2015-07-13-1436808696-2294090-taylorswiftredtouropener650430.jpg',
-        cover: COVER_IMAGE
+        avatar: this.state.celebrity.avatar,
+        cover: this.state.celebrity.cover_picture || COVER_IMAGE
       }
     }
     
