@@ -25,7 +25,7 @@ export default {
   searchIcon: {
     color: 'black',
     fontSize: 18,
-    marginRight: 10
+    alignSelf: 'center',
   },
   textSearchButton: {
     color: 'black'
@@ -37,6 +37,7 @@ export default {
     position: 'absolute',
     top: 10,
     alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }

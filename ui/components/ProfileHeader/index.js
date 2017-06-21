@@ -42,7 +42,7 @@ export default class ProfileHeader extends Component {
           ref={(img) => { this.backgroundImage = img; }}
           style={styles.coverImg} source={coverImg}/>
         <BlurView
-          blurRadius={10}
+          blurRadius={1}
           blurAmount={0}
           viewRef={this.state.viewRef}
           blurType="dark"

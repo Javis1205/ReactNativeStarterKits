@@ -19,8 +19,6 @@ import routes from '~/ui/routes'
 //import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
-const imgAvatar = "https://static.wonderfulunion.net/groundctrl/clients/taylorswift/media/13/06/large.9y7nxie1qli9.jpg"
-
 import {  
   API_BASE
 } from '~/store/constants/api'

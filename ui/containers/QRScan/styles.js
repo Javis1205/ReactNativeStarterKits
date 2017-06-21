@@ -26,7 +26,7 @@ export default {
     justifyContent: 'center'
   },
   modalImage: {
-    height: 100,
+    height: 200,
     width: width - 50
   },
   modalSuccessText: {
@@ -35,7 +35,7 @@ export default {
     fontSize: 20
   },
   modalErrorText: {
-    marginTop: 20,
+    marginTop: 0,
     color: 'red',
     fontSize: 20
   }
