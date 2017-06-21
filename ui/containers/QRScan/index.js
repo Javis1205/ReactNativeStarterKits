@@ -55,6 +55,7 @@ export default class QRScan extends Component {
     console.log(response)
     this.props.postQRCode(this.props.token, response.data, (error, data) => {
       console.log(data)
+      this.onErrorButtonPress()
     })
   }
   
@@ -101,7 +102,7 @@ export default class QRScan extends Component {
         <TouchableWithoutFeedback onPress={() => this.onErrorButtonPress()}>
           <Modal
             backdropColor="#D2FAFB"
-            backdropOpacity={0.2}
+            backdropOpacity={0.5}
             animationOut={'fadeOut'}
             animationIn={'fadeIn'}
             hideOnBack={true}
