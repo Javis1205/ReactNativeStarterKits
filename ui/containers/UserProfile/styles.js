@@ -34,11 +34,12 @@ export default {
   detailText: {
     fontSize: 14,
     color: 'white',
-    marginLeft: 5
+    alignSelf: 'center'
   },
   textContainer: {
     height: 30,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   unfollowButton: {
     // width: '50%',
@@ -63,15 +64,23 @@ export default {
     width: '80%',
     justifyContent: 'center',
     marginTop: 20,
-    backgroundColor: '#F5A2A2',
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
+    borderColor: '#979797',
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderRadius: 4
   },
   postButton: {
     width: '80%',
     justifyContent: 'center',
     marginTop: 20,
-    backgroundColor: '#F5A2A2',
-    alignSelf: 'flex-start'
+    //backgroundColor: '#F5A2A2',
+    alignSelf: 'flex-start',
+    // backgroundColor: '#F5A2A2'
+    borderColor: '#979797',
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderRadius: 4
   },
   listItemContainer: {
     borderBottomWidth: 0,

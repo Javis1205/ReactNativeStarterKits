@@ -114,33 +114,8 @@ export default class UserProfile extends Component {
     this.props.forwardTo('listTopFan/' + this.props.route.params.userId)
   }
   
-  convertToMonth(month) {
-    switch (Number(month)) {
-      case 1:
-        return 'Jan'
-      case 2:
-        return 'Feb'
-      case 3:
-        return 'Mar'
-      case 4:
-        return 'Apr'
-      case 5:
-        return 'May'
-      case 6:
-        return 'Jun'
-      case 7:
-        return 'Jul'
-      case 8:
-        return 'Aug'
-      case 9:
-        return 'Sep'
-      case 10:
-        return 'Oct'
-      case 11:
-        return 'Nov'
-      case 12:
-        return 'Dec'
-    }
+  onPressEvent() {
+    this.componentWillFocus()
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -149,20 +124,6 @@ export default class UserProfile extends Component {
         <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
       </View>
     )
-
-    // return(
-    //   <ListItem style={styles.listItemContainer}>
-    //     <Grid>
-    //       <Col style={styles.dateContainer}>
-    //         <Text style={styles.dateText}>{moment(rowData.finish_time).format("DD")}</Text>
-    //         <Text style={styles.dateText}>{this.convertToMonth(moment(rowData.finish_time).format("MM"))}</Text>
-    //       </Col>
-    //       <Col>
-    //         <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
-    //       </Col>
-    //     </Grid>
-    //   </ListItem>
-    // )
   }
   
   renderAvatarContainerFan() {
@@ -224,32 +185,34 @@ export default class UserProfile extends Component {
         <Row>
           <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='favorite-border' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888 LP</Text>
+                <Text style={styles.detailText}>8888</Text>
+                <Text style={styles.detailText}>LP</Text>
               </View>
             </View>
           </Col>
           <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='account-circle' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888 Fans</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.fan_count}</Text>
+                <Text style={styles.detailText}>Fans</Text>
               </View>
             </View>
           </Col>
-          <Col style={{width: '45%'}}>
+          <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-              <Icon name='star' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888 Followings</Text>
+                <Text style={styles.detailText}>8888</Text>
+                <Text style={styles.detailText}>Followings</Text>
               </View>
             </View>
           </Col>
         </Row>
-        <Row>
+        <Row style={{paddingBottom: 10}}>
           <Col>
-            <Button style={styles.eventButton}>
+            <Button
+              onPress={this.onPressEvent.bind(this)}
+              style={styles.eventButton}>
               <Icon name="calendar"/>
               <Text>Event</Text>
             </Button>
