@@ -154,7 +154,7 @@ export default class extends Component {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh}
               tintColor="white"
-              colors={['white']}
+              colors={['black']}
               progressBackgroundColor="white"
               title={null}
             />
