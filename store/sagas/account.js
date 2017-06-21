@@ -106,6 +106,17 @@ const requestGetListFollowedCeleb = createRequestSaga({
   ],
 })
 
+const requestPostQRCode = createRequestSaga({
+  request: api.account.postQRCode,
+  key: 'postQRCode',
+  success: [
+  
+  ],
+  failure: [
+    () => setToast('Couldn\'t request QR code', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -122,7 +133,8 @@ export default [
           takeLatest('app/searchProfile', requestSearchProfile),
           takeLatest('app/requestCeleb', requestRequestCeleb),
           takeLatest('app/getTopFan', requestGetListFan),
-          takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb)
+          takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb),
+          takeLatest('app/postQRCode', requestPostQRCode),
         ]
     },
 ]

@@ -57,3 +57,8 @@ export const replaceListFollowedCelebrity = (data) => ({
   payload: data,
 })
 
+export const postQRCode = (...args) => ({
+  type: 'app/postQRCode',
+  args
+})
+

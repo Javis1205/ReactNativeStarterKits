@@ -56,6 +56,12 @@ export default {
   
   getListFollowedCelebrity(accessToken, page, page_size) {
     return apiGet('/mobile/v1/me/list-followed/', {page, page_size}, accessToken)
-  }
+  },
+  
+  postQRCode (access_token, qRCode) {
+    return apiPost('/mobile/v1/barcodes/', {
+      merchandise_id: qRCode
+    }, access_token)
+  },
 
 }
