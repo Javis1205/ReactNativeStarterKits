@@ -88,6 +88,11 @@ android {
     lintOptions {
         checkReleaseBuilds false
     }
+
+    dexOptions {
+        jumboMode = true
+    }
+
     defaultConfig {
         applicationId "com.novame"
         minSdkVersion 16
