@@ -245,7 +245,7 @@ export default class App extends Component {
       <StyleProvider style={getTheme(material)}>         
         <Drawer
           ref={ref => this.drawer = ref}
-          open={false}
+          open={drawerState === 'opened'}
           type="displace"             
           negotiatePan={true}
           tweenDuration={100}

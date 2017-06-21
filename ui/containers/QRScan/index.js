@@ -21,6 +21,8 @@ import {
 } from '~/ui/elements/Form'
 import Icon from '~/ui/elements/Icon'
 import CacheableImage from '~/ui/components/CacheableImage'
+import { congratulations, heartBroken } from '~/assets'
+
 
 import {
   API_BASE,
@@ -55,19 +57,23 @@ export default class QRScan extends Component {
     console.log(response)
     this.props.postQRCode(this.props.token, response.data, (error, data) => {
       console.log(data)
-      this.onErrorButtonPress()
+      this.setState({
+        isErrorModalVisible: true
+      })
     })
   }
   
   onSuccessButtonPress() {
     this.setState({
-      isSuccessModalVisible: !this.state.isSuccessModalVisible
+      isSuccessModalVisible: !this.state.isSuccessModalVisible,
+      isErrorModalVisible: false
     })
   }
   
   onErrorButtonPress() {
     this.setState({
-      isErrorModalVisible: !this.state.isErrorModalVisible
+      isErrorModalVisible: !this.state.isErrorModalVisible,
+      isSuccessModalVisible: false
     })
   }
   
@@ -94,7 +100,7 @@ export default class QRScan extends Component {
               <Image
                 resizeMode="cover"
                 style={styles.modalImage}
-                source={{uri: 'http://www.mpsinternational.in/sites/default/files/congratulations1.png'}}/>
+                source={congratulations}/>
               <Text style={styles.modalSuccessText}>You have 4000LP!</Text>
             </View>
           </Modal>
@@ -110,9 +116,9 @@ export default class QRScan extends Component {
             style={{}}>
             <View style={styles.modalContainer}>
               <Image
-                resizeMode="center"
+                resizeMode="contain"
                 style={styles.modalImage}
-                source={{uri: 'http://icons.veryicon.com/ico/Love/Valentine/heart%20broken.ico'}}/>
+                source={heartBroken}/>
               <Text style={styles.modalErrorText}>Sorry! Wrong QR code</Text>
             </View>
           </Modal>
