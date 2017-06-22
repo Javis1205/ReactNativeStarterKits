@@ -36,7 +36,7 @@ import styles from './styles'
 @connect(state=>({
     token: authSelectors.getToken(state),
     profile: accountSelectors.getProfile(state)
-  }), { ...commonActions, ...accountActions})
+}), { ...commonActions, ...accountActions})
 
 export default class ListTopFan extends Component {
   constructor(props) {
@@ -60,15 +60,24 @@ export default class ListTopFan extends Component {
     })
   }
   
+  onFaceTimePress(profile) {
+    this.props.saveFanProfileToFaceTime(profile)
+    this.props.forwardTo(`videoCall/${profile.id}`)
+  }
+  
   renderRow(rowData, sectionID, rowID, highlightRow) {
     let rightContainer = null
     if (this.props.profile.id == this.props.route.params.userId) {
-      rightContainer= <Icon style={{alignSelf: 'flex-end'}} name="photo-camera"/>
+      rightContainer= <Button
+                        iconRight
+                        noPadder
+                        transparent
+                        style={{alignSelf: 'flex-end'}}
+                        onPress={this.onFaceTimePress.bind(this, rowData)}>
+                        <Icon name="photo-camera"/>
+                      </Button>
     } else {
-      // rightContainer = <Text style={{alignSelf: 'flex-end'}}>8000 LP</Text>
-      rightContainer= <Button iconRight noPadder transparent style={{alignSelf: 'flex-end'}} onPress={()=>this.props.forwardTo(`videoCall/${this.props.route.params.userId}`)}> 
-        <Icon name="photo-camera"/>
-      </Button>
+      rightContainer = <Text style={{alignSelf: 'flex-end'}}>8000 LP</Text>
     }
     return(
       <ListItem style={styles.listItemContainer}>

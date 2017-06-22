@@ -10,3 +10,6 @@ export const getSearchedProfile = state =>
 
 export const getlistFollowedCeleb = state =>
   state.account.listFollowedCeleb
+
+export const getFanProfile = state =>
+  state.account.fanProfile

@@ -62,3 +62,9 @@ export const postQRCode = (...args) => ({
   args
 })
 
+export const saveFanProfileToFaceTime = (data) => ({
+  type: 'app/saveFanProfileToFaceTime',
+  payload: data,
+})
+
+

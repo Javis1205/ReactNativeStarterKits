@@ -6,6 +6,8 @@ import {
   ListView,
 } from 'react-native'
 
+import { connect } from 'react-redux'
+
 import {
   Text, View, Input, Button, Container,
 } from 'native-base'
@@ -24,6 +26,8 @@ import {
 
 import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
+
+import * as accountSelectors from '~/store/selectors/account'
 
 import styles from './styles'
 
@@ -239,6 +243,10 @@ function getStats() {
   }
 }
 
+@connect(state=>({
+  fanProfile: accountSelectors.getFanProfile(state)
+}), null)
+
 export default class extends Component {
 
   constructor(props) {
@@ -278,7 +286,7 @@ export default class extends Component {
 
     const userId = this.props.route.params.id
 
-    this.props.app.header.show('back', 'User ID: ' + userId)
+    this.props.app.header.show('back', this.props.fanProfile.username)
   }
 
   _press = (event) =>{    

@@ -110,4 +110,14 @@ export default {
     justifyContent: 'center',
     alignItems: 'center'
   },
+  fanButton: {
+    marginLeft: 0,
+    marginRight: 0,
+    alignSelf: 'center',
+    marginTop: 0,
+    marginBottom: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    backgroundColor: 'transparent'
+  }
 }

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {findNodeHandle} from 'react-native'
+import {findNodeHandle, TouchableWithoutFeedback} from 'react-native'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
@@ -189,12 +189,14 @@ export default class UserProfile extends Component {
             </View>
           </Col>
           <Col>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <TouchableWithoutFeedback
+              onPress={this.onPressTopFan.bind(this)}
+              style={{flexDirection: 'row', justifyContent: 'center', ...styles.fanButton}}>
               <View style={styles.textContainer}>
                 <Text style={styles.detailText}>{this.state.celebrity.fan_count}</Text>
                 <Text style={styles.detailText}>Fans</Text>
               </View>
-            </View>
+            </TouchableWithoutFeedback>
           </Col>
           <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>

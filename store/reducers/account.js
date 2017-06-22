@@ -9,7 +9,10 @@ export const account = (state = {
     id: ''
   },
   searchedProfile: [],
-  listFollowedCeleb: []
+  listFollowedCeleb: [],
+  fanProfile: {
+    username: ''
+  }
 }, {type, payload}) => {
   switch (type) {   
     case 'app/replaceProfile':
@@ -18,6 +21,8 @@ export const account = (state = {
       return {...state, searchedProfile: payload.results }
     case 'app/replaceListFollowedCelebrity':
       return {...state, listFollowedCeleb: payload.results }
+    case 'app/saveFanProfileToFaceTime':
+      return {...state, fanProfile: payload }
     default:
       return state
   }
