@@ -17,7 +17,10 @@ export default class extends Component {
     const {children, refreshing, onRefresh, onScroll, padder, onEndReached, onEndReachedThreshold, ...props} = this.props    
     // show refresh control
     if(onRefresh){
-      props.refreshControl = <RefreshControl refreshing={refreshing} onRefresh={onRefresh} title="Loading..." />
+      props.refreshControl = <RefreshControl refreshing={refreshing} onRefresh={onRefresh} 
+          tintColor="white"
+          colors={['black']}
+          title={null} />
     }
     
     return (                             

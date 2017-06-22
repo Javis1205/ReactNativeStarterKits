@@ -10,7 +10,7 @@ import {
     ListItem
 } from 'native-base'
 
-import {Dimensions, RefreshControl} from 'react-native'
+import {Dimensions} from 'react-native'
 
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
@@ -148,17 +148,10 @@ export default class extends Component {
         borderTopWidth: 0.5,
       }}>
         <Content
-          padder
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-              tintColor="white"
-              colors={['black']}
-              progressBackgroundColor="white"
-              title={null}
-            />
-             }>
+          padder          
+          refreshing={this.state.refreshing}
+          onRefresh={this._onRefresh}          
+             >
           {
             activeCampaign.results && content
           }

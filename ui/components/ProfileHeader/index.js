@@ -41,12 +41,13 @@ export default class ProfileHeader extends Component {
           onLoadEnd={this.imageLoaded.bind(this)}
           ref={(img) => { this.backgroundImage = img; }}
           style={styles.coverImg} source={coverImg}/>
-        <BlurView
+        {this.state.viewRef && <BlurView
           blurRadius={1}
           blurAmount={0}
           viewRef={this.state.viewRef}
           blurType="dark"
           style={styles.avatarContainer}/>
+        }
         <View style={styles.avatarContainer}>
           <Button
             onPress={() => this.refs.popupPhotoView.setImage(this.props.user.avatar)}

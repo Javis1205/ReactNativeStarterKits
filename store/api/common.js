@@ -1,8 +1,10 @@
 import RNFetchBlob from 'react-native-fetch-blob'
 // default api_base for all request
 import {  
-  API_BASE
+  API_BASE,
+  API_TIMEOUT,
 } from '~/store/constants/api'
+
 
 export const urlEncode = data => data
 ? Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])).join('&')
@@ -14,6 +16,7 @@ export const fetchJson = (url, options = {}, base = API_BASE) => {
     // in the same server, API_BASE is emtpy
     /// check convenient way of passing base directly
     fetch(/^(?:https?)?:\/\//.test(url) ? url : base + url, {
+      timeout: API_TIMEOUT,
       ...options,
       headers: {
         ...options.headers,

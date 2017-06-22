@@ -36,8 +36,17 @@ export const rejectErrors = (res) => {
 }
 
 export const respondJson = (res) => {
-  const contentType = res.headers.get("content-type") || ''
-  return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
+  // const contentType = res.headers.get("content-type") || ''
+  // return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
+  return res.text().then((text) => {
+    try {
+        return JSON.parse(text)
+        // Do your JSON handling here
+    } catch(err) {
+      // It is text, do you text handling here
+      return {}
+    }
+  })
 }
 
 // create saga here
@@ -103,7 +112,8 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
           chainRequest = chainRequest.then(res => res.json())
         } else {
           // chain the request
-          chainRequest = chainRequest.then(rejectErrors)
+          chainRequest = chainRequest
+            //.then(rejectErrors)
             // default return empty json when no content
             .then(respondJson)
         }        
