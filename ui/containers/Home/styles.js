@@ -45,6 +45,8 @@ export default {
     backgroundColor: 'white',
     height: 60,
     alignItems: 'center',
+    overflow: 'hidden',
+    borderRadius: 4
   },
   avatar: {
     height: 50,
@@ -58,7 +60,9 @@ export default {
     width: '100%',
     backgroundColor: 'white',
     borderWidth: 0,
-    elevation: 0
+    elevation: 0,
+    shadowOffset: null,
+    shadowOpacity: 0
   },
   eventText: {
     color: 'gray',
@@ -74,6 +78,8 @@ export default {
     marginLeft: 0,
     elevation: 0,
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
+    shadowOffset: null,
+    shadowOpacity: 0
   }
 }

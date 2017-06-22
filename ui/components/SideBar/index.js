@@ -6,6 +6,7 @@ import { Content,Text, List, ListItem,
   Spinner, Thumbnail,
 } from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import OAuthManager from 'react-native-oauth'
 
 import CacheableImage from '~/ui/components/CacheableImage'
 import * as authActions from '~/store/actions/auth'
@@ -23,17 +24,25 @@ import {
   API_BASE
 } from '~/store/constants/api'
 
+const manager = new OAuthManager('novame')
+
 @connect(state=>({
   token: authSelectors.getToken(state),
   profile: accountSelectors.getProfile(state),
+  socialType: authSelectors.getSocialType(state)
 }), {...authActions, ...commonActions})
 export default class extends Component {  
 
-  _handleLogout = (e) => {
+  async _handleLogout() {
     const {forwardTo, closeDrawer, setToast} = this.props
     closeDrawer()
-    forwardTo('login')
-    setToast('Logout successfully!!!')
+    const ret = await manager.deauthorize(this.props.socialType)
+    if (ret.status == "ok") {
+      forwardTo('login')
+      setToast('Logout successfully!!!')
+    } else {
+      setToast('Logout failed! Please check your internet connection')
+    }
   }
 
   navigateTo(route) {
@@ -83,7 +92,7 @@ export default class extends Component {
                   </Left>                
                 </ListItem>)}
             
-            <ListItem noBorder button onPress={this._handleLogout} >
+            <ListItem noBorder button onPress={this._handleLogout.bind(this)} >
               <Left>                  
                 <Text style={styles.iconTextLast}>Log Out</Text>
               </Left>                
