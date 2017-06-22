@@ -65,7 +65,10 @@ export default class ListTopFan extends Component {
     if (this.props.profile.id == this.props.route.params.userId) {
       rightContainer= <Icon style={{alignSelf: 'flex-end'}} name="photo-camera"/>
     } else {
-      rightContainer = <Text style={{alignSelf: 'flex-end'}}>8000 LP</Text>
+      // rightContainer = <Text style={{alignSelf: 'flex-end'}}>8000 LP</Text>
+      rightContainer= <Button iconRight noPadder transparent style={{alignSelf: 'flex-end'}} onPress={()=>this.props.forwardTo(`videoCall/${this.props.route.params.userId}`)}> 
+        <Icon name="photo-camera"/>
+      </Button>
     }
     return(
       <ListItem style={styles.listItemContainer}>

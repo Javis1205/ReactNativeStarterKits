@@ -1,7 +1,7 @@
 import material from '~/theme/variables/material'
 
 export default {
-  selfView: {
+  remoteView: {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -9,9 +9,12 @@ export default {
     right: 0,    
     backgroundColor:'#000',
   },
-  remoteView: {
+  selfView: {
     width: 120,
-    height: 100,
+    height: 100,    
+  },
+  actionButton:{
+    marginTop: 40,
   },
   welcome: {
     fontSize: 16,
@@ -26,10 +29,9 @@ export default {
   },
   content: {
     position: 'absolute',
-    zIndex: 9,
-    top: 0,
+    zIndex: 9,        
     left: 0,
-    bottom: 0,
+    bottom: 40,
     right: 0,   
     flexDirection: 'row',
     justifyContent:'space-between', 

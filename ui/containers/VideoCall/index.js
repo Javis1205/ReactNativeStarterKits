@@ -34,6 +34,7 @@ const configuration = {"iceServers": [{
   // 'url': 'stun:global.stun.twilio.com:3478?transport=udp',
 }]};
 
+// contain all pc connected to channel, current is 2
 const pcPeers = {};
 let localStream;
 
@@ -126,18 +127,19 @@ function createPC(socketId, isOffer) {
   };
 
   pc.onaddstream = function (event) {
-    console.log('onaddstream', event.stream);
-    container.setState({info: 'Connected to tupt!'});
+    console.log('onaddstream', event.stream);    
+    container.setState({ 
+      info: 'Connected to tupt!',
+      remoteViewSrc: event.stream.toURL() 
+    })
+  }
 
-    const remoteList = container.state.remoteList;
-    remoteList[socketId] = event.stream.toURL();
-    container.setState({ remoteList: remoteList });
-  };
   pc.onremovestream = function (event) {
     console.log('onremovestream', event.stream);
-  };
+  }
 
   pc.addStream(localStream);
+
   function createDataChannel() {
     if (pc.textDataChannel) {
       return;
@@ -152,7 +154,10 @@ function createPC(socketId, isOffer) {
       console.log("dataChannel.onmessage:", event.data);
       // container.receiveTextData({user: socketId, message: event.data});
       // that is tupt :D
-      container.receiveTextData({user: 'tupt', message: event.data});
+      container.receiveTextData({
+        user: 'tupt', 
+        message: event.data
+      });
     };
 
     dataChannel.onopen = function () {
@@ -203,10 +208,10 @@ function leave(socketId) {
   pc.close();
   delete pcPeers[socketId];
 
-  const remoteList = container.state.remoteList;
-  delete remoteList[socketId]
-  container.setState({ remoteList: remoteList });
-  container.setState({info: 'Disconnected!'});
+  container.setState({ 
+    remoteViewSrc: null, 
+    info: 'Disconnected', 
+});  
 }
 
 function logError(error) {
@@ -244,7 +249,7 @@ export default class extends Component {
         roomID: 'tupt',
         isFront: true,
         selfViewSrc: null,
-        remoteList: {},
+        remoteViewSrc: null,
         textRoomConnected: false,
         textRoomData: [],
         textRoomValue: '',      
@@ -270,12 +275,22 @@ export default class extends Component {
       });
     });
 
-    this.props.app.header.show('back', 'tupt')
+    const userId = this.props.route.params.id
+
+    this.props.app.header.show('back', 'User ID: ' + userId)
   }
 
   _press = (event) =>{    
-    this.setState({status: 'connect', info: 'Connecting'});
-    join(this.state.roomID);
+    if(this.state.status === 'connect'){
+      this.setState({status: 'ready', info: 'Connect tupt'});
+      // for(let socketId in pcPeers){        
+        // leave(socketId)
+        // delete pcPeers[socketId];
+      // }      
+    } else {
+      this.setState({status: 'connect', info: 'Connecting'});
+      join(this.state.roomID);
+    }
   }
 
   _switchVideoType=()=>{
@@ -343,27 +358,47 @@ export default class extends Component {
   render() {
     return (
       <Container>                    
-        {this.state.selfViewSrc && <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>}
+        {this.state.remoteViewSrc && 
+          <RTCView streamURL={this.state.remoteViewSrc} objectFit="cover" style={styles.remoteView}/>
+        }
 
-        <View style={styles.content}>               
-          <View style={{flexDirection: 'row', width: '100%', paddingHorizontal: 100, alignSelf: 'center', justifyContent:'space-around'}}>                        
-            <Button transparent rounded bordered info noPadder
+        <View style={styles.content}>      
+
+          <View style={{
+            flexDirection: 'row', 
+            width: '100%', 
+            paddingHorizontal: 20, 
+            alignSelf: 'center', 
+            alignItems: 'center',
+            justifyContent:'space-between'
+          }}>                        
+
+            {
+              // <Text style={styles.welcome}>
+              //   {this.state.info}            
+              // </Text>   
+            }
+
+
+            <Button transparent rounded bordered info noPadder style={styles.actionButton}
               onPress={this._switchVideoType}>
               <Icon large name="switch-camera" />
             </Button>
-                 
-              <Button transparent rounded bordered info noPadder
-                onPress={this._press}>
-                <Icon large name={this.state.status === 'ready' ? 'videocam' : 'videocam-off'} />
-              </Button>          
+
+            {this.state.selfViewSrc && 
+              <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>
+            }
+
+            <Button transparent rounded bordered info noPadder style={styles.actionButton}
+              onPress={this._press}>
+              <Icon large name={this.state.status === 'ready' ? 'videocam' : 'videocam-off'} />
+            </Button>          
                          
           </View>
-          <Text style={styles.welcome}>
-              {this.state.info}            
-            </Text>    
-        {mapHash(this.state.remoteList, (remote, index) => 
-          <RTCView key={index} streamURL={remote} style={styles.remoteView}/>
-        )}
+           
+        
+          
+        
         </View>     
         {   
         // <Content>          

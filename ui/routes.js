@@ -3,7 +3,7 @@ import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserSetting from './containers/User/Setting'
-import WebRTC from './containers/WebRTC'
+import VideoCall from './containers/VideoCall'
 import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
 import EventDetail from './containers/EventDetail'
@@ -122,9 +122,9 @@ export default {
         headerType: 'none',
         footerType: 'none',
     },
-    webrtc:{
-        title: 'WebRTC',
-        Page: WebRTC,
+    'videoCall/:id':{
+        title: 'Video Call',
+        Page: VideoCall,
         headerType: 'back',  
     },
     qrCode: {
