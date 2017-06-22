@@ -11,7 +11,7 @@ import {
     Fab
 } from 'native-base'
 
-import {Dimensions, Image} from 'react-native'
+import {Dimensions, Image, RefreshControl} from 'react-native'
 
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
@@ -184,10 +184,17 @@ export default class extends Component {
         borderTopWidth: 0.5,
       }}>
         <Content
-          padder          
-          refreshing={this.state.refreshing}
-          onRefresh={this._onRefresh}          
-             >
+          padder
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+        }>
           {topButton}
           {
             activeCampaign.results && content
