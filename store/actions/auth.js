@@ -41,3 +41,8 @@ export const saveRefreshToken = (data) => ({
 export const removeLoggedUser = () => ({
   type: 'app/removeLoggedUser',  
 })
+
+export const saveSocialType = (data) => ({
+  type: 'app/saveSocialType',
+  payload: data,
+})

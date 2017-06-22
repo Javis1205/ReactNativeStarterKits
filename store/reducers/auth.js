@@ -6,7 +6,8 @@
 // this is called static, later all state will be re-hydrate, but first time we need to know
 // if this user is logged before
 const initialState = {  
-  loggedIn: false
+  loggedIn: false,
+  socialType: 'facebook'
 }
 
 // Takes care of changing the application state
@@ -21,7 +22,9 @@ export const auth = (state = initialState, {type, payload}) => {
       return {...state, user: null, token: null}
     case 'app/saveRefreshToken':
       // payload is access token
-      return {...state, token: {...state.token, ...payload} }  
+      return {...state, token: {...state.token, ...payload} }
+    case 'app/saveSocialType':
+      return {...state, socialType: payload}
     default:
       return state
   }

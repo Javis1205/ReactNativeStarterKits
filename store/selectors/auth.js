@@ -7,4 +7,7 @@ export const getToken = state =>
 
 export const getUser = state => 
   state.auth.user || {}
-  
+
+export const getSocialType = state =>
+  state.auth.socialType || {}
+
