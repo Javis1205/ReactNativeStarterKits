@@ -208,8 +208,13 @@ export default class App extends Component {
     let ref = component
     ref.visible = focus
     // maybe connect, check name of constructor is _class means it is a component :D
+    // this time support only one focus trigger, you can delegate more, to optimize performance
     while(ref && whatdog > 0){
-      ref[method] && ref[method]()
+      // do animation before run it
+      if(ref[method]){
+        requestAnimationFrame(()=>ref[method]())
+        break
+      } 
       ref = ref._reactInternalInstance._renderedComponent._instance
       whatdog--
     }    
