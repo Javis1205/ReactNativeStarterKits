@@ -7,10 +7,11 @@ import {
     View,
     Input,
     List,
-    ListItem
+    ListItem,
+    Fab
 } from 'native-base'
 
-import {Dimensions} from 'react-native'
+import {Dimensions, Image} from 'react-native'
 
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
@@ -29,7 +30,8 @@ import styles from './styles'
 @connect(state=>({  
   token: authSelectors.getToken(state),
   celebrity_id: accountSelectors.getCelebrityId(state),
-  activeCampaign: campaignSelectors.getActiveCampaign(state)
+  activeCampaign: campaignSelectors.getActiveCampaign(state),
+  profile: accountSelectors.getProfile(state)
 }), {...campaignActions, ...commonActions})
 
 export default class extends Component {
@@ -39,7 +41,8 @@ export default class extends Component {
 
     this.state = {
       refreshing: false,
-      emptyHome: false
+      emptyHome: false,
+      fabActive: false
     }    
   }
 
@@ -98,6 +101,14 @@ export default class extends Component {
     this.props.forwardTo('search')
   }
   
+  _onCreateEventPress() {
+    this.props.forwardTo('event/create')
+  }
+  
+  _onProfilePress() {
+    this.props.forwardTo('userProfile/' + this.props.profile.id)
+  }
+  
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
@@ -109,13 +120,34 @@ export default class extends Component {
     )
   }
   
+  renderTopButton() {
+    return(
+      <View style={styles.topButtonContainer}>
+        <Button
+          style={styles.avatarButton}
+          onPress={this._onProfilePress.bind(this)}>
+          <Image
+            style={styles.avatar}
+            source={{uri: this.props.profile.avatar}}/>
+        </Button>
+        <Button
+          onPress={this._onCreateEventPress.bind(this)}
+          style={styles.eventButton}>
+          <Text style={styles.eventText}>Post an event?</Text>
+        </Button>
+      </View>
+    )
+  }
+  
   renderList() {
     const { activeCampaign } = this.props
     return (
-      <List
-        removeClippedSubviews={false}
-        renderRow={this.renderRow.bind(this)}
-        dataArray={activeCampaign.results}/>
+      <View>
+        <List
+          removeClippedSubviews={false}
+          renderRow={this.renderRow.bind(this)}
+          dataArray={activeCampaign.results}/>
+      </View>
     )
   }
   
@@ -141,6 +173,10 @@ export default class extends Component {
   render() {
     const { activeCampaign } = this.props
     let content = (this.state.emptyHome) ? this.renderButtonSearch() : this.renderList()
+    let topButton = null
+    if (this.props.profile.user_type.id == 3) {
+      topButton = this.renderTopButton()
+    }
     return (
       <Container style={{
         backgroundColor: '#ccc',
@@ -152,6 +188,7 @@ export default class extends Component {
           refreshing={this.state.refreshing}
           onRefresh={this._onRefresh}          
              >
+          {topButton}
           {
             activeCampaign.results && content
           }

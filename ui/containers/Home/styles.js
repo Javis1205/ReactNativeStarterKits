@@ -39,5 +39,41 @@ export default {
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  topButtonContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    height: 60,
+    alignItems: 'center',
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    borderWidth: 0.5,
+    borderColor: '#ccc'
+  },
+  eventButton: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'white',
+    borderWidth: 0,
+    elevation: 0
+  },
+  eventText: {
+    color: 'gray',
+    fontWeight: '100',
+    fontSize: 16
+  },
+  avatarButton: {
+    height: '100%',
+    paddingLeft: 10,
+    paddingRight: 0,
+    backgroundColor: 'white',
+    borderWidth: 0,
+    marginLeft: 0,
+    elevation: 0,
+    paddingTop: 0,
+    paddingBottom: 0
   }
 }
