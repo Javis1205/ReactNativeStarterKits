@@ -73,11 +73,8 @@ export default class UserProfile extends Component {
       }
       this.setState({
         events: data.results,
-        celebrity: data.celebrity
-      }, () => {
-        this.setState({
-          refreshing: false
-        })
+        celebrity: data.celebrity,
+        refreshing: false
       })
     })
   }
@@ -133,7 +130,7 @@ export default class UserProfile extends Component {
                       small transparent light rounded bordered
                       onPress={this.onPressUnFollow.bind(this)}
                       style={styles.unfollowButton}>
-                      <Text small style={styles.unfollowTextButton}>Following</Text>
+                      <Text small>Following</Text>
                     </Button>
     } else {
       followButton = <Button
@@ -213,12 +210,8 @@ export default class UserProfile extends Component {
             <Button
               onPress={this.onPressEvent.bind(this)}
               style={styles.eventButton}>
-              <View style={{flex: 1/3}}>
-                <Icon name="calendar" style={{color: 'white', alignSelf: 'center'}}/>
-              </View>
-              <View style={{flex: 2/3}}>
-                <Text style={{color: 'white', alignSelf: 'center'}}>Event</Text>
-              </View>
+              <Icon name="calendar"/>
+              <Text>Event</Text>
             </Button>
           </Col>
           <Col style={{width: 10}}/>
@@ -226,12 +219,8 @@ export default class UserProfile extends Component {
             <Button
               onPress={this._onCreateEventPress.bind(this)}
               style={styles.postButton}>
-              <View style={{flex: 1/3}}>
-                <Icon name="create" style={{color: 'white', alignSelf: 'center'}}/>
-              </View>
-              <View style={{flex: 2/3}}>
-                <Text style={{color: 'white', alignSelf: 'center'}}>Post</Text>
-              </View>
+              <Text>Post</Text>
+              <Icon name="create"/>
             </Button>
           </Col>
         </Row>
