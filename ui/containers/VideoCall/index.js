@@ -210,6 +210,7 @@ function leave(socketId) {
 
   container.setState({ 
     remoteViewSrc: null, 
+    selfViewSrc: null,
     info: 'Disconnected', 
 });  
 }
@@ -283,10 +284,10 @@ export default class extends Component {
   _press = (event) =>{    
     if(this.state.status === 'connect'){
       this.setState({status: 'ready', info: 'Connect tupt'});
-      // for(let socketId in pcPeers){        
-        // leave(socketId)
-        // delete pcPeers[socketId];
-      // }      
+      for(let socketId in pcPeers){        
+        leave(socketId)
+        delete pcPeers[socketId];
+      }      
     } else {
       this.setState({status: 'connect', info: 'Connecting'});
       join(this.state.roomID);
