@@ -133,7 +133,7 @@ export default class UserProfile extends Component {
                       small transparent light rounded bordered
                       onPress={this.onPressUnFollow.bind(this)}
                       style={styles.unfollowButton}>
-                      <Text small>Following</Text>
+                      <Text small style={styles.unfollowTextButton}>Following</Text>
                     </Button>
     } else {
       followButton = <Button
@@ -213,8 +213,12 @@ export default class UserProfile extends Component {
             <Button
               onPress={this.onPressEvent.bind(this)}
               style={styles.eventButton}>
-              <Icon name="calendar"/>
-              <Text>Event</Text>
+              <View style={{flex: 1/3}}>
+                <Icon name="calendar" style={{color: 'white', alignSelf: 'center'}}/>
+              </View>
+              <View style={{flex: 2/3}}>
+                <Text style={{color: 'white', alignSelf: 'center'}}>Event</Text>
+              </View>
             </Button>
           </Col>
           <Col style={{width: 10}}/>
@@ -222,8 +226,12 @@ export default class UserProfile extends Component {
             <Button
               onPress={this._onCreateEventPress.bind(this)}
               style={styles.postButton}>
-              <Text>Post</Text>
-              <Icon name="create"/>
+              <View style={{flex: 1/3}}>
+                <Icon name="create" style={{color: 'white', alignSelf: 'center'}}/>
+              </View>
+              <View style={{flex: 2/3}}>
+                <Text style={{color: 'white', alignSelf: 'center'}}>Post</Text>
+              </View>
             </Button>
           </Col>
         </Row>

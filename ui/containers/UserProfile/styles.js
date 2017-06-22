@@ -47,7 +47,8 @@ export default {
     marginTop: 20,
     // backgroundColor: '#F5A2A2'
     borderColor: '#979797',
-    backgroundColor: '#000',    
+    backgroundColor: '#000',
+    alignItems: 'center',
   },
   followButton: {
     // width: '50%',
@@ -60,9 +61,12 @@ export default {
     color: '#979797',
     fontWeight: 'bold'
   },
+  unfollowTextButton: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
   eventButton: {
     width: '80%',
-    justifyContent: 'center',
     marginTop: 20,
     alignSelf: 'flex-end',
     borderColor: '#979797',
@@ -72,7 +76,6 @@ export default {
   },
   postButton: {
     width: '80%',
-    justifyContent: 'center',
     marginTop: 20,
     //backgroundColor: '#F5A2A2',
     alignSelf: 'flex-start',

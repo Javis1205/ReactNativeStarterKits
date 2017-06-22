@@ -37,7 +37,7 @@ export default class ProfileHeader extends Component {
     return(
       <View style={styles.headerContainer}>
         <PopupPhotoView ref='popupPhotoView' />
-        <CacheableImage
+        <Image
           onLoadEnd={this.imageLoaded.bind(this)}
           ref={(img) => { this.backgroundImage = img; }}
           style={styles.coverImg} source={coverImg}/>

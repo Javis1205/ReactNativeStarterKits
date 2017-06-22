@@ -50,10 +50,10 @@ export default class Search extends Component {
       refreshingJob: true,
     })
     this.props.getJob(this.props.token, 1, 4, (error, data) => {
+      this._onPressSearch()
       this.setState({
         refreshing: false,
         refreshingJob: false,
-        refreshingCeleb: false
       })
     })
     this.componentWillFocus()
