@@ -77,7 +77,7 @@ export default class ListTopFan extends Component {
                         <Icon name="photo-camera"/>
                       </Button>
     } else {
-      rightContainer = <Text style={{alignSelf: 'flex-end'}}>8000 LP</Text>
+      rightContainer = <Text note small style={{alignSelf: 'flex-end'}}>8000 LP</Text>
     }
     return(
       <ListItem style={styles.listItemContainer}>
@@ -110,6 +110,7 @@ export default class ListTopFan extends Component {
     return(
       <View style={styles.container}>
         <List
+          removeClippedSubviews={false}
           renderRow={this.renderRow.bind(this)}
           dataArray={this.state.listFan}/>
       </View>

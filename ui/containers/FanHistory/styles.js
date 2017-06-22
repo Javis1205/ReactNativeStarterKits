@@ -4,17 +4,17 @@ export default {
 
     },
     iconInfo: {
-        fontSize: 28,
-        marginRight: 3,
-        color: material.grayColor
+        fontSize: 24,
+        marginRight: 5,
+        color: material.black
     },
     icon: {
         fontSize: 20,
         marginRight: 5,
-        color: material.grayColor
+        color: material.black,
     },
     textInfo: {
-        fontSize: 28,
+        fontSize: 20,
         color: material.grayColor
     },
     infoRow: {
@@ -53,7 +53,7 @@ export default {
         borderRadius: 30
     },
     listItem: {
-        borderBottomColor: 'transparent'
+        borderBottomColor: '#ccc'
     }
 
 }

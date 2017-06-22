@@ -14,7 +14,7 @@ export default (variables = variable) => {
     fontSize: variables.titleFontSize,
     fontFamily: variables.titleFontfamily,
     color: variables.titleFontColor,
-    fontWeight: (Platform.OS==='ios') ? '600' : undefined,
+    fontWeight: (Platform.OS==='ios') ? '400' : undefined,
     textAlign: 'center'
   };
 
