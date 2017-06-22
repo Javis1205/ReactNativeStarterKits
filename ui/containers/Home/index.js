@@ -174,7 +174,7 @@ export default class extends Component {
     const { activeCampaign } = this.props
     let content = (this.state.emptyHome) ? this.renderButtonSearch() : this.renderList()
     let topButton = null
-    if (this.props.profile.user_type.id == 3) {
+    if (this.props.profile.user_type && this.props.profile.user_type.id == 3) {
       topButton = this.renderTopButton()
     }
     return (
