@@ -57,10 +57,10 @@ export default class extends Component {
         this.setState({
           refreshing: false,
         }, () => {
-          (activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
+          (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
         })
       })
-    } else if (activeCampaign.results.length == 0) {
+    } else if (this.props.activeCampaign.results.length == 0) {
       this.setState({
         emptyHome: true
       })

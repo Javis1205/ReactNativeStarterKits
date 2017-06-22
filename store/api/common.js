@@ -16,7 +16,7 @@ export const fetchJson = (url, options = {}, base = API_BASE) => {
     // in the same server, API_BASE is emtpy
     /// check convenient way of passing base directly
     fetch(/^(?:https?)?:\/\//.test(url) ? url : base + url, {
-      timeout: API_TIMEOUT,
+      // timeout: API_TIMEOUT,
       ...options,
       headers: {
         ...options.headers,
