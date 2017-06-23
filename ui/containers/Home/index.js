@@ -8,7 +8,8 @@ import {
     Input,
     List,
     ListItem,
-    Fab
+    Fab,
+    Spinner
 } from 'native-base'
 
 import {Dimensions, Image, RefreshControl} from 'react-native'
@@ -42,7 +43,9 @@ export default class extends Component {
     this.state = {
       refreshing: false,
       emptyHome: false,
-      fabActive: false
+      fabActive: false,
+      loadingMore: false,
+      page: 1,
     }    
   }
 
@@ -109,6 +112,26 @@ export default class extends Component {
     this.props.forwardTo('userProfile/' + this.props.profile.id)
   }
   
+  _onEndReached() {
+    const {token, getActiveCampaign} = this.props
+    if (this.state.loadingMore) {
+      return;
+    }
+    this.setState({
+      loadingMore: true
+    })
+    this.setState({
+      page: this.state.page++
+    }, () => {
+      console.log(token)
+      getActiveCampaign(token, this.state.page, 10, (error, data)=>{
+        this.setState({
+          loadingMore: false
+        })
+      })
+    })
+  }
+  
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
@@ -144,6 +167,8 @@ export default class extends Component {
     return (
       <View>
         <List
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={80}
           removeClippedSubviews={false}
           renderRow={this.renderRow.bind(this)}
           dataArray={activeCampaign.results}/>
@@ -199,6 +224,7 @@ export default class extends Component {
           {
             activeCampaign.results && content
           }
+          {this.state.loadingMore && <Spinner style={{marginBottom: 10}} color='#fff' />}
         </Content>
       </Container>
     )
