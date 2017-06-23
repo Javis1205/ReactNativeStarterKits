@@ -319,8 +319,7 @@ export default class UserProfile extends Component {
           <Left/>
         </Header>
 
-        <View style={{flex: 1}}>
-         <View padder>
+        <View style={{flex: 1}} padder>
           <List
             renderHeader={() => {
                 return(
@@ -330,13 +329,20 @@ export default class UserProfile extends Component {
                 )
               }
             }
+            renderFooter={() => {
+                return(
+                  <View>
+                    {this.state.loadingMore && <Spinner color='#fff' />}
+                  </View>
+                )
+              }
+            }
+            style={{flex: 1}}
             onEndReached={this._onEndReached.bind(this)}
             onEndReachedThreshold={80}
             removeClippedSubviews={false}
             renderRow={this.renderRow.bind(this)}
             dataArray={this.state.events}/>
-          </View>
-          {this.state.loadingMore && <Spinner color='#fff' />}
         </View>
       </Container>
     )
