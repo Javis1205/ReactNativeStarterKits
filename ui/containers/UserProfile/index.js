@@ -77,7 +77,11 @@ export default class UserProfile extends Component {
       this.setState({
         events: data.results,
         celebrity: data.celebrity,
-        refreshing: false
+      }, () => {
+        console.log("refreshing")
+        this.setState({
+          refreshing: false
+        })
       })
     })
   }
@@ -137,16 +141,17 @@ export default class UserProfile extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+      /*this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
         this.setState({
           events: this.state.events.concat(data.results),
+          celebrity: data.celebrity,
           refreshing: false
         }, () => {
           this.setState({
             loadingMore: false
           })
         })
-      })
+      })*/
     })
   }
   
@@ -280,7 +285,6 @@ export default class UserProfile extends Component {
     } else {
       avatarContainer = this.renderAvatarContainerFan()
     }
-    
     let username = null
     let avatar = null
     let cover = null
@@ -288,9 +292,9 @@ export default class UserProfile extends Component {
       username = this.state.celebrity.username
       avatar = this.state.celebrity
     } else {
-      username = this.state.celebrity.username
+      username = this.state.celebrity.username || ''
       avatar = {
-        avatar: this.state.celebrity.avatar,
+        avatar: this.state.celebrity.avatar || '',
         cover: this.state.celebrity.cover_picture || COVER_IMAGE
       }
     }
@@ -315,8 +319,7 @@ export default class UserProfile extends Component {
           <Left/>
         </Header>
 
-        <View style={{flex: 1}}>
-         <View padder>
+        <View style={{flex: 1}} padder>
           <List
             renderHeader={() => {
                 return(
@@ -326,13 +329,20 @@ export default class UserProfile extends Component {
                 )
               }
             }
+            renderFooter={() => {
+                return(
+                  <View>
+                    {this.state.loadingMore && <Spinner color='#fff' />}
+                  </View>
+                )
+              }
+            }
+            style={{flex: 1}}
             onEndReached={this._onEndReached.bind(this)}
             onEndReachedThreshold={80}
             removeClippedSubviews={false}
             renderRow={this.renderRow.bind(this)}
             dataArray={this.state.events}/>
-          </View>
-          {this.state.loadingMore && <Spinner color='#fff' />}
         </View>
       </Container>
     )
