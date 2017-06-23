@@ -155,12 +155,14 @@ export default class ProfileUpdate extends Component {
     editProfile = this.state.isCeleb ? this.renderCelebUser() : this.renderCommonUser();
     return (
       <Container>
-        {editProfile}
-        <Button
-          style={styles.submitButton}
-          onPress={this.submitUser.bind(this)}>
-          <Text>Update</Text>
-        </Button>
+        <Content>
+          {editProfile}
+          <Button
+            style={styles.submitButton}
+            onPress={this.submitUser.bind(this)}>
+            <Text>Update</Text>
+          </Button>
+        </Content>
         <Modal
           backdropColor="gray"
           backdropOpacity={0.7}

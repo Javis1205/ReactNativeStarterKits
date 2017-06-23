@@ -113,6 +113,7 @@ export default class extends Component {
   }
   
   _onEndReached() {
+    console.log("On End Reach")
     const {token, getActiveCampaign} = this.props
     if (this.state.loadingMore) {
       return;
@@ -121,9 +122,9 @@ export default class extends Component {
       loadingMore: true
     })
     this.setState({
-      page: this.state.page++
+      page: this.state.page + 1
     }, () => {
-      console.log(token)
+      console.log(this.state.page)
       getActiveCampaign(token, this.state.page, 10, (error, data)=>{
         this.setState({
           loadingMore: false
@@ -165,14 +166,13 @@ export default class extends Component {
   renderList() {
     const { activeCampaign } = this.props
     return (
-      <View>
-        <List
-          onEndReached={this._onEndReached.bind(this)}
-          onEndReachedThreshold={80}
-          removeClippedSubviews={false}
-          renderRow={this.renderRow.bind(this)}
-          dataArray={activeCampaign.results}/>
-      </View>
+      <List
+        style={{flex: 1,}}
+        onEndReached={this._onEndReached.bind(this)}
+        onEndReachedThreshold={80}
+        removeClippedSubviews={false}
+        renderRow={this.renderRow.bind(this)}
+        dataArray={activeCampaign.results}/>
     )
   }
   
