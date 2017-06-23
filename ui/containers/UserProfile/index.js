@@ -44,7 +44,9 @@ export default class UserProfile extends Component {
       isOwner: false,
       isFollowed: false,
       celebrity: {},
-      followLoading: false
+      followLoading: false,
+      loadingMore: false,
+      page: 1
     }
   }
   
@@ -121,6 +123,31 @@ export default class UserProfile extends Component {
   
   onPressEvent() {
     this.componentWillFocus()
+  }
+  
+  _onEndReached() {
+    console.log("On End Reach")
+    if (this.state.loadingMore) {
+      return;
+    }
+    this.setState({
+      loadingMore: true
+    })
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      console.log(this.state.page)
+      this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+        this.setState({
+          events: this.state.events.concat(data.results),
+          refreshing: false
+        }, () => {
+          this.setState({
+            loadingMore: false
+          })
+        })
+      })
+    })
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -288,16 +315,25 @@ export default class UserProfile extends Component {
           <Left/>
         </Header>
 
-        <Content>
-        <ProfileHeader user={avatar}>
-            {avatarContainer}
-          </ProfileHeader>
+        <View style={{flex: 1}}>
          <View padder>
           <List
+            renderHeader={() => {
+                return(
+                  <ProfileHeader user={avatar}>
+                    {avatarContainer}
+                  </ProfileHeader>
+                )
+              }
+            }
+            onEndReached={this._onEndReached.bind(this)}
+            onEndReachedThreshold={80}
+            removeClippedSubviews={false}
             renderRow={this.renderRow.bind(this)}
             dataArray={this.state.events}/>
           </View>
-        </Content>
+          {this.state.loadingMore && <Spinner color='#fff' />}
+        </View>
       </Container>
     )
   }
