@@ -79,7 +79,7 @@ export default class AreUCeleb extends Component {
               component={InputField}
               placeholderTextColor="#7e7e7e"/>
           </View>
-          <Button
+          <Button                    
             onPress={this.onSubmit.bind(this)}
             style={styles.submitButton}>
             <Text>Request</Text>

@@ -98,7 +98,7 @@ export default class extends Component {
       </Button>
     )
     const center = (
-      <Text white style={{alignSelf: 'center'}}>Home</Text>
+      <Title white style={{alignSelf: 'center'}}>Home</Title>
     )
     const right = (
       <View style={styles.rowIconContainer}>

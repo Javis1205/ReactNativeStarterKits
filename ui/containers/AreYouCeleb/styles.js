@@ -40,9 +40,9 @@ export default {
   submitButton: {
     alignSelf: 'center',
     marginTop: 20,
-    width: '80%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F5A2A2'
+    backgroundColor: '#222'
   }
 }

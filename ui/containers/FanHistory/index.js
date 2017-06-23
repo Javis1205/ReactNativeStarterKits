@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Button, Container, ListItem, List, Spinner,
+  Button, Container, ListItem, List, Spinner, Right,
   Text, Item, View, Input, Left, Body, Thumbnail, Content
 } from 'native-base'
 import { TouchableOpacity, ScrollView } from 'react-native'
@@ -45,13 +45,15 @@ export default class FanHistory extends Component {
       <ListItem style={styles.listItem}>
         <Thumbnail style={styles.thumbnail} source={{ uri: item.thumbnailUrl }} />
         <Body>
-          <Text small style={styles.mb5}>{item.name}</Text>
-          <View style={{...styles.rowListItem, ...styles.mb5}} >
-            <Icon name='calendar' style={styles.icon} />
-            <Text small>{item.time}</Text>
-          </View>
+          <Text small style={styles.mb5}>{item.name}</Text>          
           <Text style={styles.mb5} small>{item.point} points</Text>
         </Body>
+        
+          <View style={{...styles.rowListItem, ...styles.mb5}} >
+            <Icon name='calendar' style={{...styles.icon, fontSize: 24}} />
+            <Text small style={{fontSize:10}}>{item.time.replace(' ', '\n')}</Text>
+          </View>
+        
       </ListItem>
     )
   }
@@ -83,7 +85,8 @@ export default class FanHistory extends Component {
           <Text>Boston, US</Text>
         </View>
         <Content>
-          <List dataArray={this.items}
+          <List removeClippedSubviews={false} 
+            dataArray={this.items}
             renderRow={(item) => this._renderRow(item)} >
           </List>
         </Content>

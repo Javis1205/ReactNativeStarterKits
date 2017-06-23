@@ -8,7 +8,7 @@ export default {
     width: '100%',
     height: '100%',
     backgroundColor: 'white',
-    paddingTop: 20
+    // paddingTop: 10
   },
   spinnerContainer: {
     backgroundColor: 'white',
@@ -18,7 +18,8 @@ export default {
     alignItems: 'center'
   },
   listItemContainer: {
-    borderBottomWidth: 0,
+    borderBottomWidth: 0.5,
+    borderColor: '#ccc',
     paddingLeft: 0,
     paddingRight: 0,
     marginLeft: 0,
