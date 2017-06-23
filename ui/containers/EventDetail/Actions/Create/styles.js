@@ -11,5 +11,9 @@ export default {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 0
+  },
+  modalContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }

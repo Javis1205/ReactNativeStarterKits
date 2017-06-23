@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { BlurView } from 'react-native-blur'
 import moment from 'moment';
+import Modal from 'react-native-modal'
 
 import {
   API_BASE
@@ -68,7 +69,8 @@ export default class EventUpdate extends Component {
       date: moment(props.chosenEvent.finish_time).format("DD/MM/YYYY"),
       imgUri: API_BASE + '/i/0x0/' + props.chosenEvent.images[0].image.url,
       celebrity: props.chosenEvent.celebrity,
-      imgId: ''
+      imgId: '',
+      updatingModal: false
     }
     
   }
@@ -112,6 +114,9 @@ export default class EventUpdate extends Component {
   }
   
   submitEvent() {
+    this.setState({
+      updatingModal: true
+    })
     console.log(this.state)
     let fromTime = moment(this.state.date + ' ' + this.state.fromTime, 'DD/MM/YYYY HH:mm').toISOString()
     let toTime = moment(this.state.date + ' ' + this.state.toTime, 'DD/MM/YYYY HH:mm').toISOString()
@@ -128,7 +133,13 @@ export default class EventUpdate extends Component {
     if (this.state.imgId != '') {
       //event.image_ids = [this.state.imgId]
     }
-    this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event)
+    this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event, () => {
+      this.setState({
+        updatingModal: false
+      }, () => {
+        this.props.actions.goBack()
+      })
+    })
   }
   
   render() {
@@ -150,6 +161,16 @@ export default class EventUpdate extends Component {
           onPress={this.submitEvent.bind(this)}>
           <Text>Create</Text>
         </Button>
+        <Modal
+          backdropColor="gray"
+          backdropOpacity={0.7}
+          animationOut={'fadeOut'}
+          animationIn={'fadeIn'}
+          hideOnBack={true}
+          isVisible={this.state.updatingModal}
+          style={{}}>
+          <Spinner color={"white"}/>
+        </Modal>
       </Container>
     )
   }

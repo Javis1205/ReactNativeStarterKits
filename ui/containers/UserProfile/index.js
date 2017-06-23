@@ -43,7 +43,8 @@ export default class UserProfile extends Component {
       ],
       isOwner: false,
       isFollowed: false,
-      celebrity: {}
+      celebrity: {},
+      followLoading: false
     }
   }
   
@@ -92,9 +93,16 @@ export default class UserProfile extends Component {
   }
   
   onPressFollow() {
+    this.setState({
+      followLoading: true
+    })
     this.props.followCeleb(this.props.token, this.props.route.params.userId, () => {
       this.setState({
-        isFollowed: true
+        followLoading: false
+      }, () => {
+        this.setState({
+          isFollowed: true
+        })
       })
     })
   }
@@ -125,6 +133,7 @@ export default class UserProfile extends Component {
   
   renderAvatarContainerFan() {
     let followButton = null
+    let iconFollow = (this.state.followLoading) ? <Spinner size={15} color={"white"}/> : <Text small style={styles.followTextButton}>Follow</Text>
     if (this.state.isFollowed) {
       followButton = <Button
                       small transparent light rounded bordered
@@ -137,7 +146,7 @@ export default class UserProfile extends Component {
                       small transparent light rounded bordered
                       onPress={this.onPressFollow.bind(this)}
                       style={styles.followButton}>
-                      <Text small style={styles.followTextButton}>Follow</Text>
+                    {iconFollow}
                     </Button>
     }
 

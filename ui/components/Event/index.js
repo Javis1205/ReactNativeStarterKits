@@ -20,11 +20,11 @@ const Background = ({feed, children}) => {
     const eventImg = {uri: imgEventUri}
     return ( 
       <View cardBody>
-        <CacheableImage                              
+        <Image
           style={styles.image}
           source={eventImg}>
           {children}
-        </CacheableImage>
+        </Image>
       </View>
     )
   }

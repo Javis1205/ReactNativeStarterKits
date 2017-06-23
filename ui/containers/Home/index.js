@@ -8,7 +8,8 @@ import {
     Input,
     List,
     ListItem,
-    Fab
+    Fab,
+    Spinner
 } from 'native-base'
 
 import {Dimensions, Image, RefreshControl} from 'react-native'
@@ -42,7 +43,9 @@ export default class extends Component {
     this.state = {
       refreshing: false,
       emptyHome: false,
-      fabActive: false
+      fabActive: false,
+      loadingMore: false,
+      page: 1,
     }    
   }
 
@@ -72,7 +75,6 @@ export default class extends Component {
         emptyHome: false
       })
     }
-  
   
   }
 
@@ -109,6 +111,32 @@ export default class extends Component {
     this.props.forwardTo('userProfile/' + this.props.profile.id)
   }
   
+  _onEndReached() {
+    console.log("On End Reach")
+    const {token, activeCampaign, getActiveCampaign} = this.props
+    if (this.state.loadingMore) {
+      return;
+    }
+    this.setState({
+      loadingMore: true
+    })
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      console.log(this.state.page)
+      getActiveCampaign(token, this.state.page, 10, () => {
+        this.setState({
+          refreshing: false,
+        }, () => {
+          this.setState({
+            emptyHome: false,
+            loadingMore: false
+          })
+        })
+      })
+    })
+  }
+  
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
@@ -142,8 +170,21 @@ export default class extends Component {
   renderList() {
     const { activeCampaign } = this.props
     return (
-      <View>
+      <View style={{flex: 1}}>
         <List
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+          }
+          style={{flex: 1,}}
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={80}
           removeClippedSubviews={false}
           renderRow={this.renderRow.bind(this)}
           dataArray={activeCampaign.results}/>
@@ -153,19 +194,31 @@ export default class extends Component {
   
   renderButtonSearch() {
     return(
-      <View style={styles.buttonContainer}>
-        <View style={styles.refreshContainer}>
-          <Icon style={styles.searchIcon} name="arrow-down" />
-          <Text style={styles.refreshText}>Already follwed celebrities?</Text>
-          <Text style={styles.refreshText}>Pull to refresh</Text>
+      <Content
+        refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+        }>
+        <View style={styles.buttonContainer}>
+          <View style={styles.refreshContainer}>
+            <Icon style={styles.searchIcon} name="arrow-down" />
+            <Text style={styles.refreshText}>Already follwed celebrities?</Text>
+            <Text style={styles.refreshText}>Pull to refresh</Text>
+          </View>
+          <Button
+            onPress={this._onSearchPress.bind(this)}
+            style={styles.button}>
+            <Icon style={styles.searchIcon} name="search" />
+            <Text style={styles.textSearchButton}>You can find celebrities here</Text>
+          </Button>
         </View>
-        <Button
-          onPress={this._onSearchPress.bind(this)}
-          style={styles.button}>
-          <Icon style={styles.searchIcon} name="search" />
-          <Text style={styles.textSearchButton}>You can find celebrities here</Text>
-        </Button>
-      </View>
+      </Content>
     )
   }
   
@@ -183,23 +236,15 @@ export default class extends Component {
         borderColor: '#555',
         borderTopWidth: 0.5,
       }}>
-        <Content
-          padder
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-              tintColor="black"
-              colors={['black']}
-              progressBackgroundColor="white"
-              title={null}
-            />
-        }>
+        <View
+          style={{flex: 1}}
+          padder>
           {topButton}
           {
             activeCampaign.results && content
           }
-        </Content>
+          {this.state.loadingMore && <Spinner style={{marginBottom: 10}} color='#fff' />}
+        </View>
       </Container>
     )
   }
