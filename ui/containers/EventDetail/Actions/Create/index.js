@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import RNFetchBlob from 'react-native-fetch-blob'
+import Modal from 'react-native-modal'
 
 import {
   InputField,
@@ -63,7 +64,8 @@ export default class EventCreation extends Component {
       toTime: moment(new Date()).format("HH:mm"),
       date: moment(new Date()).format("DD/MM/YYYY"),
       imgUri: '',
-      imgId: ''
+      imgId: '',
+      creatingModal: false
     }
     
   }
@@ -108,6 +110,9 @@ export default class EventCreation extends Component {
   }
   
   submitEvent() {
+    this.setState({
+      creatingModal: true
+    })
     let fromTime = moment(this.state.date + ' ' + this.state.fromTime, 'DD/MM/YYYY HH:mm').toISOString()
     let toTime = moment(this.state.date + ' ' + this.state.toTime, 'DD/MM/YYYY HH:mm').toISOString()
     let event = {
@@ -123,7 +128,13 @@ export default class EventCreation extends Component {
     if (this.state.imgId != '') {
       event.image_ids = [this.state.imgId]
     }
-    this.props.actions.createCampaign(this.props.token, event)
+    this.props.actions.createCampaign(this.props.token, event, () => {
+      this.setState({
+        creatingModal: false
+      }, () => {
+        this.props.actions.goBack()
+      })
+    })
   }
   
   render() {
@@ -142,6 +153,16 @@ export default class EventCreation extends Component {
           onPress={this.submitEvent.bind(this)}>
           <Text>Create</Text>
         </Button>
+        <Modal
+          backdropColor="gray"
+          backdropOpacity={0.7}
+          animationOut={'fadeOut'}
+          animationIn={'fadeIn'}
+          hideOnBack={true}
+          isVisible={this.state.creatingModal}
+          style={{}}>
+          <Spinner color={"white"}/>
+        </Modal>
       </Container>
     )
   }

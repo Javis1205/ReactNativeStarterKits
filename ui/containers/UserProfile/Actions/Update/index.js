@@ -11,6 +11,8 @@ import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
+import Modal from 'react-native-modal'
+
 
 import {
   InputField,
@@ -64,6 +66,7 @@ export default class ProfileUpdate extends Component {
       isCeleb: false,
       avatarImg: props.profile.avatar,
       coverImg: props.profile.cover_picture || COVER_IMAGE,
+      updatingModal: false
     }
     
   }
@@ -99,6 +102,9 @@ export default class ProfileUpdate extends Component {
   }
   
   submitUser() {
+    this.setState({
+      updatingModal: true
+    })
     let userInfo = {
       avatar: this.state.avatarImg,
       location: this.props.formValues.address,
@@ -106,7 +112,11 @@ export default class ProfileUpdate extends Component {
       favorite: this.props.formValues.favorite
     }
     
-    this.props.updateProfile(this.props.token, userInfo)
+    this.props.updateProfile(this.props.token, userInfo, () => {
+      this.setState({
+        updatingModal: false
+      })
+    })
   }
   
   renderCommonUser() {
@@ -151,6 +161,16 @@ export default class ProfileUpdate extends Component {
           onPress={this.submitUser.bind(this)}>
           <Text>Update</Text>
         </Button>
+        <Modal
+          backdropColor="gray"
+          backdropOpacity={0.7}
+          animationOut={'fadeOut'}
+          animationIn={'fadeIn'}
+          hideOnBack={true}
+          isVisible={this.state.updatingModal}
+          style={{}}>
+          <Spinner color={"white"}/>
+        </Modal>
       </Container>
     )
   }
