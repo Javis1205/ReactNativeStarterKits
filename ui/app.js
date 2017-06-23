@@ -75,6 +75,7 @@ export default class App extends Component {
     // default is not found page, render must show error
     this.page = getPage(props.router.route) || routes.notFound   
     this.firstTime = true   
+    this.timer = null
     this.pageInstances = {}      
   }
 
@@ -212,7 +213,14 @@ export default class App extends Component {
     while(ref && whatdog > 0){
       // do animation before run it
       if(ref[method]){
-        requestAnimationFrame(()=>ref[method]())
+        // requestAnimationFrame(()=>ref[method]())
+        // requestAnimationFrame(() => ref[method]())
+        InteractionManager.runAfterInteractions(()=>{
+          // clear previous focus or blur action
+          clearTimeout(this.timer)
+          // and only do the action after 3 seconds, if there is no interaction after animation
+          this.timer = setTimeout(()=>ref[method](), 2000)
+        })   
         break
       } 
       ref = ref._reactInternalInstance._renderedComponent._instance
