@@ -124,43 +124,16 @@ export default class extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      
-      // If this is the first Login, activeCampaign.results doesn't exist
-      if (!activeCampaign.results) {
-        console.log("First Login")
+      getActiveCampaign(token, this.state.page, 10, () => {
         this.setState({
-          refreshing: true,
-        })
-        getActiveCampaign(token, 1, 10, () => {
+          refreshing: false,
+        }, () => {
           this.setState({
-            refreshing: false,
-          }, () => {
-            (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false, loadingMore: false})
+            emptyHome: false,
+            loadingMore: false
           })
         })
-      }
-      // If after fetching and no data for the listview
-      else if (this.props.activeCampaign.results.length == 0) {
-        console.log("No data")
-        this.setState({
-          emptyHome: true,
-          loadingMore: false
-        })
-      }
-      // If after fetching data and Listview has some items
-      else if (activeCampaign.results && this.props.activeCampaign.results.length != 0) {
-        console.log("Prepare to next page")
-        getActiveCampaign(token, this.state.page, 10, () => {
-          this.setState({
-            refreshing: false,
-          }, () => {
-            this.setState({
-              emptyHome: false,
-              loadingMore: false
-            })
-          })
-        })
-      }
+      })
     })
   }
   
