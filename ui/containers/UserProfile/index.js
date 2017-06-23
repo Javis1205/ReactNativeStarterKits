@@ -56,7 +56,7 @@ export default class UserProfile extends Component {
   
   componentWillFocus(){
     this.setState({
-      refreshing: false,
+      refreshing: true,
       isOwner: false,
       isFollowed: false
     })
@@ -141,7 +141,7 @@ export default class UserProfile extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      /*this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+      this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
         this.setState({
           events: this.state.events.concat(data.results),
           celebrity: data.celebrity,
@@ -151,7 +151,7 @@ export default class UserProfile extends Component {
             loadingMore: false
           })
         })
-      })*/
+      })
     })
   }
   
@@ -287,7 +287,6 @@ export default class UserProfile extends Component {
     }
     let username = null
     let avatar = null
-    let cover = null
     if (this.state.events[0]) {
       username = this.state.celebrity.username
       avatar = this.state.celebrity
