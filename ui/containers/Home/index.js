@@ -76,7 +76,6 @@ export default class extends Component {
       })
     }
   
-  
   }
 
   _onRefresh =() => {
@@ -114,7 +113,7 @@ export default class extends Component {
   
   _onEndReached() {
     console.log("On End Reach")
-    const {token, getActiveCampaign} = this.props
+    const {token, activeCampaign, getActiveCampaign} = this.props
     if (this.state.loadingMore) {
       return;
     }
@@ -125,11 +124,43 @@ export default class extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      getActiveCampaign(token, this.state.page, 10, (error, data)=>{
+      
+      // If this is the first Login, activeCampaign.results doesn't exist
+      if (!activeCampaign.results) {
+        console.log("First Login")
         this.setState({
+          refreshing: true,
+        })
+        getActiveCampaign(token, 1, 10, () => {
+          this.setState({
+            refreshing: false,
+          }, () => {
+            (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false, loadingMore: false})
+          })
+        })
+      }
+      // If after fetching and no data for the listview
+      else if (this.props.activeCampaign.results.length == 0) {
+        console.log("No data")
+        this.setState({
+          emptyHome: true,
           loadingMore: false
         })
-      })
+      }
+      // If after fetching data and Listview has some items
+      else if (activeCampaign.results && this.props.activeCampaign.results.length != 0) {
+        console.log("Prepare to next page")
+        getActiveCampaign(token, this.state.page, 10, () => {
+          this.setState({
+            refreshing: false,
+          }, () => {
+            this.setState({
+              emptyHome: false,
+              loadingMore: false
+            })
+          })
+        })
+      }
     })
   }
   
@@ -166,31 +197,55 @@ export default class extends Component {
   renderList() {
     const { activeCampaign } = this.props
     return (
-      <List
-        style={{flex: 1,}}
-        onEndReached={this._onEndReached.bind(this)}
-        onEndReachedThreshold={80}
-        removeClippedSubviews={false}
-        renderRow={this.renderRow.bind(this)}
-        dataArray={activeCampaign.results}/>
+      <View style={{flex: 1}}>
+        <List
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+          }
+          style={{flex: 1,}}
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={80}
+          removeClippedSubviews={false}
+          renderRow={this.renderRow.bind(this)}
+          dataArray={activeCampaign.results}/>
+      </View>
     )
   }
   
   renderButtonSearch() {
     return(
-      <View style={styles.buttonContainer}>
-        <View style={styles.refreshContainer}>
-          <Icon style={styles.searchIcon} name="arrow-down" />
-          <Text style={styles.refreshText}>Already follwed celebrities?</Text>
-          <Text style={styles.refreshText}>Pull to refresh</Text>
+      <Content
+        refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+        }>
+        <View style={styles.buttonContainer}>
+          <View style={styles.refreshContainer}>
+            <Icon style={styles.searchIcon} name="arrow-down" />
+            <Text style={styles.refreshText}>Already follwed celebrities?</Text>
+            <Text style={styles.refreshText}>Pull to refresh</Text>
+          </View>
+          <Button
+            onPress={this._onSearchPress.bind(this)}
+            style={styles.button}>
+            <Icon style={styles.searchIcon} name="search" />
+            <Text style={styles.textSearchButton}>You can find celebrities here</Text>
+          </Button>
         </View>
-        <Button
-          onPress={this._onSearchPress.bind(this)}
-          style={styles.button}>
-          <Icon style={styles.searchIcon} name="search" />
-          <Text style={styles.textSearchButton}>You can find celebrities here</Text>
-        </Button>
-      </View>
+      </Content>
     )
   }
   
@@ -208,24 +263,15 @@ export default class extends Component {
         borderColor: '#555',
         borderTopWidth: 0.5,
       }}>
-        <Content
-          padder
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this._onRefresh}
-              tintColor="black"
-              colors={['black']}
-              progressBackgroundColor="white"
-              title={null}
-            />
-        }>
+        <View
+          style={{flex: 1}}
+          padder>
           {topButton}
           {
             activeCampaign.results && content
           }
           {this.state.loadingMore && <Spinner style={{marginBottom: 10}} color='#fff' />}
-        </Content>
+        </View>
       </Container>
     )
   }
