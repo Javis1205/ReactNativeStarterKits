@@ -57,6 +57,7 @@ export default class ProblemReporter extends Component {
   render() {
     return (
       <Container>
+        <Content style={{paddingHorizontal: 15}}>
         <View>
           <View style={{...styles.inputContainer}}>
             <Field
@@ -77,6 +78,7 @@ export default class ProblemReporter extends Component {
             <Text>Update</Text>
           </Button>
         </View>
+        </Content>
       </Container>
     )
   }

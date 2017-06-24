@@ -3,10 +3,10 @@
  */
 export default {
   submitButton: {
-    backgroundColor: '#F5A2A2',
+    backgroundColor: '#222222',
     alignSelf: 'center',
     bottom: 0,
-    width: '70%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5
@@ -24,9 +24,7 @@ export default {
     marginTop: 20,
     paddingTop: 0,
     overflow: 'hidden',
-    paddingBottom: 0,
-    marginLeft: 15,
-    marginRight: 15
+    paddingBottom: 0,    
   },
   inputIcon: {
     fontSize: 20,

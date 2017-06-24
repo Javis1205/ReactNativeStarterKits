@@ -3,14 +3,14 @@
  */
 export default {
   submitButton: {
-    backgroundColor: '#F5A2A2',
+    backgroundColor: '#222222',
     alignSelf: 'center',
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
+    // position: 'absolute',
+    // bottom: 0,
+    width: '100%',    
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 0
+    // borderRadius: 0
   },
   avatarCommonUserContainer: {
     alignItems: 'center',
@@ -20,9 +20,9 @@ export default {
   avatarCelebUserContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
-    bottom: 20,
-    left: 20
+    // position: 'absolute',
+    // bottom: 20,
+    // left: 20
   },
   headerCelebUserContainer: {
     marginBottom: 20

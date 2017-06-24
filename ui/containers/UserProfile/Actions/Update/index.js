@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import {
   Button, List, ListItem, Switch, Spinner, CheckBox, Picker, Text,
-  Container, Item, Input, Left, Body, Right, View, Content, Grid, Col, Row
+  Container, Item, Input, Left, Body, Right, View, Grid, Col, Row
 } from 'native-base'
 import { Dimensions } from 'react-native'
 import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import Modal from 'react-native-modal'
 
+import Content from '~/ui/components/Content'
 
 import {
   InputField,
@@ -157,11 +158,15 @@ export default class ProfileUpdate extends Component {
       <Container>
         <Content>
           {editProfile}
-          <Button
-            style={styles.submitButton}
-            onPress={this.submitUser.bind(this)}>
-            <Text>Update</Text>
-          </Button>
+          <View style={{
+            padding: 15,
+          }}>
+            <Button
+              style={styles.submitButton}
+              onPress={this.submitUser.bind(this)}>
+              <Text>Update</Text>
+            </Button>
+          </View>
         </Content>
         <Modal
           backdropColor="gray"
