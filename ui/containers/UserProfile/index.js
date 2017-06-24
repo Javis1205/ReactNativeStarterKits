@@ -275,31 +275,65 @@ export default class UserProfile extends Component {
       </Grid>
     )
   }
-  
-  render() {
+
+  renderContent(){
     if (this.state.refreshing) {
       return (
-        <Preload message="Loading..."/>
+        <Preload message=""/>
       )
     }
+
     let avatarContainer = null
     if (this.state.isOwner) {
       avatarContainer = this.renderAvatarContainerCeleb()
     } else {
       avatarContainer = this.renderAvatarContainerFan()
     }
-    let username = null
+    // let username = null
     let avatar = null
     if (this.state.events[0]) {
-      username = this.state.celebrity.username
+      // username = this.state.celebrity.username
       avatar = this.state.celebrity
     } else {
-      username = this.state.celebrity.username || ''
+      // username = this.state.celebrity.username || ''
       avatar = {
         avatar: this.state.celebrity.avatar || '',
         cover: this.state.celebrity.cover_picture || COVER_IMAGE
       }
     }
+
+    return (
+      <View style={{flex: 1}} padder>
+        <List
+          renderHeader={() => {
+              return(
+                <ProfileHeader user={avatar}>
+                  {avatarContainer}
+                </ProfileHeader>
+              )
+            }
+          }
+          renderFooter={() => {
+              return(
+                <View>
+                  {this.state.loadingMore && <Spinner color='#fff' />}
+                </View>
+              )
+            }
+          }
+          style={{flex: 1}}
+          onEndReached={this._onEndReached.bind(this)}
+          onEndReachedThreshold={80}
+          removeClippedSubviews={false}
+          renderRow={this.renderRow.bind(this)}
+          dataArray={this.state.events}/>
+      </View>
+    )
+  }
+  
+  render() {
+    
+    const username = this.state.refreshing ? 'Loading...' : this.state.celebrity.username
     
     return(
       <Container style={{
@@ -321,31 +355,7 @@ export default class UserProfile extends Component {
           <Left/>
         </Header>
 
-        <View style={{flex: 1}} padder>
-          <List
-            renderHeader={() => {
-                return(
-                  <ProfileHeader user={avatar}>
-                    {avatarContainer}
-                  </ProfileHeader>
-                )
-              }
-            }
-            renderFooter={() => {
-                return(
-                  <View>
-                    {this.state.loadingMore && <Spinner color='#fff' />}
-                  </View>
-                )
-              }
-            }
-            style={{flex: 1}}
-            onEndReached={this._onEndReached.bind(this)}
-            onEndReachedThreshold={80}
-            removeClippedSubviews={false}
-            renderRow={this.renderRow.bind(this)}
-            dataArray={this.state.events}/>
-        </View>
+        {this.renderContent()}
       </Container>
     )
   }
