@@ -17,6 +17,8 @@ import styles from './styles'
 import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
 
+import Preload from '~/ui/containers/Preload'
+
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as campaignActions from '~/store/actions/campaign'
@@ -53,13 +55,16 @@ export default class UserProfile extends Component {
   componentDidMount() {
     this.componentWillFocus()
   }
-  
-  componentWillFocus(){
+
+  componentWillBlur(){
     this.setState({
       refreshing: true,
       isOwner: false,
       isFollowed: false
     })
+  }
+  
+  componentWillFocus(){    
     this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
       if (this.props.profile.id == this.props.route.params.userId) {
         this.setState({
@@ -274,9 +279,7 @@ export default class UserProfile extends Component {
   render() {
     if (this.state.refreshing) {
       return (
-        <View style={styles.spinnerContainer}>
-          <Spinner color={"black"}/>
-        </View>
+        <Preload message="Loading..."/>
       )
     }
     let avatarContainer = null
