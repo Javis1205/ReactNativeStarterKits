@@ -26,8 +26,7 @@ export default class extends Component {
         
           <Text style={{
             backgroundColor:'transparent',
-            color: '#222',
-            fontSize: 28,
+            color: '#222',            
           }}>{message}</Text>
           <Spinner color={'#222'} />
           
