@@ -33,8 +33,8 @@ const renderTextParts = text => {
 
 @connect(state=>({
   token: authSelectors.getToken(state),
-  notifications: notificationSelectors.getNotification(state),
-  notificationRequest: commonSelectors.getRequest(state, 'getNotification'),  
+  // notifications: notificationSelectors.getNotification(state),
+  // notificationRequest: commonSelectors.getRequest(state, 'getNotification'),  
 }), {...commonActions, ...notificationActions})
 export default class extends Component {
 
@@ -49,19 +49,19 @@ export default class extends Component {
 
   componentWillFocus(){
     // make it like before    
-    const {token, notifications, getNotification} = this.props
-    if(!notifications.data.length) {
-      getNotification(token)  
-    } 
+    // const {token, notifications, getNotification} = this.props
+    // if(!notifications.data.length) {
+    //   getNotification(token)  
+    // } 
 
-    this.setState({
-      refreshing: false,
-    })
+    // this.setState({
+    //   refreshing: false,
+    // })
     
   }
 
   componentWillMount(){
-    this.componentWillFocus()      
+    // this.componentWillFocus()      
   }
 
   _onRefresh =() => {    
