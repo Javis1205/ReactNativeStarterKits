@@ -241,11 +241,15 @@ export default class App extends Component {
       const {Page, ...route} = this.page
       const propsChanged = !shallowEqual(route.params, component.props.route.params) 
                       || !shallowEqual(route.query, component.props.route.query)
-      if(component.forceUpdate && propsChanged){
+      // if(component.forceUpdate && propsChanged){
+      //   // only update prop value
+      //   Object.assign(component.props.route, route)
+      //   component.forceUpdate && component.forceUpdate()
+      // }  
+      if (propsChanged) {
         // only update prop value
         Object.assign(component.props.route, route)
-        component.forceUpdate && component.forceUpdate()
-      }  
+      }
 
       // after update the content then focus on it, so we have new content
       this.handleFocusableComponent(component)          
