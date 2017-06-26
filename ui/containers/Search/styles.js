@@ -12,7 +12,7 @@ export default {
     fontSize: 30,
   },
   iconContainer: {
-    backgroundColor: material.black,
+    //backgroundColor: material.black,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -22,7 +22,8 @@ export default {
     borderRadius: 25,
   },
   categoryContainer: {
-
+    flex: 1,
+    height: 100,
   },
   item: {
     flexDirection: 'column',
@@ -38,6 +39,7 @@ export default {
   
   suggestBlock: {
     marginTop: 10,
+    flex: 1
   },
   resultThumbnail: {
     width: 70,
@@ -71,7 +73,7 @@ export default {
     paddingRight: 0,
     marginLeft: 0,
     marginRight: 0,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   searchContainer: {
     backgroundColor: '#e1e1e1',

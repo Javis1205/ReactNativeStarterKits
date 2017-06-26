@@ -40,7 +40,11 @@ export default class Search extends Component {
         {},
         {}, {}, {}, {}, {}
       ],
-      refreshingJob: true
+      refreshingJob: true,
+      loadingMore: false,
+      page: 1,
+      jobId: 0,
+      searchType: 'name'
     }
   }
   
@@ -49,7 +53,7 @@ export default class Search extends Component {
       refreshing: true,
       refreshingJob: true,
     })
-    this.props.getJob(this.props.token, 1, 4, (error, data) => {
+    this.props.getJob(this.props.token, 1, 50, (error, data) => {
       this._onPressSearch()
       this.setState({
         refreshing: false,
@@ -77,9 +81,11 @@ export default class Search extends Component {
   
   _onPressSearch = () => {
     this.setState({
-      refreshingCeleb: true
+      refreshingCeleb: true,
+      searchType: 'name',
+      page: 1
     })
-    this.props.searchProfile(this.props.token, this.state.searchText, null, (error, data) => {
+    this.props.searchProfile(this.props.token, this.state.searchText, null, 1, 10, (error, data) => {
       console.log(data)
       this.setState({
         celebList: data.results,
@@ -92,17 +98,46 @@ export default class Search extends Component {
     this.props.forwardTo('userProfile/' + userId)
   }
   
-  renderJobItem(rowData, sectionID, rowID, highlightRow) {
-    return(
-      <ListItem style={{...styles.listItemContainer, width: width/4}}>
-        <View style={styles.item}>
-          <View style={styles.iconContainer}>
-            <Icon name='actor' style={styles.icon} />
-          </View>
-          <Text small>{rowData.name}</Text>
-        </View>
-      </ListItem>
-    )
+  _onEndReachedCeleb() {
+    console.log("onEndReachedCeleb")
+    if (this.state.loadingMore) {
+      return;
+    }
+    this.setState({
+      loadingMore: true
+    })
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      console.log(this.state.page)
+      if (this.state.searchType == 'name') {
+        this.props.searchProfile(this.props.token, this.state.searchText, null, this.state.page, 10, (error, data) => {
+          this.setState({
+            loadingMore: false
+          })
+        })
+      } else {
+        this.props.searchProfile(this.props.token, null, 1, this.state.page, 10, (error, data) => {
+          this.setState({
+            loadingMore: false
+          })
+        })
+      }
+    })
+  }
+  
+  onPressJobItem(jobId) {
+    this.setState({
+      jobId: jobId,
+      refreshingCeleb: true,
+      searchType: 'job',
+      page: 1
+    })
+    this.props.searchProfile(this.props.token, null, jobId, 1, 10, (error, data) =>{
+      this.setState({
+        refreshingCeleb: false
+      })
+    })
   }
   
   renderCelebItem(rowData, sectionID, rowID, highlightRow) {
@@ -126,6 +161,28 @@ export default class Search extends Component {
       </ListItem>
     )
   }
+  
+  renderListCeleb() {
+    return(
+      <List
+        renderFooter={() => {
+              return(
+                <View>
+                  {this.state.loadingMore && <Spinner color='#fff' />}
+                </View>
+              )
+            }
+          }
+        onEndReached={this._onEndReachedCeleb.bind(this)}
+        onEndReachedThreshold={50}
+        removeClippedSubviews={false}
+        style={{flex: 1}}
+        contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
+        pageSize={4}
+        renderRow={this.renderCelebItem.bind(this)}
+        dataArray={this.props.searchedProfile}/>
+    )
+  }
 
   render() {
 
@@ -138,21 +195,13 @@ export default class Search extends Component {
     }
     
     let listCeleb = null
-    console.log(this.state.refreshingCeleb)
     if (!this.state.refreshingCeleb) {
-      listCeleb = <List
-                    removeClippedSubviews={false}
-                    style={{width:'100%'}}
-                    contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
-                    pageSize={4}
-                    renderRow={this.renderCelebItem.bind(this)}
-                    dataArray={this.props.searchedProfile}/>
+      listCeleb = this.renderListCeleb()
     } else {
       listCeleb = <View style={{...styles.spinnerContainer, marginTop: 30}}>
                     <Spinner color={"black"}/>
                   </View>
     }
-    
     return (
       <Container style={styles.container}>
         <Header noShadow style={styles.container}>
@@ -179,14 +228,28 @@ export default class Search extends Component {
           </Right>
         </Header>
         <Content>
-          <View style={styles.categoryContainer}>
-            <List
-              removeClippedSubviews={false}
-              contentContainerStyle={{justifyContent: 'space-between'}}
-              horizontal={true}
-              renderRow={this.renderJobItem.bind(this)}
-              dataArray={this.props.jobList}/>
-          </View>
+          <ScrollView
+            horizontal={true}
+            style={styles.categoryContainer}>
+            {
+              this.props.jobList && this.props.jobList.map((rowData, index) => {
+                let backgroundColor = (rowData.id == this.state.jobId) ? '#FF96C7' : 'black'
+                return(
+                  <ListItem
+                  key={index}
+                  onPress={this.onPressJobItem.bind(this, rowData.id)}
+                  style={{...styles.listItemContainer, width: width/4}}>
+                    <View style={styles.item}>
+                      <View style={{...styles.iconContainer, backgroundColor}}>
+                        <Icon name='actor' style={styles.icon} />
+                      </View>
+                      <Text small>{rowData.name}</Text>
+                    </View>
+                  </ListItem>
+                )
+              })
+            }
+          </ScrollView>
   
           <View style={styles.suggestBlock}>
             <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>

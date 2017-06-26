@@ -31,14 +31,18 @@ export default {
     return apiPost('/mobile/v1/unfollow/' + celebId, {}, access_token)
   },
   
-  searchProfile (access_token, celebrityName, jobId) {
+  searchProfile (access_token, celebrityName, jobId, page=1, pageSize=10) {
     if (celebrityName != null) {
       return apiGet('/mobile/v1/search/', {
-        celebrity_name: celebrityName
+        celebrity_name: celebrityName,
+        page: page,
+        page_size: pageSize
       }, access_token)
     } else if (celebrityName == null && jobId != null) {
       return apiGet('/mobile/v1/search/', {
-        job_id: jobId
+        job_id: jobId,
+        page: page,
+        page_size: pageSize
       }, access_token)
     }
     return apiGet('/mobile/v1/search/', {}, access_token)

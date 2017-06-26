@@ -135,7 +135,6 @@ export default class UserProfile extends Component {
   }
   
   _onEndReached() {
-    console.log("On End Reach")
     if (this.state.loadingMore) {
       return;
     }
@@ -307,9 +306,11 @@ export default class UserProfile extends Component {
         <List
           renderHeader={() => {
               return(
-                <ProfileHeader user={avatar}>
-                  {avatarContainer}
-                </ProfileHeader>
+                <View style={{marginBottom: 10}}>
+                  <ProfileHeader user={avatar}>
+                    {avatarContainer}
+                  </ProfileHeader>
+                </View>
               )
             }
           }
