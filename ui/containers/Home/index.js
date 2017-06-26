@@ -80,7 +80,7 @@ export default class extends Component {
 
   _onRefresh =() => {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
-    this.setState({refreshing: true})
+    this.setState({refreshing: true, page: 1})
 
     getActiveCampaign(token, 1, 10, (error, data)=>{
       setTimeout(() => {

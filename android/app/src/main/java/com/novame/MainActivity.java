@@ -2,6 +2,8 @@ package com.novame;
 
 import com.facebook.react.ReactActivity;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends ReactActivity {
 

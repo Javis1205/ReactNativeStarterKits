@@ -18,3 +18,4 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'
+pod 'ReactNativeFabric', :path => '../node_modules/react-native-fabric'

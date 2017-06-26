@@ -8,6 +8,7 @@ import { TouchableOpacity, ScrollView , Dimensions, ListView} from 'react-native
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
 import { connect } from 'react-redux'
+import Fabric from 'react-native-fabric'
 
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
@@ -21,6 +22,7 @@ import styles from './styles'
 import material from '~/theme/variables/material'
 
 const {height, width} = Dimensions.get('window')
+const { Crashlytics } = Fabric
 
 @connect(state=>({
   token: authSelectors.getToken(state),
@@ -83,7 +85,8 @@ export default class Search extends Component {
     this.setState({
       refreshingCeleb: true,
       searchType: 'name',
-      page: 1
+      page: 1,
+      jobId: 0
     })
     this.props.searchProfile(this.props.token, this.state.searchText, null, 1, 10, (error, data) => {
       console.log(data)
@@ -172,7 +175,7 @@ export default class Search extends Component {
                 </View>
               )
             }
-          }
+        }
         onEndReached={this._onEndReachedCeleb.bind(this)}
         onEndReachedThreshold={50}
         removeClippedSubviews={false}
