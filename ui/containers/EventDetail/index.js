@@ -18,6 +18,8 @@ import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
 import EventHeader from '~/ui/components/EventHeader'
 
+import Preload from '~/ui/containers/Preload'
+
 import { urlEncode } from '~/store/api/common'
 
 import * as commonActions from '~/store/actions/common'
@@ -49,10 +51,6 @@ export default class UserProfile extends Component {
   }
   
   componentWillFocus(){
-    this.setState({
-      refreshing: true,
-      isOwner: false
-    })
     this.props.getDetailedCampaign(this.props.token, this.props.route.params.id, (error, data) => {
       if (this.props.profile.id == data.celebrity.id) {
         this.setState({
@@ -69,6 +67,14 @@ export default class UserProfile extends Component {
       })
     })
   }
+
+  componentWillBlur(){
+    this.setState({
+      refreshing: true,
+      isOwner: false,
+      isFollowed: false
+    })
+  }
   
   onPressBack() {
     this.props.goBack()
@@ -79,24 +85,15 @@ export default class UserProfile extends Component {
     this.props.forwardTo('event/update')
   }
 
-  render() {
+  renderContent(){
     if (this.state.refreshing) {
       return (
-        <View style={styles.spinnerContainer}>
-          <Spinner color={"black"}/>
-        </View>
+        <Preload message=""/>
       )
     }
-    let editButton = null
-    if (this.state.isOwner) {
-      editButton = <Button
-                    onPress={this.onPressEdit.bind(this)}
-                    transparent>
-                    <Icon style={{fontSize: 18}} name="create" />
-                  </Button>
-    } else {
-      editButton = <View/>
-    }
+
+
+    
     let eventImgContainer = null
     if (this.state.event.images.length != 0) {
       let imgEventUri = API_BASE + '/i/0x0/' + this.state.event.images[0].image.url
@@ -111,33 +108,13 @@ export default class UserProfile extends Component {
     let fromTime = moment(this.state.event.start_time).format("HH:mm")
     let toTime = moment(this.state.event.finish_time).format("HH:mm")
     let date = moment(this.state.event.finish_time).format("DD/MM/YYYY")
-    return(
-      <Container>
-        <Header noShadow style={{borderBottomWidth: 0}}>
-          <Left>
-            <Button
-              onPress={this.onPressBack.bind(this)}
-              transparent>
-              <Icon name="keyboard-arrow-left" />
-            </Button>
-          </Left>
-          <Body>
-            <Text full style={{color: 'white', alignSelf: 'center'}}>Event</Text>
-          </Body>
-          <Left style={{alignItems: 'flex-end'}}>
-            {editButton}
-          </Left>
-        </Header>
 
-        <Content>
+    return (
+      <Content>
+
           <ProfileHeader user={this.state.celebrity}>
             <EventHeader user={this.state.celebrity}/>
           </ProfileHeader>
-
-
-          
-            
-                
               
               
           <View row style={{            
@@ -181,9 +158,47 @@ export default class UserProfile extends Component {
           </View>
 
           {eventImgContainer}
-          
 
-        </Content>
+      </Content>
+    )
+
+  }
+
+  render() {
+
+    let editButton = null
+    if (this.state.isOwner) {
+      editButton = <Button
+                    onPress={this.onPressEdit.bind(this)}
+                    transparent>
+                    <Icon style={{fontSize: 18}} name="create" />
+                  </Button>
+    } else {
+      editButton = <View/>
+    }
+    
+    return(
+      <Container>
+        <Header noShadow style={{borderBottomWidth: 0}}>
+          <Left>
+            <Button
+              onPress={this.onPressBack.bind(this)}
+              transparent>
+              <Icon name="keyboard-arrow-left" />
+            </Button>
+          </Left>
+          <Body>
+            <Text full style={{color: 'white', alignSelf: 'center'}}>
+              Event Detail
+            </Text>
+          </Body>
+          <Left style={{alignItems: 'flex-end'}}>
+            {editButton}
+          </Left>
+        </Header>
+
+        {this.renderContent()}
+
       </Container>
     )
   }
