@@ -49,9 +49,6 @@ export default class Setting extends Component {
                   name="keyboard-arrow-right"/>
               </Right>
             </ListItem>
-            <ListItem style={{justifyContent: 'center', borderBottomWidth: 0}}>
-              <Text>Log out</Text>
-            </ListItem>
           </List>
         </Content>
       </Container>
