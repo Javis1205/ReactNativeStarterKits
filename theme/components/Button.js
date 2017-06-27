@@ -393,6 +393,13 @@ export default (variables = variable) => {
 
       },
 
+      '.xsmall': {
+        height: 25,
+        'NativeBase.Text': {
+          fontSize: 12,
+        },
+      },
+
       '.small': {
         height: 30,
         'NativeBase.Text': {

@@ -169,7 +169,7 @@ export default class UserProfile extends Component {
   
   renderAvatarContainerFan() {
     let followButton = null
-    let iconFollow = (this.state.followLoading) ? <Spinner size={15} color={"white"}/> : <Text small style={styles.followTextButton}>Follow</Text>
+    let iconFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small style={styles.followTextButton}>Follow</Text>
     if (this.state.isFollowed) {
       followButton = <Button
                       small transparent light rounded bordered
