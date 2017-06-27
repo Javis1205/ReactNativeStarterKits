@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   Button, Container, ListItem, List, Spinner,
-  Text, Item, View, Input, Left, Body, Thumbnail, Content, Header, Right
+  Text, Item, View, Input, Left, Body, Thumbnail, Header, Right
 } from 'native-base'
 import { TouchableOpacity, ScrollView , Dimensions, ListView} from 'react-native'
 
@@ -9,6 +9,8 @@ import { TouchableOpacity, ScrollView , Dimensions, ListView} from 'react-native
 import Icon from '~/ui/elements/Icon'
 import { connect } from 'react-redux'
 import Fabric from 'react-native-fabric'
+
+import Content from '~/ui/components/Content'
 
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
@@ -54,6 +56,7 @@ export default class Search extends Component {
     this.setState({
       refreshing: true,
       refreshingJob: true,
+      page: 1
     })
     this.props.getJob(this.props.token, 1, 50, (error, data) => {
       this._onPressSearch()
@@ -168,16 +171,6 @@ export default class Search extends Component {
   renderListCeleb() {
     return(
       <List
-        renderFooter={() => {
-              return(
-                <View>
-                  {this.state.loadingMore && <Spinner color='#fff' />}
-                </View>
-              )
-            }
-        }
-        onEndReached={this._onEndReachedCeleb.bind(this)}
-        onEndReachedThreshold={50}
         removeClippedSubviews={false}
         style={{flex: 1}}
         contentContainerStyle={{alignItems:'flex-start', flexDirection: 'row', flexWrap: 'wrap'}}
@@ -230,7 +223,8 @@ export default class Search extends Component {
             </Button>
           </Right>
         </Header>
-        <Content>
+        <Content
+          onEndReached={this._onEndReachedCeleb.bind(this)}>
           <ScrollView
             horizontal={true}
             style={styles.categoryContainer}>
@@ -258,6 +252,7 @@ export default class Search extends Component {
             <Text bold style={{marginLeft: 20, marginBottom: 20}}>Suggestion</Text>
             <View style={{flex: 1}}>
               {listCeleb}
+              {this.state.loadingMore && <Spinner color='black' />}
             </View>
           </View>
         </Content>

@@ -18,7 +18,10 @@ export const account = (state = {
     case 'app/replaceProfile':
       return {...state, profile: payload }
     case 'app/replaceSearchedProfile':
-      return {...state, searchedProfile: payload.results }
+      let concatArray = payload.results
+      //concatArray.results = []
+      concatArray = state.searchedProfile.concat(concatArray)
+      return {...state, searchedProfile: concatArray }
     case 'app/replaceListFollowedCelebrity':
       return {...state, listFollowedCeleb: payload.results }
     case 'app/saveFanProfileToFaceTime':

@@ -9,7 +9,7 @@ import {
 export default class extends Component {  
 
   static defaultProps = {
-    onEndReachedThreshold: 10,
+    onEndReachedThreshold: 50,
     keyboardShouldPersistTaps: 'always',
   }
 

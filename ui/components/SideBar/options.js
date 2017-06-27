@@ -1,10 +1,10 @@
 export default {
   listItems: [
-    {
+    /*{
       name: 'Rewards',
       route: 'interaction',
       icon: 'gift',
-    },
+    },*/
     {
       name: 'Settings',
       route: 'setting',
