@@ -323,7 +323,7 @@ export default class UserProfile extends Component {
               )
             }
           }
-          style={{flex: 1, backgroundColor: 'red'}}
+          style={{flex: 1}}
           onEndReached={this._onEndReached.bind(this)}
           onEndReachedThreshold={80}
           removeClippedSubviews={false}

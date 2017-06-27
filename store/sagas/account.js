@@ -8,7 +8,8 @@ import {
   replaceProfile,
   getProfile,
   replaceSearchedProfile,
-  replaceListFollowedCelebrity
+  replaceListFollowedCelebrity,
+  replaceMoreSearchedProfile
 } from '~/store/actions/account'
 
 
@@ -61,6 +62,17 @@ const requestSearchProfile = createRequestSaga({
   key: 'searchProfile',
   success: [
     (data) => replaceSearchedProfile(data)
+  ],
+  failure: [
+    () => setToast('Couldn\'t search profile', 'error')
+  ],
+})
+
+const requestSearchMoreProfile = createRequestSaga({
+  request: api.account.searchProfile,
+  key: 'searchMoreProfile',
+  success: [
+    (data) => replaceMoreSearchedProfile(data)
   ],
   failure: [
     () => setToast('Couldn\'t search profile', 'error')
@@ -135,6 +147,7 @@ export default [
           takeLatest('app/getTopFan', requestGetListFan),
           takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb),
           takeLatest('app/postQRCode', requestPostQRCode),
+          takeLatest('app/searchMoreProfile', requestSearchMoreProfile)
         ]
     },
 ]

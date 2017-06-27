@@ -18,6 +18,8 @@ export const account = (state = {
     case 'app/replaceProfile':
       return {...state, profile: payload }
     case 'app/replaceSearchedProfile':
+      return {...state, searchedProfile: payload.results }
+    case 'app/replaceMoreSearchedProfile':
       let concatArray = payload.results
       //concatArray.results = []
       concatArray = state.searchedProfile.concat(concatArray)
