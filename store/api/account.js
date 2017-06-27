@@ -20,7 +20,7 @@ export default {
   },
   
   updateProfile (access_token, userInfo) {
-    return apiPost('/mobile/v1/me/', {userInfo}, access_token, 'PUT')
+    return apiPost('/mobile/v1/me/', {...userInfo}, access_token, 'PUT')
   },
   
   followCeleb (access_token, celebId) {

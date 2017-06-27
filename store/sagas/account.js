@@ -28,7 +28,7 @@ const requestUpdateProfile = createRequestSaga({
   request: api.account.updateProfile,
   key: 'updateProfile',
   success: [
-    (data, {args:[token]}) => getProfile(token)
+    //(data, {args:[token]}) => getProfile(token)
   ],
   failure: [
     () => setToast('Couldn\'t update profile', 'error')
