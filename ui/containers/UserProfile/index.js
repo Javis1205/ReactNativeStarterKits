@@ -303,7 +303,7 @@ export default class UserProfile extends Component {
     }
 
     return (
-      <View style={{flex: 1}} padder>
+      <View style={{flex: 1, backgroundColor: '#ccc'}} padder>
         <List
           renderHeader={() => {
               return(
