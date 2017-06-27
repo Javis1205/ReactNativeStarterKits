@@ -68,8 +68,18 @@ export default class extends Component {
               justifyContent:'space-between',  
             }}>
               
-                                             
-              <Text style={styles.bigText}>{'Created an event: ' + feed.title}</Text>              
+              <View row style={{
+                justifyContent:'space-between',
+              }}>                               
+                <Text style={styles.bigText}>{feed.title}</Text>              
+                
+                {
+                // <Button noPadder rounded dark xsmall bordered>                  
+                //   <Text>Follow</Text>                        
+                // </Button>       
+
+                }         
+              </View>
               <View row style={{
                 marginTop: 4,
               }}>
