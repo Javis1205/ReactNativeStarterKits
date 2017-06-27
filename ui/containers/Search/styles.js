@@ -99,6 +99,8 @@ export default {
   },
   searchInput:{
     height: material.platform === 'ios' ? 30 : 50,
-    color:'#222'
+    color:'#222',
+    paddingBottom: 0,
+    paddingTop: 0
   },
 }

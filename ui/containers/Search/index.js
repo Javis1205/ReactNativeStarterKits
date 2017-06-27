@@ -213,10 +213,12 @@ export default class Search extends Component {
           <Body style={{flex: 1,}}>
             <Item style={styles.searchContainer}>
               {/*<Icon name="search" style={styles.searchIcon} />*/}
-              <Input value={this.state.searchText}
-                     autoCorrect={false} onChangeText={this._search}
-                     placeholderTextColor="#222" style={styles.searchInput}
-                     placeholder="Novame Search" />
+              <Input
+                value={this.state.searchText}
+                autoCorrect={false} onChangeText={this._search}
+                placeholderTextColor="#222"
+                style={styles.searchInput}
+                placeholder="Novame Search" />
             </Item>
           </Body>
           <Right style={{}}>
