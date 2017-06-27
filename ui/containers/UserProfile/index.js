@@ -47,9 +47,11 @@ export default class UserProfile extends Component {
       isFollowed: false,
       celebrity: {},
       followLoading: false,
-      loadingMore: false,
-      page: 1
+      loadingMore: false,      
     }
+
+    this.page = 1
+    this.hasMore = true
   }
   
   componentDidMount() {
@@ -135,28 +137,27 @@ export default class UserProfile extends Component {
   }
   
   _onEndReached() {
-    if (this.state.loadingMore) {
+    if (!this.hasMore || this.state.loadingMore) {
       return;
     }
+    
     this.setState({
-      loadingMore: true
+      loadingMore: true      
     })
-    this.setState({
-      page: this.state.page + 1
-    }, () => {
-      console.log(this.state.page)
-      this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
-        this.setState({
-          events: this.state.events.concat(data.results),
-          celebrity: data.celebrity,
-          refreshing: false
-        }, () => {
-          this.setState({
-            loadingMore: false
-          })
-        })
+
+      
+    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, this.page, 10, (error, data) => {
+      this.setState({
+        events: this.state.events.concat(data.results),
+        celebrity: data.celebrity,        
+        loadingMore: false,        
       })
+      if(!data.results || data.results.length === 0){
+        this.hasMore = false
+      }
+      this.page++
     })
+    
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
