@@ -67,7 +67,7 @@ export default class ListTopFan extends Component {
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     let rightContainer = null
-    if (this.props.profile.id == this.props.route.params.userId) {
+    if (this.props.profile.id !== this.props.route.params.userId) {
       rightContainer= <Button
                         iconRight
                         noPadder

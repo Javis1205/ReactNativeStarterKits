@@ -213,8 +213,7 @@ function leave(socketId) {
   delete pcPeers[socketId];
 
   container.setState({ 
-    remoteViewSrc: null, 
-    selfViewSrc: null,
+    remoteViewSrc: null,
     info: 'Disconnected', 
 });  
 }
