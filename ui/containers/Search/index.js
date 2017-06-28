@@ -50,14 +50,16 @@ export default class Search extends Component {
       jobId: 0,
       searchType: 'name'
     }
+    this.page = 1
+    this.hasMore = true
   }
   
   componentDidMount() {
     this.setState({
       refreshing: true,
       refreshingJob: true,
-      page: 1
     })
+    this.page = 1
     this.props.getJob(this.props.token, 1, 50, (error, data) => {
       this._onPressSearch()
       this.setState({
@@ -85,10 +87,10 @@ export default class Search extends Component {
   }
   
   _onPressSearch = () => {
+    this.page = 1
     this.setState({
       refreshingCeleb: true,
       searchType: 'name',
-      page: 1,
       jobId: 0
     })
     this.props.searchProfile(this.props.token, this.state.searchText, null, 1, 10, (error, data) => {
@@ -105,39 +107,41 @@ export default class Search extends Component {
   }
   
   _onEndReachedCeleb() {
-    console.log("onEndReachedCeleb")
-    if (this.state.loadingMore) {
+    if (!this.hasMore || this.state.loadingMore) {
       return;
     }
     this.setState({
       loadingMore: true
     })
-    this.setState({
-      page: this.state.page + 1
-    }, () => {
-      console.log(this.state.page)
-      if (this.state.searchType == 'name') {
-        this.props.searchProfile(this.props.token, this.state.searchText, null, this.state.page, 10, (error, data) => {
-          this.setState({
-            loadingMore: false
-          })
+    this.page++
+    if (this.state.searchType == 'name') {
+      this.props.searchMoreProfile(this.props.token, this.state.searchText, null, this.page, 10, (error, data) => {
+        console.log(data)
+        this.setState({
+          loadingMore: false
         })
-      } else {
-        this.props.searchProfile(this.props.token, null, 1, this.state.page, 10, (error, data) => {
-          this.setState({
-            loadingMore: false
-          })
+        if(!data.results || data.results.length === 0){
+          this.hasMore = false
+        }
+      })
+    } else {
+      this.props.searchMoreProfile(this.props.token, null, 1, this.page, 10, (error, data) => {
+        this.setState({
+          loadingMore: false
         })
-      }
-    })
+        if(!data.results || data.results.length === 0){
+          this.hasMore = false
+        }
+      })
+    }
   }
   
   onPressJobItem(jobId) {
+    this.page = 1
     this.setState({
       jobId: jobId,
       refreshingCeleb: true,
       searchType: 'job',
-      page: 1
     })
     this.props.searchProfile(this.props.token, null, jobId, 1, 10, (error, data) =>{
       this.setState({
@@ -209,10 +213,12 @@ export default class Search extends Component {
           <Body style={{flex: 1,}}>
             <Item style={styles.searchContainer}>
               {/*<Icon name="search" style={styles.searchIcon} />*/}
-              <Input value={this.state.searchText}
-                     autoCorrect={false} onChangeText={this._search}
-                     placeholderTextColor="#222" style={styles.searchInput}
-                     placeholder="Novame Search" />
+              <Input
+                value={this.state.searchText}
+                autoCorrect={false} onChangeText={this._search}
+                placeholderTextColor="#222"
+                style={styles.searchInput}
+                placeholder="Novame Search" />
             </Item>
           </Body>
           <Right style={{}}>

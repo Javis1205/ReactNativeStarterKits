@@ -112,8 +112,8 @@ export default class ProfileUpdate extends Component {
       cover_picture: this.state.coverImg,
       favorite: this.props.formValues.favorite
     }
-    
-    this.props.updateProfile(this.props.token, userInfo, () => {
+    this.props.updateProfile(this.props.token, userInfo, (error, data) => {
+      this.props.replaceProfile(data)
       this.setState({
         updatingModal: false
       })

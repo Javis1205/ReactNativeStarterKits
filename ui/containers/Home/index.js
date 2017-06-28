@@ -170,7 +170,7 @@ export default class extends Component {
   renderList() {
     const { activeCampaign } = this.props
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#ccc'}}>
         <List
           refreshControl={
             <RefreshControl
@@ -237,7 +237,7 @@ export default class extends Component {
         borderTopWidth: 0.5,
       }}>
         <View
-          style={{flex: 1}}
+          style={{flex: 1, backgroundColor: '#ccc'}}
           padder>
           {topButton}
           {
