@@ -54,7 +54,7 @@ export default class QRScan extends Component {
   }
   
   onSuccess(response) {
-    console.log(response)
+    console.log(response.data)
     this.props.postQRCode(this.props.token, response.data, (error, data) => {
       console.log(data)
       this.setState({
@@ -81,6 +81,7 @@ export default class QRScan extends Component {
     return(
       <View style={styles.container}>
         <QRCodeScanner
+          cameraStyle={{height: '100%'}}
           reactivateTimeout={2000}
           bottomContent={null}
           reactivate={true}
