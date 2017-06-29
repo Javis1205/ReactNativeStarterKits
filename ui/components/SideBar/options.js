@@ -15,11 +15,6 @@ export default {
       route: 'fanHistory',
       icon: 'history',
     },
-    {
-      name: 'Are you a celebrity?',
-      route: 'areUCeleb',
-      icon: 'info',
-    },
   ]
 
 }

@@ -59,10 +59,17 @@ export default class extends Component {
 
   render() {
     const {profile, forwardTo} = this.props    
-    /*if(!profile)
-      return (<Spinner color="green" />)*/
-    // by default it is flex, so do not set flex portion
-    // render profile
+    let areUCeleb = (profile.user_type.id == 3) ? null : <ListItem
+                                                            noBorder
+                                                            button
+                                                            onPress={e => this.navigateTo('areUCeleb')}>
+                                                            <Left>
+                                                              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                                                                <Icon name={'info'} style={{...styles.icon, paddingLeft: 6}} />
+                                                              </View>
+                                                              <Text style={styles.iconText}>Are you a celebrity?</Text>
+                                                            </Left>
+                                                          </ListItem>
     return (
       
         <Content
@@ -91,7 +98,7 @@ export default class extends Component {
                     <Text style={styles.iconText}>{item.name}</Text>
                   </Left>                
                 </ListItem>)}
-            
+            {areUCeleb}
             <ListItem noBorder button onPress={this._handleLogout.bind(this)} >
               <Left>                  
                 <Text style={styles.iconTextLast}>Log Out</Text>

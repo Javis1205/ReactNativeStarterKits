@@ -51,6 +51,10 @@ export default {
   icon: {    
     fontSize: 20,
     color: 'white',
+    justifyContent: 'center',
+    width: 25,
+    alignSelf: 'center',
+    
   },
   editContainer:{
     flexDirection:'row',
