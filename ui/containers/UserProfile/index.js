@@ -109,21 +109,30 @@ export default class UserProfile extends Component {
     this.setState({
       followLoading: true
     })
-    this.props.followCeleb(this.props.token, this.props.route.params.userId, () => {
+    this.props.followCeleb(this.props.token, this.props.route.params.userId, (error, data) => {
       this.setState({
         followLoading: false
       }, () => {
         this.setState({
-          isFollowed: true
+          isFollowed: true,
+          celebrity: {...this.state.celebrity, fan_count: data.fan_count}
         })
       })
     })
   }
   
   onPressUnFollow() {
-    this.props.unfollowCeleb(this.props.token, this.props.route.params.userId, () => {
+    this.setState({
+      followLoading: true
+    })
+    this.props.unfollowCeleb(this.props.token, this.props.route.params.userId, (error, data) => {
       this.setState({
-        isFollowed: false
+        followLoading: false
+      }, () => {
+        this.setState({
+          isFollowed: false,
+          celebrity: {...this.state.celebrity, fan_count: data.fan_count}
+        })
       })
     })
   }
@@ -171,19 +180,20 @@ export default class UserProfile extends Component {
   renderAvatarContainerFan() {
     let followButton = null
     let iconFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small style={styles.followTextButton}>Follow</Text>
+    let iconUnFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small>Following</Text>
     if (this.state.isFollowed) {
       followButton = <Button
                       small transparent light rounded bordered
                       onPress={this.onPressUnFollow.bind(this)}
                       style={styles.unfollowButton}>
-                      <Text small>Following</Text>
+                      {iconUnFollow}
                     </Button>
     } else {
       followButton = <Button
                       small transparent light rounded bordered
                       onPress={this.onPressFollow.bind(this)}
                       style={styles.followButton}>
-                    {iconFollow}
+                      {iconFollow}
                     </Button>
     }
 
