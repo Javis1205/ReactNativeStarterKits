@@ -58,11 +58,7 @@ export default class extends Component {
   // }
 
   async handleLogin(socialType = 'facebook'){
-    OneSignal.sendTag('userId', "hello")
-    OneSignal.getTags((receivedTags) => {
-      console.log(receivedTags);
-    });
-    /*this.props.saveSocialType(socialType)
+    this.props.saveSocialType(socialType)
     const ret = await manager.authorize(socialType)
     console.log(ret.response)
     const token = ret.response.credentials.accessToken
@@ -70,15 +66,10 @@ export default class extends Component {
       //OneSignal.sendTag('userId', this.props.profile.id)
       this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
         OneSignal.sendTag('userId', dataProfile.id)
-        //OneSignal.sendTag("key", "value");
-        OneSignal.getTags((receivedTags) => {
-          console.log(receivedTags);
-        });
-        
         this.props.forwardTo('home')
         this.props.setToast('Logged successfully!!!')
       })
-    })*/
+    })
 
   }
 
