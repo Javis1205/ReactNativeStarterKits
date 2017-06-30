@@ -169,9 +169,14 @@ export default class extends Component {
   
   renderList() {
     const { activeCampaign } = this.props
+    let topButton = null
+    if (this.props.profile.user_type && this.props.profile.user_type.id == 3) {
+      topButton = this.renderTopButton()
+    }
     return (
       <View style={{flex: 1, backgroundColor: '#ccc'}}>
         <List
+          renderHeader={() => topButton}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -226,10 +231,6 @@ export default class extends Component {
   render() {
     const { activeCampaign } = this.props
     let content = (this.state.emptyHome) ? this.renderButtonSearch() : this.renderList()
-    let topButton = null
-    if (this.props.profile.user_type && this.props.profile.user_type.id == 3) {
-      topButton = this.renderTopButton()
-    }
     return (
       <Container style={{
         backgroundColor: '#ccc',
@@ -239,7 +240,6 @@ export default class extends Component {
         <View
           style={{flex: 1, backgroundColor: '#ccc'}}
           padder>
-          {topButton}
           {
             activeCampaign.results && content
           }
