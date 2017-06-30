@@ -36,15 +36,16 @@ export default {
     color: material.tabBarActiveTextColor,
   },
   bigText: {
-    fontSize: 15,
+    fontSize: 20,
     // color: '#000',
     // lineHeight: 20,    
     backgroundColor: 'transparent',
+    color: 'white'
   },
   image:{ 
     resizeMode: 'cover',    
     width:'100%',
-    height:material.deviceWidth * 0.6,
+    height:material.deviceWidth * 0.7,
   },
   textGray: {    
     color: '#757575'
@@ -62,14 +63,15 @@ export default {
     width: '100%',
   },
   icon: {
-    width: 20,
-    height: 20,
-    fontSize: 20,    
-    marginLeft:-3,
+    width: 25,
+    height: 25,
+    fontSize: 25,
+    color: 'white',
   },
   detailText: {
-    fontSize: 10,
-    lineHeight: 12,
+    fontSize: 13,
+    color: 'white',
+    alignSelf: 'center',
   },
   rowContainer: {
     marginBottom: 10,
@@ -78,5 +80,13 @@ export default {
   starNameText: {
     fontSize: 12,    
     lineHeight: 14,
+  },
+  socialText: {
+    fontSize: 13,
+    color: 'white',
+  },
+  timeText: {
+    fontSize: 13,
+    color: 'white',
   }
 }

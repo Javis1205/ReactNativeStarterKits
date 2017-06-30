@@ -39,7 +39,7 @@ export default class extends Component {
     closeDrawer()
     const ret = await manager.deauthorize(this.props.socialType)
     if (ret.status == "ok") {
-      OneSignal.deleteTag("userId")
+      OneSignal.deleteTag("user_id")
       forwardTo('login')
       setToast('Logout successfully!!!')
     } else {
