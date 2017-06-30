@@ -59,7 +59,7 @@ export default class extends Component {
 
   render() {
     const {profile, forwardTo} = this.props    
-    let areUCeleb = (profile.user_type.id == 3) ? null : <ListItem
+    let areUCeleb = (profile.user_type && profile.user_type.id == 3) ? null : <ListItem
                                                             noBorder
                                                             button
                                                             onPress={e => this.navigateTo('areUCeleb')}>

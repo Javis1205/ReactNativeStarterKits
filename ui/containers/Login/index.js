@@ -13,9 +13,10 @@ import {
 import styles from './styles'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-
 import OAuthManager from 'react-native-oauth'
 import { BlurView } from 'react-native-blur'
+import OneSignal from 'react-native-onesignal'
+
 
 import routes from '~/ui/routes'
 
@@ -23,6 +24,8 @@ import routes from '~/ui/routes'
 import * as commonActions from '~/store/actions/common'
 import * as authActions from '~/store/actions/auth'
 import * as commonSelectors from '~/store/selectors/common'
+import * as accountSelectors from '~/store/selectors/account'
+import * as accountActions from '~/store/actions/account'
 
 import Content from '~/ui/components/Content'
 import Preload from '~/ui/containers/Preload'
@@ -39,8 +42,9 @@ const manager = new OAuthManager('novame')
 manager.configure(SOCIAL_CONFIG)
 
 @connect(state=>({  
-  loginRequest: commonSelectors.getRequest(state, 'login'),  
-}), {...commonActions, ...authActions})
+  loginRequest: commonSelectors.getRequest(state, 'login'),
+  profile: accountSelectors.getProfile(state)
+}), {...commonActions, ...authActions, ...accountActions})
 @reduxForm({ form: 'LoginForm', validate})
 export default class extends Component {
 
@@ -54,11 +58,27 @@ export default class extends Component {
   // }
 
   async handleLogin(socialType = 'facebook'){
-    this.props.saveSocialType(socialType)
+    OneSignal.sendTag('userId', "hello")
+    OneSignal.getTags((receivedTags) => {
+      console.log(receivedTags);
+    });
+    /*this.props.saveSocialType(socialType)
     const ret = await manager.authorize(socialType)
     console.log(ret.response)
     const token = ret.response.credentials.accessToken
-    this.props.login(token, socialType)
+    this.props.login(token, socialType, (error, data) => {
+      //OneSignal.sendTag('userId', this.props.profile.id)
+      this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
+        OneSignal.sendTag('userId', dataProfile.id)
+        //OneSignal.sendTag("key", "value");
+        OneSignal.getTags((receivedTags) => {
+          console.log(receivedTags);
+        });
+        
+        this.props.forwardTo('home')
+        this.props.setToast('Logged successfully!!!')
+      })
+    })*/
 
   }
 

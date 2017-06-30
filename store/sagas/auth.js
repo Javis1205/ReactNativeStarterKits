@@ -23,10 +23,10 @@ const requestLogin = createRequestSaga({
     cancel: 'app/logout',
     success: [
         (data) => saveLoggedUser(data),
-        ({access_token}) => getProfile(access_token),
+        //({access_token}) => getProfile(access_token),
         () => setAuthState(true),                   
-        () => forwardTo('home'), 
-        () => setToast('Logged successfully!!!'),            
+        //() => forwardTo('home'),
+        //() => setToast('Logged successfully!!!'),
     ],
     failure: [
         () => setToast('Couldn\'t login', 'error')
