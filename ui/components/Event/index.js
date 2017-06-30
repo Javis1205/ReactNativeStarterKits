@@ -83,7 +83,7 @@ export default class extends Component {
             </View>
           </View>
           <Background feed={feed}>
-            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 100, position: 'absolute', bottom: 0}}>
+            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 110, position: 'absolute', bottom: 0}}>
               <View style={{
               padding: 8,
               backgroundColor: 'transparent',
@@ -97,13 +97,16 @@ export default class extends Component {
                     <Text style={styles.bigText}>{feed.title}</Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>
-                    <View row style={{marginTop: 4}}>
-                      <Icon name='location' style={{marginRight: 4, color: 'white', fontSize: 20}}/>
-                      <Text note style={styles.detailText}>{feed.location}</Text>
+                    <View row style={{marginTop: 4, maxWidth: '60%'}}>
+                      <Icon name='location' style={{marginRight: 4, color: 'white', fontSize: 30}}/>
+                      <Text numberOfLines={2} note style={styles.detailText}>{feed.location}</Text>
                     </View>
                     <View row style={{marginTop: 4, marginLeft: 10}}>
-                      <Icon name='calendar' style={{marginRight: 4, color: 'white', fontSize: 20}}/>
-                      <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime + '   ' + date}</Text>
+                      <Icon name='calendar' style={{marginRight: 4, color: 'white', fontSize: 30}}/>
+                      <View style={{flexDirection: 'column'}}>
+                        <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime}</Text>
+                        <Text note style={{...styles.timeText, alignSelf: 'center'}}>{date}</Text>
+                      </View>
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '100%', marginTop: 10}}>
