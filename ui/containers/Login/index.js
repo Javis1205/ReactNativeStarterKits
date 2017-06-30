@@ -65,7 +65,8 @@ export default class extends Component {
     this.props.login(token, socialType, (error, data) => {
       //OneSignal.sendTag('userId', this.props.profile.id)
       this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
-        OneSignal.sendTag('userId', dataProfile.id)
+        console.log(dataProfile.id)
+        OneSignal.sendTag("userId", dataProfile.id)
         this.props.forwardTo('home')
         this.props.setToast('Logged successfully!!!')
       })

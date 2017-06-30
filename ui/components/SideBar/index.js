@@ -7,6 +7,7 @@ import { Content,Text, List, ListItem,
 } from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OAuthManager from 'react-native-oauth'
+import OneSignal from 'react-native-onesignal'
 
 import CacheableImage from '~/ui/components/CacheableImage'
 import * as authActions from '~/store/actions/auth'
@@ -38,6 +39,7 @@ export default class extends Component {
     closeDrawer()
     const ret = await manager.deauthorize(this.props.socialType)
     if (ret.status == "ok") {
+      OneSignal.deleteTag("userId")
       forwardTo('login')
       setToast('Logout successfully!!!')
     } else {
