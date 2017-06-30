@@ -30,7 +30,7 @@ const Background = ({feed, children}) => {
   }
 
   return (
-    <View cardBody style={{height: 100, backgroundColor: '#32333C'}}>
+    <View cardBody style={{height: 80, backgroundColor: '#32333C'}}>
       {children}
     </View>
   )
@@ -83,7 +83,7 @@ export default class extends Component {
             </View>
           </View>
           <Background feed={feed}>
-            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 110, position: 'absolute', bottom: 0}}>
+            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 80, position: 'absolute', bottom: 0}}>
               <View style={{
               padding: 8,
               backgroundColor: 'transparent',
@@ -109,36 +109,38 @@ export default class extends Component {
                       </View>
                     </View>
                   </View>
-                  <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '100%', marginTop: 10}}>
-                    <View style={{width: '33%', flexDirection: 'row', justifyContent: 'center'}}>
-                      <View style={{justifyContent: 'center', width: 30}}>
-                        <Icon name='favorite-border' style={styles.icon}/>
-                      </View>
-                      <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
-                        <Text style={styles.socialText}>2K</Text>
-                      </View>
-                    </View>
-                    <View style={{width: '33%', flexDirection: 'row', justifyContent: 'center'}}>
-                      <View style={{justifyContent: 'center', width: 30}}>
-                        <Icon name='comment' style={styles.icon}/>
-                      </View>
-                      <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
-                        <Text style={styles.socialText}>50</Text>
-                      </View>
-                    </View>
-                    <View style={{width: '33%', flexDirection: 'row', justifyContent: 'center'}}>
-                      <View style={{justifyContent: 'center', width: 30}}>
-                        <Icon name='share' style={styles.icon}/>
-                      </View>
-                      <View style={{justifyContent: 'center'}}>
-                        <Text style={styles.socialText}>3K</Text>
-                      </View>
-                    </View>
-                  </View>
                 </View>
               </View>
             </View>
           </Background>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '100%', height: 40}}>
+            <Button style={styles.socialButton}>
+              <View style={{justifyContent: 'center', width: 30}}>
+                <Icon name='favorite-border' style={styles.icon}/>
+              </View>
+              <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
+                <Text style={styles.socialText}>2K</Text>
+              </View>
+            </Button>
+            <Button
+              onPress={() => console.log("OK")}
+              style={styles.socialButton}>
+              <View style={{justifyContent: 'center', width: 30}}>
+                <Icon name='comment' style={styles.icon}/>
+              </View>
+              <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
+                <Text style={styles.socialText}>50</Text>
+              </View>
+            </Button>
+            <Button style={styles.socialButton}>
+              <View style={{justifyContent: 'center', width: 30}}>
+                <Icon name='share' style={styles.icon}/>
+              </View>
+              <View style={{justifyContent: 'center'}}>
+                <Text style={styles.socialText}>3K</Text>
+              </View>
+            </Button>
+          </View>
        </View>
     )
   }

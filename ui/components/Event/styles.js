@@ -66,7 +66,7 @@ export default {
     width: 25,
     height: 25,
     fontSize: 25,
-    color: 'white',
+    color: 'black',
   },
   detailText: {
     fontSize: 13,
@@ -83,10 +83,25 @@ export default {
   },
   socialText: {
     fontSize: 13,
-    color: 'white',
+    color: 'black',
   },
   timeText: {
     fontSize: 13,
     color: 'white',
+  },
+  socialButton: {
+    width: 100/3 + '%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    elevation: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    height: 40,
+    paddingLeft: 0,
+    paddingRight: 0,
+    shadowOffset: null,
+    borderWidth: null,
+    shadowOpacity: 0
   }
 }
