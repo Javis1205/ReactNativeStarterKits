@@ -24,7 +24,6 @@ export default class EventHeader extends Component {
   }
   
   render() {
-    console.log(this.props.user)
     return(
       <Grid>
         <Row style={{justifyContent: 'center', marginBottom: 30}}>

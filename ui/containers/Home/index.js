@@ -198,6 +198,10 @@ export default class extends Component {
   }
   
   renderButtonSearch() {
+    let topButton = null
+    if (this.props.profile.user_type && this.props.profile.user_type.id == 3) {
+      topButton = this.renderTopButton()
+    }
     return(
       <Content
         refreshControl={
@@ -210,6 +214,7 @@ export default class extends Component {
               title={null}
             />
         }>
+        {topButton}
         <View style={styles.buttonContainer}>
           <View style={styles.refreshContainer}>
             <Icon style={styles.searchIcon} name="arrow-down" />

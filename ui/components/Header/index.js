@@ -53,7 +53,7 @@ export default class extends Component {
   }
   _onPressNotification = () => {
     const { forwardTo } = this.props
-    forwardTo('notification')
+    //forwardTo('notification')
   }
   renderHeaderBack(title) {
     const left = (
