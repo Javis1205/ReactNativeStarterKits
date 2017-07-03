@@ -34,7 +34,7 @@ export default class EventHeader extends Component {
             <View style={{alignSelf:'flex-start', flexDirection: 'row', justifyContent: 'center'}}>
               <Icon name='heart' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>{this.props.user.loyal_points} LP</Text>
+                <Text style={styles.detailText}>{this.props.user.loyal_points || 0} LP</Text>
               </View>
             </View>
           </Col>
@@ -42,7 +42,7 @@ export default class EventHeader extends Component {
             <View style={{alignSelf:'flex-end', flexDirection: 'row', justifyContent: 'center'}}>
               <Icon name='fan' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>{this.props.user.fan_count} Fans</Text>
+                <Text style={styles.detailText}>{this.props.user.fan_count || 0} Fans</Text>
               </View>
             </View>
           </Col>
