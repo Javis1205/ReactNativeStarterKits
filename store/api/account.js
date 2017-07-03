@@ -63,9 +63,7 @@ export default {
   },
   
   postQRCode (access_token, qRCode) {
-    return apiPost('/mobile/v1/barcodes/', {
-      merchandise_id: qRCode
-    }, access_token)
+    return apiPost('/mobile/v1/barcodes/' + qRCode + '/active', {}, access_token, 'PUT')
   },
 
 }

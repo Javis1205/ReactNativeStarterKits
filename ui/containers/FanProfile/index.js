@@ -48,54 +48,7 @@ export default class FanProfile extends Component {
     })
   }
   
-  _renderGrid = (items, numColumn) => {
-    let numRow = Math.ceil(items.length / numColumn)
-    let itemRows = []
-    let rowArr = []
-    const itemWidth = (material.deviceWidth-20)/3
-    for (let i = 0; i < items.length; i++) {
-      // Start Of Row
-      if (i % numColumn == 0) {
-        itemRows = []
-      }
-      if (i < items.length) {
-        itemRows.push(<View style={{...styles.gridItem, width: itemWidth}} key={i}>
-          <View>
-            <Image style={styles.thumbnail} source={{ uri: items[i].avatar }} />
-          </View>
-          <Text style={{fontSize: 14}}>{items[i].username}</Text>
-          <View style={{flexDirection: 'row'}}>
-            <Grid>
-              <Col style={{alignItems: 'flex-end'}}>
-                <Icon name='star' style={styles.icon} />
-              </Col>
-              <Col>
-                <Text bold style={{marginLeft: 2}}>{items[i].fan_count}</Text>
-              </Col>
-            </Grid>
-          </View>
-        </View>)
-      }else{
-        itemRows.push(<View style={{...styles.viewHolder, width: itemWidth}} key={i}></View>)
-      }
-
-      // End Of Row
-      if (i % numColumn == numColumn - 1 && i != items.length) {
-        rowArr.push(<View style={styles.row} key={i}>{itemRows}</View>)
-      }
-      // Last Row
-      if (i == items.length - 1) {
-        rowArr.push(<View style={styles.lastRow} key={i}>{itemRows}</View>)
-      }
-    }
-    return (
-      <View>
-        {rowArr}
-      </View>
-    )
-  }
   renderRow(rowData, sectionID, rowID, highlightRow) {
-    console.log(rowData)
     return(
       <ListItem style={styles.listItemContainer}>
         <Image style={styles.thumbnail} source={{uri: rowData.avatar}} />
@@ -121,7 +74,6 @@ export default class FanProfile extends Component {
         </View>
       )
     }
-    
     return (
       <Container style={styles.container}>
         <PopupPhotoView ref='popupPhotoView' />
@@ -143,13 +95,13 @@ export default class FanProfile extends Component {
               </View>
               <View style={{...styles.row2, borderRightWidth: 1, borderColor: '#ccc'}}>
                 <View>
-                  <Text style={styles.infoNumber}>8888</Text>
+                  <Text style={styles.infoNumber}>{this.props.profile.loyal_points}</Text>
                   <Text style={styles.infoText}>LP</Text>
                 </View>
               </View>
               <View style={styles.row2}>
                 <View>
-                  <Text style={styles.infoNumber}>8888</Text>
+                  <Text style={styles.infoNumber}>0</Text>
                   <Text style={styles.infoText}>Reward</Text>
                 </View>
               </View>

@@ -56,10 +56,18 @@ export default class QRScan extends Component {
   onSuccess(response) {
     console.log(response.data)
     this.props.postQRCode(this.props.token, response.data, (error, data) => {
+      console.log(error)
+      console.log('DATA')
       console.log(data)
-      this.setState({
-        isErrorModalVisible: true
-      })
+      if (data.type) {
+        this.setState({
+          isErrorModalVisible: true
+        })
+      } else {
+        this.setState({
+          isSuccessModalVisible: true
+        })
+      }
     })
   }
   
@@ -99,8 +107,8 @@ export default class QRScan extends Component {
             style={{}}>
             <View style={styles.modalContainer}>
               <Image
-                resizeMode="cover"
-                style={styles.modalImage}
+                resizeMode="stretch"
+                style={{...styles.modalImage, height: 150, width: '100%'}}
                 source={congratulations}/>
               <Text style={styles.modalSuccessText}>You have 4000LP!</Text>
             </View>
