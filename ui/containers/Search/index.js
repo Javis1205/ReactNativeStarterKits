@@ -3,7 +3,7 @@ import {
   Button, Container, ListItem, List, Spinner,
   Text, Item, View, Input, Left, Body, Thumbnail, Header, Right
 } from 'native-base'
-import { TouchableOpacity, ScrollView , Dimensions, ListView} from 'react-native'
+import { TouchableOpacity, ScrollView , Dimensions, ListView, Image} from 'react-native'
 
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
@@ -11,6 +11,10 @@ import { connect } from 'react-redux'
 import Fabric from 'react-native-fabric'
 
 import Content from '~/ui/components/Content'
+import {
+  API_BASE,
+  COVER_IMAGE
+} from '~/store/constants/api'
 
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
@@ -236,15 +240,19 @@ export default class Search extends Component {
             style={styles.categoryContainer}>
             {
               this.props.jobList && this.props.jobList.map((rowData, index) => {
-                let backgroundColor = (rowData.id == this.state.jobId) ? '#FF96C7' : 'black'
+                let backgroundColor = (rowData.id == this.state.jobId) ? '#ffc7f7' : 'white'
+                let jobImage = API_BASE + '/i/0x0/' + rowData.image
                 return(
                   <ListItem
                   key={index}
                   onPress={this.onPressJobItem.bind(this, rowData.id)}
                   style={{...styles.listItemContainer, width: width/4}}>
                     <View style={styles.item}>
-                      <View style={{...styles.iconContainer, backgroundColor}}>
-                        <Icon name='actor' style={styles.icon} />
+                      <View style={{...styles.iconContainer, backgroundColor, borderWidth: 0.2}}>
+                        <Image
+                          resizeMode={"stretch"}
+                          source={{ uri: jobImage }}
+                          style={styles.icon}/>
                       </View>
                       <Text small>{rowData.name}</Text>
                     </View>

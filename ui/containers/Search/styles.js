@@ -8,18 +8,18 @@ export default {
     height: 200
   },
   icon: {
-    color: 'white',
-    fontSize: 30,
+    height: 50,
+    width: 50
   },
   iconContainer: {
     //backgroundColor: material.black,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 15,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    overflow: 'visible'
   },
   categoryContainer: {
     flex: 1,
@@ -29,7 +29,7 @@ export default {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10
+    overflow: 'visible'
   },
   celebItem: {
     flexDirection: 'column',

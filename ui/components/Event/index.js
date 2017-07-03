@@ -98,11 +98,15 @@ export default class extends Component {
                   </View>
                   <View style={{flexDirection: 'column'}}>
                     <View row style={{marginTop: 4,}}>
-                      <Icon name='location' style={{marginRight: 4, color: 'white', fontSize: 16}}/>
+                      <View style={{width: 20, alignItems: 'center'}}>
+                        <Icon name='location' style={{color: 'white', fontSize: 16}}/>
+                      </View>
                       <Text numberOfLines={2} note style={styles.detailText}>{feed.location}</Text>
                     </View>
                     <View row style={{marginTop: 4, marginLeft: 0}}>
-                      <Icon name='calendar' style={{marginRight: 4, color: 'white', fontSize: 16}}/>
+                      <View style={{width: 20, alignItems: 'center'}}>
+                        <Icon name='calendar' style={{color: 'white', fontSize: 16}}/>
+                      </View>
                       <View style={{flexDirection: 'row'}}>
                         <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime}</Text>
                         <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 10}}>{date}</Text>

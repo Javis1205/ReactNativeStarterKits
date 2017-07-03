@@ -123,11 +123,15 @@ export default class UserProfile extends Component {
         }}>
           <Text style={styles.eventText}>{this.state.event.title}</Text>
           <View style={{marginTop: 5}} row>
-              <IconNB name='location' style={styles.iconContent}/>
+              <View style={{width: 20, alignItems: 'center'}}>
+                <IconNB name='location' style={styles.iconContent}/>
+              </View>
               <Text style={styles.detailEventText}>{this.state.event.location}</Text>
           </View>
           <View style={{marginTop: 5}} row>
-            <IconNB name='calendar' style={styles.iconContent}/>
+            <View style={{width: 20, alignItems: 'center'}}>
+              <IconNB name='calendar' style={styles.iconContent}/>
+            </View>
             <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime}</Text>
             <Icon name='calendar' style={{...styles.iconContent, marginLeft: 10}}/>
             <Text style={styles.detailEventText}>{date}</Text>
