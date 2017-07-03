@@ -218,7 +218,7 @@ export default class extends Component {
         <View style={styles.buttonContainer}>
           <View style={styles.refreshContainer}>
             <Icon style={styles.searchIcon} name="arrow-down" />
-            <Text style={styles.refreshText}>Already follwed celebrities?</Text>
+            <Text style={styles.refreshText}>Already followed celebrities?</Text>
             <Text style={styles.refreshText}>Pull to refresh</Text>
           </View>
           <Button
