@@ -5,7 +5,8 @@ import { createRequestSaga } from '~/store/sagas/common'
 import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
-    replaceActiveCampaign,    
+  replaceActiveCampaign,
+  replaceMoreActiveCampaign
 } from '~/store/actions/campaign'
 
 
@@ -18,6 +19,17 @@ const requestGetActiveCampaign = createRequestSaga({
     failure: [
         () => setToast('Couldn\'t get active campaign', 'error')
     ],
+})
+
+const requestGetMoreActiveCampaign = createRequestSaga({
+  request: api.campaign.getActiveCampaign,
+  key: 'getActiveCampaign',
+  success: [
+    (data) => replaceMoreActiveCampaign(data),
+  ],
+  failure: [
+    () => setToast('Couldn\'t get active campaign', 'error')
+  ],
 })
 
 const requestCreateCampaign = createRequestSaga({
@@ -76,7 +88,8 @@ export default [
           takeLatest('app/createCampaign', requestCreateCampaign),
           takeLatest('app/getDetailedCampaign', requestGetDetailedEvent),
           takeLatest('app/getUserCampaign', requestUserEvent),
-          takeLatest('app/editCampaign', requestEditCampaign)
+          takeLatest('app/editCampaign', requestEditCampaign),
+          takeLatest('app/getMoreActiveCampaign', requestGetMoreActiveCampaign)
         ]
     },
 ]

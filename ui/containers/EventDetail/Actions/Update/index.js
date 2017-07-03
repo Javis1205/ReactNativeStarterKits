@@ -101,7 +101,7 @@ export default class EventUpdate extends Component {
     })
   }
   
-  getImgUri(uri) {
+  getImgUri(uri, data) {
     let newDate = new Date()
     this.props.actions.uploadImage(this.props.token, [
       { name: 'images', filename: (this.props.token + newDate.toString() + '.jpg'), type:'image/jpeg', data: data }
@@ -117,7 +117,6 @@ export default class EventUpdate extends Component {
     this.setState({
       updatingModal: true
     })
-    console.log(this.state)
     let fromTime = moment(this.state.date + ' ' + this.state.fromTime, 'DD/MM/YYYY HH:mm').toISOString()
     let toTime = moment(this.state.date + ' ' + this.state.toTime, 'DD/MM/YYYY HH:mm').toISOString()
     let event = {
@@ -131,8 +130,9 @@ export default class EventUpdate extends Component {
       finish_time: toTime
     }
     if (this.state.imgId != '') {
-      //event.image_ids = [this.state.imgId]
+      event.image_ids = [this.state.imgId]
     }
+    console.log(event)
     this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event, () => {
       this.setState({
         updatingModal: false
@@ -145,7 +145,7 @@ export default class EventUpdate extends Component {
   render() {
     return(
       <Container>
-        <Content style={{marginBottom: 50}}>
+        <Content>
           <ProfileHeader user={this.state.celebrity}>
             <EventHeader user={this.state.celebrity}/>
           </ProfileHeader>
@@ -159,7 +159,7 @@ export default class EventUpdate extends Component {
         <Button
           style={styles.submitButton}
           onPress={this.submitEvent.bind(this)}>
-          <Text>Create</Text>
+          <Text>Update</Text>
         </Button>
         <Modal
           backdropColor="gray"

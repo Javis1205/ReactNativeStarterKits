@@ -129,7 +129,7 @@ export default class EventForm extends Component {
     }
     
     return(
-      <View style={{paddingLeft: 15, paddingRight: 15}}>
+      <View style={{paddingLeft: 15, paddingRight: 15, paddingBottom: 50}}>
         <View style={{flexDirection: 'column'}}>
           <View style={{...styles.inputContainer}}>
             <Field

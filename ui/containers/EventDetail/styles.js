@@ -29,10 +29,10 @@ export default {
     width: '100%'
   },
   icon: {
-    width: 30,
-    height: 30,
-    fontSize: 30,
-    color: 'white'
+    width: 20,
+    height: 20,
+    fontSize: 20,
+    color: 'black'
   },
   iconContent: {    
     fontSize: 20,    
@@ -99,4 +99,26 @@ export default {
     width:'100%',
     height:material.deviceWidth * 0.6,
   },
+  socialText: {
+    fontSize: 13,
+    color: 'black',
+  },
+  socialButton: {
+    width: 34 + '%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    elevation: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    height: 30,
+    paddingLeft: 0,
+    paddingRight: 0,
+    shadowOffset: null,
+    borderWidth: 0,
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    borderRadius: 0,
+    alignSelf: 'center'
+  }
 }

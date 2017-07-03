@@ -105,6 +105,10 @@ export default class UserProfile extends Component {
     this.props.goBack()
   }
   
+  _onEventPress(id) {
+    this.props.forwardTo('eventDetail/' + id)
+  }
+  
   onPressFollow() {
     this.setState({
       followLoading: true
@@ -171,9 +175,11 @@ export default class UserProfile extends Component {
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
-      <View style={{marginBottom:8}}>
+      <ListItem
+        onPress={this._onEventPress.bind(this, rowData.id)}
+        style={styles.listItemContainer}>
         <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
-      </View>
+      </ListItem>
     )
   }
   
@@ -196,7 +202,6 @@ export default class UserProfile extends Component {
                       {iconFollow}
                     </Button>
     }
-
     return (
       <View style={{
         marginTop: -170,
@@ -208,7 +213,7 @@ export default class UserProfile extends Component {
             }}>
               <Icon name='heart' style={styles.icon}/>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888 LP</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.loyal_points || 0} LP</Text>
               </View>
             </Button>
 
@@ -239,7 +244,7 @@ export default class UserProfile extends Component {
           <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.loyal_points || 0}</Text>
                 <Text style={styles.detailText}>LP</Text>
               </View>
             </View>
@@ -257,7 +262,7 @@ export default class UserProfile extends Component {
           <Col>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
               <View style={styles.textContainer}>
-                <Text style={styles.detailText}>8888</Text>
+                <Text style={styles.detailText}>{this.state.celebrity.fan_count}</Text>
                 <Text style={styles.detailText}>Followings</Text>
               </View>
             </View>

@@ -20,9 +20,12 @@ export default {
   avatarCelebUserContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    // position: 'absolute',
-    // bottom: 20,
-    // left: 20
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 50
   },
   headerCelebUserContainer: {
     marginBottom: 20

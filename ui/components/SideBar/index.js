@@ -102,9 +102,7 @@ export default class extends Component {
                 </ListItem>)}
             {areUCeleb}
             <ListItem noBorder button onPress={this._handleLogout.bind(this)} >
-              <Left>                  
-                <Text style={styles.iconTextLast}>Log Out</Text>
-              </Left>                
+              <Text style={styles.iconTextLast}>Log Out</Text>
             </ListItem>
           </View>          
         </Content>

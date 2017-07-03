@@ -96,16 +96,16 @@ export default class extends Component {
                   <View row style={{ justifyContent:'space-between'}}>
                     <Text style={styles.bigText}>{feed.title}</Text>
                   </View>
-                  <View style={{flexDirection: 'row'}}>
-                    <View row style={{marginTop: 4, maxWidth: '60%'}}>
-                      <Icon name='location' style={{marginRight: 4, color: 'white', fontSize: 30}}/>
+                  <View style={{flexDirection: 'column'}}>
+                    <View row style={{marginTop: 4,}}>
+                      <Icon name='location' style={{marginRight: 4, color: 'white', fontSize: 16}}/>
                       <Text numberOfLines={2} note style={styles.detailText}>{feed.location}</Text>
                     </View>
-                    <View row style={{marginTop: 4, marginLeft: 10}}>
-                      <Icon name='calendar' style={{marginRight: 4, color: 'white', fontSize: 30}}/>
-                      <View style={{flexDirection: 'column'}}>
+                    <View row style={{marginTop: 4, marginLeft: 0}}>
+                      <Icon name='calendar' style={{marginRight: 4, color: 'white', fontSize: 16}}/>
+                      <View style={{flexDirection: 'row'}}>
                         <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime}</Text>
-                        <Text note style={{...styles.timeText, alignSelf: 'center'}}>{date}</Text>
+                        <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 10}}>{date}</Text>
                       </View>
                     </View>
                   </View>

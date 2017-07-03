@@ -78,6 +78,6 @@ export default {
     color: '#eee',
     marginTop: 10,
     alignSelf: 'center',
-    marginLeft: 10,
+    marginLeft: 45,
   },
 };

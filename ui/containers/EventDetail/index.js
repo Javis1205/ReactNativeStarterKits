@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {findNodeHandle} from 'react-native'
+import {findNodeHandle, Image} from 'react-native'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
@@ -12,7 +12,8 @@ import { API_BASE } from '~/store/constants/api'
 import moment from 'moment'
 import { BlurView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
-import Icon from '~/ui/elements/Icon'
+import IconNB from '~/ui/elements/Icon'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './styles'
 import Event from '~/ui/components/Event'
 import ProfileHeader from '~/ui/components/ProfileHeader'
@@ -99,8 +100,8 @@ export default class UserProfile extends Component {
       let imgEventUri = API_BASE + '/i/0x0/' + this.state.event.images[0].image.url
       const eventImg = {uri: imgEventUri}
       eventImgContainer = <View cardBody>
-        <CacheableImage
-          resizeMode="stretch"
+        <Image
+          resizeMode="center"
           style={styles.image}
           source={eventImg} />
       </View>
@@ -111,54 +112,56 @@ export default class UserProfile extends Component {
 
     return (
       <Content>
-
-          <ProfileHeader user={this.state.celebrity}>
-            <EventHeader user={this.state.celebrity}/>
-          </ProfileHeader>
-              
-              
-          <View row style={{            
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            backgroundColor: '#ccc',
-            borderColor: '#777',
-            borderBottomWidth: 0.5,
-            padding: 8,
-          }}>
-            <View row>
-              <Icon name='calendar' style={styles.iconContent}/>              
-              <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime + ' ' + date}</Text>              
-            </View>
-            
-            <View row>
-              <View row>
-                <Icon name='favorite-border' style={styles.iconContent}/>
-                <Text style={styles.detailEventText}>{'2K'}</Text>
-              </View>
-              <View row style={{
-                marginLeft: 8,
-              }}>
-                <Icon name='share' style={styles.iconContent}/>
-                <Text style={styles.detailEventText}>{'3K'}</Text>
-              </View>
-            </View>
+        <ProfileHeader user={this.state.celebrity}>
+          <EventHeader user={this.state.celebrity}/>
+        </ProfileHeader>
+        <View style={{
+          borderColor: '#777',
+          borderBottomWidth: 0.5,
+          paddingBottom: 8,
+          margin: 8,
+        }}>
+          <Text style={styles.eventText}>{this.state.event.title}</Text>
+          <View style={{marginTop: 5}} row>
+              <IconNB name='location' style={styles.iconContent}/>
+              <Text style={styles.detailEventText}>{this.state.event.location}</Text>
           </View>
-
-          <View style={{
-            borderColor: '#777',
-            borderBottomWidth: 0.5,
-            paddingBottom: 8,
-            margin: 8,            
-          }}>
-            <Text style={styles.eventText}>{'Event ' + this.state.event.title}</Text>
-            <View row>
-                <Icon name='location' style={styles.iconContent}/>                    
-                <Text style={styles.detailEventText}>{this.state.event.location}</Text>                    
-            </View>
+          <View style={{marginTop: 5}} row>
+            <IconNB name='calendar' style={styles.iconContent}/>
+            <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime}</Text>
+            <Icon name='calendar' style={{...styles.iconContent, marginLeft: 10}}/>
+            <Text style={styles.detailEventText}>{date}</Text>
           </View>
-
-          {eventImgContainer}
-
+        </View>
+        {eventImgContainer}
+        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', height: 40}}>
+          <Button style={{...styles.socialButton}}>
+            <View style={{justifyContent: 'center', width: 30}}>
+              <IconNB name='favorite-border' style={styles.icon}/>
+            </View>
+            <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
+              <Text style={styles.socialText}>2K</Text>
+            </View>
+          </Button>
+          <Button
+            onPress={() => console.log("OK")}
+            style={{...styles.socialButton, borderRightWidth: 1, borderRightColor: 'black', borderLeftWidth: 1, borderLeftColor: 'black'}}>
+            <View style={{justifyContent: 'center', width: 30}}>
+              <IconNB name='comment' style={styles.icon}/>
+            </View>
+            <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
+              <Text style={styles.socialText}>50</Text>
+            </View>
+          </Button>
+          <Button style={styles.socialButton}>
+            <View style={{justifyContent: 'center', width: 30}}>
+              <IconNB name='share' style={styles.icon}/>
+            </View>
+            <View style={{justifyContent: 'center'}}>
+              <Text style={styles.socialText}>3K</Text>
+            </View>
+          </Button>
+        </View>
       </Content>
     )
 
@@ -171,7 +174,7 @@ export default class UserProfile extends Component {
       editButton = <Button
                     onPress={this.onPressEdit.bind(this)}
                     transparent>
-                    <Icon style={{fontSize: 18}} name="create" />
+                    <IconNB style={{fontSize: 18}} name="create" />
                   </Button>
     } else {
       editButton = <View/>
@@ -184,7 +187,7 @@ export default class UserProfile extends Component {
             <Button
               onPress={this.onPressBack.bind(this)}
               transparent>
-              <Icon name="keyboard-arrow-left" />
+              <IconNB name="keyboard-arrow-left" />
             </Button>
           </Left>
           <Body>

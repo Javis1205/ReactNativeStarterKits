@@ -12,6 +12,16 @@ export const replaceActiveCampaign = (data) => ({
   payload: data,
 })
 
+export const getMoreActiveCampaign = (...args) => ({
+  type: 'app/getMoreActiveCampaign',
+  args
+})
+
+export const replaceMoreActiveCampaign = (data) => ({
+  type: 'app/replaceMoreActiveCampaign',
+  payload: data,
+})
+
 export const createCampaign = (...args) => ({
   type: 'app/createCampaign',
   args

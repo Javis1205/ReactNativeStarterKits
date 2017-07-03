@@ -113,7 +113,7 @@ export default class extends Component {
   
   _onEndReached() {
     console.log("On End Reach")
-    const {token, activeCampaign, getActiveCampaign} = this.props
+    const {token, activeCampaign, getMoreActiveCampaign} = this.props
     if (this.state.loadingMore) {
       return;
     }
@@ -124,7 +124,7 @@ export default class extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      getActiveCampaign(token, this.state.page, 10, () => {
+      getMoreActiveCampaign(token, this.state.page, 10, () => {
         this.setState({
           refreshing: false,
         }, () => {
@@ -243,7 +243,7 @@ export default class extends Component {
           {
             activeCampaign.results && content
           }
-          {this.state.loadingMore && <Spinner style={{marginBottom: 10}} color='#fff' />}
+          {this.state.loadingMore && <Spinner style={{marginBottom: 10}} size="small" color='black' />}
         </View>
       </Container>
     )

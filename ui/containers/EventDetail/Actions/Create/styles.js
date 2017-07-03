@@ -3,7 +3,7 @@
  */
 export default {
   submitButton: {
-    backgroundColor: '#F5A2A2',
+    backgroundColor: 'black',
     alignSelf: 'center',
     position: 'absolute',
     bottom: 0,
