@@ -8,14 +8,18 @@ import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body
 } from 'native-base'
+import DeviceInfo from 'react-native-device-info'
+
 import { API_BASE, COVER_IMAGE } from '~/store/constants/api'
 import moment from 'moment'
-import { BlurView } from 'react-native-blur'
+import { BlurView, VibrancyView } from 'react-native-blur'
 import CacheableImage from '~/ui/components/CacheableImage'
 import Icon from '~/ui/elements/Icon'
 import PopupPhotoView from '~/ui/components/PopupPhotoView'
 import styles from './styles'
 
+const device = DeviceInfo.getModel()
+console.log(device)
 
 export default class ProfileHeader extends Component {
   constructor(props) {
@@ -43,7 +47,7 @@ export default class ProfileHeader extends Component {
           style={styles.coverImg} source={coverImg}/>
         {this.state.viewRef && <BlurView
           blurRadius={1}
-          blurAmount={0}
+          blurAmount={(device == 'iPhone 6 Plus' || device == 'iPhone 6s Plus') ? 5 : 0}
           viewRef={this.state.viewRef}
           blurType="dark"
           style={styles.avatarContainer}/>
