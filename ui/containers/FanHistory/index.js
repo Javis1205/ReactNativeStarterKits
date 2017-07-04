@@ -3,7 +3,7 @@ import {
   Button, Container, ListItem, List, Spinner, Right,
   Text, Item, View, Input, Left, Body, Thumbnail, Content
 } from 'native-base'
-import { TouchableOpacity, ScrollView } from 'react-native'
+import { TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
@@ -29,7 +29,8 @@ export default class FanHistory extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      refreshing: false
+      refreshing: false,
+      onRefreshing: false
     }
   }
   
@@ -44,8 +45,18 @@ export default class FanHistory extends Component {
     })
   }
   
+  _onRefresh =() => {
+    const {token, getHistory} = this.props
+    this.setState({onRefreshing: true})
+    
+    getHistory(token, 1, 50, ()=>{
+      setTimeout(() => {
+        this.setState({onRefreshing: false})
+      }, 1000)
+    })
+  }
+  
   _renderRow = (item) => {
-    console.log(item)
     return (
       <ListItem style={styles.listItem}>
         <Thumbnail style={styles.thumbnail} source={{ uri: item.user && item.user.avatar }} />
@@ -98,7 +109,16 @@ export default class FanHistory extends Component {
           <Text>{profile.username}</Text>
           <Text>{profile.location}</Text>
         </View>
-        <Content>
+        <Content refreshControl={
+            <RefreshControl
+              refreshing={this.state.onRefreshing}
+              onRefresh={this._onRefresh}
+              tintColor="black"
+              colors={['black']}
+              progressBackgroundColor="white"
+              title={null}
+            />
+        }>
           <List removeClippedSubviews={false} 
             dataArray={history.results}
             renderRow={(item) => this._renderRow(item)} >
