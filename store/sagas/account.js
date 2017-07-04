@@ -9,7 +9,8 @@ import {
   getProfile,
   replaceSearchedProfile,
   replaceListFollowedCelebrity,
-  replaceMoreSearchedProfile
+  replaceMoreSearchedProfile,
+  replaceHistory
 } from '~/store/actions/account'
 
 
@@ -129,6 +130,17 @@ const requestPostQRCode = createRequestSaga({
   ],
 })
 
+const requestGetHistory = createRequestSaga({
+  request: api.account.getHistory,
+  key: 'getHistory',
+  success: [
+    (data) => replaceHistory(data),
+  ],
+  failure: [
+    () => setToast('Couldn\'t get history', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -147,7 +159,8 @@ export default [
           takeLatest('app/getTopFan', requestGetListFan),
           takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb),
           takeLatest('app/postQRCode', requestPostQRCode),
-          takeLatest('app/searchMoreProfile', requestSearchMoreProfile)
+          takeLatest('app/searchMoreProfile', requestSearchMoreProfile),
+          takeLatest('app/getHistory', requestGetHistory)
         ]
     },
 ]

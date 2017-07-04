@@ -65,5 +65,9 @@ export default {
   postQRCode (access_token, qRCode) {
     return apiPost('/mobile/v1/barcodes/' + qRCode + '/active', {}, access_token, 'PUT')
   },
+  
+  getHistory(accessToken, page, page_size) {
+    return apiGet('/mobile/v1/active-barcodes/', {page, page_size, sort: "active-date-desc"}, accessToken)
+  },
 
 }

@@ -12,7 +12,8 @@ export const account = (state = {
   listFollowedCeleb: [],
   fanProfile: {
     username: ''
-  }
+  },
+  history: []
 }, {type, payload}) => {
   switch (type) {   
     case 'app/replaceProfile':
@@ -28,6 +29,8 @@ export const account = (state = {
       return {...state, listFollowedCeleb: payload.results }
     case 'app/saveFanProfileToFaceTime':
       return {...state, fanProfile: payload }
+    case 'app/replaceHistory':
+      return {...state, history: payload }
     default:
       return state
   }

@@ -49,14 +49,14 @@ export default class QRScan extends Component {
     this.state = {
       refreshing: false,
       isSuccessModalVisible: false,
-      isErrorModalVisible: false
+      isErrorModalVisible: false,
+      loyalPoint: 0
     }
   }
   
   onSuccess(response) {
     console.log(response.data)
     this.props.postQRCode(this.props.token, response.data, (error, data) => {
-      console.log(error)
       console.log('DATA')
       console.log(data)
       if (data.type) {
@@ -65,6 +65,7 @@ export default class QRScan extends Component {
         })
       } else {
         this.setState({
+          loyalPoint: data.loyal_point,
           isSuccessModalVisible: true
         })
       }
@@ -110,7 +111,7 @@ export default class QRScan extends Component {
                 resizeMode="stretch"
                 style={{...styles.modalImage, height: 150, width: '100%'}}
                 source={congratulations}/>
-              <Text style={styles.modalSuccessText}>You have 4000LP!</Text>
+              <Text style={styles.modalSuccessText}>You have {this.state.loyalPoint}LP!</Text>
             </View>
           </Modal>
         </TouchableWithoutFeedback>

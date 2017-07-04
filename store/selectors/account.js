@@ -13,3 +13,6 @@ export const getlistFollowedCeleb = state =>
 
 export const getFanProfile = state =>
   state.account.fanProfile
+
+export const getHistory = state =>
+  state.account.history

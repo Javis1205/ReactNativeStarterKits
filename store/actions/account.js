@@ -77,4 +77,13 @@ export const saveFanProfileToFaceTime = (data) => ({
   payload: data,
 })
 
+export const getHistory = (...args) => ({
+  type: 'app/getHistory',
+  args
+})
+
+export const replaceHistory = (data) => ({
+  type: 'app/replaceHistory',
+  payload: data,
+})
 
