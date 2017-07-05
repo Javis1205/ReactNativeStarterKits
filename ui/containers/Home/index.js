@@ -249,7 +249,7 @@ export default class extends Component {
           {
             activeCampaign.results && content
           }
-          {this.state.loadingMore && <Spinner style={{marginBottom: 0}} size="small" color='black' />}
+          {this.state.loadingMore && <Spinner style={{marginBottom: 0, height: 40}} size="small" color='black' />}
         </View>
       </Container>
     )

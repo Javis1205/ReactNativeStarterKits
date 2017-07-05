@@ -333,7 +333,7 @@ export default class UserProfile extends Component {
           renderFooter={() => {
               return(
                 <View>
-                  {this.state.loadingMore && <Spinner color='#fff' />}
+                  {this.state.loadingMore && <Spinner style={{height: 30}} size="small" color='#fff' />}
                 </View>
               )
             }
