@@ -222,7 +222,7 @@ export default class Search extends Component {
                 autoCorrect={false} onChangeText={this._search}
                 placeholderTextColor="#222"
                 style={styles.searchInput}
-                placeholder="Novame Search" />
+                placeholder="Search your celebrities" />
             </Item>
           </Body>
           <Right style={{}}>
