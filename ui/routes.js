@@ -37,9 +37,10 @@ export default {
         footerType: 'none'
     },
     home: {        
-        title: 'Home',
-        Page: Home,
-        headerType: 'home'
+      title: 'Home',
+      Page: Home,
+      headerType: 'home',
+      footerType: 'none'
     },
     'userProfile/:userId': {
         title: 'User Detail',

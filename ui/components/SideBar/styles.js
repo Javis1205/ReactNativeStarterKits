@@ -76,8 +76,8 @@ export default {
   },
   iconTextLast: {
     color: '#eee',
-    marginTop: 10,
-    alignSelf: 'center',
-    marginLeft: 45,
+    marginLeft: 20,
+    fontSize: (material.platform === 'ios') ? 14 : 12,
+    textAlign: 'center'
   },
 };

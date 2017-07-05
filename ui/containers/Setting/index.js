@@ -41,8 +41,8 @@ export default class Setting extends Component {
                   name="keyboard-arrow-right"/>
               </Right>
             </ListItem>
-            <ListItem onPress={() => this.props.forwardTo('userProfileUpdate')}>
-              <Text>Edit Profile</Text>
+            <ListItem onPress={() => {{/*this.props.forwardTo('userProfileUpdate')*/}}}>
+              <Text>Configuration</Text>
               <Right>
                 <Icon
                   style={{color: 'black'}}

@@ -6,7 +6,7 @@ import {
   Button, List, ListItem, Switch, Spinner, CheckBox, Picker, Text,
   Container, Item, Input, Left, Body, Right, View, Content, Grid, Col, Row
 } from 'native-base'
-import { Dimensions } from 'react-native'
+import { Dimensions, ScrollView } from 'react-native'
 import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -57,28 +57,31 @@ export default class ProblemReporter extends Component {
   render() {
     return (
       <Container>
-        <Content style={{paddingHorizontal: 15}}>
-        <View>
-          <View style={{...styles.inputContainer}}>
-            <Field
-              multiline={true}
-              iconStyle={styles.rightIcon}
-              icon={input=>input.value ? 'close' : 'create'}
-              onIconPress={input=>input.onChange('')}
-              inputStyle={styles.inputText}
-              style={{...styles.inputField}}
-              label="Enter your report problem"
-              name="content"
-              component={InputField}
-              placeholderTextColor="#7e7e7e"/>
+        <ScrollView
+          keyboardDismissMode="on-drag"
+          contentContainerStyle={{paddingBottom: 20}}
+          style={{paddingHorizontal: 15}}>
+          <View>
+            <View style={{...styles.inputContainer}}>
+              <Field
+                multiline={true}
+                iconStyle={styles.rightIcon}
+                icon={input=>input.value ? 'close' : 'create'}
+                onIconPress={input=>input.onChange('')}
+                inputStyle={styles.inputText}
+                style={{...styles.inputField}}
+                label="Enter your report problem"
+                name="content"
+                component={InputField}
+                placeholderTextColor="#7e7e7e"/>
+            </View>
+            <Button
+              style={styles.submitButton}
+              onPress={this.submit.bind(this)}>
+              <Text>Update</Text>
+            </Button>
           </View>
-          <Button
-            style={styles.submitButton}
-            onPress={this.submit.bind(this)}>
-            <Text>Update</Text>
-          </Button>
-        </View>
-        </Content>
+        </ScrollView>
       </Container>
     )
   }

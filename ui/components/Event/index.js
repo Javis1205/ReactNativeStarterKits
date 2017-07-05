@@ -6,6 +6,7 @@ import { View,
 } from 'native-base'
 import { Image } from 'react-native'
 import Geocoder from 'react-native-geocoder'
+import IconAwesome from 'react-native-vector-icons/FontAwesome'
 import { API_BASE } from '~/store/constants/api'
 // import * as accountSelectors from '~/store/selectors/account'
 import moment from 'moment'
@@ -30,7 +31,7 @@ const Background = ({feed, children}) => {
   }
 
   return (
-    <View cardBody style={{height: 80, backgroundColor: '#32333C'}}>
+    <View cardBody style={{height: 75, backgroundColor: '#32333C'}}>
       {children}
     </View>
   )
@@ -83,14 +84,15 @@ export default class extends Component {
             </View>
           </View>
           <Background feed={feed}>
-            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 80, position: 'absolute', bottom: 0}}>
+            <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 75, position: 'absolute', bottom: 0}}>
               <View style={{
-              padding: 8,
               backgroundColor: 'transparent',
               borderColor: '#ccc',
-              justifyContent:'space-between',
+              justifyContent:'flex-start',
               flexDirection: 'row',
               width: '100%',
+              alignItems: 'flex-start',
+              height: '100%'
             }}>
                 <View style={{flexDirection: 'column'}}>
                   <View row style={{ justifyContent:'space-between'}}>
@@ -109,7 +111,8 @@ export default class extends Component {
                       </View>
                       <View style={{flexDirection: 'row'}}>
                         <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime}</Text>
-                        <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 10}}>{date}</Text>
+                        <IconAwesome name='calendar' style={{color: 'white', fontSize: 16, marginLeft: 10}}/>
+                        <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 2}}>{date}</Text>
                       </View>
                     </View>
                   </View>
