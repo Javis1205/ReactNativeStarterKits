@@ -142,16 +142,29 @@ export default class Search extends Component {
   
   onPressJobItem(jobId) {
     this.page = 1
-    this.setState({
-      jobId: jobId,
-      refreshingCeleb: true,
-      searchType: 'job',
-    })
-    this.props.searchProfile(this.props.token, null, jobId, 1, 10, (error, data) =>{
+    if (jobId != this.state.jobId) {
       this.setState({
-        refreshingCeleb: false
+        jobId: jobId,
+        refreshingCeleb: true,
+        searchType: 'job',
       })
-    })
+      this.props.searchProfile(this.props.token, null, jobId, 1, 10, (error, data) =>{
+        this.setState({
+          refreshingCeleb: false
+        })
+      })
+    } else {
+      this.setState({
+        refreshingCeleb: true,
+        searchType: 'name',
+        jobId: 0
+      })
+      this.props.searchProfile(this.props.token, '', null, 1, 10, (error, data) => {
+        this.setState({
+          refreshingCeleb: false
+        })
+      })
+    }
   }
   
   renderCelebItem(rowData, sectionID, rowID, highlightRow) {
@@ -169,7 +182,7 @@ export default class Search extends Component {
           <Text style={{alignSelf: 'center', fontSize: 12}}>{rowData.username}</Text>
           <View style={styles.row}>
             <Icon small name='star' />
-            <Text note small>888</Text>
+            <Text note small>{rowData.fan_count}</Text>
           </View>
         </View>
       </ListItem>
