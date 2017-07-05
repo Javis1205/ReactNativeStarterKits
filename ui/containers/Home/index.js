@@ -141,7 +141,7 @@ export default class extends Component {
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
       <ListItem
-        onPress={this._onEventPress.bind(this, rowData.id)}
+        //onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
         <Event feed={rowData} onUserPress={this._onUserPress.bind(this, rowData.celebrity.id)}/>
       </ListItem>

@@ -42,8 +42,7 @@ export default {
     backgroundColor: 'transparent',
     color: 'white'
   },
-  image:{ 
-    resizeMode: 'cover',    
+  image:{
     width:'100%',
     height:material.deviceWidth * 0.7,
   },
