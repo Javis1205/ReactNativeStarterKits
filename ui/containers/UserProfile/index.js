@@ -67,7 +67,7 @@ export default class UserProfile extends Component {
   }
   
   componentWillFocus(){    
-    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 10, (error, data) => {
+    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 5, (error, data) => {
       if (this.props.profile.id == this.props.route.params.userId) {
         this.setState({
           isOwner: true
@@ -159,7 +159,7 @@ export default class UserProfile extends Component {
     })
 
       
-    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, this.page, 10, (error, data) => {
+    this.props.getUserCampaign(this.props.token, this.props.route.params.userId, this.page, 5, (error, data) => {
       this.setState({
         events: this.state.events.concat(data.results),
         celebrity: data.celebrity,        

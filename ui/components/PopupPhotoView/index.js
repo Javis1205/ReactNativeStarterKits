@@ -43,7 +43,7 @@ export default class PopupPhotoView extends Component {
     }
     
     render() {
-        let image = (this.state.refreshing) ? <Spinner color={'white'}/> : null
+        let image = (this.state.refreshing) ? <Spinner style={{position: 'absolute', alignSelf: 'center'}} color={'white'}/> : null
         return (
             <Modal
                 animationType={"slide"}
@@ -57,16 +57,16 @@ export default class PopupPhotoView extends Component {
                             <Icon name='close' style={styles.backIcon} />
                         </TouchableOpacity>
                     </View>
+                  {image}
                     <PhotoView
+                      loadingIndicatorSource={<Spinner color={'white'}/>}
                       onLoadStart={this.onLoadStart.bind(this)}
                       onLoadEnd={this.onLoadEnd.bind(this)}
                         source={{ uri: this.state.uri }}
-                        minimumZoomScale={0.5}
+                        minimumZoomScale={1.0}
                         maximumZoomScale={3}
                         resizeMode = 'contain'
-                        style={{ width: '100%', height: material.deviceHeight, justifyContent: 'center', alignItems: 'center' }}>
-                      {image}
-                    </PhotoView>
+                        style={{ width: '100%', height: material.deviceHeight, justifyContent: 'center', alignItems: 'center' }}/>
                 </View>
             </Modal>
         )

@@ -46,6 +46,7 @@ export default class extends Component {
       fabActive: false,
       loadingMore: false,
       page: 1,
+      listEvent: []
     }    
   }
 
@@ -59,9 +60,9 @@ export default class extends Component {
       this.setState({
         refreshing: true,
       })
-      getActiveCampaign(token, 1, 10, () => {
+      getActiveCampaign(token, 1, 5, (error, data) => {
         this.setState({
-          refreshing: false,
+          refreshing: false
         }, () => {
           (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
         })
@@ -82,11 +83,11 @@ export default class extends Component {
     const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
     this.setState({refreshing: true, page: 1})
 
-    getActiveCampaign(token, 1, 10, (error, data)=>{
+    getActiveCampaign(token, 1, 5, (error, data)=>{
       setTimeout(() => {
         (data.results.length == 0) ?
           this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
-          this.setState({emptyHome: false}, ()=>this.setState({refreshing: false}))
+          this.setState({emptyHome: false, listEvent: data.results}, ()=>this.setState({refreshing: false}))
       }, 1000)
     })
   }
@@ -124,7 +125,7 @@ export default class extends Component {
       page: this.state.page + 1
     }, () => {
       console.log(this.state.page)
-      getMoreActiveCampaign(token, this.state.page, 10, () => {
+      getMoreActiveCampaign(token, this.state.page, 5, () => {
         this.setState({
           refreshing: false,
         }, () => {
@@ -243,12 +244,12 @@ export default class extends Component {
         borderTopWidth: 0.5,
       }}>
         <View
-          style={{flex: 1, backgroundColor: '#ccc'}}
-          padder>
+          padder
+          style={{flex: 1, backgroundColor: '#ccc', paddingBottom: 0}}>
           {
             activeCampaign.results && content
           }
-          {this.state.loadingMore && <Spinner style={{marginBottom: 10}} size="small" color='black' />}
+          {this.state.loadingMore && <Spinner style={{marginBottom: 0}} size="small" color='black' />}
         </View>
       </Container>
     )

@@ -10,7 +10,10 @@ export default {
         justifyContent: 'flex-end'
     },
     imagePopupContainer: {
-        backgroundColor: 'black'
+      backgroundColor: 'black',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     backIcon: { 
         color: 'white', 

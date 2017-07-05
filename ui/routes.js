@@ -37,7 +37,7 @@ export default {
         footerType: 'none'
     },
     home: {        
-      title: 'Home',
+      title: 'Novame',
       Page: Home,
       headerType: 'home',
       footerType: 'none'
