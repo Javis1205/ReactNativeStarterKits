@@ -23,6 +23,7 @@ import {
 import Icon from '~/ui/elements/Icon'
 import PhotoChooser from '~/ui/components/PhotoChooser'
 import CacheableImage from '~/ui/components/CacheableImage'
+import { cameraSymbol } from '~/assets'
 
 import styles from './styles'
 const img = 'https://image.freepik.com/free-icon/camera-symbol_318-1953.jpg'
@@ -121,28 +122,20 @@ export default class EventForm extends Component {
                         style={styles.img}
                         indicator={Progress.Circle}
                         indicatorProps={{
-                        size: 30,
-                        borderWidth: 0,
-                        color: 'black',
-                        unfilledColor: '#ccc',
-                        indeterminate: false
-                      }}
+                          size: 30,
+                          borderWidth: 0,
+                          color: 'black',
+                          unfilledColor: '#ccc',
+                          indeterminate: false
+                        }}
                         source={{uri: this.props.imgUri}} />
                       <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
                     </View>
     } else {
       imgContainer = <View style={styles.photoEvent}>
-                        <ImageP
-                          indicator={Progress.Circle}
-                          indicatorProps={{
-                            size: 30,
-                            borderWidth: 0,
-                            color: 'black',
-                            unfilledColor: '#ccc',
-                            indeterminate: false
-                          }}
+                        <Image
                           style={styles.img}
-                          source={{uri: this.state.imgUri}} />
+                          source={cameraSymbol} />
                         <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
                       </View>
     }
