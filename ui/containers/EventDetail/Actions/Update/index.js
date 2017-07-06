@@ -142,7 +142,8 @@ export default class EventUpdate extends Component {
     this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event, (error, data) => {
       console.log(data)
       if (data != null) {
-        this.props.actions.editACampaign(data)
+        this.props.actions.deleteAfterEditingACampaign(data)
+        this.props.actions.addAfterDeletingACampaign(data)
         this.setState({
           updatingModal: false
         }, () => {

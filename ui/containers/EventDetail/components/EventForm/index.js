@@ -42,10 +42,6 @@ export default class EventForm extends Component {
     
   }
   
-  componentDidMount() {
-    console.log("EventForm")
-  }
-  
   onFromTimeFocus() {
     this.setState({
       fromTimeVisible: true
