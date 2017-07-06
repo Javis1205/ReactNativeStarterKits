@@ -51,3 +51,8 @@ export const addACampaign = (data) => ({
   type: 'app/addACampaign',
   payload: data,
 })
+
+export const editACampaign = (data) => ({
+  type: 'app/editACampaign',
+  payload: data
+})

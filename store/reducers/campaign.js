@@ -1,3 +1,4 @@
+import _ from 'underscore'
 
 export const campaign = (state = {activeCampaign:{}}, {type, payload}) => {
   switch (type) {   
@@ -13,6 +14,12 @@ export const campaign = (state = {activeCampaign:{}}, {type, payload}) => {
     case 'app/addACampaign':
       let newCampaign = [payload, ...state.activeCampaign.results]
       return {...state, activeCampaign: {...state.activeCampaign, results: newCampaign} }
+    case 'app/editACampaign':
+      let indexOfUpdatedCampaign = _.findIndex(state.activeCampaign.results, {id: payload.id})
+      let newUpdateCampaign = state.activeCampaign.results
+      newUpdateCampaign[indexOfUpdatedCampaign] = payload
+      console.log(newUpdateCampaign)
+      return {...state, activeCampaign: {...state.activeCampaign, results: newUpdateCampaign} }
     default:
       return state
   }
