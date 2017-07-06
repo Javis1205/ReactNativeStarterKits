@@ -128,12 +128,21 @@ export default class EventCreation extends Component {
     if (this.state.imgId != '') {
       event.image_ids = [this.state.imgId]
     }
-    this.props.actions.createCampaign(this.props.token, event, () => {
-      this.setState({
-        creatingModal: false
-      }, () => {
-        this.props.actions.goBack()
-      })
+    this.props.actions.createCampaign(this.props.token, event, (error, data) => {
+      if (data != null) {
+        this.props.actions.addACampaign(data)
+        this.setState({
+          creatingModal: false
+        }, () => {
+          this.props.actions.goBack()
+        })
+      } else {
+        this.setState({
+          creatingModal: false
+        }, () => {
+          this.props.actions.setToast('Time out', 'error')
+        })
+      }
     })
   }
   

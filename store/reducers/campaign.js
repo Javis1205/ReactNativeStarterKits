@@ -10,6 +10,9 @@ export const campaign = (state = {activeCampaign:{}}, {type, payload}) => {
       return {...state, activeCampaign: concatArray }
     case 'app/chooseACampaign':
       return {...state, chosenCampaign: payload }
+    case 'app/addACampaign':
+      let newCampaign = [payload, ...state.activeCampaign.results]
+      return {...state, activeCampaign: {...state.activeCampaign, results: newCampaign} }
     default:
       return state
   }

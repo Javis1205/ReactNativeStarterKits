@@ -46,3 +46,8 @@ export const editCampaign = (...args) => ({
   type: 'app/editCampaign',
   args
 })
+
+export const addACampaign = (data) => ({
+  type: 'app/addACampaign',
+  payload: data,
+})

@@ -11,7 +11,9 @@ import ImageP from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
 
 import { API_BASE } from '~/store/constants/api'
-// import * as accountSelectors from '~/store/selectors/account'
+import * as accountSelectors from '~/store/selectors/account'
+import * as commonActions from '~/store/actions/common'
+import * as campaignActions from '~/store/actions/campaign'
 import moment from 'moment'
 import CacheableImage from '~/ui/components/CacheableImage'
 import RegitButton from '~/ui/elements/RegitButton'
@@ -50,7 +52,9 @@ const Background = ({feed, children, parent}) => {
   )
 }
 
-
+@connect(state=>({
+  profile: accountSelectors.getProfile(state),
+}), {...commonActions, ...campaignActions})
 export default class extends Component {
   constructor(props) {
     super(props)
@@ -58,6 +62,11 @@ export default class extends Component {
     this.state = {
       location: ''
     }
+  }
+  
+  onPressEdit(data) {
+    this.props.chooseACampaign(data)
+    this.props.forwardTo('event/update')
   }
 
   render() {
@@ -71,6 +80,14 @@ export default class extends Component {
     let fromTime = moment(feed.start_time).format("HH:mm")
     let toTime = moment(feed.finish_time).format("HH:mm")
     let date = moment(feed.finish_time).format("DD/MM/YY")
+    
+    let editButton = (this.props.profile.id == feed.celebrity.id) ? <Button
+                                                                      onPress={this.onPressEdit.bind(this, feed)}
+                                                                      transparent>
+                                                                      <Icon style={{fontSize: 18, color: 'black'}} name="create" />
+                                                                    </Button>
+                                                                  : <View/>
+    
     return (
         <View style={styles.container}>
           <PopupPhotoView ref='popupPhotoView' />
@@ -95,6 +112,7 @@ export default class extends Component {
                   <Text note style={{...styles.timeText, color: 'gray'}}>{updateTime + '   ' + updateDate}</Text>
                 </View>
               </View>
+              {editButton}
             </View>
           </View>
           <Background parent={this} feed={feed}>

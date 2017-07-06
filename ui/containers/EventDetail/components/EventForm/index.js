@@ -12,6 +12,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import ImageP from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 
 import {
   InputField,
@@ -38,6 +40,10 @@ export default class EventForm extends Component {
       imgUri: img
     }
     
+  }
+  
+  componentDidMount() {
+    console.log("EventForm")
   }
   
   onFromTimeFocus() {
@@ -108,20 +114,37 @@ export default class EventForm extends Component {
   }
   
   render() {
-    let fromTime = this.state.fromTime
-    let toTime = this.state.toTime
-    let date = this.state.date
+    let {updateForm} = this.props
+    let fromTime = (updateForm) ? moment(updateForm.start_time).format("HH:mm") : this.state.fromTime
+    let toTime = (updateForm) ? moment(updateForm.finish_time).format("HH:mm") : this.state.toTime
+    let date = (updateForm) ? moment(updateForm.finish_time).format("DD/MM/YYYY") : this.state.date
     let imgContainer = null
     if (this.props.imgUri != '') {
       imgContainer = <View style={styles.photoEvent}>
-                      <Image
+                      <ImageP
                         style={styles.img}
+                        indicator={Progress.Circle}
+                        indicatorProps={{
+                        size: 30,
+                        borderWidth: 0,
+                        color: 'black',
+                        unfilledColor: '#ccc',
+                        indeterminate: false
+                      }}
                         source={{uri: this.props.imgUri}} />
                       <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
                     </View>
     } else {
       imgContainer = <View style={styles.photoEvent}>
-                        <CacheableImage
+                        <ImageP
+                          indicator={Progress.Circle}
+                          indicatorProps={{
+                            size: 30,
+                            borderWidth: 0,
+                            color: 'black',
+                            unfilledColor: '#ccc',
+                            indeterminate: false
+                          }}
                           style={styles.img}
                           source={{uri: this.state.imgUri}} />
                         <PhotoChooser style={styles.photoIcon} onSuccess={this.handleChoosePhoto}/>
