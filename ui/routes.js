@@ -126,8 +126,8 @@ export default {
     'videoCall/:id':{
         title: 'Video Call',
         Page: VideoCall,
-        headerType: 'back',
-        footerType: 'none'
+        footerType: 'none',
+        headerType: 'none'
     },
     qrCode: {
         title: 'Scan Merchandise',

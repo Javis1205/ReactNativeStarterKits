@@ -22,10 +22,13 @@ import Popover from '~/ui/components/Popover'
 // history.push => location match => return component using navigator push
 import { matchPath } from 'react-router'
 import { connect } from 'react-redux'
+import OneSignal from 'react-native-onesignal'
 
 // should show error if not found
 import { getDrawerState, getRouter } from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
+import * as accountActions from '~/store/actions/account'
+import * as accountSelectors from '~/store/selectors/account'
 import routes from './routes'
 
 const getPage = (url) => {  
@@ -49,7 +52,8 @@ const UIManager = NativeModules.UIManager
 @connect(state=>({
   router: getRouter(state),
   drawerState: getDrawerState(state),
-}), commonActions)
+  profile: accountSelectors.getProfile(state)
+}), {...commonActions, ...accountActions})
 export default class App extends Component {    
 
   static configureScene(route) {
@@ -77,6 +81,45 @@ export default class App extends Component {
     this.firstTime = true   
     // this.timer = null
     this.pageInstances = {}      
+  }
+  
+  componentWillMount() {
+    UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened.bind(this));
+    OneSignal.addEventListener('registered', this.onRegistered);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
+  
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened.bind(this));
+    OneSignal.removeEventListener('registered', this.onRegistered);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+  
+  onReceived(notification) {
+    console.log("Notification received: ", notification);
+  }
+  
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+    if (openResult.notification.payload.additionalData.p2p_notification) {
+      this.props.saveFanProfileToFaceTime(openResult.notification.payload.additionalData.p2p_notification)
+      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+    }
+  }
+  
+  onRegistered(notifData) {
+    console.log("Device had been registered for push notifications!", notifData);
+  }
+  
+  onIds(device) {
+    console.log('Device info: ', device);
   }
 
   // replace view from stack, hard code but have high performance
@@ -182,12 +225,6 @@ export default class App extends Component {
       default:
         return forwardTo(route)
     }    
-  }
-
-
-  componentWillMount() {
-      UIManager.setLayoutAnimationEnabledExperimental &&
-      UIManager.setLayoutAnimationEnabledExperimental(true)        
   }
 
   componentDidMount() {

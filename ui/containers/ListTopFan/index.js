@@ -11,6 +11,7 @@ import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
+import OneSignal from 'react-native-onesignal'
 
 import {
   InputField,
@@ -62,6 +63,15 @@ export default class ListTopFan extends Component {
   
   onFaceTimePress(profile) {
     this.props.saveFanProfileToFaceTime(profile)
+    let playerId ='f6e23ffe-3aba-4661-853a-3e2d9e9b7e61'
+    let data = {
+      user_id: this.props.profile.id,
+      username: this.props.profile.username
+    }
+    let contents = {
+      'en': 'You got a call from ' + this.props.profile.username
+    }
+    OneSignal.postNotification(contents, data, playerId)
     this.props.forwardTo(`videoCall/${profile.id}`)
   }
   

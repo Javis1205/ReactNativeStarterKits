@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux'
 
 import {
-  Text, View, Input, Button, Container,
+  Text, View, Input, Button, Container, Header, Left, Right, Body, Title
 } from 'native-base'
 
 import io from 'socket.io-client'
@@ -28,6 +28,7 @@ import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
 
 import * as accountSelectors from '~/store/selectors/account'
+import * as commonActions from '~/store/actions/common'
 
 import styles from './styles'
 
@@ -208,7 +209,6 @@ function exchange(data) {
 function leave(socketId) {
   console.log('leave', socketId);
   const pc = pcPeers[socketId];
-  const viewIndex = pc.viewIndex;
   pc.close();
   delete pcPeers[socketId];
 
@@ -244,7 +244,7 @@ function getStats() {
 
 @connect(state=>({
   fanProfile: accountSelectors.getFanProfile(state)
-}), null)
+}), {...commonActions})
 
 export default class extends Component {
 
@@ -279,13 +279,11 @@ export default class extends Component {
       getLocalStream(true, (stream) => {
         localStream = stream;
         this.setState({selfViewSrc: stream.toURL()});
-        this.setState({status: 'ready', info: 'Connect tupt'});
+        this.setState({status: 'ready', info: 'Connect tupt'}, () => {this._press()});
       });
     });
 
     const userId = this.props.route.params.id
-
-    this.props.app.header.show('back', this.props.fanProfile.username)
   }
 
   _press = (event) =>{    
@@ -362,10 +360,46 @@ export default class extends Component {
       </View>
     );
   }
+  
+  _leftClick = (e) => {
+    const { goBack } = this.props
+    this._press()
+    goBack()
+  }
+  
+  renderHeaderBack(title) {
+    const left = (
+      <Button transparent onPress={this._leftClick}>
+        <Icon name="keyboard-arrow-left" />
+      </Button>
+    )
+    const center = (
+      <Title full>{title}</Title>
+    )
+    return this.renderHeader(left, center)
+  }
+  
+  renderHeader(left, center, right, props) {
+    let rightStyle = null
+    if (right) {
+      rightStyle = {flex: 0.5}
+    } else {
+      rightStyle = {}
+    }
+    
+    return (
+      <Header noShadow style={styles.container}>
+        <Left style={{flex: 0.5}}>{left}</Left>
+        <Body style={{flex: 1,}}>{center}</Body>
+        <Right style={rightStyle}>{right}</Right>
+      </Header>
+    )
+  }
 
   render() {
     return (
-      <Container>                    
+      <Container>
+        {this.renderHeaderBack(this.props.fanProfile.username || 'Facetime')}
         {this.state.remoteViewSrc && 
           <RTCView streamURL={this.state.remoteViewSrc} objectFit="cover" style={styles.remoteView}/>
         }
