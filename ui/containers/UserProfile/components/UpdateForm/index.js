@@ -60,7 +60,7 @@ export default class UpdateForm extends Component {
               onIconPress={input=>input.onChange('')}
               inputStyle={styles.inputText}
               style={{...styles.inputField}}
-              label="Address"
+              label="Location"
               name="address"
               component={InputField}
               placeholderTextColor="#7e7e7e"/>

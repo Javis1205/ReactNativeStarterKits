@@ -21,9 +21,11 @@ export default {
     fontSize: 30
   },
   modalContainer: {
-    height: 200,
+    height: 300,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 10
   },
   modalImage: {
     height: 200,
@@ -35,7 +37,7 @@ export default {
     fontSize: 20
   },
   modalErrorText: {
-    marginTop: 0,
+    marginTop: 20,
     color: 'red',
     fontSize: 20
   }

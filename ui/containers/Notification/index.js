@@ -3,7 +3,7 @@ import {
     Button, Container, ListItem, List, Spinner,
     Text, Item, View, Input, Left, Body,
 } from 'native-base'
-
+import {Image, RefreshControl} from 'react-native'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
@@ -20,16 +20,16 @@ import material from '~/theme/variables/material'
 
 import { getTextParts } from '~/ui/shared/utils'
 
-const renderTextParts = text => {
-  const parts = getTextParts(text)
-  return (
-    <Text small>
-      {parts[0]}
-      {parts[1] && <Text small bold>{parts[1]}</Text>}
-      {parts[2]}
-    </Text>  
-  )
+var data = []
+for (let i = 0; i < 10; i++) {
+  data.push({
+    name: 'Pham Gia Khanh',
+    dateTime: new Date(),
+    image: 'https://wordsmith.org/words/images/avatar2_large.png',
+    celeb: 'Taylor Swift'
+  })
 }
+
 
 @connect(state=>({
   token: authSelectors.getToken(state),
@@ -44,69 +44,71 @@ export default class extends Component {
     this.state = {
       refreshing: false,
       loading: false,
+      notifications: data
     }    
   }
 
   componentWillFocus(){
-    // make it like before    
-    // const {token, notifications, getNotification} = this.props
-    // if(!notifications.data.length) {
-    //   getNotification(token)  
-    // } 
-
-    // this.setState({
-    //   refreshing: false,
-    // })
     
   }
 
-  componentWillMount(){
-    // this.componentWillFocus()      
+  componentDidMount(){
+    this.componentWillFocus()
   }
 
   _onRefresh =() => {    
-    this.setState({refreshing: true})        
-    this.props.getNotification(this.props.token, 0, 10, ()=>this.setState({refreshing: false}))    
+      
   }    
 
   _loadMore = ()=>{
-    if(this.state.loading || this.state.refreshing)
-      return
-    
-    const {token, notifications, getNotification} = this.props
-    if(notifications.hasMore){
-      this.setState({loading: true})          
-      getNotification(token, notifications.start + notifications.take, notifications.take, ()=>this.setState({loading: false}))              
-    }        
+       
+  }
+  
+  renderRow(item) {
+    return (
+      <ListItem noBorder style={styles.listItemContainer}>
+        <View style={{flexDirection: 'row'}}>
+          <Image source={{uri: item.image}} style={{height: 65, width: 65, borderRadius: 3}}/>
+          <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'space-between', paddingRight: 10}}>
+            <View style={{flexDirection: 'row', paddingTop: 10, alignItems: 'flex-end'}}>
+              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.name}</Text>
+              <Text style={{color: 'gray', fontSize: 12, marginBottom: 0.5}}> followed </Text>
+              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.celeb}</Text>
+            </View>
+            <TimeAgo note small time={item.dateTime} />
+          </View>
+        </View>
+      </ListItem>
+    )
   }
 
   render() {
     // we store the page so we must not set removeClippedSubviews to true, sometime it is for tab too
-    const {notifications, notificationRequest} = this.props    
+    const {notifications} = this.props
     
     return (          
        
         <Container>
                     
-            <Content               
-              onEndReached={this._loadMore} onRefresh={this._onRefresh}             
-              style={styles.container} refreshing={this.state.refreshing} 
-            >              
-              {notifications && 
+            <Content
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this._onRefresh}
+                  tintColor="black"
+                  colors={['black']}
+                  progressBackgroundColor="white"
+                  title={null}
+                />
+              }
+              onEndReached={this._loadMore}
+              style={styles.container}>
+              {/*notifications &&*/
                 <List
                   removeClippedSubviews={false}                    
-                  pageSize={notifications.take}                  
-                  dataArray={notifications.data} renderRow={(item) =>
-                    <ListItem noBorder style={styles.listItemContainer}>                    
-                        <Icon name={options.iconMap[item.Type] || 'network'} style={styles.icon}/>                    
-                        <Body>
-                          {renderTextParts(
-                            item.Title.replace(item.FromUserDisplayName, `#${item.FromUserDisplayName}#`)
-                          )}                        
-                          <TimeAgo note small time={item.DateTime} />
-                        </Body>
-                    </ListItem>  
-                } />
+                  //pageSize={notifications.take}
+                  dataArray={this.state.notifications}
+                  renderRow={this.renderRow.bind(this)} />
               } 
 
               {this.state.loading && <Spinner/>}

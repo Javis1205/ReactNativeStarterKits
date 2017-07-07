@@ -35,10 +35,15 @@ export default class FanHistory extends Component {
   }
   
   componentDidMount() {
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus() {
     this.setState({
       refreshing: true
     })
     this.props.getHistory(this.props.token, 1, 50, () => {
+      this.props.getProfile(this.props.token)
       this.setState({
         refreshing: false
       })
@@ -77,12 +82,26 @@ export default class FanHistory extends Component {
     )
   }
   render() {
-    if (this.state.refreshing) {
-      return (
-        <Preload message=""/>
-      )
-    }
     let {profile, history} = this.props
+    let listHistory = null
+    if (this.state.refreshing) {
+      listHistory = <Spinner color={'black'} size="small"/>
+    } else {
+      listHistory = <Content refreshControl={
+                      <RefreshControl
+                        refreshing={this.state.onRefreshing}
+                        onRefresh={this._onRefresh}
+                        tintColor="black"
+                        colors={['black']}
+                        progressBackgroundColor="white"
+                        title={null}/>
+                      }>
+                      <List removeClippedSubviews={false}
+                            dataArray={history.results}
+                            renderRow={(item) => this._renderRow(item)} >
+                      </List>
+                    </Content>
+    }
     return (
       <Container style={styles.container}>
         <View style={styles.infoRow}>
@@ -109,23 +128,7 @@ export default class FanHistory extends Component {
           <Text>{profile.username}</Text>
           <Text>{profile.location}</Text>
         </View>
-        <Content refreshControl={
-            <RefreshControl
-              refreshing={this.state.onRefreshing}
-              onRefresh={this._onRefresh}
-              tintColor="black"
-              colors={['black']}
-              progressBackgroundColor="white"
-              title={null}
-            />
-        }>
-          <List removeClippedSubviews={false} 
-            dataArray={history.results}
-            renderRow={(item) => this._renderRow(item)} >
-          </List>
-        </Content>
-
-
+        {listHistory}
       </Container>
     )
   }
