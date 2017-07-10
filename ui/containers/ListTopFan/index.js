@@ -66,10 +66,10 @@ export default class ListTopFan extends Component {
     let playerId ='f6e23ffe-3aba-4661-853a-3e2d9e9b7e61'
     let data = {
       user_id: this.props.profile.id,
-      username: this.props.profile.username
+      username: this.props.profile.full_name
     }
     let contents = {
-      'en': 'You got a call from ' + this.props.profile.username
+      'en': 'You got a call from ' + this.props.profile.full_name
     }
     OneSignal.postNotification(contents, data, playerId)
     this.props.forwardTo(`videoCall/${profile.id}`)
@@ -87,7 +87,7 @@ export default class ListTopFan extends Component {
                         <Icon name="photo-camera"/>
                       </Button>
     } else {
-      rightContainer = <Text note small style={{alignSelf: 'flex-end'}}>8000 LP</Text>
+      rightContainer = <Text note small style={{alignSelf: 'flex-end'}}>{rowData.loyal_points} LP</Text>
     }
     return(
       <ListItem style={styles.listItemContainer}>
@@ -97,7 +97,7 @@ export default class ListTopFan extends Component {
               source={{uri: rowData.avatar}}
               style={{width: 50, height: 50, borderRadius: 25}}/>
             <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'center'}}>
-              <Text numberOfLines={1} style={{fontSize: 14}}>{rowData.username}</Text>
+              <Text numberOfLines={1} style={{fontSize: 14}}>{rowData.full_name}</Text>
               <Text style={{fontSize: 14}}>{rowData.location || 'location'}</Text>
             </View>
           </Col>

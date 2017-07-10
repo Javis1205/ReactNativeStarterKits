@@ -50,7 +50,7 @@ const formSelector = formValueSelector('UpdateProfileForm')
   return ({
     enableReinitialize: true,
     initialValues: {
-      name: stateProps.profile.username,
+      name: stateProps.profile.full_name,
       address: stateProps.profile.location,
       favorite: stateProps.profile.favorite || ''
     },
@@ -73,6 +73,10 @@ export default class ProfileUpdate extends Component {
   }
   
   componentDidMount() {
+    this.componentWillFocus()
+  }
+  
+  componentWillFocus() {
     if (this.props.profile.user_type.id == 3) {
       this.setState({
         isCeleb: true

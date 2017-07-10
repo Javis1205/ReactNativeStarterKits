@@ -108,7 +108,7 @@ export default class extends Component {
                 }}>
                   <Text
                     onLongPress={this.props.onUserPress}
-                    style={styles.starNameText}>{feed.celebrity.username}</Text>
+                    style={styles.starNameText}>{feed.celebrity.full_name}</Text>
                   <Text note style={{...styles.timeText, color: 'gray'}}>{updateTime + '   ' + updateDate}</Text>
                 </View>
               </View>

@@ -122,7 +122,7 @@ export default class EventCreation extends Component {
       news_type_id: 1,
       location: this.props.formValues.address,
       title: this.props.formValues.name,
-      content: `${this.props.profile.username} created an event`,
+      content: `${this.props.profile.full_name} created an event`,
       start_time: fromTime,
       finish_time: toTime
     }

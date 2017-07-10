@@ -9,6 +9,7 @@ export default {
     marginRight: 0,
     backgroundColor: '#fff',
     overflow: 'hidden',
+    borderTopWidth: 0
   },
   headerContainer:{
     paddingBottom:0
@@ -17,7 +18,7 @@ export default {
     justifyContent: 'space-around',    
   },
   avatarContainer:{
-    borderTopWidth: material.platform === 'android' ? 1 : 0,
+    borderTopWidth: material.platform === 'android' ? 0 : 0,
     paddingLeft: 0,
     paddingRight: 0,    
   },

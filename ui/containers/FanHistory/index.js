@@ -66,7 +66,7 @@ export default class FanHistory extends Component {
       <ListItem style={styles.listItem}>
         <Thumbnail style={styles.thumbnail} source={{ uri: item.user && item.user.avatar }} />
         <Body>
-          <Text small style={styles.mb5}>{item.user && item.user.username}</Text>
+          <Text small style={styles.mb5}>{item.user && item.user.full_name}</Text>
           <Text style={styles.mb5} small>{item.loyal_point} points</Text>
         </Body>
         
@@ -125,7 +125,7 @@ export default class FanHistory extends Component {
           </View>
         </View>
         <View style={styles.rowPadding}>
-          <Text>{profile.username}</Text>
+          <Text>{profile.full_name}</Text>
           <Text>{profile.location}</Text>
         </View>
         {listHistory}

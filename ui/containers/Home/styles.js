@@ -10,7 +10,9 @@ export default {
     paddingBottom:0,
     marginLeft: 0,
     marginRight: 0,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderTopWidth: 0,
+    paddingTop: 5
   },
   buttonContainer: {
     height: height - 100,

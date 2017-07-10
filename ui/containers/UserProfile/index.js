@@ -186,7 +186,7 @@ export default class UserProfile extends Component {
   renderAvatarContainerFan() {
     let followButton = null
     let iconFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small style={styles.followTextButton}>Follow</Text>
-    let iconUnFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small>Following</Text>
+    let iconUnFollow = (this.state.followLoading) ? <Spinner size="small" color={"white"}/> : <Text small style={{lineHeight: null}}>Following</Text>
     if (this.state.isFollowed) {
       followButton = <Button
                       small transparent light rounded bordered
@@ -350,7 +350,7 @@ export default class UserProfile extends Component {
   
   render() {
     
-    const username = this.state.refreshing ? 'Loading...' : this.state.celebrity.username
+    const username = this.state.refreshing ? 'Loading...' : this.state.celebrity.full_name
     
     return(
       <Container style={{

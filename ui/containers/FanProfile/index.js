@@ -53,7 +53,7 @@ export default class FanProfile extends Component {
       <ListItem style={styles.listItemContainer}>
         <Image style={styles.thumbnail} source={{uri: rowData.avatar}} />
         <View style={{marginLeft:5}}>
-          <Text>{rowData.username}</Text>
+          <Text>{rowData.full_name}</Text>
           <Text>{rowData.location || 'Location'}</Text>
         </View>
         <Right>
@@ -80,7 +80,7 @@ export default class FanProfile extends Component {
         <Content>
           <ProfileHeader user={this.props.profile}>
             <View style={{alignItems: 'center', paddingBottom: 30}}>
-              <Text style={{color: 'white'}}>{this.props.profile.username || 'Username'}</Text>
+              <Text style={{color: 'white'}}>{this.props.profile.full_name || 'Username'}</Text>
               <Text small style={{color: 'white', marginTop: 10}}>{this.props.profile.favorite || 'Favorite'}</Text>
               <Text small style={{color: 'white', marginTop: 10}}>{this.props.profile.location || 'Location'}</Text>
             </View>

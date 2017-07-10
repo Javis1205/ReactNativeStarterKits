@@ -399,7 +399,7 @@ export default class extends Component {
   render() {
     return (
       <Container>
-        {this.renderHeaderBack(this.props.fanProfile.username || 'Facetime')}
+        {this.renderHeaderBack(this.props.fanProfile.full_name || 'Facetime')}
         {this.state.remoteViewSrc && 
           <RTCView streamURL={this.state.remoteViewSrc} objectFit="cover" style={styles.remoteView}/>
         }
