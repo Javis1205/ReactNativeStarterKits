@@ -29,6 +29,7 @@ import { getDrawerState, getRouter } from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
 import * as accountActions from '~/store/actions/account'
 import * as accountSelectors from '~/store/selectors/account'
+import * as notificationActions from '~/store/actions/notification'
 import routes from './routes'
 
 const getPage = (url) => {  
@@ -53,7 +54,7 @@ const UIManager = NativeModules.UIManager
   router: getRouter(state),
   drawerState: getDrawerState(state),
   profile: accountSelectors.getProfile(state)
-}), {...commonActions, ...accountActions})
+}), {...commonActions, ...accountActions, ...notificationActions})
 export default class App extends Component {    
 
   static configureScene(route) {
@@ -86,21 +87,24 @@ export default class App extends Component {
   componentWillMount() {
     UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true)
-    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('received', this.onReceived.bind(this));
     OneSignal.addEventListener('opened', this.onOpened.bind(this));
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.inFocusDisplaying(0)
   }
   
   componentWillUnmount() {
-    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('received', this.onReceived.bind(this));
     OneSignal.removeEventListener('opened', this.onOpened.bind(this));
     OneSignal.removeEventListener('registered', this.onRegistered);
     OneSignal.removeEventListener('ids', this.onIds);
+    OneSignal.inFocusDisplaying(0)
   }
   
   onReceived(notification) {
     console.log("Notification received: ", notification);
+    this.props.receiveNotification()
   }
   
   onOpened(openResult) {
@@ -108,9 +112,13 @@ export default class App extends Component {
     console.log('Data: ', openResult.notification.payload.additionalData);
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
-    if (openResult.notification.payload.additionalData.p2p_notification) {
-      this.props.saveFanProfileToFaceTime(openResult.notification.payload.additionalData.p2p_notification)
+    let notiData = openResult.notification.payload.additionalData
+    if (notiData.p2p_notification) {
+      this.props.saveFanProfileToFaceTime(notiData.p2p_notification)
       this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+    } else {
+      this.props.replaceNotification(notiData)
+      this.props.forwardTo('userProfile/' + notiData.celebrity_id)
     }
   }
   

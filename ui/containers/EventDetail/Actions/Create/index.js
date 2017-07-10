@@ -41,6 +41,7 @@ const formSelector = formValueSelector('CreateEventForm')
   formState: state.form,
   token: authSelectors.getToken(state),
   celebrity_id: accountSelectors.getCelebrityId(state),
+  profile: accountSelectors.getProfile(state)
 }), dispatch => ({
   actions: bindActionCreators({ ...commonActions, ...campaignActions, ...imageActions}, dispatch)
 }), (stateProps, dispatchProps, ownProps)=>{
@@ -121,7 +122,7 @@ export default class EventCreation extends Component {
       news_type_id: 1,
       location: this.props.formValues.address,
       title: this.props.formValues.name,
-      content: "Hello World",
+      content: `${this.props.profile.username} created an event`,
       start_time: fromTime,
       finish_time: toTime
     }

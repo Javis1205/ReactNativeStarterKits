@@ -7,13 +7,15 @@ import {
 import { View } from 'react-native'
 import * as commonSelectors from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
+import * as notificationActions from '~/store/actions/notification'
 
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
 @connect(state => ({
   searchString: commonSelectors.getSearchString(state),
-}), commonActions)
+  unReadNotification: state.notification.unRead
+}), {...commonActions, ...notificationActions})
 export default class extends Component {
 
   constructor(props) {
@@ -52,7 +54,8 @@ export default class extends Component {
     forwardTo('search')
   }
   _onPressNotification = () => {
-    const { forwardTo } = this.props
+    const { forwardTo, throwNotification } = this.props
+    throwNotification()
     forwardTo('notification')
   }
   renderHeaderBack(title) {
@@ -92,6 +95,10 @@ export default class extends Component {
     return this.renderHeader(left, center, right)
   }
   renderHeaderHome() {
+    let numberNotification = (this.props.unReadNotification != 0) ? <View style={styles.badgeContainer}>
+                                                                      <Text small white>{this.props.unReadNotification}</Text>
+                                                                    </View> : null
+    
     const left = (
       <Button transparent onPress={this._leftClick}>
         <Icon style={styles.menuIcon} name='menu' />
@@ -103,9 +110,7 @@ export default class extends Component {
     const right = (
       <View style={styles.rowIconContainer}>
         <Button transparent onPress={() => this._onPressNotification()}>
-          <View style={styles.badgeContainer}>
-            <Text small white>5</Text>
-          </View>
+          {numberNotification}
           <Icon style={styles.icon} name="notification" />
         </Button>
         <Button transparent onPress={() => this._onPressSearch()}>

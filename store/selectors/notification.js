@@ -1,2 +1,2 @@
 export const getNotification = (state) =>
-  state.notification
+  state.notification.data

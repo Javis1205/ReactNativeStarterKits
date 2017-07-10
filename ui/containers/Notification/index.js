@@ -20,21 +20,9 @@ import material from '~/theme/variables/material'
 
 import { getTextParts } from '~/ui/shared/utils'
 
-var data = []
-for (let i = 0; i < 10; i++) {
-  data.push({
-    name: 'Pham Gia Khanh',
-    dateTime: new Date(),
-    image: 'https://wordsmith.org/words/images/avatar2_large.png',
-    celeb: 'Taylor Swift'
-  })
-}
-
-
 @connect(state=>({
   token: authSelectors.getToken(state),
-  // notifications: notificationSelectors.getNotification(state),
-  // notificationRequest: commonSelectors.getRequest(state, 'getNotification'),  
+  notifications: notificationSelectors.getNotification(state),
 }), {...commonActions, ...notificationActions})
 export default class extends Component {
 
@@ -44,7 +32,6 @@ export default class extends Component {
     this.state = {
       refreshing: false,
       loading: false,
-      notifications: data
     }    
   }
 
@@ -71,9 +58,9 @@ export default class extends Component {
           <Image source={{uri: item.image}} style={{height: 65, width: 65, borderRadius: 3}}/>
           <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'space-between', paddingRight: 10}}>
             <View style={{flexDirection: 'row', paddingTop: 10, alignItems: 'flex-end'}}>
-              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.name}</Text>
-              <Text style={{color: 'gray', fontSize: 12, marginBottom: 0.5}}> followed </Text>
-              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.celeb}</Text>
+              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.celebrity_name}</Text>
+              <Text style={{color: 'gray', fontSize: 12, marginBottom: 0.5}}> created an event </Text>
+              <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.news_title}</Text>
             </View>
             <TimeAgo note small time={item.dateTime} />
           </View>
@@ -107,7 +94,7 @@ export default class extends Component {
                 <List
                   removeClippedSubviews={false}                    
                   //pageSize={notifications.take}
-                  dataArray={this.state.notifications}
+                  dataArray={this.props.notifications}
                   renderRow={this.renderRow.bind(this)} />
               } 
 
