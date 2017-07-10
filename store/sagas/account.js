@@ -141,6 +141,17 @@ const requestGetHistory = createRequestSaga({
   ],
 })
 
+const requestFaceTime = createRequestSaga({
+  request: api.account.faceTime,
+  key: 'faceTime',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t have a facetime', 'error')
+  ],
+})
+
 
 // root saga reducer
 export default [
@@ -160,7 +171,8 @@ export default [
           takeLatest('app/getListFollowedCelebrity', requestGetListFollowedCeleb),
           takeLatest('app/postQRCode', requestPostQRCode),
           takeLatest('app/searchMoreProfile', requestSearchMoreProfile),
-          takeLatest('app/getHistory', requestGetHistory)
+          takeLatest('app/getHistory', requestGetHistory),
+          takeLatest('app/faceTime', requestFaceTime)
         ]
     },
 ]

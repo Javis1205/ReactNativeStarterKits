@@ -209,8 +209,10 @@ function exchange(data) {
 function leave(socketId) {
   console.log('leave', socketId);
   const pc = pcPeers[socketId];
-  pc.close();
-  delete pcPeers[socketId];
+  if (pc && pc.close) {
+    pc.close();
+    delete pcPeers[socketId];
+  }
 
   container.setState({ 
     remoteViewSrc: null,
@@ -264,26 +266,33 @@ export default class extends Component {
     }
   }
   
-  componentDidMount() {
-    container = this;
-    socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
-    socket.on('exchange', (data)=>{
-      exchange(data);
-    });
-    socket.on('leave', (socketId)=>{
-      leave(socketId);
-    });
-
-    socket.on('connect', (data) => {
-      console.log('connect');
-      getLocalStream(true, (stream) => {
-        localStream = stream;
-        this.setState({selfViewSrc: stream.toURL()});
-        this.setState({status: 'ready', info: 'Connect tupt'}, () => {this._press()});
-      });
-    });
-
+  componentWillFocus() {
     const userId = this.props.route.params.id
+    this.setState({
+      roomID: userId
+    }, () => {
+      container = this;
+      socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
+      socket.on('exchange', (data)=>{
+        exchange(data);
+      });
+      socket.on('leave', (socketId)=>{
+        leave(socketId);
+      });
+  
+      socket.on('connect', (data) => {
+        console.log('connect');
+        getLocalStream(true, (stream) => {
+          localStream = stream;
+          this.setState({selfViewSrc: stream.toURL()});
+          this.setState({status: 'ready', info: 'Connect tupt'}, () => {this._press()});
+        });
+      });
+    })
+  }
+  
+  componentDidMount() {
+    this.componentWillFocus()
   }
 
   _press = (event) =>{    

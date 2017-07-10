@@ -55,7 +55,7 @@ export default class extends Component {
     return (
       <ListItem noBorder style={styles.listItemContainer}>
         <View style={{flexDirection: 'row'}}>
-          <Image source={{uri: item.image}} style={{height: 65, width: 65, borderRadius: 3}}/>
+          <Image source={{uri: item.celebrity_avatar}} style={{height: 65, width: 65, borderRadius: 3}}/>
           <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'space-between', paddingRight: 10}}>
             <View style={{flexDirection: 'row', paddingTop: 10, alignItems: 'flex-end'}}>
               <Text style={{fontSize: 14, fontWeight: 'bold'}}>{item.celebrity_name}</Text>

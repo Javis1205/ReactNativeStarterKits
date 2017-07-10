@@ -63,16 +63,11 @@ export default class ListTopFan extends Component {
   
   onFaceTimePress(profile) {
     this.props.saveFanProfileToFaceTime(profile)
-    let playerId ='f6e23ffe-3aba-4661-853a-3e2d9e9b7e61'
-    let data = {
-      user_id: this.props.profile.id,
-      username: this.props.profile.full_name
-    }
-    let contents = {
-      'en': 'You got a call from ' + this.props.profile.full_name
-    }
-    OneSignal.postNotification(contents, data, playerId)
-    this.props.forwardTo(`videoCall/${profile.id}`)
+    this.props.faceTime(this.props.token, profile.id, (error, data) => {
+      console.log(error)
+      console.log(data)
+      this.props.forwardTo(`videoCall/${profile.id}`)
+    })
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {

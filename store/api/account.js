@@ -69,5 +69,9 @@ export default {
   getHistory(accessToken, page, page_size) {
     return apiGet('/mobile/v1/active-barcodes/', {page, page_size, sort: "active-date-desc"}, accessToken)
   },
+  
+  faceTime (access_token, user_id) {
+    return apiPost('/mobile/v1/user/call-facetime/' + user_id, {}, access_token)
+  },
 
 }

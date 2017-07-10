@@ -5,6 +5,7 @@ import { Drawer, StyleProvider } from 'native-base'
 
 import URL from 'url-parse'
 
+import CallModal from '~/ui/components/CallModal'
 import getTheme from '~/theme/components'
 import material from '~/theme/variables/material'
 
@@ -25,7 +26,7 @@ import { connect } from 'react-redux'
 import OneSignal from 'react-native-onesignal'
 
 // should show error if not found
-import { getDrawerState, getRouter } from '~/store/selectors/common'
+import { getDrawerState, getRouter, getModalState } from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
 import * as accountActions from '~/store/actions/account'
 import * as accountSelectors from '~/store/selectors/account'
@@ -53,7 +54,8 @@ const UIManager = NativeModules.UIManager
 @connect(state=>({
   router: getRouter(state),
   drawerState: getDrawerState(state),
-  profile: accountSelectors.getProfile(state)
+  profile: accountSelectors.getProfile(state),
+  modalState: getModalState(state)
 }), {...commonActions, ...accountActions, ...notificationActions})
 export default class App extends Component {    
 
@@ -81,7 +83,11 @@ export default class App extends Component {
     this.page = getPage(props.router.route) || routes.notFound   
     this.firstTime = true   
     // this.timer = null
-    this.pageInstances = {}      
+    this.pageInstances = {}
+    this.state = {
+      modalOpen: false,
+      notiData: {}
+    }
   }
   
   componentWillMount() {
@@ -104,7 +110,18 @@ export default class App extends Component {
   
   onReceived(notification) {
     console.log("Notification received: ", notification);
-    this.props.receiveNotification()
+    let notiData = notification.payload.additionalData
+    if (notiData.user_id) {
+      this.setState({
+        modalOpen: true,
+        notiData: notiData
+      }, () => {
+        this.props.openModal()
+      })
+    } else {
+      this.props.replaceNotification(notiData)
+      this.props.receiveNotification()
+    }
   }
   
   onOpened(openResult) {
@@ -113,9 +130,9 @@ export default class App extends Component {
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
     let notiData = openResult.notification.payload.additionalData
-    if (notiData.p2p_notification) {
-      /*this.props.saveFanProfileToFaceTime(notiData.p2p_notification)
-      this.props.forwardTo(`videoCall/${this.props.profile.id}`)*/
+    if (notiData.user_id) {
+      this.props.saveFanProfileToFaceTime(notiData)
+      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
     } else {
       this.props.replaceNotification(notiData)
       this.props.forwardTo('userProfile/' + notiData.celebrity_id)
@@ -131,7 +148,7 @@ export default class App extends Component {
   }
 
   // replace view from stack, hard code but have high performance
-  componentWillReceiveProps({router, drawerState}){
+  componentWillReceiveProps({router, drawerState, modalState}){
     // process for route change only
     if(router.route !== this.props.router.route){
       const oldComponent = this.pageInstances[this.page.path]
@@ -168,6 +185,10 @@ export default class App extends Component {
     // check drawer
     if(drawerState !== this.props.drawerState){
       this.drawer._root[drawerState === 'opened' ? 'open' : 'close']()
+    }
+  
+    if(modalState !== this.props.modalState){
+      this.forceUpdate()
     }
   }
 
@@ -303,7 +324,7 @@ export default class App extends Component {
   }
 
   render() {    
-    const {router, drawerState, closeDrawer} = this.props   
+    const {router, drawerState, closeDrawer, modalState, closeModal} = this.props
     const {title, path, headerType, footerType} = this.page 
     return (            
       <StyleProvider style={getTheme(material)}>         
@@ -326,7 +347,12 @@ export default class App extends Component {
           <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
           <Popover ref={ref=>this.popover=ref}/>
-        </Drawer>   
+          <CallModal
+            ref={ref => this.modal = ref}
+            notiData={this.state.notiData}
+            onCloseClick={closeModal}
+            open={(modalState === 'opened')} />
+        </Drawer>
       </StyleProvider>          
     )
   }

@@ -87,3 +87,8 @@ export const replaceHistory = (data) => ({
   payload: data,
 })
 
+export const faceTime = (...args) => ({
+  type: 'app/faceTime',
+  args
+})
+
