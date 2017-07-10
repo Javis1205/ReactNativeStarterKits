@@ -92,3 +92,7 @@ export const faceTime = (...args) => ({
   args
 })
 
+export const getUserInfo = (...args) => ({
+  type: 'app/getUserInfo',
+  args
+})

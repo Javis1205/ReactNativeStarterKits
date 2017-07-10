@@ -31,6 +31,7 @@ import * as commonActions from '~/store/actions/common'
 import * as accountActions from '~/store/actions/account'
 import * as accountSelectors from '~/store/selectors/account'
 import * as notificationActions from '~/store/actions/notification'
+import * as authSelectors from '~/store/selectors/auth'
 import routes from './routes'
 
 const getPage = (url) => {  
@@ -55,7 +56,8 @@ const UIManager = NativeModules.UIManager
   router: getRouter(state),
   drawerState: getDrawerState(state),
   profile: accountSelectors.getProfile(state),
-  modalState: getModalState(state)
+  modalState: getModalState(state),
+  token: authSelectors.getToken(state)
 }), {...commonActions, ...accountActions, ...notificationActions})
 export default class App extends Component {    
 
@@ -97,7 +99,7 @@ export default class App extends Component {
     OneSignal.addEventListener('opened', this.onOpened.bind(this));
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
-    OneSignal.inFocusDisplaying(0)
+    OneSignal.inFocusDisplaying(1)
   }
   
   componentWillUnmount() {
@@ -105,13 +107,13 @@ export default class App extends Component {
     OneSignal.removeEventListener('opened', this.onOpened.bind(this));
     OneSignal.removeEventListener('registered', this.onRegistered);
     OneSignal.removeEventListener('ids', this.onIds);
-    OneSignal.inFocusDisplaying(0)
   }
   
   onReceived(notification) {
     console.log("Notification received: ", notification);
     let notiData = notification.payload.additionalData
-    if (notiData.user_id) {
+    console.log(notiData)
+    if (notiData.noti_type == 'facetime') {
       this.setState({
         modalOpen: true,
         notiData: notiData
@@ -130,9 +132,11 @@ export default class App extends Component {
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
     let notiData = openResult.notification.payload.additionalData
-    if (notiData.user_id) {
-      this.props.saveFanProfileToFaceTime(notiData)
-      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+    if (notiData.noti_type == 'facetime') {
+      this.props.getUserInfo(this.props.token, notiData.user_id, (error, data) => {
+        this.props.saveFanProfileToFaceTime(data)
+        this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+      })
     } else {
       this.props.replaceNotification(notiData)
       this.props.forwardTo('userProfile/' + notiData.celebrity_id)

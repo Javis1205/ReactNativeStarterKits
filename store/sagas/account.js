@@ -152,6 +152,16 @@ const requestFaceTime = createRequestSaga({
   ],
 })
 
+const requestGetUserInfo = createRequestSaga({
+  request: api.account.getUserInfo,
+  key: 'getUserInfo',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t get profile', 'error')
+  ],
+})
 
 // root saga reducer
 export default [
@@ -172,7 +182,8 @@ export default [
           takeLatest('app/postQRCode', requestPostQRCode),
           takeLatest('app/searchMoreProfile', requestSearchMoreProfile),
           takeLatest('app/getHistory', requestGetHistory),
-          takeLatest('app/faceTime', requestFaceTime)
+          takeLatest('app/faceTime', requestFaceTime),
+          takeLatest('app/getUserInfo', requestGetUserInfo)
         ]
     },
 ]

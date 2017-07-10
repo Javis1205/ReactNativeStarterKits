@@ -73,5 +73,9 @@ export default {
   faceTime (access_token, user_id) {
     return apiPost('/mobile/v1/user/call-facetime/' + user_id, {}, access_token)
   },
+  
+  getUserInfo (access_token, user_id) {
+    return apiGet('/mobile/v1/user/' + user_id, {}, access_token)
+  },
 
 }
