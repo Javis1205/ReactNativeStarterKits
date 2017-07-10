@@ -114,8 +114,8 @@ export default class App extends Component {
     console.log('openResult: ', openResult);
     let notiData = openResult.notification.payload.additionalData
     if (notiData.p2p_notification) {
-      this.props.saveFanProfileToFaceTime(notiData.p2p_notification)
-      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+      /*this.props.saveFanProfileToFaceTime(notiData.p2p_notification)
+      this.props.forwardTo(`videoCall/${this.props.profile.id}`)*/
     } else {
       this.props.replaceNotification(notiData)
       this.props.forwardTo('userProfile/' + notiData.celebrity_id)

@@ -118,7 +118,6 @@ export default class extends Component {
         </Button>
       </View>
     )
-    console.log('end of header')
     return this.renderHeader(left, center, right)
   }
   renderHeader(left, center, right, props) {
