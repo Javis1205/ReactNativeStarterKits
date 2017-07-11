@@ -99,7 +99,7 @@ export default class App extends Component {
     OneSignal.addEventListener('opened', this.onOpened.bind(this));
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
-    OneSignal.inFocusDisplaying(1)
+    OneSignal.inFocusDisplaying(0)
   }
   
   componentWillUnmount() {
@@ -113,16 +113,18 @@ export default class App extends Component {
     console.log("Notification received: ", notification);
     let notiData = notification.payload.additionalData
     console.log(notiData)
-    if (notiData.noti_type == 'facetime') {
-      this.setState({
-        modalOpen: true,
-        notiData: notiData
-      }, () => {
-        this.props.openModal()
-      })
-    } else {
-      this.props.replaceNotification(notiData)
-      this.props.receiveNotification()
+    if (notification.isAppInFocus) {
+      if (notiData.noti_type == 'facetime') {
+        this.setState({
+          modalOpen: true,
+          notiData: notiData
+        }, () => {
+          this.props.openModal()
+        })
+      } else {
+        this.props.replaceNotification(notiData)
+        this.props.receiveNotification()
+      }
     }
   }
   

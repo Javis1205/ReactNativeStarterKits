@@ -33,13 +33,12 @@ export default class extends Component {
     }
   }
   
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-  }
-  
   onCallAccepted() {
     const {onCloseClick, notiData} = this.props
-    this.props.saveFanProfileToFaceTime(notiData)
+    this.props.getUserInfo(this.props.token, notiData.user_id, (error, data) => {
+      this.props.saveFanProfileToFaceTime(data)
+      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+    })
     onCloseClick()
     this.props.forwardTo(`videoCall/${this.props.profile.id}`)
   }

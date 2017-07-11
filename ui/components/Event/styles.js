@@ -103,5 +103,15 @@ export default {
     shadowOffset: null,
     borderWidth: null,
     shadowOpacity: 0
+  },
+  innerBackground: {
+    backgroundColor: 'transparent',
+    borderColor: '#ccc',
+    justifyContent:'flex-start',
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'flex-start',
+    height: '100%',
+    marginLeft: 5
   }
 }
