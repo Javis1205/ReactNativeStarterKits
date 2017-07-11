@@ -51,9 +51,16 @@ export default class extends Component {
        
   }
   
+  _onEventPress(id) {
+    this.props.forwardTo('eventDetail/' + id)
+  }
+  
   renderRow(item) {
+    console.log(item)
     return (
-      <ListItem noBorder style={styles.listItemContainer}>
+      <ListItem
+        onPress={this._onEventPress.bind(this, item.news_id)}
+        noBorder style={styles.listItemContainer}>
         <View style={{flexDirection: 'row'}}>
           <Image source={{uri: item.celebrity_avatar}} style={{height: 65, width: 65, borderRadius: 3}}/>
           <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'space-between', paddingRight: 10}}>

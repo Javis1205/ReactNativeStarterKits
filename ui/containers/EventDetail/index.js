@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {findNodeHandle, Image} from 'react-native'
+import {findNodeHandle, Image, TouchableOpacity} from 'react-native'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col, List, ListItem,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
@@ -85,6 +85,10 @@ export default class UserProfile extends Component {
     this.props.chooseACampaign(this.state.event)
     this.props.forwardTo('event/update')
   }
+  
+  _onUserPress(userId) {
+    this.props.forwardTo('userProfile/' + userId)
+  }
 
   renderContent(){
     if (this.state.refreshing) {
@@ -109,36 +113,36 @@ export default class UserProfile extends Component {
     let fromTime = moment(this.state.event.start_time).format("HH:mm")
     let toTime = moment(this.state.event.finish_time).format("HH:mm")
     let date = moment(this.state.event.finish_time).format("DD/MM/YYYY")
-
+    console.log(this.state.celebrity)
     return (
       <Content>
-        <ProfileHeader user={this.state.celebrity}>
-          <EventHeader user={this.state.celebrity}/>
-        </ProfileHeader>
-        <View style={{
-          borderColor: '#777',
-          borderBottomWidth: 0.5,
-          paddingBottom: 8,
-          margin: 8,
-        }}>
-          <Text style={styles.eventText}>{this.state.event.title}</Text>
-          <View style={{marginTop: 5}} row>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 20, marginTop: 20}}>
+          <TouchableOpacity
+            onPress={this._onUserPress.bind(this, this.state.celebrity.id)}
+            style={{paddingLeft: 10, flexDirection: 'column', maxWidth: 120}}>
+            <Image source={{uri: this.state.celebrity.avatar}} style={styles.avatar} />
+            <Text style={styles.celebName}>{this.state.celebrity.full_name}</Text>
+          </TouchableOpacity>
+          <View style={{borderColor: '#777', paddingBottom: 8, margin: 8}}>
+            <Text style={styles.eventText}>{this.state.event.title}</Text>
+            <View style={{marginTop: 5}} row>
               <View style={{width: 20, alignItems: 'center'}}>
                 <IconNB name='location' style={styles.iconContent}/>
               </View>
               <Text style={styles.detailEventText}>{this.state.event.location}</Text>
-          </View>
-          <View style={{marginTop: 5}} row>
-            <View style={{width: 20, alignItems: 'center'}}>
-              <IconNB name='calendar' style={styles.iconContent}/>
             </View>
-            <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime}</Text>
-            <Icon name='calendar' style={{...styles.iconContent, marginLeft: 10}}/>
-            <Text style={styles.detailEventText}>{date}</Text>
+            <View style={{marginTop: 5}} row>
+              <View style={{width: 20, alignItems: 'center'}}>
+                <IconNB name='calendar' style={styles.iconContent}/>
+              </View>
+              <Text style={styles.detailEventText}>{ fromTime + ' - ' + toTime}</Text>
+              <Icon name='calendar' style={{...styles.iconContent, marginLeft: 10}}/>
+              <Text style={styles.detailEventText}>{date}</Text>
+            </View>
           </View>
         </View>
         {eventImgContainer}
-        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: '100%', height: 40}}>
+        <View style={styles.socialInnerContainer}>
           <Button style={{...styles.socialButton}}>
             <View style={{justifyContent: 'center', width: 30}}>
               <IconNB name='favorite-border' style={styles.icon}/>

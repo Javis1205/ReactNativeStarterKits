@@ -113,18 +113,18 @@ export default class App extends Component {
     console.log("Notification received: ", notification);
     let notiData = notification.payload.additionalData
     console.log(notiData)
-    if (notification.isAppInFocus) {
-      if (notiData.noti_type == 'facetime') {
+    if (notiData.noti_type == 'facetime') {
+      if (notification.isAppInFocus) {
         this.setState({
           modalOpen: true,
           notiData: notiData
         }, () => {
           this.props.openModal()
         })
-      } else {
-        this.props.replaceNotification(notiData)
-        this.props.receiveNotification()
       }
+    } else {
+      this.props.replaceNotification(notiData)
+      this.props.receiveNotification()
     }
   }
   
