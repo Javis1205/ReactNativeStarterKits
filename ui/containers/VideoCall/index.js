@@ -276,7 +276,7 @@ export default class extends Component {
     console.log("Will Focus")
     const userId = this.props.route.params.id
     this.setState({
-      roomID: 'tupt',
+      roomID: userId,
       smallScreenLoading: true
     }, () => {
       container = this;
