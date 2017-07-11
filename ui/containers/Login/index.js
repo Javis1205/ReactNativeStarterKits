@@ -61,17 +61,31 @@ export default class extends Component {
     this.props.saveSocialType(socialType)
     const ret = await manager.authorize(socialType)
     console.log(ret.response)
-    const token = ret.response.credentials.accessToken
-    this.props.login(token, socialType, (error, data) => {
-      //OneSignal.sendTag('userId', this.props.profile.id)
-      this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
-        console.log(dataProfile.id)
-        this.props.forwardTo('home')
-        this.props.setToast('Logged successfully!!!')
-        OneSignal.sendTag("user_id", dataProfile.id)
-      })
-    })
-
+    let token = null
+    if (socialType == 'facebook') {
+      token = ret.response.credentials.accessToken
+      this.props.login(token, socialType, (error, data) => {
+       this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
+         console.log(dataProfile.id)
+         this.props.forwardTo('home')
+         this.props.setToast('Logged successfully!!!')
+         OneSignal.sendTag("user_id", dataProfile.id)
+       })
+     })
+    } else {
+      token = ret.response.credentials.access_token
+      tokenSecret = ret.response.credentials.access_token_secret
+      console.log(token)
+      console.log(tokenSecret)
+      /*this.props.login(token, socialType, (error, data) => {
+        this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
+          console.log(dataProfile.id)
+          this.props.forwardTo('home')
+          this.props.setToast('Logged successfully!!!')
+          OneSignal.sendTag("user_id", dataProfile.id)
+        })
+      }) */
+    }
   }
 
   imageLoaded() {
