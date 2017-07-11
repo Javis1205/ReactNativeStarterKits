@@ -91,6 +91,8 @@
 		C16EB3F934D544FDAB89DFF1 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D4AB91FF8E4BD58D5F88DD /* libRNFetchBlob.a */; };
 		C20EC8D51F01091D006444BF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20EC8D31F01091D006444BF /* Fabric.framework */; };
 		C20EC8D61F01091D006444BF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20EC8D41F01091D006444BF /* Crashlytics.framework */; };
+		C25EFA351F14E10300AE4E0D /* RNInCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EFA331F14E10300AE4E0D /* RNInCallManager.swift */; };
+		C25EFA361F14E10300AE4E0D /* RNInCallManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C25EFA341F14E10300AE4E0D /* RNInCallManagerBridge.m */; };
 		C28C1DAD1F0C9FC700202DAA /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C28C1D821F0C9FA800202DAA /* libART.a */; };
 		C5612A9EE702439E9336B34F /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD51FC85464C459D2DF9B8 /* Rubik-Italic.ttf */; };
 		C6D8C379375C444298A3A139 /* SanFranciscoBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF4F9A030A1F4285A8BD04CB /* SanFranciscoBold.ttf */; };
@@ -529,6 +531,9 @@
 		C10D7B773452427EB159C39A /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
 		C20EC8D31F01091D006444BF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		C20EC8D41F01091D006444BF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		C25EFA321F14E10300AE4E0D /* RNInCallManager-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNInCallManager-Bridging-Header.h"; sourceTree = "<group>"; };
+		C25EFA331F14E10300AE4E0D /* RNInCallManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNInCallManager.swift; sourceTree = "<group>"; };
+		C25EFA341F14E10300AE4E0D /* RNInCallManagerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNInCallManagerBridge.m; sourceTree = "<group>"; };
 		C28C1D7D1F0C9FA800202DAA /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		C39E0391FC2049D9AEAC9450 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		C7D4AB91FF8E4BD58D5F88DD /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
@@ -881,6 +886,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				C25EFA311F14E10300AE4E0D /* RNInCallManager */,
 				C20EC8D31F01091D006444BF /* Fabric.framework */,
 				C20EC8D41F01091D006444BF /* Crashlytics.framework */,
 				240B49451ECF021000D4F01D /* WebRTC.framework */,
@@ -935,6 +941,17 @@
 				C2497E3F1EEEA4E8000773D2 /* libRNGeocoder.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C25EFA311F14E10300AE4E0D /* RNInCallManager */ = {
+			isa = PBXGroup;
+			children = (
+				C25EFA321F14E10300AE4E0D /* RNInCallManager-Bridging-Header.h */,
+				C25EFA331F14E10300AE4E0D /* RNInCallManager.swift */,
+				C25EFA341F14E10300AE4E0D /* RNInCallManagerBridge.m */,
+			);
+			name = RNInCallManager;
+			path = "../node_modules/react-native-incall-manager/ios/RNInCallManager";
 			sourceTree = "<group>";
 		};
 		C2796C541F0B56C6006BEE77 /* Products */ = {
@@ -1086,6 +1103,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = EUKQS3744F;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1733,7 +1751,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				C25EFA361F14E10300AE4E0D /* RNInCallManagerBridge.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				C25EFA351F14E10300AE4E0D /* RNInCallManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1764,6 +1784,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CC235DA05F12B9B716624D9 /* Pods-NovameTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = B2T9Y9TK29;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1814,6 +1835,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9FEDD8C8E04B890B318E85B4 /* Pods-NovameTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = B2T9Y9TK29;
@@ -1891,6 +1913,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-incall-manager/ios/RNInCallManager/RNInCallManager-Bridging-Header.h",
 				);
 				INFOPLIST_FILE = Novame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1904,6 +1927,8 @@
 				PRODUCT_NAME = Novame;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "../node_modules/react-native-incall-manager/ios/RNInCallManager/RNInCallManager-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1942,6 +1967,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-incall-manager/ios/RNInCallManager/RNInCallManager-Bridging-Header.h",
 				);
 				INFOPLIST_FILE = Novame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1955,6 +1981,8 @@
 				PRODUCT_NAME = Novame;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "../node_modules/react-native-incall-manager/ios/RNInCallManager/RNInCallManager-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

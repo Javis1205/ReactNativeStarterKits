@@ -73,6 +73,7 @@ export default class extends Component {
        })
      })
     } else {
+      console.log("im here")
       token = ret.response.credentials.access_token
       tokenSecret = ret.response.credentials.access_token_secret
       console.log(token)
