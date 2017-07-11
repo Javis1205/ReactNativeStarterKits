@@ -308,7 +308,7 @@ export default class extends Component {
 
   _press = (event) =>{    
     if(this.state.status === 'connect'){
-      this._close()
+      this._closeOnChatting()
     } else {
       this._connect()
     }
@@ -320,7 +320,15 @@ export default class extends Component {
   }
   
   _close() {
-    this.setState({status: 'ready', info: 'Connect tupt'});
+    this.setState({status: 'ready', info: 'Connect tupt', remoteViewSrc: null, selfViewSrc: null});
+    for(let socketId in pcPeers){
+      leave(socketId)
+      delete pcPeers[socketId];
+    }
+  }
+  
+  _closeOnChatting() {
+    this.setState({status: 'ready', info: 'Connect tupt', remoteViewSrc: null});
     for(let socketId in pcPeers){
       leave(socketId)
       delete pcPeers[socketId];
