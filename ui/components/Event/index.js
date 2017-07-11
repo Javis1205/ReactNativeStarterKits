@@ -11,7 +11,9 @@ import ImageP from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
 
 import { API_BASE } from '~/store/constants/api'
-// import * as accountSelectors from '~/store/selectors/account'
+import * as accountSelectors from '~/store/selectors/account'
+import * as commonActions from '~/store/actions/common'
+import * as campaignActions from '~/store/actions/campaign'
 import moment from 'moment'
 import CacheableImage from '~/ui/components/CacheableImage'
 import RegitButton from '~/ui/elements/RegitButton'
@@ -50,7 +52,9 @@ const Background = ({feed, children, parent}) => {
   )
 }
 
-
+@connect(state=>({
+  profile: accountSelectors.getProfile(state),
+}), {...commonActions, ...campaignActions})
 export default class extends Component {
   constructor(props) {
     super(props)
@@ -58,6 +62,11 @@ export default class extends Component {
     this.state = {
       location: ''
     }
+  }
+  
+  onPressEdit(data) {
+    this.props.chooseACampaign(data)
+    this.props.forwardTo('event/update')
   }
 
   render() {
@@ -71,6 +80,14 @@ export default class extends Component {
     let fromTime = moment(feed.start_time).format("HH:mm")
     let toTime = moment(feed.finish_time).format("HH:mm")
     let date = moment(feed.finish_time).format("DD/MM/YY")
+    
+    let editButton = (this.props.profile.id == feed.celebrity.id) ? <Button
+                                                                      onPress={this.onPressEdit.bind(this, feed)}
+                                                                      transparent>
+                                                                      <Icon style={{fontSize: 18, color: 'black'}} name="create" />
+                                                                    </Button>
+                                                                  : <View/>
+    
     return (
         <View style={styles.container}>
           <PopupPhotoView ref='popupPhotoView' />
@@ -91,24 +108,16 @@ export default class extends Component {
                 }}>
                   <Text
                     onLongPress={this.props.onUserPress}
-                    style={styles.starNameText}>{feed.celebrity.username}</Text>
+                    style={styles.starNameText}>{feed.celebrity.full_name}</Text>
                   <Text note style={{...styles.timeText, color: 'gray'}}>{updateTime + '   ' + updateDate}</Text>
                 </View>
               </View>
+              {editButton}
             </View>
           </View>
           <Background parent={this} feed={feed}>
             <View style={{backgroundColor: 'rgba(0,0,0,0.3)', width: '100%', height: 75, position: 'absolute', bottom: 0}}>
-              <View style={{
-              backgroundColor: 'transparent',
-              borderColor: '#ccc',
-              justifyContent:'flex-start',
-              flexDirection: 'row',
-              width: '100%',
-              alignItems: 'flex-start',
-              height: '100%',
-              marginLeft: 5
-            }}>
+              <View style={styles.innerBackground}>
                 <View style={{flexDirection: 'column'}}>
                   <View row style={{ justifyContent:'space-between'}}>
                     <Text style={styles.bigText}>{feed.title}</Text>
@@ -118,16 +127,16 @@ export default class extends Component {
                       <View style={{width: 20, alignItems: 'center'}}>
                         <Icon name='location' style={{color: 'white', fontSize: 16}}/>
                       </View>
-                      <Text numberOfLines={2} note style={styles.detailText}>{feed.location}</Text>
+                      <Text numberOfLines={2} note style={{...styles.detailText, marginLeft: 5}}>{feed.location}</Text>
                     </View>
                     <View row style={{marginTop: 4, marginLeft: 0}}>
                       <View style={{width: 20, alignItems: 'center'}}>
                         <Icon name='calendar' style={{color: 'white', fontSize: 16}}/>
                       </View>
                       <View style={{flexDirection: 'row'}}>
-                        <Text note style={{...styles.timeText}}>{fromTime + ' - ' + toTime}</Text>
+                        <Text note style={{...styles.timeText, marginLeft: 5}}>{fromTime + ' - ' + toTime}</Text>
                         <IconAwesome name='calendar' style={{color: 'white', fontSize: 16, marginLeft: 10}}/>
-                        <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 2}}>{date}</Text>
+                        <Text note style={{...styles.timeText, alignSelf: 'center', marginLeft: 5}}>{date}</Text>
                       </View>
                     </View>
                   </View>

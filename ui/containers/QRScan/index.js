@@ -21,7 +21,7 @@ import {
 } from '~/ui/elements/Form'
 import Icon from '~/ui/elements/Icon'
 import CacheableImage from '~/ui/components/CacheableImage'
-import { congratulations, heartBroken } from '~/assets'
+import { congratulations, heartBroken, winner, warning } from '~/assets'
 
 
 import {
@@ -99,7 +99,7 @@ export default class QRScan extends Component {
         <Text style={styles.text}>Scan the QR code</Text>
         <TouchableWithoutFeedback onPress={() => this.onSuccessButtonPress()}>
           <Modal
-            backdropColor="#D2FAFB"
+            backdropColor="transparent"
             backdropOpacity={0.2}
             animationOut={'fadeOut'}
             animationIn={'fadeIn'}
@@ -109,15 +109,15 @@ export default class QRScan extends Component {
             <View style={styles.modalContainer}>
               <Image
                 resizeMode="stretch"
-                style={{...styles.modalImage, height: 150, width: '100%'}}
-                source={congratulations}/>
-              <Text style={styles.modalSuccessText}>You have {this.state.loyalPoint}LP!</Text>
+                style={{...styles.modalImage, height: 200, width: 180}}
+                source={winner}/>
+              <Text style={styles.modalSuccessText}>You got {this.state.loyalPoint}LP!</Text>
             </View>
           </Modal>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => this.onErrorButtonPress()}>
           <Modal
-            backdropColor="#D2FAFB"
+            backdropColor="transparent"
             backdropOpacity={0.5}
             animationOut={'fadeOut'}
             animationIn={'fadeIn'}
@@ -127,8 +127,8 @@ export default class QRScan extends Component {
             <View style={styles.modalContainer}>
               <Image
                 resizeMode="contain"
-                style={styles.modalImage}
-                source={heartBroken}/>
+                style={{...styles.modalImage, height: 150, width: 150}}
+                source={warning}/>
               <Text style={styles.modalErrorText}>Sorry! Wrong QR code</Text>
             </View>
           </Modal>

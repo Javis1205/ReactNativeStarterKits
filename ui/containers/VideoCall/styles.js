@@ -1,9 +1,10 @@
 import material from '~/theme/variables/material'
+import { Platform } from 'react-native'
 
 export default {
   remoteView: {
     position: 'absolute',
-    top: 0,
+    top: (Platform.OS == 'android') ? 56 : 76,
     left: 0,
     bottom: 0,
     right: 0,    

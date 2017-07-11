@@ -179,7 +179,7 @@ export default class Search extends Component {
         }}>
         <View style={styles.celebItem}>
           <Thumbnail source={{ uri: rowData.avatar }} style={styles.resultThumbnail} />
-          <Text style={{alignSelf: 'center', fontSize: 12}}>{rowData.username}</Text>
+          <Text style={{alignSelf: 'center', fontSize: 12}}>{rowData.full_name}</Text>
           <View style={styles.row}>
             <Icon small name='star' />
             <Text note small>{rowData.fan_count}</Text>

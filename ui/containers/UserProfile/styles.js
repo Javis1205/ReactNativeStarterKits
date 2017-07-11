@@ -49,6 +49,8 @@ export default {
     borderColor: '#979797',
     backgroundColor: '#000',
     alignItems: 'center',
+    paddingTop: 0,
+    paddingBottom: 0
   },
   followButton: {
     // width: '50%',
@@ -90,7 +92,8 @@ export default {
     paddingLeft: 0,
     paddingRight: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
+    paddingTop: 5
   },
   dateText: {
     fontSize: 18

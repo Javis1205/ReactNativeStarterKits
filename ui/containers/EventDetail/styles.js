@@ -120,5 +120,24 @@ export default {
     shadowRadius: 0,
     borderRadius: 0,
     alignSelf: 'center'
+  },
+  socialInnerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    borderBottomWidth: 0.2,
+    borderColor: 'gray'
+  },
+  avatar: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    alignSelf: 'center'
+  },
+  celebName: {
+    marginTop: 10,
+    fontSize: 12
   }
 }

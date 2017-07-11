@@ -41,6 +41,7 @@ const formSelector = formValueSelector('CreateEventForm')
   formState: state.form,
   token: authSelectors.getToken(state),
   celebrity_id: accountSelectors.getCelebrityId(state),
+  profile: accountSelectors.getProfile(state)
 }), dispatch => ({
   actions: bindActionCreators({ ...commonActions, ...campaignActions, ...imageActions}, dispatch)
 }), (stateProps, dispatchProps, ownProps)=>{
@@ -121,19 +122,28 @@ export default class EventCreation extends Component {
       news_type_id: 1,
       location: this.props.formValues.address,
       title: this.props.formValues.name,
-      content: "Hello World",
+      content: `${this.props.profile.full_name} created an event`,
       start_time: fromTime,
       finish_time: toTime
     }
     if (this.state.imgId != '') {
       event.image_ids = [this.state.imgId]
     }
-    this.props.actions.createCampaign(this.props.token, event, () => {
-      this.setState({
-        creatingModal: false
-      }, () => {
-        this.props.actions.goBack()
-      })
+    this.props.actions.createCampaign(this.props.token, event, (error, data) => {
+      if (data != null) {
+        this.props.actions.addACampaign(data)
+        this.setState({
+          creatingModal: false
+        }, () => {
+          this.props.actions.goBack()
+        })
+      } else {
+        this.setState({
+          creatingModal: false
+        }, () => {
+          this.props.actions.setToast('Time out', 'error')
+        })
+      }
     })
   }
   

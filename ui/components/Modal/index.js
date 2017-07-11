@@ -40,7 +40,7 @@ export default class extends Component {
         visible={open}        
         >
         <View style={styles.container}>
-          <TouchableWithoutFeedback onPress={onCloseClick}>
+          <TouchableWithoutFeedback>
             <View style={styles.backdrop}>              
             </View>
           </TouchableWithoutFeedback>

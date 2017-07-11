@@ -25,7 +25,8 @@
   [Fabric with:@[[Crashlytics class]]];
 
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                         appId:@"254b7d64-9f13-4d06-8b74-1e6f6a3d209e"];
+                                                         appId:@"254b7d64-9f13-4d06-8b74-1e6f6a3d209e"
+                    settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone),kOSSettingsKeyAutoPrompt : @YES}];
   
   NSURL *jsCodeLocation;
 

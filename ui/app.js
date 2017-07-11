@@ -5,6 +5,7 @@ import { Drawer, StyleProvider } from 'native-base'
 
 import URL from 'url-parse'
 
+import CallModal from '~/ui/components/CallModal'
 import getTheme from '~/theme/components'
 import material from '~/theme/variables/material'
 
@@ -22,10 +23,15 @@ import Popover from '~/ui/components/Popover'
 // history.push => location match => return component using navigator push
 import { matchPath } from 'react-router'
 import { connect } from 'react-redux'
+import OneSignal from 'react-native-onesignal'
 
 // should show error if not found
-import { getDrawerState, getRouter } from '~/store/selectors/common'
+import { getDrawerState, getRouter, getModalState } from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
+import * as accountActions from '~/store/actions/account'
+import * as accountSelectors from '~/store/selectors/account'
+import * as notificationActions from '~/store/actions/notification'
+import * as authSelectors from '~/store/selectors/auth'
 import routes from './routes'
 
 const getPage = (url) => {  
@@ -49,7 +55,10 @@ const UIManager = NativeModules.UIManager
 @connect(state=>({
   router: getRouter(state),
   drawerState: getDrawerState(state),
-}), commonActions)
+  profile: accountSelectors.getProfile(state),
+  modalState: getModalState(state),
+  token: authSelectors.getToken(state)
+}), {...commonActions, ...accountActions, ...notificationActions})
 export default class App extends Component {    
 
   static configureScene(route) {
@@ -76,11 +85,76 @@ export default class App extends Component {
     this.page = getPage(props.router.route) || routes.notFound   
     this.firstTime = true   
     // this.timer = null
-    this.pageInstances = {}      
+    this.pageInstances = {}
+    this.state = {
+      modalOpen: false,
+      notiData: {}
+    }
+  }
+  
+  componentWillMount() {
+    UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true)
+    OneSignal.addEventListener('received', this.onReceived.bind(this));
+    OneSignal.addEventListener('opened', this.onOpened.bind(this));
+    OneSignal.addEventListener('registered', this.onRegistered);
+    OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.inFocusDisplaying(0)
+  }
+  
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived.bind(this));
+    OneSignal.removeEventListener('opened', this.onOpened.bind(this));
+    OneSignal.removeEventListener('registered', this.onRegistered);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+  
+  onReceived(notification) {
+    console.log("Notification received: ", notification);
+    let notiData = notification.payload.additionalData
+    console.log(notiData)
+    if (notiData.noti_type == 'facetime') {
+      if (notification.isAppInFocus) {
+        this.setState({
+          modalOpen: true,
+          notiData: notiData
+        }, () => {
+          this.props.openModal()
+        })
+      }
+    } else {
+      this.props.replaceNotification(notiData)
+      this.props.receiveNotification()
+    }
+  }
+  
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+    let notiData = openResult.notification.payload.additionalData
+    if (notiData.noti_type == 'facetime') {
+      this.props.getUserInfo(this.props.token, notiData.user_id, (error, data) => {
+        this.props.saveFanProfileToFaceTime(data)
+        this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+      })
+    } else {
+      this.props.replaceNotification(notiData)
+      this.props.forwardTo('userProfile/' + notiData.celebrity_id)
+    }
+  }
+  
+  onRegistered(notifData) {
+    console.log("Device had been registered for push notifications!", notifData);
+  }
+  
+  onIds(device) {
+    console.log('Device info: ', device);
   }
 
   // replace view from stack, hard code but have high performance
-  componentWillReceiveProps({router, drawerState}){
+  componentWillReceiveProps({router, drawerState, modalState}){
     // process for route change only
     if(router.route !== this.props.router.route){
       const oldComponent = this.pageInstances[this.page.path]
@@ -117,6 +191,10 @@ export default class App extends Component {
     // check drawer
     if(drawerState !== this.props.drawerState){
       this.drawer._root[drawerState === 'opened' ? 'open' : 'close']()
+    }
+  
+    if(modalState !== this.props.modalState){
+      this.forceUpdate()
     }
   }
 
@@ -182,12 +260,6 @@ export default class App extends Component {
       default:
         return forwardTo(route)
     }    
-  }
-
-
-  componentWillMount() {
-      UIManager.setLayoutAnimationEnabledExperimental &&
-      UIManager.setLayoutAnimationEnabledExperimental(true)        
   }
 
   componentDidMount() {
@@ -258,7 +330,7 @@ export default class App extends Component {
   }
 
   render() {    
-    const {router, drawerState, closeDrawer} = this.props   
+    const {router, drawerState, closeDrawer, modalState, closeModal} = this.props
     const {title, path, headerType, footerType} = this.page 
     return (            
       <StyleProvider style={getTheme(material)}>         
@@ -281,7 +353,12 @@ export default class App extends Component {
           <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
           <Popover ref={ref=>this.popover=ref}/>
-        </Drawer>   
+          <CallModal
+            ref={ref => this.modal = ref}
+            notiData={this.state.notiData}
+            onCloseClick={closeModal}
+            open={(modalState === 'opened')} />
+        </Drawer>
       </StyleProvider>          
     )
   }

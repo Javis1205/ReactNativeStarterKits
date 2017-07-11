@@ -8,7 +8,10 @@ export default {
     borderBottomWidth:0.5,
     borderColor: material.grayColor,
     marginLeft:0,
-    marginRight:0,    
+    marginRight:0,
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingLeft: 10
   },
   icon:{
     color: material.toolbarDefaultBg,

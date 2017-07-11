@@ -85,7 +85,7 @@ export default class extends Component {
               placeholder={<Icon name="image" style={styles.drawerImage}/>} 
               style={styles.drawerImage}/>            
 
-            <Text large style={styles.text}>{this.props.profile.username}</Text>
+            <Text large style={styles.text}>{this.props.profile.full_name}</Text>
             <Text small style={styles.text}>{this.props.profile.location}</Text>
             {/*<View style={styles.editContainer}>
               <Text small style={styles.text}>{'LA'}, {'USA'}</Text>
@@ -101,7 +101,7 @@ export default class extends Component {
                   </Left>                
                 </ListItem>)}
             {areUCeleb}
-            <ListItem noBorder button onPress={this._handleLogout.bind(this)} >
+            <ListItem noBorder button onPress={this._handleLogout.bind(this)} style={{marginTop: 20}} >
               <Left>
                 <Icon name={'sign-out'} style={styles.icon} />
                 <Text style={styles.iconTextLast}>Log out</Text>

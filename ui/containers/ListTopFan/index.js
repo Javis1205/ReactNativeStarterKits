@@ -11,6 +11,7 @@ import { Field, FieldArray, reduxForm, formValueSelector} from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
+import OneSignal from 'react-native-onesignal'
 
 import {
   InputField,
@@ -62,7 +63,11 @@ export default class ListTopFan extends Component {
   
   onFaceTimePress(profile) {
     this.props.saveFanProfileToFaceTime(profile)
-    this.props.forwardTo(`videoCall/${profile.id}`)
+    this.props.faceTime(this.props.token, profile.id, (error, data) => {
+      console.log(error)
+      console.log(data)
+      this.props.forwardTo(`videoCall/${profile.id}`)
+    })
   }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
@@ -77,7 +82,7 @@ export default class ListTopFan extends Component {
                         <Icon name="photo-camera"/>
                       </Button>
     } else {
-      rightContainer = <Text note small style={{alignSelf: 'flex-end'}}>8000 LP</Text>
+      rightContainer = <Text note small style={{alignSelf: 'flex-end'}}>{rowData.loyal_points} LP</Text>
     }
     return(
       <ListItem style={styles.listItemContainer}>
@@ -87,7 +92,7 @@ export default class ListTopFan extends Component {
               source={{uri: rowData.avatar}}
               style={{width: 50, height: 50, borderRadius: 25}}/>
             <View style={{flexDirection: 'column', paddingLeft: 10, justifyContent: 'center'}}>
-              <Text numberOfLines={1} style={{fontSize: 14}}>{rowData.username}</Text>
+              <Text numberOfLines={1} style={{fontSize: 14}}>{rowData.full_name}</Text>
               <Text style={{fontSize: 14}}>{rowData.location || 'location'}</Text>
             </View>
           </Col>

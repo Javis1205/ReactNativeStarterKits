@@ -10,7 +10,9 @@ export default {
     paddingBottom:0,
     marginLeft: 0,
     marginRight: 0,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderTopWidth: 0,
+    paddingTop: 5
   },
   buttonContainer: {
     height: height - 100,
@@ -57,7 +59,7 @@ export default {
   },
   eventButton: {
     height: '100%',
-    width: '100%',
+    width: '100%' - 60,
     backgroundColor: 'white',
     borderWidth: 0,
     elevation: 0,
@@ -71,7 +73,6 @@ export default {
   },
   avatarButton: {
     height: '100%',
-    paddingLeft: 10,
     paddingRight: 0,
     backgroundColor: 'white',
     borderWidth: 0,
@@ -80,6 +81,8 @@ export default {
     paddingTop: 0,
     paddingBottom: 0,
     shadowOffset: null,
-    shadowOpacity: 0
+    shadowOpacity: 0,
+    borderRadius: 4,
+    paddingLeft: 5
   }
 }

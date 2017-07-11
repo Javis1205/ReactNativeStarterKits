@@ -67,7 +67,7 @@ export default class EventUpdate extends Component {
       fromTime: moment(props.chosenEvent.start_time).format("HH:mm"),
       toTime: moment(props.chosenEvent.finish_time).format("HH:mm"),
       date: moment(props.chosenEvent.finish_time).format("DD/MM/YYYY"),
-      imgUri: API_BASE + '/i/0x0/' + props.chosenEvent.images[0].image.url,
+      imgUri: '',
       celebrity: props.chosenEvent.celebrity,
       imgId: '',
       updatingModal: false
@@ -81,6 +81,13 @@ export default class EventUpdate extends Component {
   
   componentWillFocus() {
     let event = this.props.chosenEvent
+    this.setState({
+      fromTime: moment(event.start_time).format("HH:mm"),
+      toTime: moment(event.finish_time).format("HH:mm"),
+      date: moment(event.finish_time).format("DD/MM/YYYY"),
+      imgUri: (event.images[0]) ? (API_BASE + '/i/0x0/' + event.images[0].image.url) : '',
+      celebrity: event.celebrity
+    })
   }
   
   getFromTime(fromTime) {
@@ -132,13 +139,22 @@ export default class EventUpdate extends Component {
     if (this.state.imgId != '') {
       event.image_ids = [this.state.imgId]
     }
-    console.log(event)
-    this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event, () => {
-      this.setState({
-        updatingModal: false
-      }, () => {
-        this.props.actions.goBack()
-      })
+    this.props.actions.editCampaign(this.props.token, this.props.chosenEvent.id, event, (error, data) => {
+      if (data != null) {
+        this.props.actions.deleteAfterEditingACampaign(data)
+        this.props.actions.addAfterDeletingACampaign(data)
+        this.setState({
+          updatingModal: false
+        }, () => {
+          this.props.actions.goBack()
+        })
+      } else {
+        this.setState({
+          updatingModal: false
+        }, () => {
+          this.props.actions.setToast('Time out', 'error')
+        })
+      }
     })
   }
   
@@ -146,10 +162,8 @@ export default class EventUpdate extends Component {
     return(
       <Container>
         <Content>
-          <ProfileHeader user={this.state.celebrity}>
-            <EventHeader user={this.state.celebrity}/>
-          </ProfileHeader>
           <EventForm
+            updateForm={this.props.chosenEvent}
             imgUri={this.state.imgUri}
             getFromTime={this.getFromTime.bind(this)}
             getDate={this.getDate.bind(this)}

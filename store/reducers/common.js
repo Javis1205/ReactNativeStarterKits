@@ -51,6 +51,23 @@ export const drawer = (state = {drawerState: 'closed'}, { type }) => {
   }
 }
 
+export const modal = (state = {modalState: 'closed'}, { type }) => {
+  switch (type) {
+    case 'app/openModal':
+      return {
+        ...state,
+        modalState: 'opened',
+      }
+    case 'app/closeModal':
+      return {
+        ...state,
+        modalState: 'closed',
+      }
+    default:
+      return state
+  }
+}
+
 export const search = (state = null, { type, payload }) => {
   switch(type){
     case 'app/search':
