@@ -4,7 +4,7 @@ import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col,
   Card, CardItem, Text, Thumbnail, Left, Right, Body
 } from 'native-base'
-import { TouchableOpacity, Image } from 'react-native'
+import { TouchableOpacity, Image, TouchableWithoutFeedback } from 'react-native'
 import Geocoder from 'react-native-geocoder'
 import IconAwesome from 'react-native-vector-icons/FontAwesome'
 import ImageP from 'react-native-image-progress';
@@ -68,6 +68,13 @@ export default class extends Component {
     this.props.chooseACampaign(data)
     this.props.forwardTo('event/update')
   }
+  
+  onPressProfile() {
+    const {feed, homePage, forwardTo} = this.props
+    if (homePage) {
+      forwardTo('userProfile/' + feed.celebrity.id)
+    }
+  }
 
   render() {
     const {feed} = this.props
@@ -99,7 +106,9 @@ export default class extends Component {
               width: '100%',
             }}>
               <View style={{flexDirection: 'row'}}>
-                <Image style={styles.avatar} source={starAvatar} />
+                <TouchableWithoutFeedback onPress={this.onPressProfile.bind(this)}>
+                  <Image style={styles.avatar} source={starAvatar} />
+                </TouchableWithoutFeedback>
                 <View style={{
                   marginLeft: 8,
                   height: 30,
