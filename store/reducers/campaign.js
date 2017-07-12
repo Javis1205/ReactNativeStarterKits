@@ -23,6 +23,8 @@ export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0}, {
       let newUpdatedCampaign = state.activeCampaign.results
       newUpdatedCampaign.splice(state.updatedCampaignIndex, 0, payload)
       return {...state, activeCampaign: {...state.activeCampaign, results: newUpdatedCampaign} }
+    case 'app/removeAllCampaign':
+      return {...state, activeCampaign: {} }
     default:
       return state
   }

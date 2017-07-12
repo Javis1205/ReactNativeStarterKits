@@ -3,7 +3,7 @@ import {
   Button, Container, ListItem, List, Spinner,
   Text, Item, View, Input, Left, Body, Thumbnail, Header, Right
 } from 'native-base'
-import { TouchableOpacity, ScrollView , Dimensions, ListView, Image} from 'react-native'
+import { TouchableOpacity, ScrollView , Dimensions, ListView, Image, Keyboard} from 'react-native'
 
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
@@ -91,6 +91,7 @@ export default class Search extends Component {
   }
   
   _onPressSearch = () => {
+    Keyboard.dismiss()
     this.page = 1
     this.setState({
       refreshingCeleb: true,

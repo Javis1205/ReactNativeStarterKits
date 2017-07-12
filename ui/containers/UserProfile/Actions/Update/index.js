@@ -114,7 +114,7 @@ export default class ProfileUpdate extends Component {
       avatar: this.state.avatarImg,
       location: this.props.formValues.address,
       cover_picture: this.state.coverImg,
-      favorite: this.props.formValues.favorite
+      favourite: this.props.formValues.favorite
     }
     this.props.updateProfile(this.props.token, userInfo, (error, data) => {
       this.props.replaceProfile(data)

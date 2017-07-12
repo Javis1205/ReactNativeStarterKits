@@ -4,15 +4,15 @@ export default {
  
 
   login (token, socialType) {
-    console.log(token)
     switch (socialType) {
       case 'facebook':
         return apiLogin(`/mobile/v1/user/register/facebook/`, {
           access_token: token
         })
       case 'twitter':
-        return apiLogin(`/mobile/v1/user/register/facebook/`, {
-          access_token: token
+        return apiLogin(`/mobile/v1/user/register/twitter/`, {
+          access_token: token.access_token,
+          secret_token: token.secret_token
         })
     }
   },

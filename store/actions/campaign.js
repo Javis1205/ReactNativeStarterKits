@@ -61,3 +61,7 @@ export const addAfterDeletingACampaign = (data) => ({
   type: 'app/addAfterDeletingACampaign',
   payload: data
 })
+
+export const removeAllCampaign = () => ({
+  type: 'app/removeAllCampaign'
+})

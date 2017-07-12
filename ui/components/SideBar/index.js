@@ -14,6 +14,7 @@ import * as authActions from '~/store/actions/auth'
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
+import * as campaignActions from '~/store/actions/campaign'
 
 
 import options from './options'
@@ -31,20 +32,36 @@ const manager = new OAuthManager('novame')
   token: authSelectors.getToken(state),
   profile: accountSelectors.getProfile(state),
   socialType: authSelectors.getSocialType(state)
-}), {...authActions, ...commonActions})
+}), {...authActions, ...commonActions, ...campaignActions})
 export default class extends Component {  
 
   async _handleLogout() {
-    const {forwardTo, closeDrawer, setToast} = this.props
+    const {closeDrawer} = this.props
     closeDrawer()
-    const ret = await manager.deauthorize(this.props.socialType)
-    if (ret.status == "ok") {
-      OneSignal.deleteTag("user_id")
-      forwardTo('login')
-      setToast('Logout successfully!!!')
-    } else {
-      setToast('Logout failed! Please check your internet connection')
+    try {
+      const ret = await manager.deauthorize(this.props.socialType)
+      if (ret.status == "ok") {
+        this._handleSuccessLogout()
+      }
+    } catch (error) {
+      this._handleFailLogout(error)
     }
+  }
+  
+  _handleSuccessLogout() {
+    const {forwardTo, setToast, removeAllCampaign} = this.props
+    OneSignal.deleteTag("user_id")
+    removeAllCampaign()
+    forwardTo('login')
+    setToast('Logout successfully!!!')
+  }
+  
+  _handleFailLogout(error) {
+    const {forwardTo, setToast, removeAllCampaign} = this.props
+    OneSignal.deleteTag("user_id")
+    removeAllCampaign()
+    forwardTo('login')
+    setToast(error.msg, 'error')
   }
 
   navigateTo(route) {
