@@ -6,7 +6,8 @@ import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
   replaceActiveCampaign,
-  replaceMoreActiveCampaign
+  replaceMoreActiveCampaign,
+  setNoData
 } from '~/store/actions/campaign'
 
 
@@ -14,7 +15,8 @@ const requestGetActiveCampaign = createRequestSaga({
     request: api.campaign.getActiveCampaign,
     key: 'getActiveCampaign',    
     success: [
-        (data) => replaceActiveCampaign(data),           
+        (data) => replaceActiveCampaign(data),
+        () => setNoData(false)
     ],
     failure: [
         () => setToast('Couldn\'t get active campaign', 'error')
@@ -76,6 +78,18 @@ const requestEditCampaign = createRequestSaga({
   ],
 })
 
+const requestGetTemporaryActiveCampaign = createRequestSaga({
+  request: api.campaign.getTemporaryActiveCampaign,
+  key: 'getTemporaryActiveCampaign',
+  success: [
+    (data) => replaceActiveCampaign(data),
+    () => setNoData(true)
+  ],
+  failure: [
+    () => setToast('Couldn\'t get active campaign', 'error')
+  ],
+})
+
 // saga reducer
 export default [
     // like case return, this is take => call
@@ -89,7 +103,9 @@ export default [
           takeLatest('app/getDetailedCampaign', requestGetDetailedEvent),
           takeLatest('app/getUserCampaign', requestUserEvent),
           takeLatest('app/editCampaign', requestEditCampaign),
-          takeLatest('app/getMoreActiveCampaign', requestGetMoreActiveCampaign)
+          takeLatest('app/getMoreActiveCampaign', requestGetMoreActiveCampaign),
+          takeLatest('app/getTemporaryActiveCampaign', requestGetTemporaryActiveCampaign)
+
         ]
     },
 ]

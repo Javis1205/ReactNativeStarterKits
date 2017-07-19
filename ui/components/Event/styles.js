@@ -113,5 +113,6 @@ export default {
     alignItems: 'flex-start',
     height: '100%',
     marginLeft: 5
-  }
+  },
+  
 }

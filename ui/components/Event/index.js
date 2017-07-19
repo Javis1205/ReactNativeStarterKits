@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View,
   Container, Header, Title, Content, Button, Grid, Row, Col,
-  Card, CardItem, Text, Thumbnail, Left, Right, Body
+  Card, CardItem, Text, Thumbnail, Left, Right, Body, Spinner
 } from 'native-base'
 import { TouchableOpacity, Image, TouchableWithoutFeedback } from 'react-native'
 import Geocoder from 'react-native-geocoder'
@@ -14,6 +14,9 @@ import { API_BASE } from '~/store/constants/api'
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
 import * as campaignActions from '~/store/actions/campaign'
+import * as authSelectors from '~/store/selectors/auth'
+import * as accountActions from '~/store/actions/account'
+import * as campaignSelectors from '~/store/selectors/campaign'
 import moment from 'moment'
 import CacheableImage from '~/ui/components/CacheableImage'
 import RegitButton from '~/ui/elements/RegitButton'
@@ -54,13 +57,16 @@ const Background = ({feed, children, parent}) => {
 
 @connect(state=>({
   profile: accountSelectors.getProfile(state),
-}), {...commonActions, ...campaignActions})
+  token: authSelectors.getToken(state),
+  noData: campaignSelectors.getNoData(state)
+}), {...commonActions, ...campaignActions, ...accountActions})
 export default class extends Component {
   constructor(props) {
     super(props)
     
     this.state = {
-      location: ''
+      location: '',
+      followRefreshing: false
     }
   }
   
@@ -75,6 +81,19 @@ export default class extends Component {
       forwardTo('userProfile/' + feed.celebrity.id)
     }
   }
+  
+  onPressFollow(data) {
+    this.setState({
+      followRefreshing: true
+    })
+    this.props.followCeleb(this.props.token, data.celebrity.id, (error, data) => {
+      this.setState({
+        followRefreshing: false
+      }, () => {
+        this.props.onPressFollow()
+      })
+    })
+  }
 
   render() {
     const {feed} = this.props
@@ -88,12 +107,18 @@ export default class extends Component {
     let toTime = moment(feed.finish_time).format("HH:mm")
     let date = moment(feed.finish_time).format("DD/MM/YY")
     
+    let followText = (this.state.followRefreshing) ? <Spinner color={'black'} size="small"/> : <IconAwesome style={{fontSize: 18, color: 'black'}} name="star" />
+    
     let editButton = (this.props.profile.id == feed.celebrity.id) ? <Button
                                                                       onPress={this.onPressEdit.bind(this, feed)}
                                                                       transparent>
                                                                       <Icon style={{fontSize: 18, color: 'black'}} name="create" />
                                                                     </Button>
-                                                                  : <View/>
+                                                                  : (this.props.noData) ? <Button
+                                                                                            onPress={this.onPressFollow.bind(this, feed)}
+                                                                                            transparent>
+                                                                                            {followText}
+                                                                                          </Button> : <View/>
     
     return (
         <View style={styles.container}>

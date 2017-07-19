@@ -5,3 +5,6 @@ export const getActiveCampaign = state =>
 export const getChosenCampaign = state =>
   state.campaign.chosenCampaign
 
+export const getNoData = state =>
+  state.campaign.noData
+

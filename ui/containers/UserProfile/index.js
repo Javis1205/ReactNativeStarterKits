@@ -58,13 +58,13 @@ export default class UserProfile extends Component {
     this.componentWillFocus()
   }
 
-  componentWillBlur(){
+  /*componentWillBlur(){
     this.setState({
       refreshing: true,
       isOwner: false,
       isFollowed: false
     })
-  }
+  }*/
   
   componentWillFocus(){    
     this.props.getUserCampaign(this.props.token, this.props.route.params.userId, 1, 5, (error, data) => {

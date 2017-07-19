@@ -22,4 +22,8 @@ export default {
     return apiPost('/mobile/v1/news/' + event_id, event, access_token, 'PUT')
   },
   
+  getTemporaryActiveCampaign(access_token) {
+    return apiGet('/mobile/v1/news/', {}, access_token)
+  },
+  
 }

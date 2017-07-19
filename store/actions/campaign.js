@@ -65,3 +65,14 @@ export const addAfterDeletingACampaign = (data) => ({
 export const removeAllCampaign = () => ({
   type: 'app/removeAllCampaign'
 })
+
+export const getTemporaryActiveCampaign = (...args) => ({
+  type: 'app/getTemporaryActiveCampaign',
+  args
+})
+
+export const setNoData = (data) => ({
+  type: 'app/setNoData',
+  payload: data
+})
+

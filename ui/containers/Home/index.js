@@ -32,7 +32,7 @@ import styles from './styles'
   token: authSelectors.getToken(state),
   celebrity_id: accountSelectors.getCelebrityId(state),
   activeCampaign: campaignSelectors.getActiveCampaign(state),
-  profile: accountSelectors.getProfile(state)
+  profile: accountSelectors.getProfile(state),
 }), {...campaignActions, ...commonActions})
 
 export default class extends Component {
@@ -55,17 +55,27 @@ export default class extends Component {
   }
 
   componentWillFocus(){
-    const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
+    const {token, activeCampaign, getActiveCampaign, getTemporaryActiveCampaign} = this.props
     if (!activeCampaign.results) {
       this.setState({
         refreshing: true,
       })
       getActiveCampaign(token, 1, 5, (error, data) => {
-        this.setState({
-          refreshing: false
-        }, () => {
-          (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
-        })
+        if (data.results.length == 0) {
+          getTemporaryActiveCampaign(token, (err, data1) => {
+            this.setState({
+              refreshing: false
+            }, () => {
+              (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
+            })
+          })
+        } else {
+          this.setState({
+            refreshing: false
+          }, () => {
+            (this.props.activeCampaign.results.length == 0) ? this.setState({emptyHome: true}) : this.setState({emptyHome: false})
+          })
+        }
       })
     } else if (this.props.activeCampaign.results.length == 0) {
       this.setState({
@@ -80,15 +90,25 @@ export default class extends Component {
   }
 
   _onRefresh =() => {
-    const {token, activeCampaign, getActiveCampaign, celebrity_id} = this.props
+    const {token, activeCampaign, getActiveCampaign, getTemporaryActiveCampaign} = this.props
     this.setState({refreshing: true, page: 1})
 
     getActiveCampaign(token, 1, 5, (error, data)=>{
-      setTimeout(() => {
-        (data.results.length == 0) ?
-          this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
-          this.setState({emptyHome: false, listEvent: data.results}, ()=>this.setState({refreshing: false}))
-      }, 1000)
+      if (data.results.length == 0) {
+        getTemporaryActiveCampaign(token, (err, data1) => {
+          setTimeout(() => {
+            (data1.results.length == 0) ?
+              this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
+              this.setState({emptyHome: false, listEvent: data1.results}, ()=>this.setState({refreshing: false}))
+          }, 1000)
+        })
+      } else {
+        setTimeout(() => {
+          (data.results.length == 0) ?
+            this.setState({emptyHome: true}, ()=>this.setState({refreshing: false})) :
+            this.setState({emptyHome: false, listEvent: data.results}, ()=>this.setState({refreshing: false}))
+        }, 1000)
+      }
     })
   }
   
@@ -138,6 +158,10 @@ export default class extends Component {
     })
   }
   
+  _onPressFollow() {
+    this._onRefresh()
+  }
+  
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
@@ -145,6 +169,7 @@ export default class extends Component {
         //onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
         <Event
+          onPressFollow={this._onPressFollow.bind(this)}
           homePage={true}
           feed={rowData}
           onUserPress={this._onUserPress.bind(this, rowData.celebrity.id)}/>

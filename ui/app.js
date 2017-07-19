@@ -167,11 +167,11 @@ export default class App extends Component {
         this.footer.show(footerType, router.route)
 
         // always blur the old one if disableCache then remove
-        if(oldPage.disableCache){
+        if(oldComponent.disableCache){
           // oldPage must be the last one          
           this.navigator.state.routeStack.pop()                    
         } else {
-          this.handleFocusableComponent(oldPage.path, false)  
+          this.handleFocusableComponent(oldComponent.path, false)
         }
 
         // return console.warn('Not found: ' + router.route)
@@ -186,7 +186,7 @@ export default class App extends Component {
           this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
         } else {
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
-          this.navigator.push({ title, path, showTopDropdown })
+          this.navigator.push({ title, path })
         } 
         
       } else {
@@ -287,7 +287,7 @@ export default class App extends Component {
     const method = focus ? 'componentWillFocus' : 'componentWillBlur'
     let whatdog = 10    
     let ref = this.pageInstances[path]
-    ref.visible = focus
+    //ref.visible = focus
     // maybe connect, check name of constructor is _class means it is a component :D
     // this time support only one focus trigger, you can delegate more, to optimize performance
     while(ref && whatdog > 0){

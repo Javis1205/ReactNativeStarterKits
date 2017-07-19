@@ -1,6 +1,6 @@
 import _ from 'underscore'
 
-export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0}, {type, payload}) => {
+export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0, noData: true}, {type, payload}) => {
   switch (type) {   
     case 'app/replaceActiveCampaign':
       return {...state, activeCampaign: payload }
@@ -25,6 +25,8 @@ export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0}, {
       return {...state, activeCampaign: {...state.activeCampaign, results: newUpdatedCampaign} }
     case 'app/removeAllCampaign':
       return {...state, activeCampaign: {} }
+    case 'app/setNoData':
+      return {...state, noData: payload }
     default:
       return state
   }
