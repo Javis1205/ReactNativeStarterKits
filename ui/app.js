@@ -166,21 +166,29 @@ export default class App extends Component {
         this.header._search('')
         this.footer.show(footerType, router.route)
 
+        // always blur the old one if disableCache then remove
+        if(oldPage.disableCache){
+          // oldPage must be the last one          
+          this.navigator.state.routeStack.pop()                    
+        } else {
+          this.handleFocusableComponent(oldPage.path, false)  
+        }
+
         // return console.warn('Not found: ' + router.route)
         // check if page is mounted
         const destIndex = this.navigator.state.routeStack
           .findIndex(route => route.path === this.page.path)
 
         // console.log(this.navigator.state)      
-        if(destIndex !==-1){          
-          // trigger will focus, the first time should be did mount
+        if (destIndex !== -1) {          
+          // trigger will focus, the first time should be did mount          
           this.handlePageWillFocus(path)
-          oldComponent && this.handleFocusableComponent(oldComponent, false)
-          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)                 
-        } else {                            
+          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
+        } else {
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
-          this.navigator.push({title, path})                    
-        }  
+          this.navigator.push({ title, path, showTopDropdown })
+        } 
+        
       } else {
         // no need to push to route
         this.page = routes.notFound
@@ -274,11 +282,11 @@ export default class App extends Component {
     })
   }
 
-  handleFocusableComponent(component, focus=true) {
+  handleFocusableComponent(path, focus=true) {
     // do not loop forever
     const method = focus ? 'componentWillFocus' : 'componentWillBlur'
     let whatdog = 10    
-    let ref = component
+    let ref = this.pageInstances[path]
     ref.visible = focus
     // maybe connect, check name of constructor is _class means it is a component :D
     // this time support only one focus trigger, you can delegate more, to optimize performance
@@ -324,7 +332,7 @@ export default class App extends Component {
       }
 
       // after update the content then focus on it, so we have new content
-      this.handleFocusableComponent(component)          
+      this.handleFocusableComponent(path)          
     }     
 
   }

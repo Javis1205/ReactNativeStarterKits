@@ -127,7 +127,8 @@ export default {
         title: 'Video Call',
         Page: VideoCall,
         footerType: 'none',
-        headerType: 'none'
+        headerType: 'none',
+        disableCache: true,
     },
     qrCode: {
         title: 'Scan Merchandise',
