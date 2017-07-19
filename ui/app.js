@@ -17,7 +17,7 @@ import SideBar from './components/SideBar'
 import Preload from './containers/Preload'
 import Header from '~/ui/components/Header'
 import Footer from '~/ui/components/Footer'
-import Popover from '~/ui/components/Popover'
+// import Popover from '~/ui/components/Popover'
 
 // router => render component base on url
 // history.push => location match => return component using navigator push
@@ -157,7 +157,7 @@ export default class App extends Component {
   componentWillReceiveProps({router, drawerState, modalState}){
     // process for route change only
     if(router.route !== this.props.router.route){
-      const oldComponent = this.pageInstances[this.page.path]
+      const oldPage = this.page
       this.page = getPage(router.route)
       if(this.page){
         const {headerType, footerType, title, path} = this.page
@@ -167,11 +167,11 @@ export default class App extends Component {
         this.footer.show(footerType, router.route)
 
         // always blur the old one if disableCache then remove
-        if(oldComponent.disableCache){
+        if(oldPage.disableCache){
           // oldPage must be the last one          
           this.navigator.state.routeStack.pop()                    
         } else {
-          this.handleFocusableComponent(oldComponent.path, false)
+          this.handleFocusableComponent(oldPage.path, false)
         }
 
         // return console.warn('Not found: ' + router.route)
@@ -215,10 +215,7 @@ export default class App extends Component {
   initializePage(ref, route){   
     // maybe in debug mode, ref can be null 
     if(ref && route.path){
-      this.pageInstances[route.path] = ref
-      ref.visible = true
-      const fn = ref.shouldComponentUpdate
-      ref.shouldComponentUpdate = (nextProps, nextState) => (fn ? fn.call(ref) : true) && ref.visible      
+      this.pageInstances[route.path] = ref               
     }
   }
 
@@ -286,8 +283,7 @@ export default class App extends Component {
     // do not loop forever
     const method = focus ? 'componentWillFocus' : 'componentWillBlur'
     let whatdog = 10    
-    let ref = this.pageInstances[path]
-    //ref.visible = focus
+    let ref = this.pageInstances[path]    
     // maybe connect, check name of constructor is _class means it is a component :D
     // this time support only one focus trigger, you can delegate more, to optimize performance
     while(ref && whatdog > 0){
@@ -360,7 +356,9 @@ export default class App extends Component {
           />
           <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
-          <Popover ref={ref=>this.popover=ref}/>
+          {
+            // <Popover ref={ref=>this.popover=ref}/>
+          }
           <CallModal
             ref={ref => this.modal = ref}
             notiData={this.state.notiData}
