@@ -53,10 +53,6 @@ export default class extends Component {
     this.state = { viewRef: null }
   }
 
-  // _handleLogin = ({email, password}) => {    
-  //   this.props.login(email, password)
-  // }
-
   async handleLogin(socialType = 'facebook'){
     this.props.saveSocialType(socialType)
     const ret = await manager.authorize(socialType)
@@ -75,16 +71,18 @@ export default class extends Component {
     } else {
       token = ret.response.credentials.access_token
       tokenSecret = ret.response.credentials.access_token_secret
-      console.log(token)
-      console.log(tokenSecret)
-      /*this.props.login(token, socialType, (error, data) => {
+      let allToken = {
+        access_token: token,
+        secret_token: tokenSecret
+      }
+      this.props.login(allToken, socialType, (error, data) => {
         this.props.getProfile(data.access_token, (errorProfile, dataProfile) => {
           console.log(dataProfile.id)
           this.props.forwardTo('home')
           this.props.setToast('Logged successfully!!!')
           OneSignal.sendTag("user_id", dataProfile.id)
         })
-      }) */
+      })
     }
   }
 

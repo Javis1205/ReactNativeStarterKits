@@ -3,6 +3,7 @@ package com.novame;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.zxcpoiu.incallmanager.InCallManagerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
 import com.smixx.fabric.FabricPackage;
@@ -47,6 +48,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new InCallManagerPackage(),
             new RNDeviceInfo(),
             new CodePush("wq4Y6g3H0Rn_jpM_XgvekNRmrpKxcc8bd796-9b62-4355-995d-a57138ae013d", getApplicationContext(), BuildConfig.DEBUG),
             new FabricPackage(),

@@ -1,16 +1,23 @@
 /**
  * Created by vjtc0n on 6/9/17.
  */
+
+import {Dimensions} from 'react-native'
+const {height, width} = Dimensions.get('window')
+
 export default {
   inputField: {
     borderRadius: 5,
     backgroundColor: '#d9d9d9',
-    height: 48,
-    marginTop: 0
+    height: (height <= 600) ? 40 : 50,
+    marginTop: 0,
+    paddingTop: 0,
+    marginBottom: 0,
+    paddingBottom: 0
   },
   inputContainer: {
     marginBottom: 5,
-    height: 50,
+    height: (height <= 600) ? 40 : 50,
     borderRadius: 5,
     marginTop: 10,
     paddingTop: 0,
@@ -23,20 +30,28 @@ export default {
   },
   inputText: {
     color: "#7e7e7e",
-    top: 0
+    top: 0,
+    height: (height <= 600) ? 40 : 50
   },
   rightIcon: {
     color: '#7e7e7e',
-    fontSize: 18
+    fontSize: 18,
+    marginTop: 0,
   },
   photoEvent: {
     width: '100%',
     height: 250,
-    marginTop: 20
+    marginTop: 20,
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   img: {
-    width: '100%',
-    height: '100%',
+    width: '99%',
+    height: '99%',
     backgroundColor: '#d9d9d9',
     borderRadius: 3
   },

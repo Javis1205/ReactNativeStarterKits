@@ -175,6 +175,7 @@ export default class EventForm extends Component {
                     onPress={this.onFromTimeFocus.bind(this)}
                     editable={false}
                     style={styles.inputField}
+                    inputStyle={styles.inputText}
                     label={fromTime}
                     name="fromDate"
                     component={InputField}
@@ -187,6 +188,7 @@ export default class EventForm extends Component {
                     onPress={this.onToTimeFocus.bind(this)}
                     editable={false}
                     style={styles.inputField}
+                    inputStyle={styles.inputText}
                     label={toTime}
                     name="toDate"
                     component={InputField}

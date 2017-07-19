@@ -4,7 +4,7 @@ import { Platform } from 'react-native'
 export default {
   remoteView: {
     position: 'absolute',
-    top: (Platform.OS == 'android') ? 56 : 76,
+    top: (Platform.OS == 'android') ? 56 : 75,
     left: 0,
     bottom: 0,
     right: 0,    

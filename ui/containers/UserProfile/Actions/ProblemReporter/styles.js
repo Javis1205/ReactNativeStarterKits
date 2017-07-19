@@ -1,6 +1,9 @@
 /**
  * Created by vjtc0n on 6/9/17.
  */
+import {Dimensions} from 'react-native'
+const {height, width} = Dimensions.get('window')
+
 export default {
   submitButton: {
     backgroundColor: '#222222',
@@ -18,7 +21,7 @@ export default {
     marginTop: 0
   },
   inputContainer: {
-    marginBottom: 30,
+    marginBottom: (height <= 600) ? 20 : 30,
     height: 400,
     borderRadius: 5,
     marginTop: 20,

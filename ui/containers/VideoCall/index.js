@@ -9,8 +9,10 @@ import {
 import { connect } from 'react-redux'
 
 import {
-  Text, View, Input, Button, Container, Header, Left, Right, Body, Title
+  Text, View, Input, Button, Container, Header, Left, Right, Body, Title, Spinner
 } from 'native-base'
+
+import InCallManager from 'react-native-incall-manager'
 
 import io from 'socket.io-client'
 
@@ -26,6 +28,7 @@ import {
 
 import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
+import Preload from '~/ui/containers/Preload'
 
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
@@ -62,7 +65,7 @@ function getLocalStream(isFront, callback) {
     });
   }
   getUserMedia({
-    // audio: true,
+    audio: true,
     video: {
       mandatory: {
         minWidth: 640, // Provide your own width, height and frame rate here
@@ -135,7 +138,8 @@ function createPC(socketId, isOffer) {
     console.log('onaddstream', event.stream);    
     container.setState({ 
       info: 'Connected to tupt!',
-      remoteViewSrc: event.stream.toURL() 
+      remoteViewSrc: event.stream.toURL(),
+      mainScreenLoading: false
     })
   }
 
@@ -159,10 +163,10 @@ function createPC(socketId, isOffer) {
       console.log("dataChannel.onmessage:", event.data);
       // container.receiveTextData({user: socketId, message: event.data});
       // that is tupt :D
-      container.receiveTextData({
+      /*container.receiveTextData({
         user: 'tupt', 
         message: event.data
-      });
+      });*/
     };
 
     dataChannel.onopen = function () {
@@ -262,14 +266,18 @@ export default class extends Component {
         remoteViewSrc: null,
         textRoomConnected: false,
         textRoomData: [],
-        textRoomValue: '',      
+        textRoomValue: '',
+        mainScreenLoading: false,
+        smallScreenLoading: false
     }
   }
   
   componentWillFocus() {
+    console.log("Will Focus")
     const userId = this.props.route.params.id
     this.setState({
-      roomID: userId
+      roomID: userId,
+      smallScreenLoading: true
     }, () => {
       container = this;
       socket = io.connect('https://react-native-webrtc.herokuapp.com', {transports: ['websocket']});
@@ -284,8 +292,11 @@ export default class extends Component {
         console.log('connect');
         getLocalStream(true, (stream) => {
           localStream = stream;
-          this.setState({selfViewSrc: stream.toURL()});
-          this.setState({status: 'ready', info: 'Connect tupt'}, () => {this._press()});
+          this.setState({
+            selfViewSrc: stream.toURL(),
+            smallScreenLoading: false
+          }, () => InCallManager.setForceSpeakerphoneOn(true));
+          this.setState({status: 'ready', info: 'Connect tupt'}, () => {this._connect()});
         });
       });
     })
@@ -297,20 +308,36 @@ export default class extends Component {
 
   _press = (event) =>{    
     if(this.state.status === 'connect'){
-      this.setState({status: 'ready', info: 'Connect tupt'});
-      for(let socketId in pcPeers){        
-        leave(socketId)
-        delete pcPeers[socketId];
-      }      
+      this._closeOnChatting()
     } else {
-      this.setState({status: 'connect', info: 'Connecting'});
-      join(this.state.roomID);
+      this._connect()
+    }
+  }
+  
+  _connect() {
+    this.setState({status: 'connect', info: 'Connecting', mainScreenLoading: true,});
+    join(this.state.roomID);
+  }
+  
+  _close() {
+    this.setState({status: 'ready', info: 'Connect tupt', remoteViewSrc: null, selfViewSrc: null});
+    for(let socketId in pcPeers){
+      leave(socketId)
+      delete pcPeers[socketId];
+    }
+  }
+  
+  _closeOnChatting() {
+    this.setState({status: 'ready', info: 'Connect tupt', remoteViewSrc: null});
+    for(let socketId in pcPeers){
+      leave(socketId)
+      delete pcPeers[socketId];
     }
   }
 
   _switchVideoType=()=>{
     const isFront = !this.state.isFront;
-    this.setState({isFront});
+    this.setState({isFront, smallScreenLoading: true});
     getLocalStream(isFront, (stream) => {
       if (localStream) {
         for (const id in pcPeers) {
@@ -320,7 +347,10 @@ export default class extends Component {
         localStream.release();
       }
       localStream = stream;
-      this.setState({selfViewSrc: stream.toURL()});
+      this.setState({
+        selfViewSrc: stream.toURL(),
+        smallScreenLoading: false
+      });
 
       for (const id in pcPeers) {
         const pc = pcPeers[id];
@@ -328,51 +358,14 @@ export default class extends Component {
       }
     });
   }
-
-  receiveTextData(data) {
-    const textRoomData = this.state.textRoomData.slice();
-    textRoomData.push(data);
-    this.setState({textRoomData, textRoomValue: ''});
-  }
-
-  _textRoomPress=()=> {
-    if (!this.state.textRoomValue) {
-      return
-    }
-    const textRoomData = this.state.textRoomData.slice();
-    textRoomData.push({user: 'Me', message: this.state.textRoomValue});
-    for (const key in pcPeers) {
-      const pc = pcPeers[key];
-      pc.textDataChannel.send(this.state.textRoomValue);
-    }
-    this.setState({textRoomData, textRoomValue: ''});
-  }
-
-  _renderTextRoom() {
-    return (
-      <View style={styles.listViewContainer}>
-        <ListView
-          style={{flex:2}}
-          enableEmptySections={true}
-          dataSource={this.ds.cloneWithRows(this.state.textRoomData)}
-          renderRow={rowData => <Text>{`${rowData.user}: ${rowData.message}`}</Text>}
-          />
-        <Input
-          style={{flex:1, paddingTop:0,paddingBottom:0, height: 30, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={value => this.setState({textRoomValue: value})}
-          value={this.state.textRoomValue}
-        />
-        <Button style={{height:30}}
-          onPress={this._textRoomPress}>
-          <Text>Send</Text>
-        </Button>
-      </View>
-    );
-  }
   
   _leftClick = (e) => {
     const { goBack } = this.props
-    this._press()
+    this.setState({
+      mainScreenLoading: false,
+      smallScreenLoading: false
+    })
+    this._close()
     goBack()
   }
   
@@ -404,41 +397,60 @@ export default class extends Component {
       </Header>
     )
   }
+  
+  renderSmallSpinner() {
+    return(
+      <View style={{marginTop: 20}}>
+        <Spinner color={'black'}/>
+      </View>
+    )
+  }
+  
+  renderMainSpinner() {
+    return(
+      <View style={{height: '80%', alignItems: 'center', justifyContent: 'center'}}>
+        <Spinner color={'black'}/>
+      </View>
+    )
+  }
 
   render() {
+    let selfScreen = null
+    if (this.state.smallScreenLoading) {
+      selfScreen = this.renderSmallSpinner()
+    } else {
+      selfScreen = (this.state.selfViewSrc) ? <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/> : <View/>
+    }
+    
+    let mainScreen = null
+    if (this.state.mainScreenLoading) {
+      mainScreen = this.renderMainSpinner()
+    } else {
+      mainScreen = (this.state.remoteViewSrc) ? <RTCView streamURL={this.state.remoteViewSrc} objectFit="cover" style={styles.remoteView}/> : <View/>
+    }
+  
+  
     return (
       <Container>
         {this.renderHeaderBack(this.props.fanProfile.full_name || 'Facetime')}
-        {this.state.remoteViewSrc && 
-          <RTCView streamURL={this.state.remoteViewSrc} objectFit="cover" style={styles.remoteView}/>
-        }
+        {mainScreen}
 
         <View style={styles.content}>      
 
           <View style={{
             flexDirection: 'row', 
             width: '100%', 
-            paddingHorizontal: 20, 
+            paddingHorizontal: 20,
             alignSelf: 'center', 
             alignItems: 'center',
             justifyContent:'space-between'
-          }}>                        
-
-            {
-              // <Text style={styles.welcome}>
-              //   {this.state.info}            
-              // </Text>   
-            }
-
-
+          }}>
             <Button transparent rounded bordered info noPadder style={styles.actionButton}
               onPress={this._switchVideoType}>
               <Icon large name="switch-camera" />
             </Button>
 
-            {this.state.selfViewSrc && 
-              <RTCView streamURL={this.state.selfViewSrc} style={styles.selfView}/>
-            }
+            {selfScreen}
 
             <Button transparent rounded bordered info noPadder style={styles.actionButton}
               onPress={this._press}>
@@ -450,12 +462,7 @@ export default class extends Component {
         
           
         
-        </View>     
-        {   
-        // <Content>          
-        //   {this.state.textRoomConnected && this._renderTextRoom()} 
-        // </Content>
-      }
+        </View>
 
       </Container>
     );
