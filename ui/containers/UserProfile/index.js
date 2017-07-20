@@ -85,7 +85,6 @@ export default class UserProfile extends Component {
         events: data.results,
         celebrity: data.celebrity,
       }, () => {
-        console.log("refreshing")
         this.setState({
           refreshing: false
         })
@@ -173,12 +172,25 @@ export default class UserProfile extends Component {
     
   }
   
+  _onPressLike(event, like_count) {
+    let updatedEvent = {
+      ...event,
+      like_count: like_count,
+      is_liked: !event.is_liked
+    }
+    this.props.deleteAfterEditingACampaign(updatedEvent)
+    this.props.addAfterDeletingACampaign(updatedEvent)
+  }
+  
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return (
       <ListItem
         //onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
-        <Event feed={rowData} onUserPress={this._onUserPress.bind(this)}/>
+        <Event
+          onPressLike={this._onPressLike.bind(this)}
+          feed={rowData}
+          onUserPress={this._onUserPress.bind(this)}/>
       </ListItem>
     )
   }

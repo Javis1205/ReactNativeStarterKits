@@ -17,26 +17,47 @@ export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0, no
       
     case 'app/deleteAfterEditingACampaign':
       let indexOfUpdatedCampaign = _.findIndex(state.activeCampaign.results, {id: payload.id})
-      let newUpdateCampaign = _.without(state.activeCampaign.results, _.findWhere(state.activeCampaign.results, {id: payload.id}))
-      return {
-        ...state,
-        updatedCampaignIndex: indexOfUpdatedCampaign,
-        activeCampaign: {
-          ...state.activeCampaign,
-          results: JSON.parse(JSON.stringify(newUpdateCampaign))
+      if (indexOfUpdatedCampaign != -1) {
+        let newUpdateCampaign = _.without(state.activeCampaign.results, _.findWhere(state.activeCampaign.results, {id: payload.id}))
+        return {
+          ...state,
+          updatedCampaignIndex: indexOfUpdatedCampaign,
+          activeCampaign: {
+            ...state.activeCampaign,
+            results: JSON.parse(JSON.stringify(newUpdateCampaign))
+          }
+        }
+      } else {
+        return {
+          ...state,
+          updatedCampaignIndex: indexOfUpdatedCampaign,
+          activeCampaign: {
+            ...state.activeCampaign,
+          }
         }
       }
+      
     
     case 'app/addAfterDeletingACampaign':
-      let newUpdatedCampaign = state.activeCampaign.results
-      newUpdatedCampaign.splice(state.updatedCampaignIndex, 0, payload)
-      return {
-        ...state,
-        activeCampaign: {
-          ...state.activeCampaign,
-          results: JSON.parse(JSON.stringify(newUpdatedCampaign))
+      if (state.updatedCampaignIndex != -1) {
+        let newUpdatedCampaign = state.activeCampaign.results
+        newUpdatedCampaign.splice(state.updatedCampaignIndex, 0, payload)
+        return {
+          ...state,
+          activeCampaign: {
+            ...state.activeCampaign,
+            results: JSON.parse(JSON.stringify(newUpdatedCampaign))
+          }
+        }
+      } else {
+        return {
+          ...state,
+          activeCampaign: {
+            ...state.activeCampaign
+          }
         }
       }
+      
       
     case 'app/removeAllCampaign':
       return {...state, activeCampaign: {} }

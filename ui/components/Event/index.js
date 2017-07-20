@@ -70,6 +70,20 @@ export default class extends Component {
     }
   }
   
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      like_count: nextProps.feed.like_count,
+      is_liked: nextProps.feed.is_liked
+    })
+  }
+  
+  componentWillMount() {
+    this.setState({
+      like_count: this.props.feed.like_count,
+      is_liked: this.props.feed.is_liked
+    })
+  }
+  
   onPressEdit(data) {
     this.props.chooseACampaign(data)
     this.props.forwardTo('event/update')
@@ -97,6 +111,11 @@ export default class extends Component {
   
   onPressLike(event) {
     this.props.likeCampaign(this.props.token, event.id, (error, data) => {
+      console.log(data)
+      this.setState({
+        like_count: data.like_count,
+        is_liked: (data.action == 'liked')
+      })
       this.props.onPressLike && this.props.onPressLike(event, data.like_count)
     })
   }
@@ -189,10 +208,10 @@ export default class extends Component {
               onPress={this.onPressLike.bind(this, feed)}
               style={styles.socialButton}>
               <View style={{justifyContent: 'center', width: 30}}>
-                <Icon name={(feed.is_liked) ? 'favorite' : 'favorite-border'} style={styles.icon}/>
+                <Icon name={(this.state.is_liked) ? 'favorite' : 'favorite-border'} style={styles.icon}/>
               </View>
               <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
-                <Text style={styles.socialText}>{feed.like_count}</Text>
+                <Text style={styles.socialText}>{this.state.like_count}</Text>
               </View>
             </Button>
             <Button
