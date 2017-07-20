@@ -162,6 +162,15 @@ export default class extends Component {
     this._onRefresh()
   }
   
+  _onPressLike(event, like_count) {
+    let updatedEvent = {
+      ...event,
+      like_count: like_count,
+      is_liked: !event.is_liked
+    }
+    this.props.deleteAfterEditingACampaign(updatedEvent)
+    this.props.addAfterDeletingACampaign(updatedEvent)
+  }
   
   renderRow(rowData, sectionID, rowID, highlightRow) {
     return(
@@ -169,6 +178,7 @@ export default class extends Component {
         //onPress={this._onEventPress.bind(this, rowData.id)}
         style={styles.listItemContainer}>
         <Event
+          onPressLike={this._onPressLike.bind(this)}
           onPressFollow={this._onPressFollow.bind(this)}
           homePage={true}
           feed={rowData}

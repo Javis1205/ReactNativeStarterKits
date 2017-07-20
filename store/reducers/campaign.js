@@ -14,15 +14,30 @@ export const campaign = (state = {activeCampaign:{}, updatedCampaignIndex: 0, no
     case 'app/addACampaign':
       let newCampaign = [payload, ...state.activeCampaign.results]
       return {...state, activeCampaign: {...state.activeCampaign, results: newCampaign} }
+      
     case 'app/deleteAfterEditingACampaign':
       let indexOfUpdatedCampaign = _.findIndex(state.activeCampaign.results, {id: payload.id})
       let newUpdateCampaign = _.without(state.activeCampaign.results, _.findWhere(state.activeCampaign.results, {id: payload.id}))
-      return {...state,  updatedCampaignIndex: indexOfUpdatedCampaign, activeCampaign: {...state.activeCampaign, results: newUpdateCampaign}}
+      return {
+        ...state,
+        updatedCampaignIndex: indexOfUpdatedCampaign,
+        activeCampaign: {
+          ...state.activeCampaign,
+          results: JSON.parse(JSON.stringify(newUpdateCampaign))
+        }
+      }
+    
     case 'app/addAfterDeletingACampaign':
-      console.log(state.updatedCampaignIndex)
       let newUpdatedCampaign = state.activeCampaign.results
       newUpdatedCampaign.splice(state.updatedCampaignIndex, 0, payload)
-      return {...state, activeCampaign: {...state.activeCampaign, results: newUpdatedCampaign} }
+      return {
+        ...state,
+        activeCampaign: {
+          ...state.activeCampaign,
+          results: JSON.parse(JSON.stringify(newUpdatedCampaign))
+        }
+      }
+      
     case 'app/removeAllCampaign':
       return {...state, activeCampaign: {} }
     case 'app/setNoData':

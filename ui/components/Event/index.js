@@ -94,6 +94,12 @@ export default class extends Component {
       })
     })
   }
+  
+  onPressLike(event) {
+    this.props.likeCampaign(this.props.token, event.id, (error, data) => {
+      this.props.onPressLike && this.props.onPressLike(event, data.like_count)
+    })
+  }
 
   render() {
     const {feed} = this.props
@@ -179,12 +185,14 @@ export default class extends Component {
             </View>
           </Background>
           <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', width: '100%', height: 40}}>
-            <Button style={styles.socialButton}>
+            <Button
+              onPress={this.onPressLike.bind(this, feed)}
+              style={styles.socialButton}>
               <View style={{justifyContent: 'center', width: 30}}>
-                <Icon name='favorite-border' style={styles.icon}/>
+                <Icon name={(feed.is_liked) ? 'favorite' : 'favorite-border'} style={styles.icon}/>
               </View>
               <View style={{width: '20%', justifyContent: 'center', overflow: 'visible'}}>
-                <Text style={styles.socialText}>2K</Text>
+                <Text style={styles.socialText}>{feed.like_count}</Text>
               </View>
             </Button>
             <Button

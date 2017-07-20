@@ -76,3 +76,8 @@ export const setNoData = (data) => ({
   payload: data
 })
 
+export const likeCampaign = (...args) => ({
+  type: 'app/likeCampaign',
+  args
+})
+

@@ -90,6 +90,17 @@ const requestGetTemporaryActiveCampaign = createRequestSaga({
   ],
 })
 
+const requestLikeCampaign = createRequestSaga({
+  request: api.campaign.likeCampaign,
+  key: 'likeCampaign',
+  success: [
+    
+  ],
+  failure: [
+    () => setToast('Couldn\'t like event', 'error')
+  ],
+})
+
 // saga reducer
 export default [
     // like case return, this is take => call
@@ -104,8 +115,8 @@ export default [
           takeLatest('app/getUserCampaign', requestUserEvent),
           takeLatest('app/editCampaign', requestEditCampaign),
           takeLatest('app/getMoreActiveCampaign', requestGetMoreActiveCampaign),
-          takeLatest('app/getTemporaryActiveCampaign', requestGetTemporaryActiveCampaign)
-
+          takeLatest('app/getTemporaryActiveCampaign', requestGetTemporaryActiveCampaign),
+          takeLatest('app/likeCampaign', requestLikeCampaign)
         ]
     },
 ]

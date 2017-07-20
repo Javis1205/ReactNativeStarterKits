@@ -26,4 +26,8 @@ export default {
     return apiGet('/mobile/v1/news/', {}, access_token)
   },
   
+  likeCampaign(access_token, event_id) {
+    return apiPost('/mobile/v1/news/' + event_id + '/like-toggle/', {}, access_token, 'PUT')
+  },
+  
 }
