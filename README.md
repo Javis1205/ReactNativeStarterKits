@@ -10,7 +10,11 @@
 ## Setup
 ```
 git clone https://github.com/agiletechvn/ReactNativeStarterKits.git your_folder_name
-cd your_folder_name && react-native-rename your_project-name
+cd your_folder_name
+rm -rf ios android
+react-native upgrade
+react-native-rename your_project-name
+react-native link
 ```
 
 ## LICENSE
