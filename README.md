@@ -13,6 +13,6 @@ git clone https://github.com/agiletechvn/ReactNativeStarterKits.git your_folder_
 cd your_folder_name && react-native-rename your_project-name
 ```
 
-## LICENSED
+## LICENSE
 
 Not yet decided
