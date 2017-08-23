@@ -87,7 +87,7 @@ export default class UserProfile extends Component {
   }
   
   _onUserPress(userId) {
-    this.props.forwardTo('userProfile/' + userId)
+    this.props.forwardTo('userProfile', {userId})
   }
 
   renderContent(){

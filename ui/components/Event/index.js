@@ -92,7 +92,7 @@ export default class extends Component {
   onPressProfile() {
     const {feed, homePage, forwardTo} = this.props
     if (homePage) {
-      forwardTo('userProfile/' + feed.celebrity.id)
+      forwardTo('userProfile',{userId: feed.celebrity.id})
     }
   }
   

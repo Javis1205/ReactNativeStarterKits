@@ -3,7 +3,6 @@ import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserSetting from './containers/User/Setting'
-import VideoCall from './containers/VideoCall'
 import Test from './containers/Test'
 import UserProfile from './containers/UserProfile'
 import EventDetail from './containers/EventDetail'
@@ -16,7 +15,6 @@ import ProblemReporter from './containers/UserProfile/Actions/ProblemReporter'
 import FanHistory from './containers/FanHistory'
 import FanProfile from './containers/FanProfile'
 import AreUCeleb from './containers/AreYouCeleb'
-import QRScan from './containers/QRScan'
 import ListTopFan from './containers/ListTopFan'
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -28,21 +26,23 @@ export default {
     },
     test: {
         title: 'Test',
-        Page: Test,
+        Page: Test,        
     },
     search: {
         title: 'Search',
         Page: Search,
         headerType: 'none',
-        footerType: 'none'
+        footerType: 'none',
+        cache: true
     },
     home: {        
       title: 'Novame',
       Page: Home,
       headerType: 'home',
-      footerType: 'none'
+      footerType: 'none',
+      cache: true
     },
-    'userProfile/:userId': {
+    'userProfile': {
         title: 'User Detail',
         Page: UserProfile,
         headerType: 'none',
@@ -53,14 +53,16 @@ export default {
         Page: ProfileUpdate,
         headerType: 'back',
         footerType: 'none',
+        cache: true,
     },
     'userProfileReport': {
         title: 'Report Problem',
         Page: ProblemReporter,
         headerType: 'back',
         footerType: 'none',
+        cache: true,
     },
-    'eventDetail/:id': {
+    'eventDetail': {
         title: 'Event',
         Page: EventDetail,
         headerType: 'none',
@@ -88,19 +90,22 @@ export default {
         title: 'History',
         Page: FanHistory,
         headerType: 'back',
-        footerType: 'none'
+        footerType: 'none',
+        cache: true
     },
     fanProfile: {
         title: 'Profile',
         Page: FanProfile,
         headerType: 'back',
-        footerType: 'none'
+        footerType: 'none',
+        cache: true
     },
     notification: {
         title: 'Notification',
         Page: Notification,
         footerType: 'none',
-        headerType: 'back'
+        headerType: 'back',
+        cache: true
     },
     areUCeleb: {
         title: 'Celebrity Request',
@@ -116,6 +121,7 @@ export default {
     'user/setting': {
         title: 'User Setting',
         Page: UserSetting,
+        cache: true,
     },       
     login: {
         title: 'Login',
@@ -123,20 +129,7 @@ export default {
         headerType: 'none',
         footerType: 'none',
     },
-    'videoCall/:id':{
-        title: 'Video Call',
-        Page: VideoCall,
-        footerType: 'none',
-        headerType: 'none',
-        disableCache: true,
-    },
-    qrCode: {
-        title: 'Scan Merchandise',
-        Page: QRScan,
-        headerType: 'back',
-        footerType: 'none'
-    },
-    'listTopFan/:userId': {
+    'listTopFan': {
         title: 'Top Fan',
         Page: ListTopFan,
         headerType: 'back',

@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Image, ActivityIndicator, NetInfo, Platform } from 'react-native'
 import RNFS, { DocumentDirectoryPath } from 'react-native-fs'
 import ResponsiveImage from 'react-native-responsive-image'

@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import OAuthManager from 'react-native-oauth'
 import { BlurView } from 'react-native-blur'
-import OneSignal from 'react-native-onesignal'
+// import OneSignal from 'react-native-onesignal'
 
 
 import routes from '~/ui/routes'
@@ -65,7 +65,7 @@ export default class extends Component {
          console.log(dataProfile.id)
          this.props.forwardTo('home')
          this.props.setToast('Logged successfully!!!')
-         OneSignal.sendTag("user_id", dataProfile.id)
+         // OneSignal.sendTag("user_id", dataProfile.id)
        })
      })
     } else {
@@ -80,7 +80,7 @@ export default class extends Component {
           console.log(dataProfile.id)
           this.props.forwardTo('home')
           this.props.setToast('Logged successfully!!!')
-          OneSignal.sendTag("user_id", dataProfile.id)
+          // OneSignal.sendTag("user_id", dataProfile.id)
         })
       })
     }

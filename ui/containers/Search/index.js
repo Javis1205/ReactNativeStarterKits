@@ -8,7 +8,6 @@ import { TouchableOpacity, ScrollView , Dimensions, ListView, Image, Keyboard} f
 // import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
 import { connect } from 'react-redux'
-import Fabric from 'react-native-fabric'
 
 import Content from '~/ui/components/Content'
 import {
@@ -28,7 +27,6 @@ import styles from './styles'
 import material from '~/theme/variables/material'
 
 const {height, width} = Dimensions.get('window')
-const { Crashlytics } = Fabric
 
 @connect(state=>({
   token: authSelectors.getToken(state),
@@ -108,7 +106,7 @@ export default class Search extends Component {
   }
   
   onUserPress(userId) {
-    this.props.forwardTo('userProfile/' + userId)
+    this.props.forwardTo('userProfile', {userId})
   }
   
   _onEndReachedCeleb() {

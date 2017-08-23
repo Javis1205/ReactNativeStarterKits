@@ -37,10 +37,10 @@ export default class extends Component {
     const {onCloseClick, notiData} = this.props
     this.props.getUserInfo(this.props.token, notiData.user_id, (error, data) => {
       this.props.saveFanProfileToFaceTime(data)
-      this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+      this.props.forwardTo('videoCall', {id:this.props.profile.id})
     })
     onCloseClick()
-    this.props.forwardTo(`videoCall/${this.props.profile.id}`)
+    // this.props.forwardTo("videoCall", {id:this.props.profile.id})
   }
   
   render() {

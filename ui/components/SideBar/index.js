@@ -7,7 +7,6 @@ import { Content,Text, List, ListItem,
 } from 'native-base'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import OAuthManager from 'react-native-oauth'
-import OneSignal from 'react-native-onesignal'
 
 import CacheableImage from '~/ui/components/CacheableImage'
 import * as authActions from '~/store/actions/auth'
@@ -50,7 +49,7 @@ export default class extends Component {
   
   _handleSuccessLogout() {
     const {forwardTo, setToast, removeAllCampaign} = this.props
-    OneSignal.deleteTag("user_id")
+    // OneSignal.deleteTag("user_id")
     removeAllCampaign()
     forwardTo('login')
     setToast('Logout successfully!!!')
@@ -58,7 +57,7 @@ export default class extends Component {
   
   _handleFailLogout(error) {
     const {forwardTo, setToast, removeAllCampaign} = this.props
-    OneSignal.deleteTag("user_id")
+    // OneSignal.deleteTag("user_id")
     removeAllCampaign()
     forwardTo('login')
     setToast(error.msg, 'error')

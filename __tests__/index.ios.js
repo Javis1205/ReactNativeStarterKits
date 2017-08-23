@@ -5,7 +5,7 @@ import URL from 'url-parse'
 
 // Note: test renderer must be required after react-native.
 // import renderer from 'react-test-renderer';
-import { matchPath } from 'react-router'
+// import { matchPath } from 'react-router'
 const routes = {
   'abc': false,
   'delegation':true,
@@ -15,15 +15,15 @@ const routes = {
 
 const matchRoutes = (pathname) => {
   let match = null
-  for(route in routes) {
-    match = matchPath(pathname, {
-      path:route,
-      exact: true,
-      strict: false,
-    })
-    if(match) 
-      break    
-  }
+  // for(route in routes) {
+  //   match = matchPath(pathname, {
+  //     path:route,
+  //     exact: true,
+  //     strict: false,
+  //   })
+  //   if(match) 
+  //     break    
+  // }
   return match
 }
 

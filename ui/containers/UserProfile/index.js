@@ -105,7 +105,7 @@ export default class UserProfile extends Component {
   }
   
   _onEventPress(id) {
-    this.props.forwardTo('eventDetail/' + id)
+    this.props.forwardTo('eventDetail', {id})
   }
   
   onPressFollow() {
@@ -141,7 +141,7 @@ export default class UserProfile extends Component {
   }
   
   onPressTopFan() {
-    this.props.forwardTo('listTopFan/' + this.props.route.params.userId)
+    this.props.forwardTo("listTopFan", {userId:this.props.route.params.userId})
   }
   
   onPressEvent() {

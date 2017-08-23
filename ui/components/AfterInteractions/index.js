@@ -1,4 +1,5 @@
-import { PureComponent, PropTypes } from 'react'
+import { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { InteractionManager, Platform } from 'react-native'
 
 export default class extends PureComponent {

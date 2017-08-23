@@ -113,11 +113,11 @@ export default class extends Component {
   }
   
   _onUserPress(userId) {
-    this.props.forwardTo('userProfile/' + userId)
+    this.props.forwardTo('userProfile', {userId})
   }
   
   _onEventPress(id) {
-    this.props.forwardTo('eventDetail/' + id)
+    this.props.forwardTo("eventDetail", {id})
   }
   
   _onSearchPress() {
@@ -129,7 +129,7 @@ export default class extends Component {
   }
   
   _onProfilePress() {
-    this.props.forwardTo('userProfile/' + this.props.profile.id)
+    this.props.forwardTo('userProfile', {userId: this.props.profile.id})
   }
   
   _onEndReached() {

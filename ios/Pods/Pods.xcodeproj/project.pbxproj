@@ -16,7 +16,7 @@
 		15BCBBAF9050D1FC6DC3A94B0B111697 /* DCTBasicAuthCredential.h in Headers */ = {isa = PBXBuildFile; fileRef = A217ED0BA905E2876EA70CF5E02848DC /* DCTBasicAuthCredential.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1773CC3BB9BB834EE9ACD186D3A42B97 /* DCTAuth-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E9150F4FE10AA82E0F9DAD5F6A6E78EB /* DCTAuth-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C904BA67E24FC44A4C97FD9C3CA10E0 /* DCTAuthMultipartData.m in Sources */ = {isa = PBXBuildFile; fileRef = BE9AD511732B4D25474B2730844C1B53 /* DCTAuthMultipartData.m */; };
-		2583AE987407B447E0872AE977248E22 /* Pods-Novame-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 02839A8CEFDBBC563140525E30DFFCF2 /* Pods-Novame-dummy.m */; };
+		2583AE987407B447E0872AE977248E22 /* Pods-Novame-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE8550AAF0D6E4BC32683A3F051544D /* Pods-Novame-dummy.m */; };
 		26F84F2A5EA9C7FEE81CCFDDE083221E /* DCTOAuth1SignatureType.h in Headers */ = {isa = PBXBuildFile; fileRef = AF51943A7ACB9E0482546DAA713F1F41 /* DCTOAuth1SignatureType.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		29C67763410C1C5AA0311CEBCBE9F8F0 /* NSString+DCTAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 486A72A1B99EAE761C6C31E62872F9DE /* NSString+DCTAuth.m */; };
 		2BBB4727AE3A5FF36319B6DA5178EC89 /* DCTAuthURLRequestPerformer.h in Headers */ = {isa = PBXBuildFile; fileRef = A82033DD052426E15DE9AFD2DB4D48F3 /* DCTAuthURLRequestPerformer.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -25,12 +25,11 @@
 		3CF675107A4F27DB0EB94965F4E14F5A /* DCTOAuth2Account.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FD6A409D6E595537CC26BC94B42D5C9 /* DCTOAuth2Account.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3EC1B28A8912901F2054B90A9C18510E /* DCTOAuth1Account.m in Sources */ = {isa = PBXBuildFile; fileRef = E624FE06F50E66DE69D5096204F73F61 /* DCTOAuth1Account.m */; };
 		418872954478F93DB081F0CE855CE75C /* DCTAuthAccountStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 415E9E65C6C357A604570531DF1947ED /* DCTAuthAccountStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		42501E9B805B38CF2624E93F4947295A /* Pods-NovameTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 023ABB58EBE9360AE37CC30DC96B170D /* Pods-NovameTests-dummy.m */; };
 		4251ABB18F511C3935B500F0B969EC15 /* DCTAbstractAuthAccountProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB6E11F806EB7F829B65F9236FAFE9F /* DCTAbstractAuthAccountProperties.m */; };
 		44E829018F04EA3592B44B752A6B04BD /* DCTOAuth2RequestType.h in Headers */ = {isa = PBXBuildFile; fileRef = 44121DAFCA7C7121E3EB1BD201D9B043 /* DCTOAuth2RequestType.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		49FEFA36486A328FBF432312059C6926 /* DCTOAuth1Signature.h in Headers */ = {isa = PBXBuildFile; fileRef = 874F414B749FAEC24C88ED001F89FF9A /* DCTOAuth1Signature.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		52A306594DBC3541E83BC3BB665EBDB4 /* DCTOAuth1ParameterTransmission.h in Headers */ = {isa = PBXBuildFile; fileRef = A9C156B2B1F8644E707543B8E231D1A3 /* DCTOAuth1ParameterTransmission.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		52D6886C6237DFF0C14691AA57A79EA8 /* Pods-Novame-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 62BCA4B0F09D3F24A5B86008E56B40E3 /* Pods-Novame-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52D6886C6237DFF0C14691AA57A79EA8 /* Pods-Novame-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8A51F1206D4E8E813213707279BA63 /* Pods-Novame-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C18E9CB1D7FA268171A61951127ED8E /* DCTAuthURLOpenerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = C04E2DF65AD4C429B85DABE5F69BA5B3 /* DCTAuthURLOpenerOperation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		5DD22C8605E9213DB27511C63BF00ADF /* DCTAuthPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = DE58D5F5741E94BD39D42494945305C5 /* DCTAuthPlatform.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		64C5787FD4C3D5C570C8676673D55BDF /* DCTOAuth1Account.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BFD7C05AEC6676400DD0002C3E2A3A8 /* DCTOAuth1Account.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -42,7 +41,6 @@
 		7636E9509EE9C65B0E3407846FF2DC62 /* DCTBasicAuthAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 999A937D311A769343E8DD6D55AFFBF7 /* DCTBasicAuthAccount.m */; };
 		7D405D3A0018A438503AA4EC5F63DA19 /* DCTAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = F368FA3AAA6E91A7B5F448050F6203D3 /* DCTAuth.m */; };
 		80ED268CCC39B32E95640CDBAF304B34 /* DCTAuthAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F256FCD53FC942FD2270A959004DC39 /* DCTAuthAccountStore.m */; };
-		8112EC5E29969A4B833DA9297CB77110 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		88D85846408BCAADFBDF8AE653F24BF4 /* DCTOAuth1Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 2000D991D2B725FFAEC871FFA7112A57 /* DCTOAuth1Credential.m */; };
 		88F0586DC9E0C83BEC3DFC6F1A9EC16E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		8F9CF4FE30B5CA870890CA05FE0B4A18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
@@ -68,7 +66,6 @@
 		C18A131B3A41A6DABC46FD8702DC918C /* DCTOAuth2Keys.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8CAD301082A90511ECE0C8F9B22C02 /* DCTOAuth2Keys.m */; };
 		CC4A5888A88A9C05443F1A06B28EDCEA /* DCTAuthRequestMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF9EB66C26BC0DB9A62E9D41A95CFF6 /* DCTAuthRequestMethod.m */; };
 		D077956A3CF7C693F6B3CA6B5BD12703 /* DCTAuthURLRequestPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB54A60F69280B6EC5A73EBC475FE82 /* DCTAuthURLRequestPerformer.m */; };
-		D200ED414C89FD416C7E9B6980528281 /* Pods-NovameTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FA2F9D21B33B8125E20315B875C5155 /* Pods-NovameTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4DC0BD9ADA0A2030EB7EB02305204DB /* DCTOAuth1Credential.h in Headers */ = {isa = PBXBuildFile; fileRef = DCB33D0ECB71E656E20C80F72628CF7A /* DCTOAuth1Credential.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DD8A1AD8D13E8CF38229E8FCBF7E1DD3 /* DCTAuthAccountStoreQueryDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A3321C6AE4F13C46DA7DC38A382C37B /* DCTAuthAccountStoreQueryDelegate.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DECA4AF8510CAC8DCDCF3A8B3D6B4AF8 /* DCTOAuth1Keys.h in Headers */ = {isa = PBXBuildFile; fileRef = 979A48A66F03F5598886D59CC0194225 /* DCTOAuth1Keys.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -93,57 +90,44 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		023ABB58EBE9360AE37CC30DC96B170D /* Pods-NovameTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NovameTests-dummy.m"; sourceTree = "<group>"; };
-		02839A8CEFDBBC563140525E30DFFCF2 /* Pods-Novame-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Novame-dummy.m"; sourceTree = "<group>"; };
 		08048C66A868C4AAC20742F2DE403B9C /* DCTAuthResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthResponse.m; path = DCTAuth/DCTAuthResponse.m; sourceTree = "<group>"; };
-		0977F729081688BDF92A9DF4AF92950E /* Pods_NovameTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_NovameTests.framework; path = "Pods-NovameTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8CAD301082A90511ECE0C8F9B22C02 /* DCTOAuth2Keys.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth2Keys.m; path = DCTAuth/DCTOAuth2Keys.m; sourceTree = "<group>"; };
+		12AC79A3E9CC0C966B1D627430957E41 /* Pods-Novame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Novame.debug.xcconfig"; sourceTree = "<group>"; };
 		1617F0F016912B75EAAC3168794F2981 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17ED29BAD4DBE64FE2E6693419162FC8 /* DCTBasicAuthCredential.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTBasicAuthCredential.m; path = DCTAuth/DCTBasicAuthCredential.m; sourceTree = "<group>"; };
 		1AF5A1B426003E091049D774E7493811 /* DCTAuthAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccount.h; path = DCTAuth/DCTAuthAccount.h; sourceTree = "<group>"; };
 		2000D991D2B725FFAEC871FFA7112A57 /* DCTOAuth1Credential.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth1Credential.m; path = DCTAuth/DCTOAuth1Credential.m; sourceTree = "<group>"; };
 		2409A7BD6DC8772F9B41808FF8345237 /* DCTAuthURLOpener.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthURLOpener.h; path = DCTAuth/DCTAuthURLOpener.h; sourceTree = "<group>"; };
-		27554CE449AF1DE78CD1CE390646C44D /* Pods-NovameTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NovameTests-frameworks.sh"; sourceTree = "<group>"; };
 		2A3321C6AE4F13C46DA7DC38A382C37B /* DCTAuthAccountStoreQueryDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccountStoreQueryDelegate.h; path = DCTAuth/DCTAuthAccountStoreQueryDelegate.h; sourceTree = "<group>"; };
 		2C5C93A987AFA167658F7C9573326A22 /* NSKeyedUnarchiver+DCTAuth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSKeyedUnarchiver+DCTAuth.m"; path = "DCTAuth/NSKeyedUnarchiver+DCTAuth.m"; sourceTree = "<group>"; };
 		2D8C14D787E892F8074C467F3257FF04 /* DCTOAuth2.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth2.m; path = DCTAuth/DCTOAuth2.m; sourceTree = "<group>"; };
-		2E621A1CD19CE7725925E7F5E5682C63 /* Pods-Novame.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Novame.modulemap"; sourceTree = "<group>"; };
 		3024502E20991D185DC8FB70F2600EB3 /* DCTOAuth1Signature.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth1Signature.m; path = DCTAuth/DCTOAuth1Signature.m; sourceTree = "<group>"; };
 		310CE46C51F5778B0366147F2F212372 /* DCTOAuth2Credential.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth2Credential.h; path = DCTAuth/DCTOAuth2Credential.h; sourceTree = "<group>"; };
 		31A2124CFDAA14951A6BBBD8667A52FC /* DCTAuthMultipartData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthMultipartData.h; path = DCTAuth/DCTAuthMultipartData.h; sourceTree = "<group>"; };
-		31FFF0B7A6528E5BE6DCBCCCAC9349BD /* Pods_Novame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Novame.framework; path = "Pods-Novame.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		357A56501C7C70CEF91299A1BEA6B204 /* DCTAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DCTAuth.framework; path = DCTAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35D73D04E9ED8A1EFE684AABF58CF127 /* Pods-Novame-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Novame-acknowledgements.plist"; sourceTree = "<group>"; };
 		38F33717D4894602A7EF5D95D67BA0F0 /* DCTAuthAccountCredential.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccountCredential.h; path = DCTAuth/DCTAuthAccountCredential.h; sourceTree = "<group>"; };
 		3BFD7C05AEC6676400DD0002C3E2A3A8 /* DCTOAuth1Account.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1Account.h; path = DCTAuth/DCTOAuth1Account.h; sourceTree = "<group>"; };
 		3DB54A60F69280B6EC5A73EBC475FE82 /* DCTAuthURLRequestPerformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthURLRequestPerformer.m; path = DCTAuth/DCTAuthURLRequestPerformer.m; sourceTree = "<group>"; };
-		3F03EAD6C226698A1D38FBC159F91B1B /* Pods-NovameTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NovameTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		3F2E876ECA80E29C7B213282E0540B0D /* Pods-Novame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Novame.release.xcconfig"; sourceTree = "<group>"; };
 		3FD6A409D6E595537CC26BC94B42D5C9 /* DCTOAuth2Account.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth2Account.h; path = DCTAuth/DCTOAuth2Account.h; sourceTree = "<group>"; };
 		3FE64519C7BB7BD62DE4CD02ABBE96E6 /* DCTAuthContent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthContent.m; path = DCTAuth/DCTAuthContent.m; sourceTree = "<group>"; };
 		415E9E65C6C357A604570531DF1947ED /* DCTAuthAccountStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccountStore.h; path = DCTAuth/DCTAuthAccountStore.h; sourceTree = "<group>"; };
 		44121DAFCA7C7121E3EB1BD201D9B043 /* DCTOAuth2RequestType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth2RequestType.h; path = DCTAuth/DCTOAuth2RequestType.h; sourceTree = "<group>"; };
-		46BD626E04646951E9FA0BEEAE14C3D4 /* Pods-NovameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NovameTests.debug.xcconfig"; sourceTree = "<group>"; };
 		486A72A1B99EAE761C6C31E62872F9DE /* NSString+DCTAuth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+DCTAuth.m"; path = "DCTAuth/NSString+DCTAuth.m"; sourceTree = "<group>"; };
+		48C271982DF27322E3664FF07828BA6E /* Pods-Novame-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Novame-frameworks.sh"; sourceTree = "<group>"; };
 		4BAAAB1DE8A0F70C3ACAF62FDF5D6E7E /* DCTAuthAccountStoreQuery.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthAccountStoreQuery.m; path = DCTAuth/DCTAuthAccountStoreQuery.m; sourceTree = "<group>"; };
 		4DF9EB66C26BC0DB9A62E9D41A95CFF6 /* DCTAuthRequestMethod.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthRequestMethod.m; path = DCTAuth/DCTAuthRequestMethod.m; sourceTree = "<group>"; };
 		4E8CB8C90206CB66B0F6E0B8ED655D96 /* DCTAuthKeychainAccess.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthKeychainAccess.h; path = DCTAuth/DCTAuthKeychainAccess.h; sourceTree = "<group>"; };
-		4FA2F9D21B33B8125E20315B875C5155 /* Pods-NovameTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NovameTests-umbrella.h"; sourceTree = "<group>"; };
 		4FB6E11F806EB7F829B65F9236FAFE9F /* DCTAbstractAuthAccountProperties.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAbstractAuthAccountProperties.m; path = DCTAuth/DCTAbstractAuthAccountProperties.m; sourceTree = "<group>"; };
-		5055D193F70B48D811B3E0943E68EC56 /* Pods-Novame-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Novame-resources.sh"; sourceTree = "<group>"; };
 		54399C8EEE06529F509E88B9EEB57D12 /* DCTAuthPlatform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthPlatform.m; path = DCTAuth/DCTAuthPlatform.m; sourceTree = "<group>"; };
 		584A3087A34D46D6B991EEA67CE38972 /* DCTAuthAccountStoreQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccountStoreQuery.h; path = DCTAuth/DCTAuthAccountStoreQuery.h; sourceTree = "<group>"; };
-		5D3F6248468AA1394FABE7BBAB21CDCB /* Pods-NovameTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NovameTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		62BCA4B0F09D3F24A5B86008E56B40E3 /* Pods-Novame-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Novame-umbrella.h"; sourceTree = "<group>"; };
+		5E1AD8DCF1F3BF1AA82D33EE4A54220F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		672B09D37BE9918EC4742D0298FE4152 /* DCTAuth.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = DCTAuth.modulemap; sourceTree = "<group>"; };
-		6827CEF8C3FA324FC37B161C993238DC /* Pods-Novame-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Novame-acknowledgements.plist"; sourceTree = "<group>"; };
-		68330BDBE58956AA453B45A271131FF8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68967ED492003D3013F9962046392527 /* DCTAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DCTAuth.framework; path = DCTAuth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D79650327D384B7F5D20D7EE25E6AB8 /* DCTAuthKeychainAccess.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthKeychainAccess.m; path = DCTAuth/DCTAuthKeychainAccess.m; sourceTree = "<group>"; };
 		6F256FCD53FC942FD2270A959004DC39 /* DCTAuthAccountStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthAccountStore.m; path = DCTAuth/DCTAuthAccountStore.m; sourceTree = "<group>"; };
 		72CCB8B0570B36658AF6A5AA0CACAD47 /* DCTAuthResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthResponse.h; path = DCTAuth/DCTAuthResponse.h; sourceTree = "<group>"; };
 		73A254E8486D01B7777105F990E35734 /* DCTAuthRequestMethod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthRequestMethod.h; path = DCTAuth/DCTAuthRequestMethod.h; sourceTree = "<group>"; };
-		75C0D94BD42F1D729D2F8B1EA66ECB28 /* Pods-NovameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NovameTests.release.xcconfig"; sourceTree = "<group>"; };
-		7B86CB0D50E07EF8BACEE89B1A4C7F81 /* Pods-Novame-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Novame-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8102C359316C20AEC139E219A7EC00D3 /* DCTAuthURLOpener.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthURLOpener.m; path = DCTAuth/DCTAuthURLOpener.m; sourceTree = "<group>"; };
 		8139DA72F7EA33426A8D6990EB0787B3 /* DCTAuth-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DCTAuth-dummy.m"; sourceTree = "<group>"; };
 		874F414B749FAEC24C88ED001F89FF9A /* DCTOAuth1Signature.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1Signature.h; path = DCTAuth/DCTOAuth1Signature.h; sourceTree = "<group>"; };
@@ -154,7 +138,9 @@
 		979A48A66F03F5598886D59CC0194225 /* DCTOAuth1Keys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1Keys.h; path = DCTAuth/DCTOAuth1Keys.h; sourceTree = "<group>"; };
 		9840A55B02330733DEEC85E526F5E12E /* DCTAuthContentType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthContentType.h; path = DCTAuth/DCTAuthContentType.h; sourceTree = "<group>"; };
 		999A937D311A769343E8DD6D55AFFBF7 /* DCTBasicAuthAccount.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTBasicAuthAccount.m; path = DCTAuth/DCTBasicAuthAccount.m; sourceTree = "<group>"; };
+		9A821CDE50A36C8770FEEF7A00B0EEE3 /* Pods-Novame-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Novame-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9DB342E311C5B9C373F21AB6FAF68F71 /* DCTAuth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuth.h; path = DCTAuth/DCTAuth.h; sourceTree = "<group>"; };
+		9DE8550AAF0D6E4BC32683A3F051544D /* Pods-Novame-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Novame-dummy.m"; sourceTree = "<group>"; };
 		A217ED0BA905E2876EA70CF5E02848DC /* DCTBasicAuthCredential.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTBasicAuthCredential.h; path = DCTAuth/DCTBasicAuthCredential.h; sourceTree = "<group>"; };
 		A21CFC8533AE7507BDBF058908769F27 /* DCTOAuth2Keys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth2Keys.h; path = DCTAuth/DCTOAuth2Keys.h; sourceTree = "<group>"; };
 		A59BFE045967466E216713944E57049E /* DCTAuthAccountStore+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DCTAuthAccountStore+Private.h"; path = "DCTAuth/DCTAuthAccountStore+Private.h"; sourceTree = "<group>"; };
@@ -162,8 +148,6 @@
 		A82033DD052426E15DE9AFD2DB4D48F3 /* DCTAuthURLRequestPerformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthURLRequestPerformer.h; path = DCTAuth/DCTAuthURLRequestPerformer.h; sourceTree = "<group>"; };
 		A96A4CD66C025B01AABD5553A096FE65 /* NSString+DCTAuth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+DCTAuth.h"; path = "DCTAuth/NSString+DCTAuth.h"; sourceTree = "<group>"; };
 		A9C156B2B1F8644E707543B8E231D1A3 /* DCTOAuth1ParameterTransmission.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1ParameterTransmission.h; path = DCTAuth/DCTOAuth1ParameterTransmission.h; sourceTree = "<group>"; };
-		ABF8F78241B072AF145F6CCE5220C8DF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AEBC198FF4EADB2326780800D87C1622 /* Pods-NovameTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-NovameTests.modulemap"; sourceTree = "<group>"; };
 		AF51943A7ACB9E0482546DAA713F1F41 /* DCTOAuth1SignatureType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1SignatureType.h; path = DCTAuth/DCTOAuth1SignatureType.h; sourceTree = "<group>"; };
 		B239050CF7C1F59AE4A40F38801C6FFE /* DCTAuth.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = DCTAuth.xcconfig; sourceTree = "<group>"; };
 		B2B361A38FEB78E289FC87B4D82F655A /* DCTOAuth2RequestType.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth2RequestType.m; path = DCTAuth/DCTOAuth2RequestType.m; sourceTree = "<group>"; };
@@ -171,22 +155,24 @@
 		B74F3E41AFA451D4C5081078A5FB3E3F /* DCTAuthAccountSubclass.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthAccountSubclass.h; path = DCTAuth/DCTAuthAccountSubclass.h; sourceTree = "<group>"; };
 		BE5E740C219E0FC1A0B7D8ED02A7017B /* DCTAuth-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DCTAuth-prefix.pch"; sourceTree = "<group>"; };
 		BE9AD511732B4D25474B2730844C1B53 /* DCTAuthMultipartData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthMultipartData.m; path = DCTAuth/DCTAuthMultipartData.m; sourceTree = "<group>"; };
-		C049A9FAFCE4761AFD2E315736CDC40D /* Pods-NovameTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NovameTests-resources.sh"; sourceTree = "<group>"; };
 		C04E2DF65AD4C429B85DABE5F69BA5B3 /* DCTAuthURLOpenerOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthURLOpenerOperation.h; path = DCTAuth/DCTAuthURLOpenerOperation.h; sourceTree = "<group>"; };
-		C136286246402A10DDB3983A81AF59AB /* Pods-Novame-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Novame-frameworks.sh"; sourceTree = "<group>"; };
 		C62DF30BB03D415AEB8DB4200C412D7E /* DCTOAuth2Account.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth2Account.m; path = DCTAuth/DCTOAuth2Account.m; sourceTree = "<group>"; };
 		C65C3AB18774E4A4FB633644F41A26D6 /* DCTAuthAccount.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthAccount.m; path = DCTAuth/DCTAuthAccount.m; sourceTree = "<group>"; };
 		CAC108544678A8B6AB8D6F8912A80830 /* DCTAbstractAuthAccountProperties.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAbstractAuthAccountProperties.h; path = DCTAuth/DCTAbstractAuthAccountProperties.h; sourceTree = "<group>"; };
 		CE6511B217969D8CC98FB52C3C1C8591 /* DCTOAuth2Credential.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth2Credential.m; path = DCTAuth/DCTOAuth2Credential.m; sourceTree = "<group>"; };
 		DCB33D0ECB71E656E20C80F72628CF7A /* DCTOAuth1Credential.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth1Credential.h; path = DCTAuth/DCTOAuth1Credential.h; sourceTree = "<group>"; };
 		DE58D5F5741E94BD39D42494945305C5 /* DCTAuthPlatform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTAuthPlatform.h; path = DCTAuth/DCTAuthPlatform.h; sourceTree = "<group>"; };
+		E0B78A5A9C000C3E8962841DDD783C69 /* Pods-Novame.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Novame.modulemap"; sourceTree = "<group>"; };
 		E25424554C9D9E5132B57221F8289348 /* DCTAuthAccount+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DCTAuthAccount+Private.h"; path = "DCTAuth/DCTAuthAccount+Private.h"; sourceTree = "<group>"; };
+		E37A3660499A917337BEC37BCB17DFAF /* Pods_Novame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Novame.framework; path = "Pods-Novame.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E624FE06F50E66DE69D5096204F73F61 /* DCTOAuth1Account.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth1Account.m; path = DCTAuth/DCTOAuth1Account.m; sourceTree = "<group>"; };
+		E6D3ABE824AD10FFAC37DD2E4694BB5D /* Pods-Novame-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Novame-resources.sh"; sourceTree = "<group>"; };
 		E9150F4FE10AA82E0F9DAD5F6A6E78EB /* DCTAuth-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DCTAuth-umbrella.h"; sourceTree = "<group>"; };
 		EF1E936EC853BCCB7ECD54F429B72A95 /* DCTAuthURLOpenerOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuthURLOpenerOperation.m; path = DCTAuth/DCTAuthURLOpenerOperation.m; sourceTree = "<group>"; };
+		F1BA3A7D4305227341817A4CC759994E /* Pods-Novame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Novame.release.xcconfig"; sourceTree = "<group>"; };
 		F368FA3AAA6E91A7B5F448050F6203D3 /* DCTAuth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTAuth.m; path = DCTAuth/DCTAuth.m; sourceTree = "<group>"; };
 		F4477C7663A70658B1222DCFAF45DA1E /* DCTOAuth2.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DCTOAuth2.h; path = DCTAuth/DCTOAuth2.h; sourceTree = "<group>"; };
-		FC221CDB3AA5E0ABB755119EFF2AB293 /* Pods-Novame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Novame.debug.xcconfig"; sourceTree = "<group>"; };
+		FA8A51F1206D4E8E813213707279BA63 /* Pods-Novame-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Novame-umbrella.h"; sourceTree = "<group>"; };
 		FF29007C627D125DFE841875A1340459 /* DCTOAuth1Keys.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DCTOAuth1Keys.m; path = DCTAuth/DCTOAuth1Keys.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,14 +182,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F9CF4FE30B5CA870890CA05FE0B4A18 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		765E92DC052D3F226CD0A990DEF10425 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8112EC5E29969A4B833DA9297CB77110 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,32 +196,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E1A667E02F094746B32D38368DA28A9 /* Pods-NovameTests */ = {
+		12652FA6924006A18050B52C9A3388BE /* Pods-Novame */ = {
 			isa = PBXGroup;
 			children = (
-				ABF8F78241B072AF145F6CCE5220C8DF /* Info.plist */,
-				AEBC198FF4EADB2326780800D87C1622 /* Pods-NovameTests.modulemap */,
-				5D3F6248468AA1394FABE7BBAB21CDCB /* Pods-NovameTests-acknowledgements.markdown */,
-				3F03EAD6C226698A1D38FBC159F91B1B /* Pods-NovameTests-acknowledgements.plist */,
-				023ABB58EBE9360AE37CC30DC96B170D /* Pods-NovameTests-dummy.m */,
-				27554CE449AF1DE78CD1CE390646C44D /* Pods-NovameTests-frameworks.sh */,
-				C049A9FAFCE4761AFD2E315736CDC40D /* Pods-NovameTests-resources.sh */,
-				4FA2F9D21B33B8125E20315B875C5155 /* Pods-NovameTests-umbrella.h */,
-				46BD626E04646951E9FA0BEEAE14C3D4 /* Pods-NovameTests.debug.xcconfig */,
-				75C0D94BD42F1D729D2F8B1EA66ECB28 /* Pods-NovameTests.release.xcconfig */,
+				5E1AD8DCF1F3BF1AA82D33EE4A54220F /* Info.plist */,
+				E0B78A5A9C000C3E8962841DDD783C69 /* Pods-Novame.modulemap */,
+				9A821CDE50A36C8770FEEF7A00B0EEE3 /* Pods-Novame-acknowledgements.markdown */,
+				35D73D04E9ED8A1EFE684AABF58CF127 /* Pods-Novame-acknowledgements.plist */,
+				9DE8550AAF0D6E4BC32683A3F051544D /* Pods-Novame-dummy.m */,
+				48C271982DF27322E3664FF07828BA6E /* Pods-Novame-frameworks.sh */,
+				E6D3ABE824AD10FFAC37DD2E4694BB5D /* Pods-Novame-resources.sh */,
+				FA8A51F1206D4E8E813213707279BA63 /* Pods-Novame-umbrella.h */,
+				12AC79A3E9CC0C966B1D627430957E41 /* Pods-Novame.debug.xcconfig */,
+				F1BA3A7D4305227341817A4CC759994E /* Pods-Novame.release.xcconfig */,
 			);
-			name = "Pods-NovameTests";
-			path = "Target Support Files/Pods-NovameTests";
-			sourceTree = "<group>";
-		};
-		2767B942F316E7811879867E541787F9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				357A56501C7C70CEF91299A1BEA6B204 /* DCTAuth.framework */,
-				31FFF0B7A6528E5BE6DCBCCCAC9349BD /* Pods_Novame.framework */,
-				0977F729081688BDF92A9DF4AF92950E /* Pods_NovameTests.framework */,
-			);
-			name = Products;
+			name = "Pods-Novame";
+			path = "Target Support Files/Pods-Novame";
 			sourceTree = "<group>";
 		};
 		6E23DFCD2F9A7910FC314940CFA01103 /* DCTAuth */ = {
@@ -325,18 +293,18 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
 				B2CCF3879CB678FB9A5324BFC6AB1625 /* Pods */,
-				2767B942F316E7811879867E541787F9 /* Products */,
-				9A86ABA6B2FF7DA2FF1D502A9FB91E7B /* Targets Support Files */,
+				80692059F698078714DF75E7F102C46A /* Products */,
+				E924FB9E035AFC19F7AFA1DE3D95B3A8 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		9A86ABA6B2FF7DA2FF1D502A9FB91E7B /* Targets Support Files */ = {
+		80692059F698078714DF75E7F102C46A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DFDB44AF8F47BC832B64294627554CC5 /* Pods-Novame */,
-				0E1A667E02F094746B32D38368DA28A9 /* Pods-NovameTests */,
+				68967ED492003D3013F9962046392527 /* DCTAuth.framework */,
+				E37A3660499A917337BEC37BCB17DFAF /* Pods_Novame.framework */,
 			);
-			name = "Targets Support Files";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B2CCF3879CB678FB9A5324BFC6AB1625 /* Pods */ = {
@@ -377,22 +345,12 @@
 			path = "../Target Support Files/DCTAuth";
 			sourceTree = "<group>";
 		};
-		DFDB44AF8F47BC832B64294627554CC5 /* Pods-Novame */ = {
+		E924FB9E035AFC19F7AFA1DE3D95B3A8 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				68330BDBE58956AA453B45A271131FF8 /* Info.plist */,
-				2E621A1CD19CE7725925E7F5E5682C63 /* Pods-Novame.modulemap */,
-				7B86CB0D50E07EF8BACEE89B1A4C7F81 /* Pods-Novame-acknowledgements.markdown */,
-				6827CEF8C3FA324FC37B161C993238DC /* Pods-Novame-acknowledgements.plist */,
-				02839A8CEFDBBC563140525E30DFFCF2 /* Pods-Novame-dummy.m */,
-				C136286246402A10DDB3983A81AF59AB /* Pods-Novame-frameworks.sh */,
-				5055D193F70B48D811B3E0943E68EC56 /* Pods-Novame-resources.sh */,
-				62BCA4B0F09D3F24A5B86008E56B40E3 /* Pods-Novame-umbrella.h */,
-				FC221CDB3AA5E0ABB755119EFF2AB293 /* Pods-Novame.debug.xcconfig */,
-				3F2E876ECA80E29C7B213282E0540B0D /* Pods-Novame.release.xcconfig */,
+				12652FA6924006A18050B52C9A3388BE /* Pods-Novame */,
 			);
-			name = "Pods-Novame";
-			path = "Target Support Files/Pods-Novame";
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,14 +408,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E66D69AEE719A7EB5AF22DB3ACC62F80 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D200ED414C89FD416C7E9B6980528281 /* Pods-NovameTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -475,7 +425,7 @@
 			);
 			name = DCTAuth;
 			productName = DCTAuth;
-			productReference = 357A56501C7C70CEF91299A1BEA6B204 /* DCTAuth.framework */;
+			productReference = 68967ED492003D3013F9962046392527 /* DCTAuth.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		105486B6E703216EB9864EF00A80DCEE /* Pods-Novame */ = {
@@ -493,24 +443,7 @@
 			);
 			name = "Pods-Novame";
 			productName = "Pods-Novame";
-			productReference = 31FFF0B7A6528E5BE6DCBCCCAC9349BD /* Pods_Novame.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		DC262CBCE17F7A4F1EE39D62F3A00FBF /* Pods-NovameTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6FCD2754167022DD3B975242A3882F87 /* Build configuration list for PBXNativeTarget "Pods-NovameTests" */;
-			buildPhases = (
-				CC65AD08C41B85DCF5491DE504D173C0 /* Sources */,
-				765E92DC052D3F226CD0A990DEF10425 /* Frameworks */,
-				E66D69AEE719A7EB5AF22DB3ACC62F80 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-NovameTests";
-			productName = "Pods-NovameTests";
-			productReference = 0977F729081688BDF92A9DF4AF92950E /* Pods_NovameTests.framework */;
+			productReference = E37A3660499A917337BEC37BCB17DFAF /* Pods_Novame.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -530,26 +463,17 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 2767B942F316E7811879867E541787F9 /* Products */;
+			productRefGroup = 80692059F698078714DF75E7F102C46A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				073CE0154758777B2E46C5CBFE578C54 /* DCTAuth */,
 				105486B6E703216EB9864EF00A80DCEE /* Pods-Novame */,
-				DC262CBCE17F7A4F1EE39D62F3A00FBF /* Pods-NovameTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CC65AD08C41B85DCF5491DE504D173C0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				42501E9B805B38CF2624E93F4947295A /* Pods-NovameTests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DA2EB90EA026322F72E614BD238813FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -608,7 +532,7 @@
 /* Begin XCBuildConfiguration section */
 		0985533E8858309E0BC0DE4C8B2A7611 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F2E876ECA80E29C7B213282E0540B0D /* Pods-Novame.release.xcconfig */;
+			baseConfigurationReference = F1BA3A7D4305227341817A4CC759994E /* Pods-Novame.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -718,45 +642,9 @@
 			};
 			name = Debug;
 		};
-		54E4F33C619AE063AA232E06F66FE244 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46BD626E04646951E9FA0BEEAE14C3D4 /* Pods-NovameTests.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-NovameTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-NovameTests/Pods-NovameTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_NovameTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		5CD01D9AB10B09610B203140F3AE5E90 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FC221CDB3AA5E0ABB755119EFF2AB293 /* Pods-Novame.debug.xcconfig */;
+			baseConfigurationReference = 12AC79A3E9CC0C966B1D627430957E41 /* Pods-Novame.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -870,42 +758,6 @@
 			};
 			name = Debug;
 		};
-		EB37A28BDC49EDF58B3C87A399D1692B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 75C0D94BD42F1D729D2F8B1EA66ECB28 /* Pods-NovameTests.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-NovameTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-NovameTests/Pods-NovameTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_NovameTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -923,15 +775,6 @@
 			buildConfigurations = (
 				5CD01D9AB10B09610B203140F3AE5E90 /* Debug */,
 				0985533E8858309E0BC0DE4C8B2A7611 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6FCD2754167022DD3B975242A3882F87 /* Build configuration list for PBXNativeTarget "Pods-NovameTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				54E4F33C619AE063AA232E06F66FE244 /* Debug */,
-				EB37A28BDC49EDF58B3C87A399D1692B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

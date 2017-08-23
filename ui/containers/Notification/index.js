@@ -52,7 +52,7 @@ export default class extends Component {
   }
   
   _onEventPress(id) {
-    this.props.forwardTo('eventDetail/' + id)
+    this.props.forwardTo('eventDetail', {id})
   }
   
   renderRow(item) {

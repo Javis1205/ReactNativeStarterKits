@@ -7,15 +7,11 @@ target 'Novame' do
 
   # Pods for Novame
 
-  target 'NovameTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+    source 'https://github.com/CocoaPods/Specs.git'
+    platform :ios, '8.0'
+    use_frameworks!
 
+    pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'
 end
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
-use_frameworks!
 
-pod 'DCTAuth', :git => 'https://github.com/danielctull/DCTAuth.git'
-pod 'ReactNativeFabric', :path => '../node_modules/react-native-fabric'
+

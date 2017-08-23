@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { TouchableWithoutFeedback, View } from 'react-native'
 import { Icon as IconNB, mapPropsToStyleNames, connectStyle } from 'native-base'
 import Svg from 'react-native-svg'
@@ -31,7 +32,7 @@ export default class extends Component {
       fontSize=24,       
       color='#FFF', stroke, strokeWidth, 
       ...iconStyle
-    } = style
+    } =  Array.isArray(style) ? style[0] : style
 
     const {svg:svgEl, viewBox = '0 0 100 100'} = svg    
     // by default height is fontSize, min-x, min-y, width, height
@@ -43,6 +44,8 @@ export default class extends Component {
     } else {
       width = height * (viewBoxCoords[2] / viewBoxCoords[3])
     }
+
+    // console.log(iconStyle, style)
     
     return (
       <View style={iconStyle} {...props}>        

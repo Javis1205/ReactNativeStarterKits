@@ -8,33 +8,26 @@
  */
 
 #import "AppDelegate.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 #import <CodePush/CodePush.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+
 #import "OAuthManager.h"
 
 @implementation AppDelegate
 
-@synthesize oneSignal = _oneSignal;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [Fabric with:@[[Crashlytics class]]];
-
-  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                         appId:@"254b7d64-9f13-4d06-8b74-1e6f6a3d209e"
-                    settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone),kOSSettingsKeyAutoPrompt : @YES}];
-  
   NSURL *jsCodeLocation;
 
+  
 #ifdef DEBUG
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 #else
-  jsCodeLocation = [CodePush bundleURL];
+    jsCodeLocation = [CodePush bundleURL];
 #endif
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Novame"
                                                initialProperties:nil
@@ -48,15 +41,9 @@
   
   // ADD THIS LINE SOMEWHERE IN THIS FUNCTION
   [OAuthManager setupOAuthHandler:application];
-  // ...
   
   [self.window makeKeyAndVisible];
   return YES;
-}
-
-// Required for the notification event.
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
-  [RCTOneSignal didReceiveRemoteNotification:notification];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

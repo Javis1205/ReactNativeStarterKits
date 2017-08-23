@@ -15,7 +15,6 @@ import com.reactnative.photoview.PhotoViewPackage;
 import com.cmcewen.blurview.BlurViewPackage;
 import io.fullstack.oauth.OAuthManagerPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.oney.WebRTCModule.WebRTCModulePackage;
 import com.rnfs.RNFSPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -60,7 +59,6 @@ public class MainApplication extends Application implements ReactApplication {
             new BlurViewPackage(),
             new OAuthManagerPackage(),
             new LinearGradientPackage(),
-            new ReactNativeOneSignalPackage(),
             new WebRTCModulePackage(),
             new RNFSPackage(),
             new ImagePickerPackage(),
